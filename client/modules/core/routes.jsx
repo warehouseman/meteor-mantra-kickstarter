@@ -3,7 +3,7 @@ import {mount} from 'react-mounter';
 
 import {
   LayoutDefault,
-} from '/client/configs/theme.jsx';
+} from '../../configs/theme.jsx';
 
 import MainLayout from './components/main_layout.jsx';
 import PostList from './containers/postlist';

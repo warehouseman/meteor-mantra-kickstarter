@@ -1,4 +1,6 @@
-import {_colors} from '/lib/collections';
+/* eslint-disable no-console */
+
+import {_colors} from '../../lib/collections';
 // import {_color} from '/lib/color.js';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
@@ -49,6 +51,11 @@ export default function () {
       //  console.log('_colors.delete _id', _id);
       let record = _colors.findOne(_id);
       record.remove();
+    },
+
+    '_colors.wipe'() {
+      let result = _colors.remove({});
+      console.log('_colors.wipe --> Colors deleted : ', result);
     }
   });
 }

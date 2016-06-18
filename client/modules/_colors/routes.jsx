@@ -4,7 +4,7 @@ import {mount} from 'react-mounter';
 import {
   LayoutDefault,
   Simple
-} from '/client/configs/theme.jsx';
+} from '../../configs/theme.jsx';
 
 import ColorsList from './components/colors/collection.jsx';
 import ColorsView from './components/colors/single.jsx';

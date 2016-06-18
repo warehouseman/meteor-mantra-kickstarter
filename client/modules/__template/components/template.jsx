@@ -7,7 +7,7 @@ export default class extends React.Component {
     return (
       <div>
         <h1>Simplest react component template</h1>
-        <h3>{title}</h3>
+        <h3>{name}</h3>
       </div>
     )
   }

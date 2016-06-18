@@ -3,7 +3,7 @@ import {mount} from 'react-mounter';
 
 import {
   LayoutDefault,
-  Simple
+//  Simple
 } from '../../configs/theme.jsx';
 
 

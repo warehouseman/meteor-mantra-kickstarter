@@ -5,6 +5,10 @@
     "node": true
   },
 
+  "globals": {
+    "Meteor"
+  },
+
   "plugins": [
     "react"
   ],

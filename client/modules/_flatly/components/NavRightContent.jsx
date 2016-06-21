@@ -11,7 +11,7 @@ export default class extends React.Component {
     return (
       <div>yo
       </div>
-    )
+    );
   }
 
   render() {
@@ -19,6 +19,6 @@ export default class extends React.Component {
       <UserControls
         classVersion="navbar-nav"
         />
-    )
+    );
   }
 }

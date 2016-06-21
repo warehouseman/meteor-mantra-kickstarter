@@ -28,7 +28,11 @@ export default class extends React.Component {
         <p><strong>last name:</strong> {lastName}</p>
         <p><strong>email:</strong> {email}</p>
 
-        <a href={'/users/' + _id + '/edit'}>edit</a> | <a href="#" onClick={this.deleteRecord.bind(this)}>delete</a>
+        <a href={'/users/' + _id + '/edit'}>
+          edit
+        </a> | <a href="#" onClick={this.deleteRecord.bind(this)}>
+          delete
+        </a>
       </div>
     );
   }

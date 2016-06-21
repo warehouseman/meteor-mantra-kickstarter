@@ -16,10 +16,10 @@ module.exports = function (wallaby) {
       'client/**/tests/*.js'
     ],
     compilers: {
-       '**/*.js*': wallaby.compilers.babel({
-         babel: load('babel-core'),
-         presets: ['es2015', 'stage-2', 'react']
-       })
+      '**/*.js*': wallaby.compilers.babel({
+        babel: load('babel-core'),
+        presets: [ 'es2015', 'stage-2', 'react' ]
+      })
     },
     env: {
       type: 'node'

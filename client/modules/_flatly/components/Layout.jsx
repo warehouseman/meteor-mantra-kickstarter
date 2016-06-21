@@ -13,9 +13,9 @@ export default class extends React.Component {
       <div>
 
         <NavHeader
-          brand={()=> (AppConfig.name) }
-          leftContent={()=> (<NavLeftContent />) }
-          rightContent={()=> (<NavRightContent />) }
+          brand={ () => (AppConfig.name) }
+          leftContent={ () => (<NavLeftContent />) }
+          rightContent={ () => (<NavRightContent />) }
         />
 
         <div className="container">

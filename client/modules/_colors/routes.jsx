@@ -3,7 +3,7 @@ import {mount} from 'react-mounter';
 
 import {
   LayoutDefault,
-  Simple
+  // Simple
 } from '../../configs/theme.jsx';
 
 import ColorsList from './components/colors/collection.jsx';
@@ -51,4 +51,4 @@ export default function (injectDeps, {FlowRouter}) {
     }
   });
 
-};
+}

@@ -1,0 +1,8 @@
+/.meteor
+/.git
+**/*.min.js
+/node_modules
+**/*.png
+**/*.md
+**/*.json
+**/*.feature

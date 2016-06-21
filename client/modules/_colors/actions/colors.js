@@ -9,7 +9,7 @@ export default {
         return LocalState.set('_colors.SAVE_ERROR', err.message);
       }
     });
-    FlowRouter.go(`/colors/${_id}`);
+    FlowRouter.go('/colors/' + _id);
   },
 
   // update

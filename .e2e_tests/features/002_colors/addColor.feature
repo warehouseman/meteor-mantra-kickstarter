@@ -1,4 +1,4 @@
-Feature: 001 Add a new color
+Feature: 002 Add a new color
   As an authorized user
   I want to create a new color
 

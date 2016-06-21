@@ -80,7 +80,9 @@ export default React.createClass({
           />
 
         <button className="btn btn-primary" onClick={this.submitForm}>{buttonLabel}</button>
-        {debug ? <button className="btn btn-primary" onClick={this.componentLog}>component log</button> : null }
+        {debug ? <button className="btn btn-primary" onClick={this.componentLog}>
+                   component log
+                </button> : null }
 
       </div>
     );

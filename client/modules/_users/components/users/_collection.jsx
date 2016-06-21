@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 import React from 'react';
 
-function deleteUser (id) {
-    console.log('deleteUser: ' + id);
-    //this.props.deleteAction(id);
+function deleteUser(id) {
+  console.log('deleteUser: ' + id);
+  // this.props.deleteAction(id);
 }
 
 export default ({collection}) => (
@@ -19,16 +20,30 @@ export default ({collection}) => (
           </thead>
           <tbody>
           {collection.map(record => (
-              <tr className="text-left" key={record._id}>
-                  <td className="col-xs-4"><a href={`/users/${record._id}`}>{record.firstEmail()}</a></td>
-                  <td className="col-xs-2">{record.profile.firstName}</td>
-                  <td className="col-xs-2">{record.profile.lastName}</td>
-                  <td className="col-xs-4">
-                      <a className="btn btn-default btn-sm" role="button" href={`/users/${record._id}`}>View</a>
-                      <a className="btn btn-default btn-sm" role="button" href={`/users/${record._id}/edit`}>Edit</a>
-                      <button className="btn btn-default btn-sm" role="button" onClick={() => deleteUser(record._id)}>Delete</button>
-                  </td>
-              </tr>
+            <tr className="text-left" key={record._id}>
+              <td className="col-xs-4">
+                <a href={`/users/${record._id}`}>{record.firstEmail()}</a>
+              </td>
+              <td className="col-xs-2">{record.profile.firstName}</td>
+              <td className="col-xs-2">{record.profile.lastName}</td>
+              <td className="col-xs-4">
+                <a className="btn btn-default btn-sm"
+                   role="button"
+                   href={`/users/${record._id}`}>
+                  View
+                </a>
+                <a className="btn btn-default btn-sm"
+                   role="button"
+                   href={`/users/${record._id}/edit`}>
+                  edit
+                </a>
+                <button className="btn btn-default btn-sm"
+                        role="button"
+                        onClick={() => deleteUser(record._id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
           ))}
           </tbody>
       </table>

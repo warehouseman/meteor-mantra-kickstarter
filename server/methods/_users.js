@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
+
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 // import _ from 'lodash';
+
 
 export default function () {
   Meteor.methods({
@@ -59,6 +62,22 @@ export default function () {
         let record = Meteor.users.findOne(_id);
         record.remove();
       }
+    },
+
+    '_users.findByEmail'(_email) {
+
+      check(_email, String);
+      const user = Meteor.users.findOne({ 'emails.address': _email });
+      console.log('_users.findByEmail(' + _email + ') --> User found : ', user);
+      return user;
+    },
+
+    '_users.removeByEmail'(_email) {
+
+      check(_email, String);
+      Meteor.users.remove({ 'emails.address': _email });
+      console.log('_users.removeByEmail(' + _email + ') --> User deleted. ');
+      return;
     }
   });
 }

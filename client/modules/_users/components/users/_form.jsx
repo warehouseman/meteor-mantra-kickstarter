@@ -2,6 +2,8 @@ import React from 'react';
 import t from 'tcomb-form';
 // import _ from 'lodash';
 
+
+
 export default React.createClass({
 
 
@@ -24,31 +26,42 @@ export default React.createClass({
 
   render() {
 
+
+    const AllRoles = t.enums.of(
+             [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ]
+           , 'Roles');
+
     const formModel = t.struct({
       firstName: t.String,
       lastName: t.String,
-      email: t.String
+      email: t.String,
+      role: AllRoles
       // ,content: t.maybe(t.String)
     });
+
+//       t.enums.of('Owner Administrator Staff Member Customer Registered')
 
     const formOptions = {
       config: {
       },
       fields: {
-        // title : {
-        //
-        // }
-        // ,content: {
-        //   type: 'textarea'
-        //   ,label: 'To jest kontent'
-        //   ,attrs: {
-        //     rows :3
-        //   }
-        // }
+        firstName: {
+          label: 'Name'
+        },
+        lastName: {
+          label: 'Family name'
+        },
+        email: {
+          label: 'Electronic mail address'
+        },
+        role: {
+          label: 'Privilege level',
+          factory: t.form.Radio
+        }
       }
     };
 
-    const debug = true;
+//    const debug = true;
     // const {_id, error, record, email } = this.props;
     const {_id, error, email } = this.props;
 
@@ -80,11 +93,13 @@ export default React.createClass({
           />
 
         <button className="btn btn-primary" onClick={this.submitForm}>{buttonLabel}</button>
-        {debug ? <button className="btn btn-primary" onClick={this.componentLog}>
-                   component log
-                </button> : null }
+
 
       </div>
     );
   }
 });
+
+        // {debug ? <button className="btn btn-primary" onClick={this.componentLog}>
+        //            component log
+        //         </button> : null }

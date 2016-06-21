@@ -4,6 +4,7 @@ import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 // import _ from 'lodash';
 
+const AllRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
 
 export default function () {
   Meteor.methods({
@@ -20,11 +21,14 @@ export default function () {
 
       data.password = 'test1234';
 
-      // console.log('_users.add data', data);
+      console.log('_users.add data', data);
 
       // XXX: Do some user authorization
 
-      const _idNew = Accounts.createUser({email: data.email, password: 'test1234'});
+      const _idNew = Accounts.createUser({
+        email: data.email,
+        password: 'test1234'
+      });
       // console.log('new user created with _id_new', _id_new);
 
       return { _idNew };
@@ -35,7 +39,8 @@ export default function () {
       check(data, {
         firstName: String,
         lastName: String,
-        email: String
+        email: String,
+        role: String
       });
       check(_id, String);
 
@@ -52,6 +57,10 @@ export default function () {
       record.profile.set('lastName', data.lastName);
       record.emails[0].set('address', data.email);
       record.save();
+
+      console.log('Setting roles', data.role, 'for user', _id);
+      console.log('Index', AllRoles.slice(AllRoles.indexOf(data.role)));
+      Roles.setUserRoles(_id, AllRoles.slice(AllRoles.indexOf(data.role)));
 
     },
 

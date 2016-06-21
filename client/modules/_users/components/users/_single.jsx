@@ -9,7 +9,7 @@ export default class extends React.Component {
   }
 
   render() {
-    const {_id, email, firstName, lastName, error} = this.props;
+    const {_id, email, firstName, lastName, role, error} = this.props;
 
     // const Layout = ({_id=()=>null, email=()=>null, firstName=()=>null, lastName=()=>null}) => (
 
@@ -24,9 +24,10 @@ export default class extends React.Component {
 
         <h3>user _id: {_id}</h3>
 
-        <p><strong>first name:</strong> {firstName}</p>
-        <p><strong>last name:</strong> {lastName}</p>
-        <p><strong>email:</strong> {email}</p>
+        <p><strong>First name:</strong> {firstName}</p>
+        <p><strong>Last name:</strong> {lastName}</p>
+        <p><strong>EMail:</strong> {email}</p>
+        <p><strong>Role:</strong> {role}</p>
 
         <a href={'/users/' + _id + '/edit'}>
           edit

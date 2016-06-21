@@ -9,7 +9,8 @@
     "Meteor",
     "Accounts",
     "Astro",
-    "Validators"
+    "Validators",
+    "Roles"
   },
 
   "plugins": [

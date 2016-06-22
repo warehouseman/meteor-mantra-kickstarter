@@ -6,13 +6,13 @@ function deleteUser(id) {
   // this.props.deleteAction(id);
 }
 
-export default ({collection}) => (
-  <div>
+const UserList = ({collection}) => (
+  <div className='userlist'>
     <h3>Users</h3>
       <table className="table table-responsive table-striped table-hover table-condensed">
           <thead>
           <tr>
-              <th className="col-xs-4">email</th>
+              <th className="col-xs-4">Electronic Mail</th>
               <th className="col-xs-2">First Name</th>
               <th className="col-xs-2">Last Name</th>
               <th className="col-xs-4">Actions</th>
@@ -49,3 +49,5 @@ export default ({collection}) => (
       </table>
   </div>
 );
+
+export default UserList;

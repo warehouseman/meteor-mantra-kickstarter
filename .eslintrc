@@ -10,7 +10,8 @@
     "Accounts",
     "Astro",
     "Validators",
-    "Roles"
+    "Roles",
+    "_"
   },
 
   "plugins": [

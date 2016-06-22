@@ -1,5 +1,5 @@
 {
-  "name": "mantra-demo",
+  "name": "meteor-mantra-kickstarter",
   "version": "0.2.1",
   "scripts": {
     "lint": "eslint . --ext .js --ext .jsx",
@@ -28,20 +28,19 @@
     "jsdom": "^8.0.4"
   },
   "dependencies": {
+    "classnames": "2.2.1",
     "domready": "^1.0.8",
+    "formsy-react": "0.17.0",
+    "formsy-react-components": "0.6.6",
+    "lodash": "3.10.1",
     "mantra-core": "^1.2.0",
-    "react": "^0.14.6",
+    "meteor-node-stubs": "^0.2.3",
+    "react": "^0.14.8",
     "react-dom": "^0.14.6",
-    "react-mounter": "^1.0.0"
-
-    ,"classnames": "2.2.1"
-    ,"lodash":"3.10.1"
-    ,"formsy-react": "0.17.0"
-    ,"formsy-react-components": "0.6.6"
-    ,"tcomb-form" : "0.8.1"
-    ,"react-tagsinput": "3.1.0"
-    ,"react-select": "1.0.0-beta8"
-    
+    "react-mounter": "^1.0.0",
+    "react-select": "1.0.0-beta8",
+    "react-tagsinput": "3.1.0",
+    "tcomb-form": "0.8.1"
   },
   "private": true
 }

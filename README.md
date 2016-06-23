@@ -45,7 +45,7 @@ Please make sure you read [Mantra Specification](https://kadirahq.github.io/mant
 
 ### Setting Up
 
-* make sure you have Meteor installed
+* make sure you [have Meteor installed](curl https://install.meteor.com/ | sh)
 * clone this repo
 * make sure you are on v0.2.1 branch
 

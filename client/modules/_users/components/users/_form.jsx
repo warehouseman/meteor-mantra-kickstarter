@@ -1,9 +1,8 @@
+/* eslint-disable no-console */
 import React from 'react';
 import t from 'tcomb-form';
-// import _ from 'lodash';
 
-
-
+const enumRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
 export default React.createClass({
 
 
@@ -27,9 +26,7 @@ export default React.createClass({
   render() {
 
 
-    const AllRoles = t.enums.of(
-             [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ]
-           , 'Roles');
+    const AllRoles = t.enums.of( enumRoles, 'Roles');
 
     const formModel = t.struct({
       firstName: t.String,
@@ -63,16 +60,20 @@ export default React.createClass({
 
 //    const debug = true;
     // const {_id, error, record, email } = this.props;
-    const {_id, error, email } = this.props;
+    const {_id, error, email, user } = this.props;
 
     const defaultValues = {
       ...this.props
     };
 
+    defaultValues.role = user.roles.headOffice[0];
+
     const Form = t.form.Form;
 
     const formTitle = _id ? 'Edit ' + email : 'Add new record';
     const buttonLabel = 'Save';
+
+    // console.log('_users/components/users/_form.jsx --> Default values :', defaultValues);
 
     return (
       <div>

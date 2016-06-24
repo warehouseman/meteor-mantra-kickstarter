@@ -45,7 +45,7 @@ export default function () {
       check(_id, String);
 
       //  console.log('_users.update _id', _id);
-      //  console.log('_users.update data', data);
+      // console.log('_users.update data', data);
 
       // XXX: Do some user authorization
 
@@ -58,9 +58,9 @@ export default function () {
       record.emails[0].set('address', data.email);
       record.save();
 
-      console.log('Setting roles', data.role, 'for user', _id);
-      console.log('Index', AllRoles.slice(AllRoles.indexOf(data.role)));
-      Roles.setUserRoles(_id, AllRoles.slice(AllRoles.indexOf(data.role)));
+      // console.log('Setting roles', data.role, 'for user', _id);
+      // console.log('Index', AllRoles.slice(AllRoles.indexOf(data.role)));
+      Roles.setUserRoles(_id, AllRoles.slice(AllRoles.indexOf(data.role)), 'headOffice');
 
     },
 

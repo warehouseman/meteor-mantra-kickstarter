@@ -35,7 +35,7 @@ export default {
 
   update({Meteor, LocalState, FlowRouter}, data, _id) {
     // console.log ('actions._users.update _id', _id);
-    console.log ('actions._users.update data', data);
+    // console.log ('actions._users.update data', data);
 
     Meteor.call('_users.update', data, _id, (err) => {
       if (err) {

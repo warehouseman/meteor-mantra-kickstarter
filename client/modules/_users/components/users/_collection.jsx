@@ -28,20 +28,20 @@ const UserList = ({collection}) => (
               <td className="col-xs-2">{record.profile.lastName}</td>
               <td className="col-xs-4">
                 <a className="btn btn-default btn-sm"
-                   role="button"
-                   href={`/users/${record._id}`}>
+                  role="button"
+                  href={`/users/${record._id}`}>
                   View
                 </a>
                 <a className="btn btn-default btn-sm"
-                   role="button"
-                   href={`/users/${record._id}/edit`}>
-                  edit
+                  role="button"
+                  href={`/users/${record._id}/edit`}>
+                  Edit
                 </a>
-                <button className="btn btn-default btn-sm"
-                        role="button"
-                        onClick={() => deleteUser(record._id)}>
+                <a className="btn btn-default btn-sm"
+                  role="button"
+                  onClick={() => deleteUser(record._id)}>
                   Delete
-                </button>
+                </a>
               </td>
             </tr>
           ))}

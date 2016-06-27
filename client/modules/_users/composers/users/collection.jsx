@@ -1,4 +1,3 @@
-// import Component from '../components/Users/UsersCollection.jsx';
 import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
@@ -11,7 +10,13 @@ export const composer = ({context}, onData) => {
   }
 };
 
+export const depsMapper = (context, actions) => ({
+  submitAction: actions._users.delete,
+  clearErrors: actions._users.clearUserErrors,
+  context: () => context
+});
+
 export default (component) => composeAll(
     composeWithTracker(composer),
-    useDeps()
+    useDeps(depsMapper)
   )(component);

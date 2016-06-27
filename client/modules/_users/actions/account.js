@@ -1,4 +1,3 @@
-// import {Accounts} from 'meteor/meteor';
 export default {
 
   login({Meteor, LocalState, FlowRouter}, email, password) {
@@ -24,20 +23,33 @@ export default {
 
   register({Meteor, LocalState, FlowRouter}, email, password1, password2) {
 
-    if (!email || !password1 || !password2) {
+    if ( !email || !password1 || !password2 ) {
       return LocalState.set('REGISTER_ERROR', 'Please fill out all the required fileds!');
     }
 
-    if (password1 !== password2 ) {
+    if ( password1 !== password2 ) {
       return LocalState.set('REGISTER_ERROR', 'Passwords do not match!');
     }
 
-    Accounts.createUser({email, password: password1}, (err) => {
-      if (err && err.reason) {
-        return LocalState.set('REGISTER_ERROR', err.reason);
+    const userObject = {
+      email,
+      profile: {
+        firstName: '',
+        lastName: ''
+      },
+      password: password1,
+      role: 'none'
+    };
+
+    Meteor.call('_users.add', userObject, (err, response) => {
+      if (err) {
+        return LocalState.set('_users.SAVE_ERROR', err.message);
       }
-      FlowRouter.go('/');
+      if (response._idNew) {
+        FlowRouter.go('/users/' + response._idNew);
+      }
     });
+
   },
 
   registerErrorClear({LocalState}) {

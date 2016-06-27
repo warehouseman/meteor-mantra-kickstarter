@@ -1,15 +1,16 @@
+/* eslint-disable no-console */
 export default {
 
   add({Meteor, LocalState, FlowRouter}, data) {
     // console.log('actions._users.add data', data);
-    // const _id = Meteor.uuid();
-
     const userObject = {
       email: data.email,
+      password: data.password1,
       profile: {
         firstName: data.firstName,
         lastName: data.lastName
-      }
+      },
+      role: data.role
     };
 
     Meteor.call('_users.add', userObject, (err, response) => {
@@ -20,16 +21,6 @@ export default {
         FlowRouter.go('/users/' + response._idNew);
       }
     });
-
-    // const user_id = Accounts.createUser(userObject, (err,res) => {
-    //   if (err && err.reason) {
-    //     return LocalState.set('_colors.SAVE_ERROR', err.reason);
-    //   } else {
-    //
-    //   }
-    // });
-
-    // FlowRouter.go('/users/');
 
   },
 
@@ -57,7 +48,7 @@ export default {
       if (err) {
         return LocalState.set('_users.DELETE_ERROR', err.message);
       }
-      FlowRouter.go(`/users/`);
+      FlowRouter.go(`/users`);
 
     });
   },

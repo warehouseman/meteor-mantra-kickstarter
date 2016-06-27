@@ -8,7 +8,9 @@ export default class extends React.Component {
       <ul className="nav navbar-nav navbar-right">
         <li className="dropdown">
           <a href="#" className="dropdown-toggle"
-            data-toggle="dropdown">{email} <span className="caret"></span></a>
+            data-toggle="dropdown">
+              <x-cuke id="acct-email">{email}</x-cuke>
+              &nbsp;<span className="caret"></span></a>
           <ul className="dropdown-menu" role="menu">
             <li><a href="/profile">Profile</a></li>
             <li><a href="/account">Account</a></li>

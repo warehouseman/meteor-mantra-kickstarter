@@ -30,7 +30,7 @@ export default class extends React.Component {
               <div className="col-md-6">
                   <div className="ibox-content">
 
-                    <h2 className="font-bold">Login</h2>
+                    <h2 className="font-bold"><x-cuke id="login">Login</x-cuke> </h2>
                     <p>
                         Enter your email address and your password.
                     </p>

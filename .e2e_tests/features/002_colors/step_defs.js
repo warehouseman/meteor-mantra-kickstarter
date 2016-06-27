@@ -1,12 +1,12 @@
 /* eslint-disable no-undef   */
 /* eslint-disable no-console */
 
-const btnSubmit = '//button[@class="btn btn-primary" and contains(., "Save")]';
-const inpTitle = '//input[@class="form-control" and @name="title"]';
-const inpContent = '//textarea[@class="form-control" and @name="content"]';
+const cukeBtnSubmit = '//button[@data-cuke="save-color"]';
+const cukeInpTitle = '//input[@data-cuke="title"]';
+const cukeInpContent = '//textarea[@data-cuke="content"]';
 
-const h2Title = '//*[@id="react-root"]/div/div/div/div/div[2]/div/h2';
-const spnContent = '//*[@id="react-root"]/div/div/div/div/div[2]/div/p/span[1]';
+const cukeTitle = '//x-cuke[@id="title"]';
+const cukeContent = '//x-cuke[@id="content"]';
 
 var title = '';
 var content = '';
@@ -22,18 +22,18 @@ module.exports = function () {
 
     title = arg1;
     content = arg2;
-    browser.waitForEnabled( btnSubmit );
-    browser.setValue(inpTitle, title);
-    browser.setValue(inpContent, content);
+    browser.waitForEnabled( cukeBtnSubmit );
+    browser.setValue(cukeInpTitle, title);
+    browser.setValue(cukeInpContent, content);
 
-    browser.click(btnSubmit);
+    browser.click(cukeBtnSubmit);
     browser.waitForEnabled('//*[@id="react-root"]/div/div/div/div/div[2]/div/h2');
 
   });
 
   this.Then(/^I see a new record with the same title and contents\.$/, function () {
-    expect(browser.getText(h2Title)).toEqual(title);
-    expect(browser.getText(spnContent)).toEqual(content);
+    expect(browser.getText(cukeTitle)).toEqual(title);
+    expect(browser.getText(cukeContent)).toEqual(content);
   });
 
 };

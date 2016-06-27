@@ -69,6 +69,8 @@ export default React.createClass({
           onValid={this.enableButton}
           onInvalid={this.disableButton}
           onChange={this.onChange}
+
+          data-cuke='register'
           ref="form">
 
           <fieldset>
@@ -86,6 +88,8 @@ export default React.createClass({
                 type="email"
                 placeholder="This is an email input."
 
+                data-cuke="email"
+
                 autoComplete="off"
 
                 validations="isEmail"
@@ -101,6 +105,8 @@ export default React.createClass({
                 label="Password"
                 type="password"
 
+                data-cuke="password1"
+
                 validations="minLength:8"
                 validationError="Your password must be at least 8 characters long."
                 placeholder="Choose a password"
@@ -112,6 +118,7 @@ export default React.createClass({
                 label="Confirm password"
                 type="password"
 
+                data-cuke="password2"
 
                 validations="equalsField:password1"
                 validationErrors={{
@@ -125,7 +132,7 @@ export default React.createClass({
 
           <Row layout={this.state.layout}>
 
-            <input className="btn btn-primary block full-width m-b"
+            <input data-cuke='submit' className="btn btn-primary block full-width m-b"
               formNoValidate={true}
               disabled={!this.state.canSubmit}
               type="submit"

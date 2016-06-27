@@ -30,7 +30,7 @@ export default class extends React.Component {
               <div className="col-md-6">
                   <div className="ibox-content">
 
-                    <h3>Account page</h3>
+                    <h3> <x-cuke id="account-page">Account page</x-cuke></h3>
 
 
 

@@ -36,12 +36,16 @@ export default React.createClass({
       },
       fields: {
         title: {
-          label: 'Title (custom label)'
+          label: 'Title (custom label)',
+          attrs: {
+            'data-cuke': 'title'
+          }
         },
         content: {
           type: 'textarea',
           attrs: {
-            rows: 8
+            rows: 8,
+            'data-cuke': 'content'
           }
         }
       }
@@ -75,7 +79,11 @@ export default React.createClass({
             onChange={this.onChange}
 
           />
-        <button className="btn btn-primary" onClick={this.submitForm}>{buttonLabel}</button>
+        <button
+          data-cuke="save-color" className="btn btn-primary"
+          onClick={this.submitForm}>{buttonLabel}
+        </button>
+
         {debug ? <button className="btn btn-primary"
           onClick={this.componentLog}>component log</button> : null
         }

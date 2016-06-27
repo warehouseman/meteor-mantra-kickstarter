@@ -3,8 +3,6 @@ import {Meteor} from 'meteor/meteor';
 export default () => {
   if (Meteor.users.find().count() < 6 ) {
 
-    console.log('>>>>>>>>>>>>>>>>>>');
-
     const AllRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
     let idx = 0;
 
@@ -56,8 +54,6 @@ export default () => {
         profile: { firstName: user.firstName, lastName: user.lastName }
       });
 
-      console.log('Roles : ', user.roles);
-
       if (user.roles.length > 0) {
         // Need _id of existing user record so this call must come
         // after `Accounts.createUser` or `Accounts.onCreate`
@@ -65,10 +61,6 @@ export default () => {
       }
 
     });
-
-    console.log('<<<<<<<<<<<<<<<<<<<');
-
-
 
   }
 };

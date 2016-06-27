@@ -68,6 +68,9 @@ export default React.createClass({
           onValid={this.enableButton}
           onInvalid={this.disableButton}
           onChange={this.onChange}
+
+          data-cuke="login"
+
           ref="form">
 
           <fieldset>
@@ -84,8 +87,9 @@ export default React.createClass({
                 label="Email"
                 type="email"
                 placeholder="This is an email input."
-
                 autoComplete="off"
+
+                data-cuke="email"
 
                 validations="isEmail"
                 validationError="Please provide a valid email address."
@@ -98,6 +102,8 @@ export default React.createClass({
                 label="Password"
                 type="password"
                 placeholder="Type in your password"
+
+                data-cuke="password"
 
                 validations="minLength:4"
                 validationError="That password looks a bit short, try again"
@@ -112,6 +118,9 @@ export default React.createClass({
               formNoValidate={true}
               disabled={!this.state.canSubmit}
               type="submit"
+
+              data-cuke="login-button"
+
               defaultValue="Login" />
 
           </Row>

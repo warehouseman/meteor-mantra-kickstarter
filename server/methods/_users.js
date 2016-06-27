@@ -5,7 +5,9 @@ import {check} from 'meteor/check';
 // import _ from 'lodash';
 
 const AllRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
+const numRoles = AllRoles.length;
 
+const GROUP = 'headOffice';
 export default function () {
   Meteor.methods({
 
@@ -16,20 +18,21 @@ export default function () {
         profile: {
           firstName: String,
           lastName: String
-        }
+        },
+        password: String,
+        role: String
       });
 
-      data.password = 'test1234';
+      // console.log(' Profile ? ', data);
 
-      console.log('_users.add data', data);
+      const _idNew = Accounts.createUser( data );
 
-      // XXX: Do some user authorization
-
-      const _idNew = Accounts.createUser({
-        email: data.email,
-        password: 'test1234'
-      });
-      // console.log('new user created with _id_new', _id_new);
+      const hasRole = AllRoles.indexOf(data.role);
+      if ( hasRole < 0 ) {
+        Roles.addUsersToRoles(_idNew, AllRoles.slice( numRoles - 1 ), GROUP);
+      } else {
+        Roles.addUsersToRoles(_idNew, AllRoles.slice( hasRole ), GROUP);
+      }
 
       return { _idNew };
 
@@ -40,14 +43,11 @@ export default function () {
         firstName: String,
         lastName: String,
         email: String,
+        password: String,
         role: String
       });
       check(_id, String);
 
-      //  console.log('_users.update _id', _id);
-      // console.log('_users.update data', data);
-
-      // XXX: Do some user authorization
 
       let record = Meteor.users.findOne(_id);
       // const allowedFields = ['profile.firstName'];
@@ -58,8 +58,6 @@ export default function () {
       record.emails[0].set('address', data.email);
       record.save();
 
-      // console.log('Setting roles', data.role, 'for user', _id);
-      // console.log('Index', AllRoles.slice(AllRoles.indexOf(data.role)));
       Roles.setUserRoles(_id, AllRoles.slice(AllRoles.indexOf(data.role)), 'headOffice');
 
     },
@@ -77,7 +75,7 @@ export default function () {
 
       check(_email, String);
       const user = Meteor.users.findOne({ 'emails.address': _email });
-      console.log('_users.findByEmail(' + _email + ') --> User found : ', user);
+      // console.log('_users.findByEmail(' + _email + ') --> User found : ', user);
       return user;
     },
 
@@ -85,7 +83,7 @@ export default function () {
 
       check(_email, String);
       Meteor.users.remove({ 'emails.address': _email });
-      console.log('_users.removeByEmail(' + _email + ') --> User deleted. ');
+      // console.log('_users.removeByEmail(' + _email + ') --> User deleted. ');
       return;
     }
   });

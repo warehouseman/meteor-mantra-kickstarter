@@ -32,41 +32,66 @@ export default React.createClass({
       firstName: t.String,
       lastName: t.String,
       email: t.String,
+      password1: t.String,
+      password2: t.String,
       role: AllRoles
-      // ,content: t.maybe(t.String)
     });
-
-//       t.enums.of('Owner Administrator Staff Member Customer Registered')
 
     const formOptions = {
       config: {
       },
       fields: {
         firstName: {
-          label: 'Name'
+          label: 'Name',
+          attrs: {
+            'data-cuke': 'firstName'
+          }
         },
         lastName: {
-          label: 'Family name'
+          label: 'Family name',
+          attrs: {
+            'data-cuke': 'lastName'
+          }
         },
         email: {
-          label: 'Electronic mail address'
+          label: 'Electronic mail address',
+          attrs: {
+            'data-cuke': 'email'
+          }
+        },
+        password1: {
+          label: 'Password',
+          attrs: {
+            'data-cuke': 'pword1'
+          }
+        },
+        password2: {
+          label: 'Repeat Password',
+          attrs: {
+            'data-cuke': 'pword2'
+          }
         },
         role: {
           label: 'Privilege level',
+          attrs: {
+            'data-cuke': 'role'
+          },
           factory: t.form.Radio
         }
       }
     };
 
-//    const debug = true;
-    // const {_id, error, record, email } = this.props;
     const {_id, error, email, user } = this.props;
 
     const defaultValues = {
       ...this.props
     };
 
-    defaultValues.role = user.roles.headOffice[0];
+    if ( !user || !user.roles ) {
+      defaultValues.role = '';
+    } else {
+      defaultValues.role = user.roles.headOffice[0];
+    }
 
     const Form = t.form.Form;
 
@@ -78,7 +103,7 @@ export default React.createClass({
     return (
       <div>
 
-          <h3>{formTitle}</h3>
+          <h3><x-cuke id="formTitle">{formTitle}</x-cuke></h3>
 
           {error ?
           <div className="alert alert-danger" onClick="">
@@ -93,14 +118,12 @@ export default React.createClass({
             value={defaultValues}
           />
 
-        <button className="btn btn-primary" onClick={this.submitForm}>{buttonLabel}</button>
+        <button data-cuke='user-save' className="btn btn-primary" onClick={this.submitForm}>
+          {buttonLabel}
+        </button>
 
 
       </div>
     );
   }
 });
-
-        // {debug ? <button className="btn btn-primary" onClick={this.componentLog}>
-        //            component log
-        //         </button> : null }

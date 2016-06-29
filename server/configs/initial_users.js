@@ -14,7 +14,7 @@ export default () => {
         roles: AllRoles.slice(idx++)
       },
       {
-        firstName: 'Hasan',
+        firstName: 'Martin',
         lastName: 'Bramwell',
         email: 'administrator@example.com',
         roles: AllRoles.slice(idx++)
@@ -39,7 +39,7 @@ export default () => {
       },
       {
         firstName: 'Alejandro',
-        lastName: 'Subía',
+        lastName: 'Vasquez',
         email: 'registered@example.com',
         roles: AllRoles.slice(idx++)
       }

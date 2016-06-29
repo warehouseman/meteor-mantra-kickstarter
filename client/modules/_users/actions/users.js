@@ -32,7 +32,7 @@ export default {
       if (err) {
         return LocalState.set('_users.SAVE_ERROR', err.message);
       }
-      FlowRouter.go(`/users/`);
+      FlowRouter.go('/users/');
     });
   },
 
@@ -48,7 +48,7 @@ export default {
       if (err) {
         return LocalState.set('_users.DELETE_ERROR', err.message);
       }
-      FlowRouter.go(`/users`);
+      FlowRouter.go('/users');
 
     });
   },

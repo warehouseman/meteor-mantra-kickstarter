@@ -11,7 +11,7 @@ export default React.createClass({
     return (
 
       <div className='userlist'>
-        <h3>Users</h3>
+        <h3> <x-cuke id="user-list">Users</x-cuke> </h3>
           <table className="table table-responsive table-striped table-hover table-condensed">
               <thead>
               <tr>
@@ -29,16 +29,20 @@ export default React.createClass({
                   <td className="col-xs-2">{record.profile.lastName}</td>
                   <td className="col-xs-2">{record.roles.headOffice[0]}</td>
                   <td className="col-xs-3">
-                    <a href={`/users/${record._id}`}>{record.firstEmail()}</a>
+                    <a href={`/users/${record._id}`}>
+                      {record.firstEmail()}
+                    </a>
                   </td>
                   <td className="col-xs-4">
                     <a className="btn btn-default btn-sm"
                       role="button"
+                      data-cuke={'view-' + record.firstEmail()}
                       href={`/users/${record._id}`}>
                       View
                     </a>
                     <a className="btn btn-default btn-sm"
                       role="button"
+                      data-cuke={'edit-' + record.firstEmail()}
                       href={`/users/${record._id}/edit`}>
                       Edit
                     </a>

@@ -26,6 +26,8 @@ module.exports = function () {
     email = arg1;
     urlRegister = arg2;
 
+    browser.setViewportSize({ width: 1024, height: 480 });
+
     browser.url(urlLogout);
     browser.waitForVisible(cukeLogin);
     browser.url(urlRegister);

@@ -12,9 +12,6 @@ const cukeInpPwd = '//input[@data-cuke="password"]';
 const cukeAccountPage = '//x-cuke[@id="account-page"]';
 const cukeAcctEmail = '//x-cuke[@id="acct-email"]';
 
-const cukeUserAddPage = '//x-cuke[@id="formTitle"]';
-
-
 const cukeInpName = '//input[@data-cuke="firstName"]';
 const cukeInpFamilyName = '//input[@data-cuke="lastName"]';
 const cukeInpPwd1 = '//input[@data-cuke="pword1"]';
@@ -29,8 +26,14 @@ const xCukeLastName = '//x-cuke[@id="lastName"]';
 const xCukeEmail = '//x-cuke[@id="email"]';
 const xCukeRole = '//x-cuke[@id="role"]';
 
+const cukeUserListPage = '//x-cuke[@id="user-list"]';
+
+
 let myEmail = '';
 module.exports = function () {
+
+//  Scenario: Log in as administrator
+// ------------------------------------------------------------------------
 
   this.Given(/^I have opened the login page : "([^"]*)"$/, function (urlLogin) {
 
@@ -58,11 +61,24 @@ module.exports = function () {
     let idAcct = browser.getText(cukeAcctEmail);
     expect(idAcct).toEqual(myEmail);
   });
+// =======================================================================
+
+
+//   Scenario: Create a new user
+// ------------------------------------------------------------------------
 
   this.Given(/^I have opened the create user page : "([^"]*)"$/, function (urlCreateUser) {
     browser.url(urlCreateUser);
+
+  });
+
+  // <h3 data-cuke="user-form-title">Add new record</h3>
+  this.Given(/^seen the title "([^"]*)"$/, function (title) {
+    const cukeUserAddPage = '//h3[@data-cuke="user-form-title" and contains(text(), "' +
+                                                                         title + '")]';
     browser.waitForExist(cukeUserAddPage);
   });
+
 
   let firstName = '';
   this.When(/^I provide the user's name "([^"]*)",$/, function (_firstname) {
@@ -71,7 +87,7 @@ module.exports = function () {
   });
 
   let lastName = '';
-  this.When(/^her family name "([^"]*)",$/, function (_lastname) {
+  this.When(/^family name "([^"]*)",$/, function (_lastname) {
     lastName = _lastname;
     browser.setValue(cukeInpFamilyName, lastName);
   });
@@ -96,7 +112,7 @@ module.exports = function () {
 
   });
 
-  this.When(/^I submit the new user form\.$/, function () {
+  this.When(/^I submit the create user form\.$/, function () {
     browser.click(cukeButtonSave);
     browser.waitForExist(cukeUserRecord);
   });
@@ -110,5 +126,41 @@ module.exports = function () {
     expect(browser.element(xCukeRole).getText()).toEqual(role);
 
   });
+// =======================================================================
+
+
+//   Scenario: Edit an existing user
+// ------------------------------------------------------------------------
+  this.Given(/^I have opened the list of users : "([^"]*)"$/, function (urlListUsers) {
+    browser.url(urlListUsers);
+    browser.waitForExist(cukeUserListPage);
+  });
+
+  let user = null;
+  this.Given(/^I find and click the Edit button for user "([^"]*)",$/, function (emailUser) {
+    user = emailUser;
+    let cukeButtonUserEdit = '//a[@data-cuke="edit-' + user + '"]';
+    browser.click(cukeButtonUserEdit);
+  });
+
+  //  <h3 data-cuke="user-form-title">Edit x.yz@x.yz</h3>
+  this.Given(/^I see the user "([^"]*)" form,$/, function (title) {
+    const cukeUserEditPage = '//h3[@data-cuke="user-form-title" and contains(text(), "' +
+                                                                         title + '")]';
+    browser.waitForExist(cukeUserEditPage);
+  });
+
+  this.When(/^I submit the edit user form\.$/, function () {
+    browser.click(cukeButtonSave);
+    browser.waitForExist(cukeUserListPage);
+  });
+
+  this.Then(/^the record shows the same data\.$/, function () {
+    let cukeButtonUserView = '//a[@data-cuke="view-' + user + '"]';
+    browser.click(cukeButtonUserView);
+    expect(browser.element(xCukeFirstName).getText()).toEqual(firstName);
+    expect(browser.element(xCukeLastName).getText()).toEqual(lastName);
+  });
+// =======================================================================
 
 };

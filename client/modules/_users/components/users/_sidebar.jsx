@@ -10,8 +10,8 @@ export default class extends React.Component {
         </div>
         <div className="box-body no-padding">
           <ul className="nav nav-pills nav-stacked">
-            <li><a href="/users"><i className="fa "></i> Users collection</a></li>
-            <li><a href="/users/add"><i className="fa "></i> Add user</a></li>
+            <li><a href="/users"><i className="fa "></i>List of Users</a></li>
+            <li><a href="/users/add"><i className="fa "></i>Add a User</a></li>
           </ul>
         </div>
       </div>

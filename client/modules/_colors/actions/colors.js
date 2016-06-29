@@ -32,7 +32,7 @@ export default {
       if (err) {
         return LocalState.set('_colors.DELETE_ERROR', err.message);
       }
-      FlowRouter.go(`/colors/`);
+      FlowRouter.go('/colors/');
 
     });
   },

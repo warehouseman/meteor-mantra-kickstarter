@@ -11,8 +11,6 @@ export default class extends React.Component {
   render() {
     const {_id, email, firstName, lastName, role, error} = this.props;
 
-    // const Layout = ({_id=()=>null, email=()=>null, firstName=()=>null, lastName=()=>null}) => (
-
     return (
       <div>
 
@@ -25,7 +23,7 @@ export default class extends React.Component {
         <h3> <x-cuke id="user-record">User Record</x-cuke> </h3>
 
         <p><strong>First name:</strong> <x-cuke id="firstName">{firstName}</x-cuke></p>
-        <p><strong>Last name:::</strong> <x-cuke id="lastName">{lastName}</x-cuke> </p>
+        <p><strong>Last name:</strong> <x-cuke id="lastName">{lastName}</x-cuke> </p>
         <p><strong>EMail:</strong> <x-cuke id="email">{email}</x-cuke></p>
         <p><strong>Role:</strong> <x-cuke id="role">{role}</x-cuke></p>
         <p>Internal key: {_id}</p>

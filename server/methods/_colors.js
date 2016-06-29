@@ -55,7 +55,7 @@ export default function () {
 
     '_colors.wipe'() {
       let result = _colors.remove({});
-      // console.log('_colors.wipe --> Colors deleted : ', result);
+      console.log('_colors.wipe --> Colors deleted : ', result);
     }
   });
 }

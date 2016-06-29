@@ -43,7 +43,7 @@ export default function () {
         firstName: String,
         lastName: String,
         email: String,
-        password: String,
+//        password: String,
         role: String
       });
       check(_id, String);

@@ -10,7 +10,8 @@ export const singleComposer = ({context, _id, clearErrors}, onData) => {
     const email = user.firstEmail();
     const role = user.bestRole();
     if ( user ) {
-      onData(null, {...user.profile, role, user, email, error});
+      let parms = { ...user.profile, role, user, email, error };
+      onData(null, parms);
     } else {
       onData(null, null);
     }

@@ -28,14 +28,20 @@ export default React.createClass({
 
     const AllRoles = t.enums.of( enumRoles, 'Roles');
 
-    const formModel = t.struct({
+    const RegisteredUser = t.struct({
       firstName: t.String,
       lastName: t.String,
       email: t.String,
+      role: AllRoles
+    }, 'RegisteredUser');
+
+    const NewUser = RegisteredUser.extend({
       password1: t.String,
       password2: t.String,
-      role: AllRoles
-    });
+    }, 'NewUser');
+
+    const User = t.union([ RegisteredUser, NewUser ], 'User');
+    User.dispatch = value => value && value.email ? RegisteredUser : NewUser;
 
     const formOptions = {
       config: {
@@ -78,7 +84,8 @@ export default React.createClass({
           },
           factory: t.form.Radio
         }
-      }
+      },
+      order: [ 'firstName', 'lastName', 'email', 'password1', 'password2', 'role' ]
     };
 
     const {_id, error, email, user } = this.props;
@@ -103,7 +110,7 @@ export default React.createClass({
     return (
       <div>
 
-          <h3><x-cuke id="formTitle">{formTitle}</x-cuke></h3>
+          <h3 data-cuke="user-form-title">{formTitle}</h3>
 
           {error ?
           <div className="alert alert-danger" onClick="">
@@ -112,7 +119,7 @@ export default React.createClass({
           </div> : null }
 
           <Form ref="form"
-            type={formModel}
+            type={User}
             options={formOptions}
             onChange={this.onChange}
             value={defaultValues}

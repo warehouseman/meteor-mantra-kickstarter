@@ -1,0 +1,14 @@
+{
+  "HOST_URI": "localhost:3000",
+  "MAILGUN_DOMAIN": "yourhost.yourpublic.work",
+  "MAILGUN_KEY": "as if I'm gonna to leave that lying around",
+  "PASSWORD_RESET": {
+    "Route": "/pr/",
+    "Html_1": "<b>If you did not request a password reset just ignore this.</b><br /><b>If you did request it, then please click <a href='http://",
+    "Html_2": "'>this link</a> to open your password reset page.",
+    "Text_1": "If you did not request a password reset just ignore this.\nIf you did request it, then please go to http://",
+    "Text_2": " in order to reset your password.",
+    "Subject": "Your Mantra Kickstarter password reset request",
+    "From": "yourself@yourpublic.work"
+  }
+}

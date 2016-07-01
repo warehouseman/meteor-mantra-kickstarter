@@ -50,7 +50,7 @@ export default () => {
 
       id = Accounts.createUser({
         email: user.email,
-        password: 'apple1',
+        password: 'apple_01',
         profile: { firstName: user.firstName, lastName: user.lastName }
       });
 

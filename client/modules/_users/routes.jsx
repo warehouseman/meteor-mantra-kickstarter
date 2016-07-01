@@ -10,6 +10,7 @@ import {
 import Login from './components/login/wrapper.jsx';
 import Register from './components/register/wrapper.jsx';
 import Password from './components/password/wrapper.jsx';
+import ResetPWrd from './components/password/success.jsx';
 
 import Account from './components/account/wrapper.jsx';
 import Profile from './components/profile/wrapper.jsx';
@@ -52,6 +53,28 @@ export default function (injectDeps, {FlowRouter}) {
     }
   });
 
+  FlowRouter.route('/rstpwdok/:_email', {
+    name: 'users.rstpwdok',
+    action({_email}) {
+
+      mount(LayoutDefaultCtx, {
+        content: () => (<ResetPWrd email={_email}/>)
+      });
+    }
+
+  });
+
+  FlowRouter.route('/pr/:_code', {
+    name: 'users.pr',
+    action({_code}) {
+
+      mount(LayoutDefaultCtx, {
+        content: () => (<ResetPWrd email={_code}/>)
+      });
+    }
+
+  });
+
   FlowRouter.route('/login', {
     name: 'users.login',
     action() {
@@ -69,7 +92,6 @@ export default function (injectDeps, {FlowRouter}) {
   FlowRouter.route('/logout', {
     name: 'users.logout',
     action() {
-      // Accounts.logout();
       Meteor.logout(() => {
         FlowRouter.go('/login');
       });
@@ -136,6 +158,7 @@ export default function (injectDeps, {FlowRouter}) {
     name: '_users.usersSingle',
     action({_id}) {
 
+      // console.log(' /users/:_id ', _id);
       if (!Meteor.userId()) {
         FlowRouter.go('/login');
       }

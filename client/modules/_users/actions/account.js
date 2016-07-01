@@ -17,6 +17,29 @@ export default {
 
   },
 
+  requestPasswordReset({Meteor, LocalState, FlowRouter}, email) {
+    console.log('Try to reset password for ', email);
+
+    if ( email ) {
+
+      LocalState.set('EMAIL_ERROR', null);
+
+      Meteor.call('_users.passwordResetRequest', email, (err) => {
+        if (err) {
+          return LocalState.set('_users.PASSWORD_ERROR', err.message);
+        }
+        FlowRouter.go('/rstpwdok/' + email);
+
+      });
+
+    } else {
+
+      return LocalState.set('EMAIL_ERROR', 'Could not send to email address : ' + email);
+
+    }
+
+  },
+
   loginErrorClear({LocalState}) {
     return LocalState.set('LOGIN_ERROR', null);
   },
@@ -24,7 +47,7 @@ export default {
   register({Meteor, LocalState, FlowRouter}, email, password1, password2) {
 
     if ( !email || !password1 || !password2 ) {
-      return LocalState.set('REGISTER_ERROR', 'Please fill out all the required fileds!');
+      return LocalState.set('REGISTER_ERROR', 'Please fill out all the required fields!');
     }
 
     if ( password1 !== password2 ) {

@@ -5,7 +5,7 @@ Feature: 003 User Management
   @watch
   Scenario: Log in as administrator
     Given I have opened the login page : "http://localhost:3000/login"
-    When I provide my email "administrator@example.com" and password "apple1"
+    When I provide my email "administrator@example.com" and password "apple_01"
     And I submit the form
     Then I see my user drop-down menu.
 
@@ -24,7 +24,7 @@ Feature: 003 User Management
   @watch
   Scenario: Edit an existing user
     Given I have opened the list of users : "http://localhost:3000/users"
-    And I find and click the Edit button for user "x.yz@x.yz",
+    And I find and click the Edit button for user "yourself.yourorg@gmail.com",
     And I see the user "Edit" form,
     When I provide the user's name "XX",
     And family name "YY",

@@ -87,6 +87,8 @@ export default React.createClass({
                 type="email"
                 placeholder="This is an email input."
 
+                data-cuke='rst-email'
+
                 autoComplete="off"
 
                 validations="isEmail"
@@ -101,6 +103,9 @@ export default React.createClass({
             <input className="btn btn-primary block full-width m-b"
               formNoValidate={true}
               disabled={!this.state.canSubmit}
+
+              data-cuke='submit-rst-email'
+
               type="submit"
               defaultValue="Send new password" />
 

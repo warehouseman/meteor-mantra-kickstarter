@@ -2,12 +2,26 @@
 
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
+
+import mailer from './mail.js';
+
 // import _ from 'lodash';
 
 const AllRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
 const numRoles = AllRoles.length;
 
 const GROUP = 'headOffice';
+
+function getRandomIntInclusive(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomKey() {
+  return getRandomIntInclusive(1048576,116777215).toString(16);
+}
+
+
+
 export default function () {
   Meteor.methods({
 
@@ -60,6 +74,20 @@ export default function () {
 
       Roles.setUserRoles(_id, AllRoles.slice(AllRoles.indexOf(data.role)), 'headOffice');
 
+    },
+
+    '_users.passwordResetRequest'(_email) {
+      check(_email, String);
+      const user = Meteor.users.findOne({ 'emails.address': _email });
+      if (user) {
+        let validator = randomKey();
+        console.log( 'Sending password reset request for ' + _email + ' validated by ' + validator);
+        mailer.resetPassword(_email, user._id, validator);
+
+      } else {
+        console.log( 'Unknown user' );
+        return;
+      }
     },
 
     '_users.delete'(_id) {

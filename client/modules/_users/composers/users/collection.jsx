@@ -2,10 +2,11 @@ import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
 export const composer = ({context}, onData) => {
-  const {Meteor} = context();
+  const {Meteor, Collections} = context();
 
   if (Meteor.subscribe('users.collection').ready()) {
-    const collection = Meteor.users.find().fetch();
+//    const collection = Meteor.users.find().fetch();
+    const collection = Collections.Users.find();
     onData(null, {collection});
   }
 };

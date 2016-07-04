@@ -5,7 +5,7 @@ import {composeWithTracker, composeAll} from 'react-komposer';
 
 export const addComposer = ({context, clearErrors}, onData) => {
   const {LocalState} = context();
-  const error = LocalState.get('_users.USER_SAVING_ERROR');
+  const error = LocalState.get('_users.INSERT_ERROR');
   onData(null, {error});
 
   // clearErrors when unmounting the component

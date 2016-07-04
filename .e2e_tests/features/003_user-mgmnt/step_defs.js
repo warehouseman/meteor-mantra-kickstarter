@@ -1,7 +1,6 @@
 /* eslint-disable no-undef   */
 /* eslint-disable no-console */
 
-// const cukeFrmSubmit = '//form[@class="vertical m-t"]';
 const cukeFrmSubmit = '//form[@data-cuke="login"]';
 
 const urlLogout = 'http://localhost:3000/logout';
@@ -28,7 +27,6 @@ const xCukeRole = '//x-cuke[@id="role"]';
 
 const cukeUserListPage = '//x-cuke[@id="user-list"]';
 
-
 let myEmail = '';
 module.exports = function () {
 
@@ -38,6 +36,9 @@ module.exports = function () {
   this.Given(/^I have opened the login page : "([^"]*)"$/, function (urlLogin) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
+    browser.timeouts('implicit', 2000);
+    browser.timeouts('page load', 2000);
+    browser.timeouts('script', 2000);
     browser.url(urlLogout);
     browser.waitForVisible(cukeLogin);
     browser.url(urlLogin);
@@ -69,16 +70,13 @@ module.exports = function () {
 
   this.Given(/^I have opened the create user page : "([^"]*)"$/, function (urlCreateUser) {
     browser.url(urlCreateUser);
-
   });
 
-  // <h3 data-cuke="user-form-title">Add new record</h3>
   this.Given(/^seen the title "([^"]*)"$/, function (title) {
     const cukeUserAddPage = '//h3[@data-cuke="user-form-title" and contains(text(), "' +
                                                                          title + '")]';
     browser.waitForExist(cukeUserAddPage);
   });
-
 
   let firstName = '';
   this.When(/^I provide the user's name "([^"]*)",$/, function (_firstname) {
@@ -115,6 +113,8 @@ module.exports = function () {
   this.When(/^I submit the create user form\.$/, function () {
     browser.click(cukeButtonSave);
     browser.waitForExist(cukeUserRecord);
+    browser.screenshot();
+    browser.saveScreenshot('BRUTE');
   });
 
 
@@ -143,10 +143,9 @@ module.exports = function () {
     browser.click(cukeButtonUserEdit);
   });
 
-  //  <h3 data-cuke="user-form-title">Edit x.yz@x.yz</h3>
   this.Given(/^I see the user "([^"]*)" form,$/, function (title) {
-    const cukeUserEditPage = '//h3[@data-cuke="user-form-title" and contains(text(), "' +
-                                                                         title + '")]';
+    const cukeUserEditPage =
+       '//h3[@data-cuke="user-form-title" and contains(text(), "' + title + '")]';
     browser.waitForExist(cukeUserEditPage);
   });
 

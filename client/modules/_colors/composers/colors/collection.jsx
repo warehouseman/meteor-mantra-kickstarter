@@ -4,7 +4,7 @@ import {composeWithTracker, composeAll} from 'react-komposer';
 export const collectionComposer = ({context}, onData) => {
   const {Meteor, Collections} = context();
   if (Meteor.subscribe('_colors.list').ready()) {
-    const collection = Collections._colors.find().fetch();
+    const collection = Collections.Colors.find();
     onData(null, {collection});
   }
 };

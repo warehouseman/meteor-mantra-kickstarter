@@ -22,6 +22,18 @@ export default {
         return LocalState.set('_colors.SAVE_ERROR', err.message);
       }
     });
+    FlowRouter.go('/colors/' + _id);
+  },
+
+  hide({Meteor, LocalState, FlowRouter}, _id) {
+
+    Meteor.call('_colors.hide', _id, (err) => {
+      if (err) {
+        return LocalState.set('_colors.HIDE_ERROR', err.message);
+      }
+      FlowRouter.go('/colors/');
+
+    });
   },
 
   delete({Meteor, LocalState, FlowRouter}, _id) {

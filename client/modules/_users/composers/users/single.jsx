@@ -3,10 +3,10 @@ import {composeWithTracker, composeAll} from 'react-komposer';
 // import _ from 'lodash';
 
 export const singleComposer = ({context, _id, clearErrors}, onData) => {
-  const {Meteor, LocalState} = context();
+  const {Meteor, LocalState, Collections} = context();
   const error = LocalState.get('_users.DELETE_ERROR');
   if (Meteor.subscribe('users.single', _id).ready()) {
-    const user = Meteor.users.findOne(_id);
+    const user = Collections.Users.findOne(_id);
     const email = user.firstEmail();
     const role = user.bestRole();
     if ( user ) {

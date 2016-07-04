@@ -1,4 +1,4 @@
-import {_colors} from '../../lib/collections';
+import {Colors} from '../../lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
@@ -11,13 +11,13 @@ export default function () {
       limit: 10
     };
 
-    return _colors.find(selector, options);
+    return Colors.find(selector, options);
   });
 
   Meteor.publish('_colors.single', function (_id) {
     check( _id, String);
     const selector = {_id};
-    const response = _colors.find(selector);
+    const response = Colors.find(selector);
     // console.log('publish _colors.single _id', _id);
     // console.log('publish _colors.single response.title', response.title);
     return response;

@@ -4,8 +4,11 @@ import React from 'react';
 export default class extends React.Component {
 
   deleteRecord() {
-    // console.log('deleteRecord ', this.props._id);
     this.props.deleteAction(this.props._id);
+  }
+
+  hideRecord() {
+    this.props.hideAction(this.props._id);
   }
 
   render() {
@@ -17,8 +20,8 @@ export default class extends React.Component {
         <p>
           <x-cuke id="content">{record.content}</x-cuke>
           <br />
-          <a href={'/colors/' + _id + '/edit'}>edit</a> |
-          <a href="#" onClick={this.deleteRecord.bind(this)}>delete</a>
+          <a data-cuke='edit-color' href={'/colors/' + _id + '/edit'}>edit</a> |&nbsp;
+          <a data-cuke='delete-color' href="#" onClick={this.hideRecord.bind(this)}>delete</a>
         </p>
       </div>
     );

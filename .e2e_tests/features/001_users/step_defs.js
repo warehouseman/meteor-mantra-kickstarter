@@ -27,7 +27,9 @@ module.exports = function () {
     urlRegister = arg2;
 
     browser.setViewportSize({ width: 1024, height: 480 });
-
+    // browser.timeoutsImplicitWait(2000);
+    browser.timeouts('implicit', 2000);
+    browser.timeouts('page load', 10000);
     browser.url(urlLogout);
     browser.waitForVisible(cukeLogin);
     browser.url(urlRegister);

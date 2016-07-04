@@ -3,6 +3,8 @@
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
+import {User} from '/lib/user.js';
+
 import mailer from './mail.js';
 
 // import _ from 'lodash';
@@ -21,7 +23,6 @@ function randomKey() {
 }
 
 
-
 export default function () {
   Meteor.methods({
 
@@ -36,8 +37,6 @@ export default function () {
         password: String,
         role: String
       });
-
-      // console.log(' Profile ? ', data);
 
       const _idNew = Accounts.createUser( data );
 
@@ -57,19 +56,17 @@ export default function () {
         firstName: String,
         lastName: String,
         email: String,
-//        password: String,
         role: String
       });
       check(_id, String);
 
 
-      let record = Meteor.users.findOne(_id);
-      // const allowedFields = ['profile.firstName'];
-      // data.forEach(key => record.set(key,data[key]) );
+      let record = User.findOne(_id);
 
-      record.profile.set('firstName', data.firstName);
-      record.profile.set('lastName', data.lastName);
-      record.emails[0].set('address', data.email);
+      record.profile.firstName = data.firstName;
+      record.profile.lastName = data.lastName;
+      record.emails[0].address = data.email;
+
       record.save();
 
       Roles.setUserRoles(_id, AllRoles.slice(AllRoles.indexOf(data.role)), 'headOffice');
@@ -116,3 +113,32 @@ export default function () {
     }
   });
 }
+
+/*
+
+{
+    "_id": "W6NbBRXoJ3PYeTJeu",
+    "createdAt" : ISODate("2016-07-03T10:02:47.508Z"),
+    "services": {
+        "password": {
+            "bcrypt": "$2a$10$26caqcdhBll5cgC/f8ZdbuLckO78Ze5bcGPJxtjJPJCV04/3OgK1C"
+        }
+    },
+    "emails": [
+        {
+            "address": "registered@example.com",
+            "verified": false
+        }
+    ],
+    "profile": {
+        "firstName": "Alejandro",
+        "lastName": "Vasquez",
+        "pr": 0
+    },
+    "roles": {
+        "headOffice": [
+            "Registered"
+        ]
+    }
+}
+*/

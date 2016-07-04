@@ -5,7 +5,7 @@ import {singleComposer} from './single.jsx';
 
 export const editComposer = ({context, clearErrors}, onData) => {
   const {LocalState} = context();
-  const error = LocalState.get('_users.USER_SAVING_ERROR');
+  const error = LocalState.get('_users.UPDATE_ERROR');
   onData(null, {error});
 
   // clearErrors when unmounting the component

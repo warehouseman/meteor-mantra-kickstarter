@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 
-import {_colors} from '../../lib/collections';
-// import {_color} from '/lib/color.js';
+import {Colors, _Colors} from '../../lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
+
 // import _ from 'lodash';
 export default function () {
   Meteor.methods({
@@ -15,14 +15,15 @@ export default function () {
       });
       check(_id, String);
 
-      // console.log('_colors.add data', data);
+      let color = new Colors();
+      color._id = _id;
 
-      // XXX: Do some user authorization
+      color.title = data.title;
+      color.content = data.content;
 
-      data._id = _id;
-      data.createAt = new Date();
-      // const object = {_id, data.title, data.content, createdAt};
-      _colors.insert(data);
+      color.createAt = new Date();
+
+      color.save();
     },
 
     '_colors.update'(data, _id) {
@@ -32,30 +33,34 @@ export default function () {
       });
       check(_id, String);
 
-      // console.log ('_colors.update _id', _id);
-      // console.log ('_colors.update data', data);
+      let record = Colors.findOne(_id);
+      record.fullText();
 
-      // XXX: Do some user authorization
-
-      let record = _colors.findOne(_id);
       const allowedFields = [ 'title','content' ];
-      allowedFields.forEach(key => record.set(key,data[key]) );
+      for (let key of allowedFields) {
+        record[key] = data[key];
+      }
       record.save(allowedFields);
 
-      // console.log ('_colors.update record', record);
 
     },
 
     '_colors.delete'(_id) {
       check(_id, String);
       //  console.log('_colors.delete _id', _id);
-      let record = _colors.findOne(_id);
+      let record = Colors.findOne(_id);
       record.remove();
     },
 
+    '_colors.hide'(_id) {
+      check(_id, String);
+      let record = Colors.findOne(_id);
+      record.softRemove();
+    },
+
     '_colors.wipe'() {
-      let result = _colors.remove({});
-      console.log('_colors.wipe --> Colors deleted : ', result);
+      let result = _Colors.remove({});
+      return result;
     }
   });
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 export default {
 
   login({Meteor, LocalState, FlowRouter}, email, password) {
@@ -18,7 +19,7 @@ export default {
   },
 
   requestPasswordReset({Meteor, LocalState, FlowRouter}, email) {
-    console.log('Try to reset password for ', email);
+    // console.log('Try to reset password for ', email);
 
     if ( email ) {
 
@@ -45,6 +46,7 @@ export default {
   },
 
   register({Meteor, LocalState, FlowRouter}, email, password1, password2) {
+    // console.log(' account actions register ');
 
     if ( !email || !password1 || !password2 ) {
       return LocalState.set('REGISTER_ERROR', 'Please fill out all the required fields!');
@@ -65,6 +67,7 @@ export default {
     };
 
     Meteor.call('_users.add', userObject, (err, response) => {
+      // console.log('actions.acct.register response ', response);
       if (err) {
         return LocalState.set('_users.SAVE_ERROR', err.message);
       }
@@ -72,7 +75,6 @@ export default {
         FlowRouter.go('/users/' + response._idNew);
       }
     });
-
   },
 
   registerErrorClear({LocalState}) {

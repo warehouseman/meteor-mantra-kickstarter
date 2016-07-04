@@ -14,24 +14,41 @@ export default {
     };
 
     Meteor.call('_users.add', userObject, (err, response) => {
+      // console.log('actions._users.add response ', response);
       if (err) {
-        return LocalState.set('_users.SAVE_ERROR', err.message);
+        return LocalState.set('_users.INSERT_ERROR', err.message);
       }
       if (response._idNew) {
         FlowRouter.go('/users/' + response._idNew);
       }
     });
 
+/*
+    Meteor.call('_users.add', userObject, (err, response) => {
+      console.log('actions._users.add call', userObject);
+      if (err) {
+        console.log('actions._users.add INSERT_ERROR : ', err.message);
+        return LocalState.set('_users.INSERT_ERROR', err.message);
+      }
+      let id = response.user._id;
+      console.log('actions._users.add response ', id);
+      if ( id ) {
+        FlowRouter.go('/users/' + id);
+      }
+    });
+*/
   },
 
   update({Meteor, LocalState, FlowRouter}, data, _id) {
-    // console.log ('actions._users.update _id', _id);
-    // console.log ('actions._users.update data', data);
 
+    LocalState.set('_users.UPDATE_ERROR', 'TESTING');
     Meteor.call('_users.update', data, _id, (err) => {
+      // console.log('actions._users.update back from callback ');
       if (err) {
-        return LocalState.set('_users.SAVE_ERROR', err.message);
+        // console.log('actions._users.update UPDATE_ERROR ', err.message);
+        return LocalState.set('_users.UPDATE_ERROR', err.message);
       }
+      // console.log('actions._users.update OK ');
       FlowRouter.go('/users/');
     });
   },
@@ -53,9 +70,11 @@ export default {
     });
   },
 
-  clearErrors({LocalState}) {
+  clearUserErrors({LocalState}) {
     LocalState.set('_users.DELETE_ERROR', null);
-    return LocalState.set('_users.SAVE_ERROR', null);
+    LocalState.set('_users.INSERT_ERROR', null);
+    LocalState.set('_users.UPDATE_ERROR', null);
+    return;
   }
 
 };

@@ -37,7 +37,9 @@ export default class extends React.Component {
 
                     <Container />
 
-                    <p className="text-muted text-center"><small>Remembered your password?</small></p>
+                    <p className="text-muted text-center">
+                      <small>Remembered your password?</small>
+                    </p>
                     <a className="btn btn-sm btn-white btn-block" href="/login">Login</a>
 
                   </div>

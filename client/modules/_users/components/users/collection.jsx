@@ -1,6 +1,5 @@
 import React from 'react';
 import Sidebar from './_sidebar.jsx';
-// import Container from '../../containers/UsersCollectionContainer.jsx'
 
 import dataComposer from '../../composers/users/collection.jsx';
 import Component from './_collection.jsx';

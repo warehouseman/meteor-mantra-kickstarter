@@ -18,13 +18,14 @@ module.exports = function () {
   this.Given(/^I have opened the password reset page : "([^"]*)"$/, function (urlPasswordReset) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
+    browser.timeouts('implicit', 2000);
+    browser.timeouts('page load', 10000);
     browser.url(urlLogout);
     browser.waitForVisible(cukeLogin);
     browser.url(urlPasswordReset);
 
     server.call('_users.removeByEmail', 'jj@gmail.com');
     browser.waitForEnabled(cukeInpEmail);
-
 
   });
 
@@ -42,7 +43,6 @@ module.exports = function () {
   this.Then(/^I see the confirmation: "([^"]*)"\.$/, function (_confirmation) {
     console.log('Confirmation : ', _confirmation);
   });
-
 
 // =======================================================================
 

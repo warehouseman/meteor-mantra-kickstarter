@@ -7,7 +7,7 @@
     "testonly": "mocha .scripts/mocha_boot.js client/**/tests/**/*.js --compilers js:babel-core/register",
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js,jsx",
-    "acceptance": "./node_modules/.bin/chimp --ddp=http://localhost:3000 --watch --path=.e2e_tests",
+    "acceptance": "./node_modules/.bin/chimp .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --watch --path=.e2e_tests",
     "dsstore": "find . -name '*.DS_Store' -type f -delete"
   },
   "devDependencies": {

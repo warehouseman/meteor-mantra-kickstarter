@@ -5,11 +5,9 @@ export const singleComposer = ({context, _id, clearErrors}, onData) => {
   const {Meteor, Collections, LocalState} = context();
   const error = LocalState.get('_colors.DELETE_ERROR');
   if (Meteor.subscribe('_colors.single', _id).ready()) {
-    const record = Collections._colors.findOne(_id);
+    const record = Collections.Colors.findOne(_id);
     if (record) {
       onData(null, {record, error});
-    } else {
-      // FlowRouter.go('/colors');
     }
   }
   // clearErrors when unmounting the component
@@ -18,6 +16,7 @@ export const singleComposer = ({context, _id, clearErrors}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
+  hideAction: actions._colors.hide,
   deleteAction: actions._colors.delete,
   clearErrors: actions._colors.clearErrors,
   context: () => context

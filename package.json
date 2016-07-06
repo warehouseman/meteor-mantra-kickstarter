@@ -8,6 +8,7 @@
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js,jsx",
     "acceptance": "./node_modules/.bin/chimp .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --watch --path=.e2e_tests",
+    "workarounds": ".workarounds/fix.sh",
     "dsstore": "find . -name '*.DS_Store' -type f -delete"
   },
   "devDependencies": {
@@ -24,7 +25,7 @@
     "eslint": "^2.13.1",
     "eslint-plugin-react": "^5.2.2",
     "mocha": "2.x.x",
-    "react-addons-test-utils": "^15.1.0",
+    "react-addons-test-utils": "~15.1.0",
     "sinon": "1.17.x",
     "jsdom": "9.x.x"
   },
@@ -38,8 +39,8 @@
     "meteor-node-stubs": "^0.2.3",
     "nodemailer": "^2.4.2",
     "nodemailer-mailgun-transport": "^1.2.0",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
+    "react": "~15.1.0",
+    "react-dom": "~15.1.0",
     "react-komposer": "1.11.0",
     "react-mounter": "^1.0.0",
     "react-select": "1.0.0-beta13",

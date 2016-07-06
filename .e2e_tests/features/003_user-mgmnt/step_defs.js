@@ -113,8 +113,7 @@ module.exports = function () {
   this.When(/^I submit the create user form\.$/, function () {
     browser.click(cukeButtonSave);
     browser.waitForExist(cukeUserRecord);
-    browser.screenshot();
-    browser.saveScreenshot('BRUTE');
+    // browser.saveScreenshot('screenshot_example');
   });
 
 

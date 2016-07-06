@@ -51,6 +51,7 @@ Please make sure you read [Mantra Specification](https://kadirahq.github.io/mant
 
 ```
 npm install
+sudo npm run workarounds # clean up ugly non-fatal run-time warnings  
 meteor --port 5005
 ```
 Your app should be running [http://localhost:5005](http://localhost:5005)

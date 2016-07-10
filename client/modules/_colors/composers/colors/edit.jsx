@@ -5,12 +5,15 @@ import {composeWithTracker, composeAll} from 'react-komposer';
 import {singleComposer} from './single.jsx';
 
 export const editComposer = ({context, clearErrors}, onData) => {
-  const {LocalState} = context();
-  const error = LocalState.get('_colors.SAVING_ERROR');
-  onData(null, {error});
+  const {LocalState, Logger} = context();
+  const state = LocalState.get('_colors.SAVE_ERROR');
 
-  // clearErrors when unmounting the component
-  return clearErrors;
+  onData(null, {state, Logger});
+
+  //    returns clearErrors when unmounting the component
+  //    Caution : actions always unmount the component,
+  //           so clearErrors will wipe action errors before than can be seen
+  // return clearErrors;
 };
 
 export const depsMapper = (context, actions) => ({

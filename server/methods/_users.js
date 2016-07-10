@@ -7,6 +7,8 @@ import {User} from '/lib/user.js';
 
 import mailer from './mail.js';
 
+import Logger from '../../lib/logging';
+
 // import _ from 'lodash';
 
 const AllRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
@@ -94,6 +96,19 @@ export default function () {
         let record = Meteor.users.findOne(_id);
         record.remove();
       }
+    },
+
+    '_users.hide'(_id) {
+      check(_id, String);
+      let record = User.findOne(_id);
+      record.roles = { headOffice: [ '' ] };
+      record.save();
+      record.softRemove();
+
+      Logger.italic('_users.hide')
+        .bold('\nHidden : ' + JSON.stringify(record) + '\n')
+        .gray(Logger.path(__filename))
+        .info();
     },
 
     '_users.findByEmail'(_email) {

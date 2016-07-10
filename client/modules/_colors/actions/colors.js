@@ -13,16 +13,20 @@ export default {
   },
 
   // update
-  update({Meteor, LocalState, FlowRouter}, data, _id) {
+  update({Meteor, LocalState, FlowRouter, Logger}, data, _id) {
     // console.log ('actions._colors.update _id', _id);
     // console.log ('actions._colors.update data', data);
 
     Meteor.call('_colors.update', data, _id, (err) => {
       if (err) {
+        Logger.blue.underline('update -- ')
+         .bold(err.message)
+         .gray(Logger.path(__filename))
+         .error();
         return LocalState.set('_colors.SAVE_ERROR', err.message);
       }
+      FlowRouter.go('/colors/' + _id);
     });
-    FlowRouter.go('/colors/' + _id);
   },
 
   hide({Meteor, LocalState, FlowRouter}, _id) {
@@ -50,9 +54,15 @@ export default {
   },
 
   // clearError
-  clearErrors({LocalState}) {
+  clearErrors({LocalState, Logger}) {
+    Logger.blue.underline('clearErrors')
+     .bold('clearing now')
+     .gray(Logger.path(__filename))
+     .trace();
     LocalState.set('_colors.DELETE_ERROR', null);
-    return LocalState.set('_colors.SAVE_ERROR', null);
+    LocalState.set('_colors.HIDE_ERROR', null);
+    LocalState.set('_colors.SAVE_ERROR', null);
+    return;
   }
 
 };

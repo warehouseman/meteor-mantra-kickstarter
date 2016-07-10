@@ -159,6 +159,25 @@ module.exports = function () {
     expect(browser.element(xCukeFirstName).getText()).toEqual(firstName);
     expect(browser.element(xCukeLastName).getText()).toEqual(lastName);
   });
+
+// =======================================================================
+
+//   Scenario: Hide an existing user
+// ------------------------------------------------------------------------
+
+  let selector = '';
+  let email = '';
+  this.Given(/^I find and click the Remove button for user "([^"]*)",$/, function (_email) {
+    email = _email;
+    selector = '//a[@data-cuke="hide-' + _email + '"]';
+    browser.click(selector);
+  });
+
+  this.Then(/^I no longer see that user record\.$/, function () {
+    expect(browser.isExisting(selector) ? email : 'Gone').toBe('Gone');
+
+  });
+
 // =======================================================================
 
 };

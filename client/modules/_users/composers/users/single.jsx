@@ -4,12 +4,12 @@ import {composeWithTracker, composeAll} from 'react-komposer';
 
 export const singleComposer = ({context, _id, clearErrors}, onData) => {
   const {Meteor, LocalState, Collections} = context();
-  const error = LocalState.get('_users.DELETE_ERROR');
+  const error = LocalState.get('_users.HIDE_ERROR');
   if (Meteor.subscribe('users.single', _id).ready()) {
     const user = Collections.Users.findOne(_id);
-    const email = user.firstEmail();
-    const role = user.bestRole();
     if ( user ) {
+      const email = user.firstEmail();
+      const role = user.bestRole();
       let parms = { ...user.profile, role, user, email, error };
       onData(null, parms);
     } else {
@@ -17,12 +17,12 @@ export const singleComposer = ({context, _id, clearErrors}, onData) => {
     }
   }
   // clearErrors when unmounting the component
-  return clearErrors;
+  //   return clearErrors;
 };
 
 
 export const depsMapper = (context, actions) => ({
-  deleteAction: actions._users.delete,
+  deleteAction: actions._users.hide,
   clearErrors: actions._users.clearErrors,
   context: () => context
 });

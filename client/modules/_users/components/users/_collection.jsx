@@ -29,9 +29,11 @@ export default React.createClass({
                   <td className="col-xs-2">{record.profile.lastName}</td>
                   <td className="col-xs-2">{record.roles.headOffice[0]}</td>
                   <td className="col-xs-3">
-                    <a href={`/users/${record._id}`}>
-                      {record.firstEmail()}
-                    </a>
+                    <x-cuke id='rowUser' key={record.firstEmail()}>
+                      <a href={`/users/${record._id}`}>
+                        {record.firstEmail()}
+                      </a>
+                    </x-cuke>
                   </td>
                   <td className="col-xs-4">
                     <a className="btn btn-default btn-sm"
@@ -48,6 +50,7 @@ export default React.createClass({
                     </a>
                     <a className="btn btn-default btn-sm"
                       role="button"
+                      data-cuke={'hide-' + record.firstEmail()}
                       onClick={() => this.deleteUser(record._id)}>
                       Delete
                     </a>

@@ -2,17 +2,29 @@ import React from 'react';
 import t from 'tcomb-form';
 // import _ from 'lodash';
 
+// const ValidationWarningTag = ({_idTag, _val}) => (
+//   <x-cuke id={_idTag}>{_val}</x-cuke>
+// );
+
+
 export default React.createClass({
+
+  debug(_place, _value) {
+    const lgr = this.props.Logger;
+    lgr.setLevel('info');
+    lgr.blue.underline(_place)
+       .bold(' - ' + _value)
+       .gray(lgr.path(__filename))
+       .debug();
+  },
 
   submitForm(event) {
     event.preventDefault();
     var values = this.refs.form.getValue();
+    this.debug('submitting', JSON.stringify(values));
     if (values) {
-      // console.log('submitForm values', values);
+      this.props.clearErrors();
       if (this.props._id) {
-        // values['title'] = 'dupa';
-        // console.log('submitForm values with id', values);
-        // console.log('submitForm values with id title', values.title);
         this.props.submitAction(values, this.props._id);
       } else {
         this.props.submitAction(values);
@@ -21,18 +33,32 @@ export default React.createClass({
   },
 
   onChange() {
-    this.refs.form.getValue(); // <- validate on every change
+    let vals = this.refs.form.getValue(); // <- validate on every change
+    this.debug('onChange', vals);
   },
 
   render() {
 
+    const {record, state} = this.props;
+
+    const ctx = {poolParty: { age: 21 }};
+    const Age = t.refinement(t.Number, (n) => n >= ctx.poolParty.age);
+    Age.getValidationErrorMessage = (value, path, context) =>
+         'Nope. ' + value + ' is too young, Pool Party Age : ' + context.poolParty.age;
+//       <ValidationWarningTag _idTag='invalid-age' _val={context.poolParty.age} />;
+
     const formModel = t.struct({
       title: t.String,
+      age: Age,
       content: t.maybe(t.String)
     });
 
     const formOptions = {
       config: {
+        horizontal: {
+          md: [ 3, 9 ],
+          sm: [ 6, 6 ]
+        }
       },
       fields: {
         title: {
@@ -41,10 +67,15 @@ export default React.createClass({
             'data-cuke': 'title'
           }
         },
+        age: {
+          attrs: {
+            'data-cuke': 'age'
+          }
+        },
         content: {
           type: 'textarea',
           attrs: {
-            rows: 8,
+            rows: 4,
             'data-cuke': 'content'
           }
         }
@@ -52,7 +83,6 @@ export default React.createClass({
     };
 
     const debug = false;
-    const {error, record} = this.props;
 
     const Form = t.form.Form;
 
@@ -64,10 +94,10 @@ export default React.createClass({
       <div>
 
           <h3>{title}</h3>
-          {error ?
-          <div className="alert alert-danger" onClick="">
-            <span className="octicon octicon-megaphone" ></span>
-            {error}
+          {state ?
+          <div data-cuke="bad-content" className="alert alert-danger" onClick="">
+            <span className="unicon fatal icon-white icon-24" ></span>
+            {state}
           </div> : null }
 
           <Form ref="form"
@@ -77,6 +107,8 @@ export default React.createClass({
 
             value ={record}
             onChange={this.onChange}
+
+            context={ ctx }
 
           />
         <button

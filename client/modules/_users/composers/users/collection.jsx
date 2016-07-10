@@ -12,7 +12,7 @@ export const composer = ({context}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-  submitAction: actions._users.delete,
+  submitAction: actions._users.hide,
   clearErrors: actions._users.clearUserErrors,
   context: () => context
 });

@@ -25,7 +25,7 @@
     "eslint": "^2.13.1",
     "eslint-plugin-react": "^5.2.2",
     "mocha": "2.x.x",
-    "react-addons-test-utils": "~15.1.0",
+    "react-addons-test-utils": "~15.2.0",
     "sinon": "1.17.x",
     "jsdom": "9.x.x"
   },
@@ -35,18 +35,19 @@
     "formsy-react": "0.18.0",
     "formsy-react-components": "0.8.0",
     "lodash": "^4.13.1",
+    "logatim": "^0.9.0",
     "mantra-core": "^1.7.0",
     "meteor-node-stubs": "^0.2.3",
     "nodemailer": "^2.4.2",
     "nodemailer-mailgun-transport": "^1.2.0",
-    "react": "~15.1.0",
-    "react-dom": "~15.1.0",
+    "react": "~15.2.0",
+    "react-dom": "~15.2.0",
     "react-komposer": "1.11.0",
     "react-mounter": "^1.0.0",
     "react-select": "1.0.0-beta13",
     "react-simple-di": "1.2.0",
     "react-tagsinput": "3.9.0",
-    "tcomb-form": "0.9.7"
+    "tcomb-form": "0.9.8"
   },
   "private": true
 }

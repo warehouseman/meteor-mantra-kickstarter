@@ -2,9 +2,9 @@ import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
 export const addComposer = ({context, clearErrors}, onData) => {
-  const {LocalState} = context();
-  const error = LocalState.get('_colors.SAVE_ERROR');
-  onData(null, {error});
+  const {LocalState, Logger} = context();
+  const state = LocalState.get('_colors.SAVE_ERROR');
+  onData(null, {state, Logger});
 
   // clearErrors when unmounting the component
   return clearErrors;

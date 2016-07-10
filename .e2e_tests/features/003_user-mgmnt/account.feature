@@ -31,3 +31,9 @@ Feature: 003 User Management
     And her role "Staff",
     And I submit the edit user form.
     Then the record shows the same data.
+
+  @watch
+  Scenario: Hide an existing user
+    Given I have opened the list of users : "http://localhost:3000/users"
+    And I find and click the Remove button for user "jj@gmail.com",
+    Then I no longer see that user record.

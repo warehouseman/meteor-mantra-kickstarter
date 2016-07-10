@@ -10,8 +10,10 @@ export const singleComposer = ({context, _id, clearErrors}, onData) => {
       onData(null, {record, error});
     }
   }
-  // clearErrors when unmounting the component
-  return clearErrors;
+  //    returns clearErrors when unmounting the component
+  //    Caution : actions always unmount the component,
+  //           so clearErrors will wipe action errors before than can be seen
+  // return clearErrors;
 
 };
 

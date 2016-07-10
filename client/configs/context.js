@@ -1,4 +1,6 @@
 import * as Collections from '../../lib/collections';
+import Logger from '../../lib/logging';
+
 import {Meteor} from 'meteor/meteor';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {ReactiveDict} from 'meteor/reactive-dict';
@@ -10,6 +12,7 @@ export default function () {
     FlowRouter,
     Collections,
     LocalState: new ReactiveDict(),
-    Tracker
+    Tracker,
+    Logger
   };
 }

@@ -2,9 +2,12 @@
 /* eslint-disable no-console */
 
 const cukeBtnSubmit = '//button[@data-cuke="save-color"]';
+
+const cukeInpAge = '//input[@data-cuke="age"]';
 const cukeInpTitle = '//input[@data-cuke="title"]';
 const cukeInpContent = '//textarea[@data-cuke="content"]';
 
+const cukeAge = '//x-cuke[@id="age"]';
 const cukeTitle = '//x-cuke[@id="title"]';
 const cukeContent = '//x-cuke[@id="content"]';
 
@@ -12,7 +15,11 @@ const cukeHrefEdit = '//a[@data-cuke="edit-color"]';
 
 const cukeColorsList = '//ul[@data-cuke="colors-list"]';
 
+const cukeInvalidAge = '//span[@class="help-block error-block"]';
 
+const cukeBadContent = '//div[@data-cuke="bad-content"]';
+
+var age = '';
 var title = '';
 var content = '';
 module.exports = function () {
@@ -29,20 +36,25 @@ module.exports = function () {
     server.call('_colors.wipe');
   });
 
-  this.When(/^I create a "([^"]*)" item with text "([^"]*)",$/, function (arg1, arg2) {
+  this.When(/^I create a "([^"]*)" years old "([^"]*)" item with text "([^"]*)",$/,
+    function (_age, _title, _content) {
 
-    title = arg1;
-    content = arg2;
-    browser.waitForEnabled( cukeBtnSubmit );
-    browser.setValue(cukeInpTitle, title);
-    browser.setValue(cukeInpContent, content);
+      age = _age;
+      title = _title;
+      content = _content;
 
-    browser.click(cukeBtnSubmit);
-    browser.waitForEnabled('//*[@id="react-root"]/div/div/div/div/div[2]/div/h2');
+      browser.waitForEnabled( cukeBtnSubmit );
+      browser.setValue(cukeInpTitle, title);
+      browser.setValue(cukeInpAge, age);
+      browser.setValue(cukeInpContent, content);
 
-  });
+      browser.click(cukeBtnSubmit);
+      // browser.waitForEnabled(cukeHrefEdit);
 
-  this.Then(/^I see a new record with the same title and contents\.$/, function () {
+    });
+
+  this.Then(/^I see a new record with the same title, age and contents\.$/, function () {
+    expect(browser.getText(cukeAge)).toEqual(age + ' years old.');
     expect(browser.getText(cukeTitle)).toEqual(title);
     expect(browser.getText(cukeContent)).toEqual(content);
   });
@@ -50,7 +62,7 @@ module.exports = function () {
 // =======================================================================
 
 
-//   Scenario: Edit color
+//   Scenario: Verify field validation
 // ------------------------------------------------------------------------
   this.Given(/^I have opened the colors list page : "([^"]*)"$/, function (_url) {
     browser.setViewportSize({ width: 1024, height: 480 });
@@ -59,7 +71,7 @@ module.exports = function () {
   });
 
   let link = '';
-  this.Given(/^I have elected to edit the "([^"]*)" item\.$/, function (_color) {
+  this.Given(/^I have elected to edit the "([^"]*)" item,$/, function (_color) {
     link = '//a[@data-cuke="' + _color + '"]';
     browser.waitForEnabled( link );
     browser.click(link);
@@ -67,15 +79,40 @@ module.exports = function () {
     browser.click(cukeHrefEdit);
   });
 
+  this.When(/^I set 'Age' to "([^"]*)"$/, function (_age) {
+    browser.setValue(cukeInpAge, _age);
+  });
+
+  this.When(/^I save the item,$/, function () {
+    browser.click(cukeBtnSubmit);
+  });
+
+  this.Then(/^I see the validation hint "([^"]*)"\.$/, function (_message) {
+    expect(browser.getText(cukeInvalidAge)).toEqual(_message);
+  });
+
+
+
   this.When(/^I save the item with new content "([^"]*)",$/, function (_content) {
     content = _content;
     browser.setValue(cukeInpContent, content);
     browser.click(cukeBtnSubmit);
-    browser.waitForEnabled( cukeTitle );
   });
 
   this.Then(/^I see the record with the new content\.$/, function () {
+    browser.waitForEnabled( cukeTitle );
     expect(browser.getText(cukeContent)).toEqual(content);
+  });
+
+// =======================================================================
+
+
+//   Scenario: Fail to update color
+// ------------------------------------------------------------------------
+
+  this.Then(/^I see the message, "([^"]*)"\.$/, function (rude) {
+    const msg = browser.getText(cukeBadContent);
+    expect( msg ).toEqual(rude);
   });
 
 // =======================================================================
@@ -94,7 +131,7 @@ module.exports = function () {
 
   });
 
-  this.Then(/^I no longer see that record\.$/, function () {
+  this.Then(/^I no longer see that color record\.$/, function () {
     browser.waitForEnabled( cukeColorsList );
     let item = browser.elements(link);
     expect(item.value.length).toEqual(0);

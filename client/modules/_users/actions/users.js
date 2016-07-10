@@ -53,17 +53,17 @@ export default {
     });
   },
 
-  delete({Meteor, LocalState, FlowRouter}, _id) {
-    // console.log('actions._users.delete _id', _id);
-    // console.log('actions._users.delete Meteor.userId()', Meteor.userId());
+  hide({Meteor, LocalState, FlowRouter}, _id) {
+    // console.log('actions._users.hide _id', _id);
+    // console.log('actions._users.hide Meteor.userId()', Meteor.userId());
 
-    Meteor.call('_users.delete', _id, (err) => {
+    Meteor.call('_users.hide', _id, (err) => {
       if (_id === Meteor.userId()) {
-        // console.log('cant delete self');
-        return LocalState.set('_users.DELETE_ERROR', 'Seppuku :-) ');
+        // console.log('cant hide self');
+        return LocalState.set('_users.HIDE_ERROR', 'Seppuku :-) ');
       }
       if (err) {
-        return LocalState.set('_users.DELETE_ERROR', err.message);
+        return LocalState.set('_users.HIDE_ERROR', err.message);
       }
       FlowRouter.go('/users');
 
@@ -71,7 +71,7 @@ export default {
   },
 
   clearUserErrors({LocalState}) {
-    LocalState.set('_users.DELETE_ERROR', null);
+    LocalState.set('_users.HIDE_ERROR', null);
     LocalState.set('_users.INSERT_ERROR', null);
     LocalState.set('_users.UPDATE_ERROR', null);
     return;

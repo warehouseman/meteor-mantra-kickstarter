@@ -8,6 +8,7 @@ import {User} from '/lib/user.js';
 import mailer from './mail.js';
 
 import Logger from '../../lib/logging';
+const txtPath = Logger.path(__filename);
 
 // import _ from 'lodash';
 
@@ -29,7 +30,6 @@ export default function () {
   Meteor.methods({
 
     '_users.add'(data) {
-
       check(data, {
         email: String,
         profile: {
@@ -39,6 +39,7 @@ export default function () {
         password: String,
         role: String
       });
+      const nameMethod = '_users.add' + ' ...';
 
       const _idNew = Accounts.createUser( data );
 
@@ -49,6 +50,10 @@ export default function () {
         Roles.addUsersToRoles(_idNew, AllRoles.slice( hasRole ), GROUP);
       }
 
+      Logger.italic(nameMethod)
+        .bold('New user : ' + JSON.stringify(User.findOne(_idNew)) + '\n')
+        .gray(txtPath)
+        .info();
       return { _idNew };
 
     },
@@ -75,17 +80,51 @@ export default function () {
 
     },
 
+    '_users.resetPwd'(_code, _pwd) {
+      check(_code, String);
+      check(_pwd, String);
+      const nameMethod = '_users.resetPwd' + '... ';
+
+      const idUser = User.findOne( { 'emails.verifier': _code } );
+      Logger.italic(nameMethod)
+        .bold('Resetting password for, ' + idUser._id + '\n')
+        .gray(txtPath)
+        .warn();
+
+      Accounts.setPassword(idUser._id, _pwd);
+
+    },
+
     '_users.passwordResetRequest'(_email) {
       check(_email, String);
-      const user = Meteor.users.findOne({ 'emails.address': _email });
+      const nameMethod = '_users.passwordResetRequest' + '... ';
+
+      // const user = Meteor.users.findOne({ 'emails.address': _email });
+      const user = User.findOne({ 'emails.address': _email });
       if (user) {
-        let validator = randomKey();
-        console.log( 'Sending password reset request for ' + _email + ' validated by ' + validator);
-        mailer.resetPassword(_email, user._id, validator);
+        let verifier = randomKey();
+
+        Logger.italic(nameMethod)
+          .bold('Sending password reset request for, ' + _email +
+                                    ', validated by ' + verifier + '\n')
+          .gray(txtPath)
+          .info();
+
+        let idx = user.emails.findIndex(element => element.address === _email);
+        user.emails[idx].verifier = verifier;
+        user.save();
+
+        mailer.resetPassword(_email, user._id, verifier);
 
       } else {
-        console.log( 'Unknown user' );
-        return;
+        Logger.italic(nameMethod)
+          .bold('Bad password reset request for unrecognized : ' + _email + '\n')
+          .gray(txtPath)
+          .warn();
+        throw new Meteor.Error(
+          ' UNKNOWN EMAIL ',
+          'We can\'t find <' + _email + '> in our files.',
+          'Yup. When it\'s cwappy, it\'s wee wee, wee wee cwappy');
       }
     },
 
@@ -100,22 +139,50 @@ export default function () {
 
     '_users.hide'(_id) {
       check(_id, String);
+      const nameMethod = '_users.hide' + ' ...';
+
       let record = User.findOne(_id);
       record.roles = { headOffice: [ '' ] };
       record.save();
       record.softRemove();
 
-      Logger.italic('_users.hide')
-        .bold('\nHidden : ' + JSON.stringify(record) + '\n')
-        .gray(Logger.path(__filename))
-        .info();
+      Logger.italic(nameMethod)
+      .bold('\nHidden : ' + JSON.stringify(record) + '\n')
+      .gray(txtPath)
+      .info();
     },
 
     '_users.findByEmail'(_email) {
-
       check(_email, String);
+      const nameMethod = '_users.findByPasswordResetCode' + ' ...';
+
       const user = Meteor.users.findOne({ 'emails.address': _email });
-      // console.log('_users.findByEmail(' + _email + ') --> User found : ', user);
+      if (user) {
+        Logger.italic(nameMethod)
+          .bold('\nFound user : ' + JSON.stringify(user) + '\n')
+          .gray(txtPath)
+          .info();
+        return user;
+      }
+      Logger.italic(nameMethod)
+        .bold('\nUser not found : ' + _email + '\n')
+        .gray(txtPath)
+        .warn();
+      return null;
+
+    },
+
+    '_users.findByPasswordResetCode'(_code) {
+
+      check(_code, String);
+      const nameMethod = '_users.findByPasswordResetCode' + ' ...';
+      const user = Meteor.users.findOne({ 'emails.address': _code });
+
+      Logger.italic(nameMethod)
+        .bold('\nHidden : ' + JSON.stringify(user) + '\n')
+        .gray(txtPath)
+        .info();
+
       return user;
     },
 

@@ -6,9 +6,9 @@ import {singleComposer} from './single.jsx';
 
 export const editComposer = ({context, clearErrors}, onData) => {
   const {LocalState, Logger} = context();
-  const state = LocalState.get('_colors.SAVE_ERROR');
+  const exception = LocalState.get('_colors.SAVE_ERROR');
 
-  onData(null, {state, Logger});
+  onData(null, {exception, Logger});
 
   //    returns clearErrors when unmounting the component
   //    Caution : actions always unmount the component,

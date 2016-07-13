@@ -19,9 +19,9 @@ const cukeInvalidAge = '//span[@class="help-block error-block"]';
 
 const cukeBadContent = '//div[@data-cuke="bad-content"]';
 
-var age = '';
-var title = '';
-var content = '';
+let age = '';
+let title = '';
+let content = '';
 module.exports = function () {
 
 //   Scenario: Create a new color
@@ -92,7 +92,6 @@ module.exports = function () {
   });
 
 
-
   this.When(/^I save the item with new content "([^"]*)",$/, function (_content) {
     content = _content;
     browser.setValue(cukeInpContent, content);
@@ -110,7 +109,17 @@ module.exports = function () {
 //   Scenario: Fail to update color
 // ------------------------------------------------------------------------
 
+  // this.When(/^I save the item with unsuitable content "([^"]*)",$/, function (_badContent) {
+  //   browser.setValue(cukeInpContent, _badContent);
+  //   browser.click(cukeBtnSubmit);
+  // });
+
   this.Then(/^I see the message, "([^"]*)"\.$/, function (rude) {
+    let t = true;
+    browser.waitUntil(function () {
+      t = !t;
+      return t;
+    }, 2000, ' wut?');
     const msg = browser.getText(cukeBadContent);
     expect( msg ).toEqual(rude);
   });

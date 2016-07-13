@@ -32,8 +32,8 @@
   "dependencies": {
     "classnames": "2.2.5",
     "domready": "^1.0.8",
-    "formsy-react": "0.18.0",
-    "formsy-react-components": "0.8.0",
+    "formsy-react": "0.18.1",
+    "formsy-react-components": "0.8.1",
     "lodash": "^4.13.1",
     "logatim": "^0.9.0",
     "mantra-core": "^1.7.0",

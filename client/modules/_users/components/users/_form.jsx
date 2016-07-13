@@ -10,7 +10,8 @@ export default React.createClass({
     event.preventDefault();
     var values = this.refs.form.getValue();
     if (values) {
-      // console.log('submitForm values', values);
+      console.log('submitForm values', values);
+      console.log('submitForm props._id', this.props._id);
       if (this.props._id) {
         this.props.submitAction(values, this.props._id);
       } else {
@@ -88,7 +89,7 @@ export default React.createClass({
       order: [ 'firstName', 'lastName', 'email', 'password1', 'password2', 'role' ]
     };
 
-    const {_id, error, email, user } = this.props;
+    const {_id, exception, email, user } = this.props;
 
     const defaultValues = {
       ...this.props
@@ -105,17 +106,17 @@ export default React.createClass({
     const formTitle = _id ? 'Edit ' + email : 'Add new record';
     const buttonLabel = 'Save';
 
-    // console.log('_users/components/users/_form.jsx --> error :', error);
+    console.log('_users/components/users/_form.jsx --> exception :', exception);
 
     return (
       <div>
 
           <h3 data-cuke="user-form-title">{formTitle}</h3>
 
-          {error ?
+          {exception ?
           <div className="alert alert-danger" onClick="">
             <span className="octicon octicon-megaphone" ></span>
-            {error}
+            {exception}
           </div> : null }
 
           <Form ref="form"

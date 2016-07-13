@@ -3,16 +3,21 @@ import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
 export const composer = ({context, clearErrors}, onData) => {
-  const {LocalState} = context();
-  const exception = LocalState.get('REGISTER_ERROR');
-  onData(null, {exception});
+  const {LocalState, Meteor, Collections} = context();
+
+  if (Meteor.subscribe('users.collection').ready()) {
+
+    const exception = LocalState.get('_users.PASSWORD_RESET_ERROR');
+    const users = Collections.Users;
+    onData(null, {exception, users});
+  }
 
   // clearErrors when unmounting the component
-  //  return clearErrors;
+  // return clearErrors;
 };
 
 export const depsMapper = (context, actions) => ({
-  submitAction: actions._account.register,
+  submitAction: actions._account.resetPassword,
   clearErrors: actions._account.registerErrorClear,
   context: () => context
 });

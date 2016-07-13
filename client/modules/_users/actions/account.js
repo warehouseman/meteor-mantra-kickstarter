@@ -19,23 +19,23 @@ export default {
   },
 
   requestPasswordReset({Meteor, LocalState, FlowRouter}, email) {
-    // console.log('Try to reset password for ', email);
 
     if ( email ) {
 
-      LocalState.set('EMAIL_ERROR', null);
+      LocalState.set('_users.PASSWORD_RESET_ERROR', null);
 
       Meteor.call('_users.passwordResetRequest', email, (err) => {
         if (err) {
-          return LocalState.set('_users.PASSWORD_ERROR', err.message);
+          return LocalState.set('_users.PASSWORD_RESET_ERROR', err.message);
         }
-        FlowRouter.go('/rstpwdok/' + email);
+        FlowRouter.go('/prrs/' + email);
 
       });
 
     } else {
 
-      return LocalState.set('EMAIL_ERROR', 'Could not send to email address : ' + email);
+      return LocalState.set('_users.PASSWORD_RESET_ERROR',
+                            'Could not send to email address : <' + email + '>.');
 
     }
 
@@ -43,6 +43,27 @@ export default {
 
   loginErrorClear({LocalState}) {
     return LocalState.set('LOGIN_ERROR', null);
+  },
+
+  resetPassword({Meteor, LocalState, FlowRouter}, _code, _password1, _password2) {
+
+    if ( !_password1 || !_password2 ) {
+      return LocalState.set('_users.PASSWORD_RESET_ERROR'
+                          , 'Please fill out all the required fields!');
+    }
+
+    if ( _password1 !== _password2 ) {
+      return LocalState.set('_users.PASSWORD_RESET_ERROR', 'Passwords do not match!');
+    }
+
+    // console.log('actions.resetPassword _code ' + _code + ' pwd ' + _password1);
+    Meteor.call('_users.resetPwd', _code, _password1, (err) => {
+      if (err) {
+        return LocalState.set('_users.PASSWORD_RESET_ERROR', err.message);
+      }
+      // console.log('actions.resetPassword success ');
+      FlowRouter.go('/login');
+    });
   },
 
   register({Meteor, LocalState, FlowRouter}, email, password1, password2) {
@@ -78,7 +99,9 @@ export default {
   },
 
   registerErrorClear({LocalState}) {
-    return LocalState.set('REGISTER_ERROR', null);
+    LocalState.set('PASSWORD_RESET_ERROR', null);
+    LocalState.set('REGISTER_ERROR', null);
+    return;
   },
 
 };

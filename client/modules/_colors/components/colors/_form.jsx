@@ -39,7 +39,7 @@ export default React.createClass({
 
   render() {
 
-    const {record, state} = this.props;
+    const {record, exception} = this.props;
 
     const ctx = {poolParty: { age: 21 }};
     const Age = t.refinement(t.Number, (n) => n >= ctx.poolParty.age);
@@ -94,10 +94,10 @@ export default React.createClass({
       <div>
 
           <h3>{title}</h3>
-          {state ?
+          {exception ?
           <div data-cuke="bad-content" className="alert alert-danger" onClick="">
             <span className="unicon fatal icon-white icon-24" ></span>
-            {state}
+            {exception}
           </div> : null }
 
           <Form ref="form"

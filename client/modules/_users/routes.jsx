@@ -10,7 +10,8 @@ import {
 import Login from './components/login/wrapper.jsx';
 import Register from './components/register/wrapper.jsx';
 import Password from './components/password/wrapper.jsx';
-import ResetPWrd from './components/password/success.jsx';
+import PwdReqSent from './components/password/success.jsx';
+import PwdReset from './components/password/resetWrapper.jsx';
 
 import Account from './components/account/wrapper.jsx';
 import Profile from './components/profile/wrapper.jsx';
@@ -53,23 +54,23 @@ export default function (injectDeps, {FlowRouter}) {
     }
   });
 
-  FlowRouter.route('/rstpwdok/:_email', {
-    name: 'users.rstpwdok',
-    action({_email}) {
+  FlowRouter.route('/prrq/:_code', {
+    name: 'users.prrq',
+    action({_code}) {
 
       mount(LayoutDefaultCtx, {
-        content: () => (<ResetPWrd email={_email}/>)
+        content: () => (<PwdReset code={_code}/>)
       });
     }
 
   });
 
-  FlowRouter.route('/pr/:_code', {
-    name: 'users.pr',
-    action({_code}) {
+  FlowRouter.route('/prrs/:_email', {
+    name: 'users.prrs',
+    action({_email}) {
 
       mount(LayoutDefaultCtx, {
-        content: () => (<ResetPWrd email={_code}/>)
+        content: () => (<PwdReqSent email={_email}/>)
       });
     }
 

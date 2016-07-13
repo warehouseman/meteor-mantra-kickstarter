@@ -5,11 +5,11 @@ import {singleComposer} from './single.jsx';
 
 export const editComposer = ({context, clearErrors}, onData) => {
   const {LocalState} = context();
-  const error = LocalState.get('_users.UPDATE_ERROR');
-  onData(null, {error});
+  const exception = LocalState.get('_users.UPDATE_ERROR');
+  onData(null, {exception});
 
   // clearErrors when unmounting the component
-  return clearErrors;
+  // return clearErrors;
 };
 
 export const depsMapper = (context, actions) => ({

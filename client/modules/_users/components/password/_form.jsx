@@ -60,7 +60,7 @@ export default React.createClass({
       disabled: this.state.disabled
     };
 
-    const {error} = this.props;
+    const {exception} = this.props;
 
     return (
 
@@ -73,12 +73,11 @@ export default React.createClass({
           ref="form">
 
           <fieldset>
-            {error ?
-            <div className="alert alert-danger" onClick="">
-              <span className="octicon octicon-megaphone" ></span>
-              {error}
+            {exception ?
+            <div data-cuke="bad-mailing" className="alert alert-danger" onClick="">
+              <span className="unicon fatal icon-white icon-24" ></span>
+              {exception}
             </div> : null }
-
             <Input
                 {...sharedProps}
                 name="email"

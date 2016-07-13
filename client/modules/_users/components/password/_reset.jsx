@@ -22,12 +22,12 @@ export default React.createClass({
   },
 
   validSubmit(data) {
-    // console.log('validSubmit', data);
-    this.props.submitAction(data.email, data.password1, data.password2);
+    // console.log('validSubmit', this.props._code);
+    this.props.submitAction(this.props._code, data.password1, data.password2);
   },
-  // invalidSubmit() {
+
   invalidSubmit() {
-    // console.log('invalidSubmit', data);
+    // console.log('invalidSubmit');
   },
 
   enableButton() {
@@ -59,7 +59,14 @@ export default React.createClass({
       disabled: this.state.disabled
     };
 
-    const {exception} = this.props;
+    const { exception, users, _code } = this.props;
+    let user = users.findOne( { 'emails.verifier': _code } );
+
+    let fail = exception;
+    if ( !user ) {
+      fail = 'You are not authorized to change a password here';
+      sharedProps.disabled = true;
+    }
 
     return (
 
@@ -74,29 +81,16 @@ export default React.createClass({
           ref="form">
 
           <fieldset>
-            {exception ?
+
+            {fail ?
             <div data-cuke="bad-content" className="alert alert-danger" onClick="">
               <span className="unicon fatal icon-white icon-24" ></span>
-              {exception}
+              {fail}
             </div> : null }
 
-            <Input
-                {...sharedProps}
-                name="email"
-                value=""
-                label="Email"
-                type="email"
-                placeholder="This is an email input."
-
-                data-cuke="email"
-
-                autoComplete="off"
-
-                validations="isEmail"
-                validationError="Please provide a valid email address."
-
-            />
-
+            <p>
+              Enter your password twice as shown.  Then log in again, please.
+            </p>
 
             <Input
                 {...sharedProps}
@@ -133,10 +127,10 @@ export default React.createClass({
           <Row layout={this.state.layout}>
 
             <input data-cuke='submit' className="btn btn-primary block full-width m-b"
-              formNoValidate={true}
+              formNoValidate={false}
               disabled={!this.state.canSubmit}
               type="submit"
-              defaultValue="Register" />
+              defaultValue="Reset Password" />
 
           </Row>
 

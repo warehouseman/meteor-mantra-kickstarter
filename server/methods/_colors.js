@@ -3,7 +3,9 @@
 import {Colors, _Colors} from '../../lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
+
 import Logger from '../../lib/logging';
+const txtPath = Logger.path(__filename);
 
 
 // import _ from 'lodash';
@@ -38,6 +40,8 @@ export default function () {
       });
       check(_id, String);
 
+      const nameMethod = '_colors.update';
+
       let record = Colors.findOne(_id);
       record.fullText();
 
@@ -45,9 +49,9 @@ export default function () {
       for (let key of allowedFields) {
         record[key] = data[key];
       }
-      Logger.italic('_colors.update')
+      Logger.italic(nameMethod)
         .bold('\nSaving : ' + JSON.stringify(record) + '\n')
-        .gray(Logger.path(__filename))
+        .gray(txtPath)
         .info();
 
       if ( record.content.includes('crap')) {
@@ -62,10 +66,11 @@ export default function () {
 
     '_colors.delete'(_id) {
       check(_id, String);
-      //  console.log('_colors.delete _id', _id);
-      Logger.italic('_colors.delete')
+      const nameMethod = '_colors.delete';
+
+      Logger.italic(nameMethod)
         .bold('\nDeleting : ' + JSON.stringify(record) + '\n')
-        .gray(Logger.path(__filename))
+        .gray(txtPath)
         .info();
 
       let record = Colors.findOne(_id);
@@ -74,12 +79,14 @@ export default function () {
 
     '_colors.hide'(_id) {
       check(_id, String);
+      const nameMethod = '_colors.hide';
+
       let record = Colors.findOne(_id);
       record.softRemove();
 
-      Logger.italic('_colors.hide')
+      Logger.italic(nameMethod)
         .bold('\nHidden : ' + JSON.stringify(record) + '\n')
-        .gray(Logger.path(__filename))
+        .gray(txtPath)
         .info();
 
     },

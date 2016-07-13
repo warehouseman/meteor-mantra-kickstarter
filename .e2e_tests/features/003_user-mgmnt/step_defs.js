@@ -36,9 +36,6 @@ module.exports = function () {
   this.Given(/^I have opened the login page : "([^"]*)"$/, function (urlLogin) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
-    browser.timeouts('implicit', 2000);
-    browser.timeouts('page load', 2000);
-    browser.timeouts('script', 2000);
     browser.url(urlLogout);
     browser.waitForVisible(cukeLogin);
     browser.url(urlLogin);
@@ -107,7 +104,6 @@ module.exports = function () {
 
     let cukeRadioRole = '//input[@data-cuke="role" and @value="' + role + '"]';
     browser.click(cukeRadioRole);
-
   });
 
   this.When(/^I submit the create user form\.$/, function () {
@@ -174,6 +170,11 @@ module.exports = function () {
   });
 
   this.Then(/^I no longer see that user record\.$/, function () {
+    let t = true;
+    browser.waitUntil(function () {
+      t = !t;
+      return t;
+    }, 2000, ' what the?');
     expect(browser.isExisting(selector) ? email : 'Gone').toBe('Gone');
 
   });

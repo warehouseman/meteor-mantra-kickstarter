@@ -3,26 +3,27 @@ import React from 'react';
 import t from 'tcomb-form';
 
 const enumRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
-export default React.createClass({
 
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
 
-  submitForm(event) {
-    event.preventDefault();
-    var values = this.refs.form.getValue();
-    if (values) {
-      console.log('submitForm values', values);
-      console.log('submitForm props._id', this.props._id);
-      if (this.props._id) {
-        this.props.submitAction(values, this.props._id);
-      } else {
-        this.props.submitAction(values);
+    this.onChange = () => { this.refs.form.getValue(); };
+
+    this.submitForm = (event) => {
+      event.preventDefault();
+      var values = this.refs.form.getValue();
+      if (values) {
+        console.log('submitForm values', values);
+        console.log('submitForm props._id', this.props._id);
+        if (this.props._id) {
+          this.props.submitAction(values, this.props._id);
+        } else {
+          this.props.submitAction(values);
+        }
       }
-    }
-  },
-
-  onChange() {
-    this.refs.form.getValue(); // <- validate on every change
-  },
+    };
+  }
 
   render() {
 
@@ -134,4 +135,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}

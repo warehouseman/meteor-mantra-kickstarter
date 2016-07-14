@@ -14,52 +14,70 @@ import {
 
 } from 'formsy-react-components';
 
-export default React.createClass({
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
 
-  resetForm() {
-    // console.log('resetForm');
-    this.refs.form.reset();
-  },
+    this.onChange = this.onChange.bind(this);
+    this.resetForm = this.resetForm.bind(this);
+    this.validSubmit = this.validSubmit.bind(this);
+    this.enableButton = this.enableButton.bind(this);
+    this.disableButton = this.disableButton.bind(this);
+    this.invalidSubmit = this.invalidSubmit.bind(this);
 
-  validSubmit(data) {
-    // console.log('validSubmit', this.props._code);
-    this.props.submitAction(this.props._code, data.password1, data.password2);
-  },
-
-  invalidSubmit() {
-    // console.log('invalidSubmit');
-  },
-
-  enableButton() {
-    // console.log('enable button');
-    this.setState({ canSubmit: true });
-  },
-
-  disableButton() {
-    // console.log('disable button');
-    this.setState({ canSubmit: false });
-  },
-
-  getInitialState() {
-    return {
+    this.state = {
       layout: 'vertical',
       validatePristine: true,
       disabled: false,
       canSubmit: false
     };
-  },
+
+    this.lggr = this.props.Logger;
+    this.lggr.setLevel('info');
+    this.lggr.file = __filename;
+    this.debug = this.lggr.debug;
+    this.info = this.lggr.info;
+  }
+
+  resetForm() {
+    // console.log('resetForm');
+    this.refs.form.reset();
+  }
+
+  onChange() {
+    // console.log('onChange ', this.props.canSubmit);
+  }
+
+  validSubmit(data) {
+    // console.log('validSubmit', this.props._code);
+    this.props.submitAction(this.props._code, data.password1, data.password2);
+  }
+
+  invalidSubmit() {
+    // console.log('invalidSubmit');
+  }
+
+  enableButton() {
+    if ( !this.state.canSubmit ) { this.setState({canSubmit: true}); }
+  }
+
+  disableButton() {
+    if ( this.state.canSubmit ) { this.setState({canSubmit: false}); }
+  }
 
   render() {
 
     let formClassName = 'vertical m-t';
 
-    var sharedProps = {
+    const { exception, users, _code } = this.props;
+    this.debug(' render() ', _code);
+
+    let sharedProps = {
       layout: this.state.layout,
       validatePristine: this.state.validatePristine,
       disabled: this.state.disabled
     };
 
-    const { exception, users, _code } = this.props;
     let user = users.findOne( { 'emails.verifier': _code } );
 
     let fail = exception;
@@ -67,6 +85,7 @@ export default React.createClass({
       fail = 'You are not authorized to change a password here';
       sharedProps.disabled = true;
     }
+
 
     return (
 
@@ -126,7 +145,11 @@ export default React.createClass({
 
           <Row layout={this.state.layout}>
 
-            <input data-cuke='submit' className="btn btn-primary block full-width m-b"
+            <input
+
+              data-cuke='submit'
+              className="btn btn-primary block full-width m-b"
+
               formNoValidate={false}
               disabled={!this.state.canSubmit}
               type="submit"
@@ -138,4 +161,4 @@ export default React.createClass({
 
     );
   }
-});
+}

@@ -1,41 +1,39 @@
 import React from 'react';
 import t from 'tcomb-form';
-// import _ from 'lodash';
-
-// const ValidationWarningTag = ({_idTag, _val}) => (
-//   <x-cuke id={_idTag}>{_val}</x-cuke>
-// );
 
 
-export default React.createClass({
+export default class extends React.Component {
 
-  debug(_place, _value) {
-    const lgr = this.props.Logger;
-    lgr.setLevel('info');
-    lgr.blue.underline(_place)
-       .bold(' - ' + _value)
-       .gray(lgr.path(__filename))
-       .debug();
-  },
+  constructor(props) {
+    super(props);
 
-  submitForm(event) {
-    event.preventDefault();
-    var values = this.refs.form.getValue();
-    this.debug('submitting', JSON.stringify(values));
-    if (values) {
-      this.props.clearErrors();
-      if (this.props._id) {
-        this.props.submitAction(values, this.props._id);
-      } else {
-        this.props.submitAction(values);
+    this.onChange = () => {
+      let vals = this.refs.form.getValue(); // <- validate on every change
+      this.info( ' @ onChange ', JSON.stringify(vals) );
+    };
+
+    // this.submitForm = this.submitForm.bind(this);
+    this.submitForm = (event) => {
+      event.preventDefault();
+      var values = this.refs.form.getValue();
+      this.info('submitForm', JSON.stringify(values));
+      if (values) {
+        this.props.clearErrors();
+        if (this.props._id) {
+          this.props.submitAction(values, this.props._id);
+        } else {
+          this.props.submitAction(values);
+        }
       }
-    }
-  },
+    };
 
-  onChange() {
-    let vals = this.refs.form.getValue(); // <- validate on every change
-    this.debug('onChange', vals);
-  },
+    this.lggr = this.props.Logger;
+    this.lggr.setLevel('info');
+    this.lggr.file = __filename;
+    this.debug = this.lggr.debug;
+    this.info = this.lggr.info;
+
+  }
 
   render() {
 
@@ -124,4 +122,5 @@ export default React.createClass({
     );
   }
 
-});
+}
+// });

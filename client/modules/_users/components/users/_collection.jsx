@@ -1,10 +1,14 @@
 import React from 'react';
 
-export default React.createClass({
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
 
-  deleteUser(_id) {
-    this.props.submitAction( _id );
-  },
+    this.deleteUser = (_id) => {
+      this.props.submitAction(_id);
+    };
+
+  }
 
   render() {
 
@@ -63,5 +67,4 @@ export default React.createClass({
 
     );
   }
-
-});
+}

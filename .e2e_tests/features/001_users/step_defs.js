@@ -63,4 +63,13 @@ module.exports = function () {
 
   });
 
+  this.Given(/^I am at my personal account page, "([^"]*)"$/, function (_urlAccount) {
+    browser.url(_urlAccount);
+  });
+
+  this.When(/^I logout,$/, function () {
+    browser.url(urlLogout);
+  });
+
+
 };

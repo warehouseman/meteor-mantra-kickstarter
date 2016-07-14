@@ -13,42 +13,41 @@ import {
 
 } from 'formsy-react-components';
 
-export default React.createClass({
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
 
+    this.resetForm = () => { this.refs.form.reset(); };
+    this.validSubmit = (data) => {
+      /* console.log('validSubmit', data); */
+      this.props.submitAction(data.email);
+    };
 
-  resetForm() {
-    // console.log('resetForm');
-    this.refs.form.reset();
-  },
+    this.enableButton = () => {
+      // console.log('enable button');
+      if (!this.canSubmit) { this.setState({ canSubmit: true }); }
+    };
 
-  validSubmit(data) {
-    // console.log('validSubmit', data);
-    this.props.submitAction(data.email, data.password);
-  },
+    this.disableButton = () => {
+      // console.log('disable button');
+      if (this.canSubmit) { this.setState({ canSubmit: false }); }
+    };
 
-  // invalidSubmit(data) {
-  invalidSubmit() {
-    // console.log('invalidSubmit', data);
-  },
+    this.invalidSubmit = () => { /*  console.log('invalidSubmit', data); */ };
 
-  enableButton() {
-    // console.log('enable button');
-    this.setState({ canSubmit: true });
-  },
-
-  disableButton() {
-    // console.log('disable button');
-    this.setState({ canSubmit: false });
-  },
-
-  getInitialState() {
-    return {
+    this.state = {
       layout: 'vertical',
       validatePristine: true,
       disabled: false,
       canSubmit: false
     };
-  },
+
+    this.lggr = this.props.Logger;
+    this.lggr.setLevel('info');
+    this.lggr.file = __filename;
+    this.debug = this.lggr.debug;
+    this.info = this.lggr.info;
+  }
 
   render() {
 
@@ -114,4 +113,4 @@ export default React.createClass({
 
     );
   }
-});
+}

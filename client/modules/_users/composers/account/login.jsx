@@ -3,9 +3,9 @@ import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
 export const composer = ({context, clearErrors}, onData) => {
-  const {LocalState} = context();
+  const {LocalState, Logger} = context();
   const error = LocalState.get('LOGIN_ERROR');
-  onData(null, {error});
+  onData(null, {error, Logger});
 
   // clearErrors when unmounting the component
   return clearErrors;

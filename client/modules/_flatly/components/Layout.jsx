@@ -4,7 +4,7 @@ import NavHeader from './NavHeader.jsx';
 import NavLeftContent from './NavLeftContent.jsx';
 import NavRightContent from './NavRightContent.jsx';
 
-import AppConfig from '../../../configs/app.js';
+import AppConfig from '/lib/app.js';
 
 export default class extends React.Component {
 

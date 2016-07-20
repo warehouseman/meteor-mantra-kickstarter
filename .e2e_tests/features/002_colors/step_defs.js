@@ -19,6 +19,8 @@ const cukeInvalidAge = '//span[@class="help-block error-block"]';
 
 const cukeBadContent = '//div[@data-cuke="bad-content"]';
 
+const cukeWarning = '//x-cuke[@id="warning"]';
+
 let age = '';
 let title = '';
 let content = '';
@@ -26,7 +28,7 @@ module.exports = function () {
 
 //   Scenario: Create a new color
 // ------------------------------------------------------------------------
-  this.Given(/^I have opened the colors editor page : "([^"]*)"$/, function (_url) {
+  this.Given(/^I have opened the 'add colors' page : "([^"]*)"$/, function (_url) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
     browser.timeouts('implicit', 2000);
@@ -124,6 +126,24 @@ module.exports = function () {
     expect( msg ).toEqual(rude);
   });
 
+// =======================================================================
+
+
+//   Scenario: Prohibited from add and from update
+// ------------------------------------------------------------------------
+
+  this.Given(/^I have opened the colors editor page : "([^"]*)"$/, function (_url) {
+
+    browser.setViewportSize({ width: 1024, height: 480 });
+    browser.timeouts('implicit', 2000);
+    browser.timeouts('page load', 2000);
+
+    browser.url(_url);
+  });
+
+  this.Then(/^I see the warning "([^"]*)"$/, function (_warning) {
+    expect(_warning).toEqual(browser.getText(cukeWarning));
+  });
 // =======================================================================
 
 

@@ -1,12 +1,14 @@
 import React from 'react';
 import Sidebar from './_sidebar.jsx';
 
-// import Container from '../../containers/colors/add.jsx';
+import Authorized from '/client/access_control/acComposer.js';
+
 import dataComposer from '../../composers/colors/add.jsx';
 import Component from './_form.jsx';
 const Container = dataComposer(Component);
 
 export default class extends React.Component {
+
   render() {
     return (
       <div className="bs-docs-section clearfix">
@@ -15,10 +17,18 @@ export default class extends React.Component {
             <Sidebar />
           </div>
           <div className="col-md-9">
-            <Container />
+            <Authorized accesspoint='colors.add' warn='true'>
+              <Container />
+            </Authorized>
           </div>
         </div>
       </div>
     );
+/*
+            <Authorized accesspoint='colors.update' warn='true'>
+              <Container />
+            </Authorized>
+*/
+
   }
 }

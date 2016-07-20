@@ -1,4 +1,3 @@
-// import New from '../components/ColorsNew/index.jsx';
 import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
@@ -6,7 +5,7 @@ import {singleComposer} from './single.jsx';
 
 export const editComposer = ({context, clearErrors}, onData) => {
   const {LocalState, Logger} = context();
-  const exception = LocalState.get('_colors.SAVE_ERROR');
+  const exception = LocalState.get('_colors.UPDATE_ERROR');
 
   onData(null, {exception, Logger});
 

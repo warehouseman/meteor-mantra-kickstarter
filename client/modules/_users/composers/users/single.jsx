@@ -4,13 +4,13 @@ import {composeWithTracker, composeAll} from 'react-komposer';
 
 export const singleComposer = ({context, _id, clearErrors}, onData) => {
   const {Meteor, LocalState, Collections} = context();
-  const error = LocalState.get('_users.HIDE_ERROR');
+  const hideException = LocalState.get('_users.HIDE_ERROR');
   if (Meteor.subscribe('users.single', _id).ready()) {
     const user = Collections.Users.findOne(_id);
     if ( user ) {
       const email = user.firstEmail();
       const role = user.bestRole();
-      let parms = { ...user.profile, role, user, email, error };
+      let parms = { ...user.profile, role, user, email, hideException };
       onData(null, parms);
     } else {
       onData(null, null);

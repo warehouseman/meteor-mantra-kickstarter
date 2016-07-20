@@ -1,5 +1,27 @@
 import React from 'react';
+// import Authorized from '/client/access_control/acComposer.js';
 
+class ColorList extends React.Component {
+
+  render() {
+    return (
+      <ul className="nav nav-pills nav-stacked">
+        <li><a href="/colors"><i className="fa "></i> Colors collection</a></li>
+        <li><a href="/colors/add"><i className="fa "></i> Add color</a></li>
+      </ul>
+    );
+  }
+}
+
+/*
+
+        <li>
+          <Authorized accesspoint='colors.update'>
+            <div><a href="/colors/add"><i className="fa "></i> Add color</a></div>
+          </Authorized>
+        </li>
+
+*/
 export default class extends React.Component {
 
   render() {
@@ -9,10 +31,7 @@ export default class extends React.Component {
           <h3 className="box-title">Colors navigation</h3>
         </div>
         <div className="box-body no-padding">
-          <ul className="nav nav-pills nav-stacked">
-            <li><a href="/colors"><i className="fa "></i> Colors collection</a></li>
-            <li><a href="/colors/add"><i className="fa "></i> Add color</a></li>
-          </ul>
+          <ColorList />
         </div>
       </div>
     );

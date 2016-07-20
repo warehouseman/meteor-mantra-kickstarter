@@ -56,6 +56,7 @@ meteor --port 5005
 ```
 Your app should be running [http://localhost:5005](http://localhost:5005)
 
+Please report issues.  We have an [overv.io](https://overv.io/warehouseman/meteor-mantra-kickstarter/board/) repository overview.
 ### Roadmap
 
 This is an early draft. Mantra architecture is very fresh and React environment is quite dynamic, that means things will change and break. We will be following the discussions and will try to keep this project up to date.

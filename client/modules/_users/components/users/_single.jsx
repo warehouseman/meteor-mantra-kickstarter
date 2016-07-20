@@ -9,17 +9,16 @@ export default class extends React.Component {
   }
 
   render() {
-    const {_id, email, firstName, lastName, role, error} = this.props;
+    const {_id, email, firstName, lastName, role, hideException} = this.props;
 
     return (
       <div>
 
-        {error ?
-        <div className="alert alert-danger" onClick="">
-          <span className="octicon octicon-megaphone" ></span>
-          {error}
+        {hideException ?
+        <div data-cuke="bad-content" className="alert alert-danger" onClick="">
+          <span className="unicon fatal icon-white icon-24" ></span>
+          {hideException}
         </div> : null }
-
         <h3> <x-cuke id="user-record">User Record</x-cuke> </h3>
 
         <p><strong>First name:</strong> <x-cuke id="firstName">{firstName}</x-cuke></p>

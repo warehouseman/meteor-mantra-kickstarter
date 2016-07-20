@@ -1,7 +1,8 @@
 import React from 'react';
 import Sidebar from './_sidebar.jsx';
 
-// import Container from '../../containers/colors/edit.jsx';
+import Authorized from '/client/access_control/acComposer.js';
+
 import dataComposer from '../../composers/colors/edit.jsx';
 import Component from './_form.jsx';
 const Container = dataComposer(Component);
@@ -17,10 +18,17 @@ export default class extends React.Component {
             <Sidebar />
           </div>
           <div className="col-md-9">
-            <Container _id={_id}/>
+            <Authorized accesspoint='colors.update' warn='true'>
+              <Container _id={_id}/>
+            </Authorized>
           </div>
         </div>
       </div>
     );
+/*
+            <Authorized accesspoint='colors.update' warn='true'>
+              <Container _id={_id}/>
+            </Authorized>
+*/
   }
 }

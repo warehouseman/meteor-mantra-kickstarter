@@ -1,9 +1,16 @@
 import {Meteor} from 'meteor/meteor';
+import {AccessControl} from '../../lib/collections';
+
+const AllRoles = AccessControl.getTrustLevels();
+
+export const Groups = {
+  defaultGroup: 'headOffice',
+  subsidiaryGroup: 'branch'
+};
 
 export default () => {
   if (Meteor.users.find().count() < 6 ) {
 
-    const AllRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
     let idx = 0;
 
     var users = [

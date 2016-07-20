@@ -1,13 +1,18 @@
 import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
+// no other composer
+
 export const addComposer = ({context, clearErrors}, onData) => {
   const {LocalState, Logger} = context();
-  const state = LocalState.get('_colors.SAVE_ERROR');
-  onData(null, {state, Logger});
+  const exception = LocalState.get('_colors.ADD_ERROR');
 
-  // clearErrors when unmounting the component
-  return clearErrors;
+  onData(null, {exception, Logger});
+
+  //    returns clearErrors when unmounting the component
+  //    Caution : actions always unmount the component,
+  //           so clearErrors will wipe action errors before than can be seen
+  // return clearErrors;
 };
 
 export const depsMapper = (context, actions) => ({

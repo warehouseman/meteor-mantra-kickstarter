@@ -1,11 +1,7 @@
-
 import React from 'react';
+// import Authorized from '/client/access_control/acComposer.js';
 
 export default class extends React.Component {
-
-  deleteRecord() {
-    this.props.deleteAction(this.props._id);
-  }
 
   hideRecord() {
     this.props.hideAction(this.props._id);
@@ -28,5 +24,14 @@ export default class extends React.Component {
         </p>
       </div>
     );
+/*
+          <Authorized accesspoint='colors.update'>
+            <a data-cuke='edit-color' href={'/colors/' + _id + '/edit'}>edit</a> |&nbsp;
+          </Authorized>
+          <Authorized accesspoint='colors.update'>
+            <a data-cuke='delete-color' href="#" onClick={this.hideRecord.bind(this)}>delete</a>
+          </Authorized>
+*/
+
   }
 }

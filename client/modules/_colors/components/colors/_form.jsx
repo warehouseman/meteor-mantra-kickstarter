@@ -16,7 +16,7 @@ export default class extends React.Component {
     this.submitForm = (event) => {
       event.preventDefault();
       var values = this.refs.form.getValue();
-      this.info('submitForm', JSON.stringify(values));
+      this.debug('submitForm', JSON.stringify(values));
       if (values) {
         this.props.clearErrors();
         if (this.props._id) {
@@ -43,7 +43,6 @@ export default class extends React.Component {
     const Age = t.refinement(t.Number, (n) => n >= ctx.poolParty.age);
     Age.getValidationErrorMessage = (value, path, context) =>
          'Nope. ' + value + ' is too young, Pool Party Age : ' + context.poolParty.age;
-//       <ValidationWarningTag _idTag='invalid-age' _val={context.poolParty.age} />;
 
     const formModel = t.struct({
       title: t.String,
@@ -123,4 +122,3 @@ export default class extends React.Component {
   }
 
 }
-// });

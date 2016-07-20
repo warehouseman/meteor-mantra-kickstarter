@@ -1,5 +1,4 @@
 import React from 'react';
-// import DataComposer from '../composers/ColorsCollection.jsx';
 
 export default ({collection}) => (
   <div>

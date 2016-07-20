@@ -1,15 +1,20 @@
 export default {
 
   // create
-  add({Meteor, LocalState, FlowRouter}, data) {
+  add({Meteor, LocalState, FlowRouter, Logger}, data) {
     // console.log ('actions._colors.add data', data);
     const _id = Meteor.uuid();
     Meteor.call('_colors.add', data, _id, (err) => {
       if (err) {
-        return LocalState.set('_colors.SAVE_ERROR', err.message);
+        Logger.blue.underline('add -- ')
+         .bold(err.message)
+         .gray(Logger.path(__filename))
+         .error();
+        LocalState.set('_colors.ADD_ERROR', err.message);
+        return;
       }
+      FlowRouter.go('/colors/' + _id);
     });
-    FlowRouter.go('/colors/' + _id);
   },
 
   // update
@@ -23,7 +28,8 @@ export default {
          .bold(err.message)
          .gray(Logger.path(__filename))
          .error();
-        return LocalState.set('_colors.SAVE_ERROR', err.message);
+        LocalState.set('_colors.UPDATE_ERROR', err.message);
+        return;
       }
       FlowRouter.go('/colors/' + _id);
     });
@@ -40,19 +46,6 @@ export default {
     });
   },
 
-  delete({Meteor, LocalState, FlowRouter}, _id) {
-    // console.log ('actions._colors.update _id', _id);
-    // console.log ('actions._colors.update data', data);
-
-    Meteor.call('_colors.delete', _id, (err) => {
-      if (err) {
-        return LocalState.set('_colors.DELETE_ERROR', err.message);
-      }
-      FlowRouter.go('/colors/');
-
-    });
-  },
-
   // clearError
   clearErrors({LocalState, Logger}) {
     Logger.blue.underline('clearErrors')
@@ -61,7 +54,8 @@ export default {
      .trace();
     LocalState.set('_colors.DELETE_ERROR', null);
     LocalState.set('_colors.HIDE_ERROR', null);
-    LocalState.set('_colors.SAVE_ERROR', null);
+    LocalState.set('_colors.ADD_ERROR', null);
+    LocalState.set('_colors.UPDATE_ERROR', null);
     return;
   }
 

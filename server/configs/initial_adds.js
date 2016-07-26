@@ -6,8 +6,7 @@ import {Groups} from './initial_users';
 import Logger from '../../lib/logging';
 const txtPath = Logger.path(__filename);
 
-
-export default () => {
+export const initPosts = () => {
   if (!Posts.findOne()) {
     for (let lc = 1; lc <= 5; lc++) {
       const title = `This is the post title: ${lc}`;
@@ -17,7 +16,7 @@ export default () => {
   }
 };
 
-export default () => {
+export const initAccessPoints = () => {
   const nameMethod = 'initialize-access-points';
 
   /* eslint-disable no-multi-spaces */

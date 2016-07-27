@@ -8,15 +8,15 @@ export default class extends React.Component {
     super(props);
 
     this.onChange = () => {
-      let vals = this.refs.form.getValue(); // <- validate on every change
-      this.info( ' @ onChange ', JSON.stringify(vals) );
+//      let vals = this.refs.form.getValue(); // <- validate on every change
+//      this.info( ' @ onChange ', JSON.stringify(vals) );
     };
 
     // this.submitForm = this.submitForm.bind(this);
     this.submitForm = (event) => {
       event.preventDefault();
       var values = this.refs.form.getValue();
-      this.debug('submitForm', JSON.stringify(values));
+//      this.debug('submitForm', JSON.stringify(values));
       if (values) {
         this.props.clearErrors();
         if (this.props._id) {
@@ -27,11 +27,11 @@ export default class extends React.Component {
       }
     };
 
-    this.lggr = this.props.Logger;
-    this.lggr.setLevel('info');
-    this.lggr.file = __filename;
-    this.debug = this.lggr.debug;
-    this.info = this.lggr.info;
+    // this.lggr = this.props.Logger;
+    // this.lggr.setLevel('info');
+    // this.lggr.file = __filename;
+    // this.debug = this.lggr.debug;
+    // this.info = this.lggr.info;
 
   }
 

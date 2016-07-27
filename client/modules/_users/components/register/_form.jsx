@@ -44,11 +44,11 @@ export default class extends React.Component {
       canSubmit: false
     };
 
-    this.lggr = this.props.Logger;
-    this.lggr.setLevel('info');
-    this.lggr.file = __filename;
-    this.debug = this.lggr.debug;
-    this.info = this.lggr.info;
+    // this.lggr = this.props.Logger;
+    // this.lggr.setLevel('info');
+    // this.lggr.file = __filename;
+    // this.debug = this.lggr.debug;
+    // this.info = this.lggr.info;
   }
 
   render() {

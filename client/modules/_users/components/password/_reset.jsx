@@ -32,11 +32,12 @@ export default class extends React.Component {
       canSubmit: false
     };
 
-    this.lggr = this.props.Logger;
-    this.lggr.setLevel('info');
-    this.lggr.file = __filename;
-    this.debug = this.lggr.debug;
-    this.info = this.lggr.info;
+    // this.lggr = this.props.Logger;
+    // this.lggr.setLevel('info');
+    // this.lggr.file = __filename;
+    // this.debug = this.lggr.debug;
+    // this.info = this.lggr.info;
+
   }
 
   resetForm() {
@@ -70,7 +71,7 @@ export default class extends React.Component {
     let formClassName = 'vertical m-t';
 
     const { exception, users, _code } = this.props;
-    this.debug(' render() ', _code);
+//    this.debug(' render() ', _code);
 
     let sharedProps = {
       layout: this.state.layout,

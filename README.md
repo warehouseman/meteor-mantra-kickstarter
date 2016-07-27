@@ -43,27 +43,9 @@ Please make sure you read [Mantra Specification](https://kadirahq.github.io/mant
 
 ![screen colors-single](public/screens/colors.single.png)
 
-### Setting Up
+### Setting Up and Running Tests
 
-1. make sure you [have Meteor installed](curl https://install.meteor.com/ | sh)
-1. make sure you have your Mailgun API key ready.  Get it here, [Mailgun API key](https://mailgun.com/app/dashboard). *
-1. clone [this repo](https://github.com/warehouseman/meteor-mantra-kickstarter)
-1. make **certain** you are on the v0.2.1 branch!  ( **¡¡ Seriously !!** )
-1. copy "settings.json.example" to "settings.json"
-1. write your Mailgun credentials into the corresponding fields
-
-
-```
-npm install
-sudo npm run workarounds # clean up some ugly non-fatal run-time warnings from the mailer package
-meteor --settings=settings.json
-```
-
-Your app should be running [http://localhost:3000](http://localhost:3000)
-
-Please report issues.  We have an [overv.io](https://overv.io/warehouseman/meteor-mantra-kickstarter/board/) repository overview.
-
-* Note : If you don't care whether password reset works, you don't need Mailgun.  In that case, you can use this as your API key ...  ```key-dead0dead0dead0dead0dead0dead000```.
+Please refer to the ['Installation Steps' wiki page](https://github.com/warehouseman/meteor-mantra-kickstarter/wiki/Installation-steps).
 
 ### Roadmap
 
@@ -71,77 +53,27 @@ This is an early draft. Mantra architecture is very fresh and React environment 
 
 The goal is to bring some simple yet valuable to most apps features:
 
-* user management
-* role management
-* ACL management
-* profile page
-* account page
-* advanced CRUD component with pagination
-* file manager
+☑  user management
 
-### Running Tests (to be completed)
+☐  role management
 
-#### Unit Tests
-In this app, a good portion of the client side is fully tested using the familiar tools like Mocha, Chai and Sinon.
+☐  ACL management
 
-You can run linting and unit tests with:
+☐  proper logging with Winston and Loggly
 
-```
-npm test
-```
+☐  profile page
 
-#### Acceptance (end to end) Tests
+☐  account page
 
-Acceptance Tests, (a.k.a end to end, e2e, functional, etc. tests) require Chimp.
+☐  advanced CRUD component with pagination
 
-To use Chimp you will have to have installed :
+☑  full Cucumber acceptance testing
 
-1. Jave JRE
-1. NPM
-1. NodeJS
-1. Chimp
+☐  mixed server-side rendering (SSR) and client-side rendering (CSR)
 
-You can acceptance tests with:
+☑  script to assist installation for development
 
-```
-npm run acceptance
-```
+☐  scripts to install in a remote server with mup
 
+☐  scripts to assist working with Android and iPhone
 
-
-**See the `scripts` section of `package.json` for details of other testing and setup commands.**
-
-### Other Notes
-
-For my own use, I set up at least 4 terminal windows with these commands ready to run :
-
-*Term 1*
-
-```
-cd projects/meteor-mantra-kickstarter/
-meteor --settings=settings.json
-```
-
-*Term 2*
-```
-cd projects/meteor-mantra-kickstarter/
-npm run acceptance
-```
-
-*Term 3*
-```
-cd projects/meteor-mantra-kickstarter/
-meteor mongo
-# then
- db.users.findOne({ "emails.address" : "member@example.com" });
- db.getCollection("_colors").find({});
-```
-
-*Term 4*
-```
-cd projects/meteor-mantra-kickstarter/
-grep -R --exclude=\*.{css,txt,min.js} --exclude-dir={.git,.meteor,node_modules} "key" -A 1
-```
-
-I tend to use the above commands daily.
-To get quickly ready to work, I open this file, open the four terminal windows and cut and paste into them.

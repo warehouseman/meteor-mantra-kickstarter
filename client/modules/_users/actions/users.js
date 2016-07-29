@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 export default {
 
   add({Meteor, LocalState, FlowRouter}, data) {

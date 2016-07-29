@@ -4,10 +4,10 @@ import {composeWithTracker, composeAll} from 'react-komposer';
 import {singleComposer} from './single.jsx';
 
 export const editComposer = ({context, clearErrors}, onData) => {
-  const {LocalState, Logger} = context();
+  const {LocalState} = context();
   const exception = LocalState.get('_colors.UPDATE_ERROR');
 
-  onData(null, {exception, Logger});
+  onData(null, {exception});
 
   //    returns clearErrors when unmounting the component
   //    Caution : actions always unmount the component,

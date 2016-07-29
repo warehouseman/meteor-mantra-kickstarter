@@ -3,13 +3,13 @@ import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
 export const composer = ({context, clearErrors}, onData) => {
-  const {LocalState, Meteor, Collections, Logger} = context();
+  const {LocalState, Meteor, Collections} = context();
 
   if (Meteor.subscribe('users.collection').ready()) {
 
     const exception = LocalState.get('_users.PASSWORD_RESET_ERROR');
     const users = Collections.Users;
-    onData(null, {exception, users, Logger});
+    onData(null, {exception, users});
   }
 
   // clearErrors when unmounting the component

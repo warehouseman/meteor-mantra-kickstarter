@@ -1,4 +1,6 @@
-/* eslint-disable no-console */
+import _lgr from '/lib/Logging/client/clientLogger';
+const Lgr = new _lgr( __filename, 'verbose', true );
+
 import React from 'react';
 
 class Authorized extends React.Component {
@@ -9,11 +11,12 @@ class Authorized extends React.Component {
     this.errorComponent = unauthenticatedMessage || DefaultUnauthenticatedMessage;
   }
   render() {
+    Lgr.a = 'render';
 
     const { children, authorize, accesspoint, warn } = this.props;
     const allowed = authorize(accesspoint);
     let errorComponent = this.errorComponent;
-    console.log( 'authorized? ', allowed);
+    Lgr.verbose(`User ${Meteor.userId()} is authorized? ${allowed}`);
 
     if ( allowed ) {
       return ( <div>{ children } </div>);

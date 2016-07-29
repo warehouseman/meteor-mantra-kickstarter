@@ -1,5 +1,4 @@
 /* eslint-disable no-undef   */
-/* eslint-disable no-console */
 
 const cukeFrmSubmit = '//form[@data-cuke="login"]';
 

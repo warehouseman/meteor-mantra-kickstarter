@@ -1,4 +1,6 @@
-/* eslint-disable no-console */
+import _lgr from '/lib/Logging/client/clientLogger';
+const Lgr = new _lgr(__filename, 'verbose', true);
+
 export default {
 
   login({Meteor, LocalState, FlowRouter}, email, password) {
@@ -67,7 +69,7 @@ export default {
   },
 
   register({Meteor, LocalState, FlowRouter}, email, password1, password2) {
-    // console.log(' account actions register ');
+    Lgr.a = 'register';
 
     if ( !email || !password1 || !password2 ) {
       return LocalState.set('REGISTER_ERROR', 'Please fill out all the required fields!');
@@ -88,9 +90,9 @@ export default {
     };
 
     Meteor.call('_users.add', userObject, (err, response) => {
-      // console.log('actions.acct.register response ', response);
       if (err) {
-        return LocalState.set('_users.SAVE_ERROR', err.message);
+        Lgr.info(err.message);
+        return LocalState.set('REGISTER_ERROR', err.message);
       }
       if (response._idNew) {
         FlowRouter.go('/users/' + response._idNew);

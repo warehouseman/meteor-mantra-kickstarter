@@ -1,5 +1,4 @@
 /* eslint-disable no-undef   */
-/* eslint-disable no-console */
 
 const cukeFormSubmit = '//form[@data-cuke="register"]';
 

@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
-
 var nodemailer = require('nodemailer');
 var mg = require('nodemailer-mailgun-transport');
-import Logger from '../../lib/logging';
-const txtPath = Logger.path(__filename);
+
+import _lgr from '/lib/Logging/server/serverLogger';
+const Lgr = new _lgr( __filename, 'verbose' );
 
 var auth = {
 /* eslint-disable camelcase   */
@@ -17,7 +16,7 @@ var auth = {
 let mailer = nodemailer.createTransport(mg(auth));
 
 mailer.resetPassword = function resetPassword(_email, _id, _validator) {
-  const nameMethod = 'mailer.resetPassword';
+  Lgr.a = 'mailer.resetPassword';
 
   const cfg = Meteor.settings.public.PASSWORD_RESET;
   const host = Meteor.settings.public.HOST_URI;
@@ -30,15 +29,9 @@ mailer.resetPassword = function resetPassword(_email, _id, _validator) {
     text: cfg.Text_1 + host + cfg.Route + _id + '-' + _validator + cfg.Text_2,
   }, function (err, info) {
     if (err) {
-      Logger.italic(nameMethod)
-        .bold('\n Mail send error : ' + err + '\n')
-        .gray(txtPath)
-        .error();
+      Lgr.error( '\n Mail send error : ' + err + '\n' );
     } else {
-      Logger.italic(nameMethod)
-        .bold('\n Mail host response: ' + info.message + '\n')
-        .gray(txtPath)
-        .info();
+      Lgr.info( '\n Mail host response: ' + info.message + '\n' );
     }
   });
 };

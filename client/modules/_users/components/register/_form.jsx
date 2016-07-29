@@ -21,7 +21,7 @@ export default class extends React.Component {
 //    this.onChange = this.onChange.bind(this);
     this.resetForm = () => { this.refs.form.reset(); };
     this.validSubmit = (data) => {
-      /* console.log('validSubmit', data); */
+      // console.log('validSubmit', data);
       this.props.submitAction(data.email, data.password1, data.password2);
     };
 
@@ -43,12 +43,6 @@ export default class extends React.Component {
       disabled: false,
       canSubmit: false
     };
-
-    // this.lggr = this.props.Logger;
-    // this.lggr.setLevel('info');
-    // this.lggr.file = __filename;
-    // this.debug = this.lggr.debug;
-    // this.info = this.lggr.info;
   }
 
   render() {

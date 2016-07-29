@@ -1,14 +1,13 @@
-// import comments from './comments';
-const txtPath = __filename;
+import _lgr from '/lib/Logging/client/clientLogger';
+const Lgr = new _lgr(__filename, 'warn', true);
 
 // XXX: Here we can auto generate this file based on the method stubs
 // export default function (context) {
 export default function (context) {
-  const nameMethod = 'method_stubs.default';
-  const {Logger} = context;
-  Logger.italic(nameMethod)
-    .bold('\n : loaded context\n')
-    .gray(txtPath)
-    .info();
-  // comments(context);
+
+  const {App} = context;
+
+  Lgr.f = __filename;
+  Lgr.a = 'method_stubs.default';
+  Lgr.debug(`\n : loaded context for "${App.name}"\n`);
 }

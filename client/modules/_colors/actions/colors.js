@@ -1,15 +1,15 @@
+import _lgr from '/lib/Logging/client/clientLogger';
+const Lgr = new _lgr(__filename, 'verbose', true);
+
 export default {
 
   // create
-  add({Meteor, LocalState, FlowRouter, Logger}, data) {
-    // console.log ('actions._colors.add data', data);
+  add({Meteor, LocalState, FlowRouter}, data) {
+    Lgr.a = 'add';
     const _id = Meteor.uuid();
     Meteor.call('_colors.add', data, _id, (err) => {
       if (err) {
-        Logger.blue.underline('add -- ')
-         .bold(err.message)
-         .gray(Logger.path(__filename))
-         .error();
+        Lgr.error(err.message);
         LocalState.set('_colors.ADD_ERROR', err.message);
         return;
       }
@@ -18,16 +18,11 @@ export default {
   },
 
   // update
-  update({Meteor, LocalState, FlowRouter, Logger}, data, _id) {
-    // console.log ('actions._colors.update _id', _id);
-    // console.log ('actions._colors.update data', data);
-
+  update({Meteor, LocalState, FlowRouter}, data, _id) {
+    Lgr.a = 'add';
     Meteor.call('_colors.update', data, _id, (err) => {
       if (err) {
-        Logger.blue.underline('update -- ')
-         .bold(err.message)
-         .gray(Logger.path(__filename))
-         .error();
+        Lgr.error(err.message);
         LocalState.set('_colors.UPDATE_ERROR', err.message);
         return;
       }
@@ -47,11 +42,9 @@ export default {
   },
 
   // clearError
-  clearErrors({LocalState, Logger}) {
-    Logger.blue.underline('clearErrors')
-     .bold('clearing now')
-     .gray(Logger.path(__filename))
-     .trace();
+  clearErrors({LocalState}) {
+    Lgr.a = 'clearErrors';
+    Lgr.debug('clearing now');
     LocalState.set('_colors.DELETE_ERROR', null);
     LocalState.set('_colors.HIDE_ERROR', null);
     LocalState.set('_colors.ADD_ERROR', null);

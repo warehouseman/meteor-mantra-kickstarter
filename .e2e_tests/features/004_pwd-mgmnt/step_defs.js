@@ -1,5 +1,4 @@
 /* eslint-disable no-undef   */
-/* eslint-disable no-console */
 
 const cukeInpEmail = '//input[@data-cuke="rst-email"]';
 const cukeButtonSubmit = '//input[@data-cuke="submit-rst-email"]';

@@ -1,10 +1,12 @@
-/* eslint-disable no-console */
 import {Posts, AccessControl, TrustLevel} from '/lib/collections';
-
 import {Groups} from './initial_users';
 
-import Logger from '../../lib/logging';
-const txtPath = Logger.path(__filename);
+import _lgr from '/lib/Logging/server/serverLogger';
+const Lgr = new _lgr( __filename, 'verbose' );
+
+Meteor.startup(() => {
+  // code to run on server at startup
+});
 
 export const initPosts = () => {
   if (!Posts.findOne()) {
@@ -17,7 +19,7 @@ export const initPosts = () => {
 };
 
 export const initAccessPoints = () => {
-  const nameMethod = 'initialize-access-points';
+  Lgr.a = 'initAccessPoints';
 
   /* eslint-disable no-multi-spaces */
   const accessPoints = [];
@@ -31,15 +33,9 @@ export const initAccessPoints = () => {
     AccessControl.upsertRecord(ap[0], TrustLevel[ap[1]], ap[2]);
   });
 
-  Logger.italic(nameMethod)
-  .bold(' Claims initialized \n')
-  .gray(txtPath)
-  .info();
+  Lgr.info( ' Claims initialized => ' );
 
-  // const acl = AccessControl.findAccessPoint( 'colors.update', Groups.defaultGroup );
-  // console.log(' Trusted Roles : ', acl.trusted);
-
-  console.log(' Access Point trust level : ',
+  Lgr.verbose( ' Access Point trust level : ',
     AccessControl.findOne( { key: 'colors.add', group: Groups.defaultGroup } ).level
   );
 

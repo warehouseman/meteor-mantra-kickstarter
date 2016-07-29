@@ -1,5 +1,4 @@
 import * as Collections from '../../lib/collections';
-import Logger from '../../lib/logging';
 
 import App from '/lib/app';
 
@@ -17,6 +16,5 @@ export default function () {
     LocalState: new ReactiveDict(),
     Tracker,
     App,
-    Logger
   };
 }

@@ -10,5 +10,7 @@
     "Text_2": " in order to reset your password.",
     "Subject": "Your Mantra Kickstarter password reset request",
     "From": "yourself@yourpublic.work"
-  }
+  },
+  "LOGGLY_SUBDOMAIN": "yourwork",
+  "LOGGLY_TOKEN": " ( not this either ) "
 }

@@ -4,10 +4,10 @@ import {composeWithTracker, composeAll} from 'react-komposer';
 // no other composer
 
 export const addComposer = ({context, clearErrors}, onData) => {
-  const {LocalState, Logger} = context();
+  const {LocalState} = context();
   const exception = LocalState.get('_colors.ADD_ERROR');
 
-  onData(null, {exception, Logger});
+  onData(null, {exception});
 
   //    returns clearErrors when unmounting the component
   //    Caution : actions always unmount the component,

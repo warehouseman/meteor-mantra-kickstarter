@@ -1,16 +1,10 @@
-/* eslint-disable no-console */
-
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
-
 import {User} from '/lib/user.js';
-
 import mailer from './mail.js';
 
-import Logger from '../../lib/logging';
-const txtPath = Logger.path(__filename);
-
-// import _ from 'lodash';
+import _lgr from '/lib/Logging/server/serverLogger';
+const Lgr = new _lgr( __filename, 'verbose' );
 
 const AllRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
 const numRoles = AllRoles.length;
@@ -39,7 +33,8 @@ export default function () {
         password: String,
         role: String
       });
-      const nameMethod = '_users.add' + ' ...';
+
+      Lgr.a = '_users.add';
 
       const _idNew = Accounts.createUser( data );
 
@@ -50,10 +45,7 @@ export default function () {
         Roles.addUsersToRoles(_idNew, AllRoles.slice( hasRole ), GROUP);
       }
 
-      Logger.italic(nameMethod)
-        .bold('New user : ' + JSON.stringify(User.findOne(_idNew)) + '\n')
-        .gray(txtPath)
-        .info();
+      Lgr.info('New user : ' + JSON.stringify(User.findOne(_idNew)) + '\n');
       return { _idNew };
 
     },
@@ -83,13 +75,10 @@ export default function () {
     '_users.resetPwd'(_code, _pwd) {
       check(_code, String);
       check(_pwd, String);
-      const nameMethod = '_users.resetPwd' + '... ';
+      Lgr.a = '_users.resetPwd' + '... ';
 
       const idUser = User.findOne( { 'emails.verifier': _code } );
-      Logger.italic(nameMethod)
-        .bold('Resetting password for, ' + idUser._id + '\n')
-        .gray(txtPath)
-        .warn();
+      Lgr.info('Resetting password for, ' + idUser._id + '\n');
 
       Accounts.setPassword(idUser._id, _pwd);
 
@@ -97,18 +86,15 @@ export default function () {
 
     '_users.passwordResetRequest'(_email) {
       check(_email, String);
-      const nameMethod = '_users.passwordResetRequest' + '... ';
+      Lgr.a = '_users.passwordResetRequest' + '... ';
 
       // const user = Meteor.users.findOne({ 'emails.address': _email });
       const user = User.findOne({ 'emails.address': _email });
       if (user) {
         let verifier = randomKey();
 
-        Logger.italic(nameMethod)
-          .bold('Sending password reset request for, ' + _email +
-                                    ', validated by ' + verifier + '\n')
-          .gray(txtPath)
-          .info();
+        Lgr.info('Sending password reset request for, ' + _email +
+                                    ', validated by ' + verifier + '\n');
 
         let idx = user.emails.findIndex(element => element.address === _email);
         user.emails[idx].verifier = verifier;
@@ -117,10 +103,8 @@ export default function () {
         mailer.resetPassword(_email, user._id, verifier);
 
       } else {
-        Logger.italic(nameMethod)
-          .bold('Bad password reset request for unrecognized : ' + _email + '\n')
-          .gray(txtPath)
-          .warn();
+        Lgr.info('Bad password reset request for unrecognized : ' + _email + '\n');
+
         throw new Meteor.Error(
           ' UNKNOWN EMAIL ',
           'We can\'t find <' + _email + '> in our files.',
@@ -139,35 +123,26 @@ export default function () {
 
     '_users.hide'(_id) {
       check(_id, String);
-      const nameMethod = '_users.hide' + ' ...';
+      Lgr.a = '_users.hide' + ' ...';
 
       let record = User.findOne(_id);
       record.roles = { headOffice: [ '' ] };
       record.save();
       record.softRemove();
 
-      Logger.italic(nameMethod)
-      .bold('\nHidden : ' + JSON.stringify(record) + '\n')
-      .gray(txtPath)
-      .info();
+      Lgr.info('\nHidden : ' + JSON.stringify(record) + '\n');
     },
 
     '_users.findByEmail'(_email) {
       check(_email, String);
-      const nameMethod = '_users.findByPasswordResetCode' + ' ...';
+      Lgr.a = '_users.findByPasswordResetCode' + ' ...';
 
       const user = Meteor.users.findOne({ 'emails.address': _email });
       if (user) {
-        Logger.italic(nameMethod)
-          .bold('\nFound user : ' + JSON.stringify(user) + '\n')
-          .gray(txtPath)
-          .info();
+        Lgr.info('\nFound user : ' + JSON.stringify(user) + '\n');
         return user;
       }
-      Logger.italic(nameMethod)
-        .bold('\nUser not found : ' + _email + '\n')
-        .gray(txtPath)
-        .warn();
+      Lgr.info('\nUser not found : ' + _email + '\n');
       return null;
 
     },
@@ -175,13 +150,10 @@ export default function () {
     '_users.findByPasswordResetCode'(_code) {
 
       check(_code, String);
-      const nameMethod = '_users.findByPasswordResetCode' + ' ...';
+      Lgr.a = '_users.findByPasswordResetCode' + ' ...';
       const user = Meteor.users.findOne({ 'emails.address': _code });
 
-      Logger.italic(nameMethod)
-        .bold('\nHidden : ' + JSON.stringify(user) + '\n')
-        .gray(txtPath)
-        .info();
+      Lgr.info('\nHidden : ' + JSON.stringify(user) + '\n');
 
       return user;
     },
@@ -190,37 +162,7 @@ export default function () {
 
       check(_email, String);
       Meteor.users.remove({ 'emails.address': _email });
-      // console.log('_users.removeByEmail(' + _email + ') --> User deleted. ');
       return;
     }
   });
 }
-
-/*
-
-{
-    "_id": "W6NbBRXoJ3PYeTJeu",
-    "createdAt" : ISODate("2016-07-03T10:02:47.508Z"),
-    "services": {
-        "password": {
-            "bcrypt": "$2a$10$26caqcdhBll5cgC/f8ZdbuLckO78Ze5bcGPJxtjJPJCV04/3OgK1C"
-        }
-    },
-    "emails": [
-        {
-            "address": "registered@example.com",
-            "verified": false
-        }
-    ],
-    "profile": {
-        "firstName": "Alejandro",
-        "lastName": "Vasquez",
-        "pr": 0
-    },
-    "roles": {
-        "headOffice": [
-            "Registered"
-        ]
-    }
-}
-*/

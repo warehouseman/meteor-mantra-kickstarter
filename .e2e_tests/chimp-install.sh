@@ -38,7 +38,7 @@ function installJava()
   echo "### Java Installed";
 }
 
-function installNpm()
+function installNodeJs()
 {
 
   declare NODEVERSION=$(node -version 2>&1 >/dev/null) >/dev/null;
@@ -97,8 +97,6 @@ function installMeteor()
 
 refreshApt;
 installJava;
-installNpm;
+installNodeJs;
 installChimp;
 installMeteor;
-
-

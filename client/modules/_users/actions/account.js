@@ -1,4 +1,4 @@
-import _lgr from '/lib/Logging/client/clientLogger';
+import _lgr from '/lib/logging/client/clientLogger';
 const Lgr = new _lgr(__filename, 'verbose', true);
 
 export default {

@@ -1,11 +1,12 @@
 import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
-// no other composer
+import {singleComposer} from './single.jsx';
 
-export const addComposer = ({context, clearErrors}, onData) => {
+export const editComposer = ({context, clearErrors}, onData) => {
+
   const {LocalState} = context();
-  const exception = LocalState.get('_colors.ADD_ERROR');
+  const exception = LocalState.get('_colors.UPDATE_ERROR');
 
   onData(null, {exception});
 
@@ -16,12 +17,13 @@ export const addComposer = ({context, clearErrors}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-  submitAction: actions._colors.add,
+  submitAction: actions._colors.update,
   clearErrors: actions._colors.clearErrors,
   context: () => context
 });
 
 export default (component) => composeAll(
-    composeWithTracker(addComposer),
+    composeWithTracker(singleComposer),
+    composeWithTracker(editComposer),
     useDeps(depsMapper)
   )(component);

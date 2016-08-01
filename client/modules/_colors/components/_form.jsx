@@ -30,6 +30,7 @@ export default class extends React.Component {
 
   render() {
 
+    // console.log( 'color component _form.jsx', this.props );
     const {record, exception} = this.props;
 
     const ctx = {poolParty: { age: 21 }};

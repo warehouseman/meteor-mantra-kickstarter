@@ -1,15 +1,21 @@
 import React from 'react';
-import Sidebar from './_sidebar.jsx';
 
-import Authorized from '/client/access_control/acComposer.js';
+import Sidebar from '../containers/sidebar.jsx';
 
-import dataComposer from '../../composers/colors/add.jsx';
-import Component from './_form.jsx';
+import Authorized from '/client/access_control/acContainer.js';
+
+import dataComposer from '../composers/add.jsx';
+import Component from '../components/_form.jsx';
 const Container = dataComposer(Component);
 
 export default class extends React.Component {
 
   render() {
+
+    const apAdd = {module: 'colors', action: 'add'};
+    const accPnts = [ apAdd ];
+    console.log(' ad cont - -   apAdd : ', apAdd);
+
     return (
       <div className="bs-docs-section clearfix">
         <div className="row">
@@ -17,18 +23,19 @@ export default class extends React.Component {
             <Sidebar />
           </div>
           <div className="col-md-9">
-            <Authorized accesspoint='colors.add' warn='true'>
+            <Authorized accesspoints={accPnts} warn='true'>
               <Container />
             </Authorized>
           </div>
         </div>
       </div>
     );
-/*
-            <Authorized accesspoint='colors.update' warn='true'>
-              <Container />
-            </Authorized>
-*/
 
   }
 }
+
+/*
+            <Authorized accesspoints={accPnts} warn='true'>
+              <Container />
+            </Authorized>
+*/

@@ -11,6 +11,7 @@ const cukeTitle = '//x-cuke[@id="title"]';
 const cukeContent = '//x-cuke[@id="content"]';
 
 const cukeHrefEdit = '//a[@data-cuke="edit-color"]';
+const cukeHrefDelete = '//a[@data-cuke="delete-color"]';
 
 const cukeColorsList = '//ul[@data-cuke="colors-list"]';
 
@@ -74,7 +75,7 @@ module.exports = function () {
   let link = '';
   this.Given(/^I have elected to edit the "([^"]*)" item,$/, function (_color) {
     link = '//a[@data-cuke="' + _color + '"]';
-    browser.waitForEnabled( link );
+    browser.waitForExist( link );
     browser.click(link);
     browser.waitForEnabled( cukeHrefEdit );
     browser.click(cukeHrefEdit);
@@ -126,6 +127,49 @@ module.exports = function () {
   });
 
 // =======================================================================
+
+
+//   Scenario: Fail to delete color
+// ------------------------------------------------------------------------
+
+  let color = '';
+  this.Given(/^I have elected to view the "([^"]*)" item,$/, function (_color) {
+    color = _color;
+    const cukeHrefColor = `//a[@data-cuke="${color}"]`;
+
+    browser.waitForEnabled( cukeHrefColor );
+    browser.click( cukeHrefColor );
+
+  });
+
+  let href = null;
+  this.When(/^I elect to delete the item,$/, function () {
+    href = cukeHrefDelete;
+
+    browser.waitForExist( href );
+
+  });
+
+  this.Then(/^I see it is disabled\.$/, function () {
+    expect(browser.isEnabled( href )).toBe(true);
+  });
+
+// =======================================================================
+
+
+
+
+//   Scenario: Unable to update color
+// ------------------------------------------------------------------------
+
+  this.When(/^I attempt to edit the item,$/, function () {
+    href = cukeHrefEdit;
+    browser.waitForExist( href );
+  });
+
+// =======================================================================
+
+
 
 
 //   Scenario: Prohibited from add and from update

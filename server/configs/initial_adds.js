@@ -1,12 +1,11 @@
+
 import {Posts, AccessControl, TrustLevel} from '/lib/collections';
+
 import {Groups} from './initial_users';
 
-import _lgr from '/lib/Logging/server/serverLogger';
+import _lgr from '/lib/logging/server/serverLogger';
 const Lgr = new _lgr( __filename, 'verbose' );
 
-Meteor.startup(() => {
-  // code to run on server at startup
-});
 
 export const initPosts = () => {
   if (!Posts.findOne()) {
@@ -16,6 +15,17 @@ export const initPosts = () => {
       Posts.insert({title, content});
     }
   }
+
+  /* eslint-disable no-multi-spaces */
+  const accessPoints = [];
+  accessPoints.push( [ 'posts', 'update', 'Member',         Groups.defaultGroup ] );
+  accessPoints.push( [ 'posts',    'add', 'Registered',     Groups.defaultGroup ] );
+  /*  eslint-enable no-multi-spaces  */
+
+  _.each(accessPoints, function (ap) {
+    AccessControl.upsertRecord(ap[0], ap[1], TrustLevel[ap[2]], ap[3]);
+  });
+
 };
 
 export const initAccessPoints = () => {
@@ -23,20 +33,22 @@ export const initAccessPoints = () => {
 
   /* eslint-disable no-multi-spaces */
   const accessPoints = [];
-  accessPoints.push( [ 'colors.update', 'Staff',         Groups.defaultGroup ] );
-  accessPoints.push( [    'colors.add', 'Member',        Groups.defaultGroup ] );
-  accessPoints.push( [ 'colors.update', 'Administrator', Groups.subsidiaryGroup ] );
-  accessPoints.push( [    'colors.add', 'Administrator', Groups.subsidiaryGroup ] );
-  /* eslint-enable no-multi-spaces */
+  accessPoints.push( [ 'colors', 'delete', 'Administrator', Groups.defaultGroup ] );
+  accessPoints.push( [ 'colors', 'update', 'Staff',         Groups.defaultGroup ] );
+  accessPoints.push( [ 'colors',    'add', 'Member',        Groups.defaultGroup ] );
+  accessPoints.push( [ 'colors', 'delete', 'Owner',         Groups.subsidiaryGroup ] );
+  accessPoints.push( [ 'colors', 'update', 'Administrator', Groups.subsidiaryGroup ] );
+  accessPoints.push( [ 'colors',    'add', 'Administrator', Groups.subsidiaryGroup ] );
+  /*  eslint-enable no-multi-spaces  */
 
   _.each(accessPoints, function (ap) {
-    AccessControl.upsertRecord(ap[0], TrustLevel[ap[1]], ap[2]);
+    AccessControl.upsertRecord(ap[0], ap[1], TrustLevel[ap[2]], ap[3]);
   });
 
   Lgr.info( ' Claims initialized => ' );
 
   Lgr.verbose( ' Access Point trust level : ',
-    AccessControl.findOne( { key: 'colors.add', group: Groups.defaultGroup } ).level
+    AccessControl.findOne( { module: 'colors', action: 'add', group: Groups.defaultGroup } ).level
   );
 
 };

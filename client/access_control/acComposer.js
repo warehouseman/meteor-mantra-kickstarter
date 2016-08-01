@@ -1,35 +1,40 @@
-import {useDeps, composeAll, composeWithTracker} from 'mantra-core';
+import _lgr from '/lib/logging/client/clientLogger';
+const Lgr = new _lgr( __filename, 'info', true );
 
-import _lgr from '/lib/Logging/client/clientLogger';
-const Lgr = new _lgr( __filename, 'warn', true );
 
-import Authorized from './acComponent.jsx';
+export default ({context, accesspoints}, onData) => {
+  const action = 'Authorization ';
+  Lgr.a = action;
 
-export const composer = ({context, accesspoint}, onData) => {
-  Lgr.a = 'composer';
-  const {Meteor, Collections, App} = context();
+  const {Meteor, Tracker, ACL, LocalState, App} = context();
 
-  Lgr.debug( ' waiting for ready ' );
-  if (Meteor.subscribe('access-points', accesspoint, App.group).ready()) {
-    Lgr.verbose( ' ready ' );
+  // console.log( 'acComposer', accesspoints );
 
-    const authorize = ( _accesspoint ) => {
-      const accessPoint = Collections.AccessControl.findAccessPoint( _accesspoint, App.group );
-      return Roles.userIsInRole(Meteor.userId(), accessPoint.trusted, accessPoint.group);
-    };
+  Lgr.debug( `Container access point ${accesspoints[0]}.` );
 
-    onData(null, {Meteor, authorize});
+
+  let permissions = { };
+
+  if ( LocalState.get('module.colors.subscription') === 'ready' ) {
+
+    accesspoints.forEach( (accesspoint) => {
+      // console.log(accesspoint);
+      ACL.AccessControl.canTrust(
+        {Tracker, LocalState}, Meteor.userId(), accesspoint
+      );
+
+      permissions[accesspoint.module + ':' + accesspoint.action] =
+          LocalState.get(
+            accesspoint.module + ':' + accesspoint.action + ':' +
+            App.group + ':' + Meteor.userId()
+          );
+    });
+
   }
-  Lgr.debug( ' waiting for ready ' );
+
+  Lgr.debug( `Composer allows ${permissions}` );
+  // console.log( 'permissions' , permissions);
+
+  onData(null, {permissions});
 
 };
-
-export const depsMapper = (context, actions) => ({
-  context: () => context,
-  actions: () => actions
-});
-
-export default composeAll(
-  composeWithTracker(composer),
-  useDeps(depsMapper)
-)(Authorized);

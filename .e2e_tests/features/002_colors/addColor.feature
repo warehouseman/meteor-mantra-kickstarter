@@ -39,6 +39,13 @@ Feature: 002 Manage colors
     Then I see the message, "I knew it! It's YOUR fault -- again! [ Remedy : cut the crap ]".
 
   @watch
+  Scenario: Fail to delete color
+    Given I have opened the colors list page : "http://localhost:3000/colors"
+    And I have elected to view the "Pink" item,
+    When I elect to delete the item,
+    Then I see it is disabled.
+
+  @watch
   Scenario: Log in as a registered member
     Given I have opened the login page : "http://localhost:3000/login"
     When I provide my email "registered@example.com" and password "apple_01"
@@ -46,13 +53,14 @@ Feature: 002 Manage colors
     Then I see my user drop-down menu.
 
   @watch
-  Scenario: Update color
+  Scenario: Unable to update color
     Given I have opened the colors list page : "http://localhost:3000/colors"
-    And I have elected to edit the "Pink" item,
-    Then I see the warning "You haven't been authorized to access this page."
+    And I have elected to view the "Pink" item,
+    And I attempt to edit the item,
+    Then I see it is disabled.
 
   @watch
-  Scenario: Create a new color
+  Scenario: Forbidden to create a new color
     Given I have opened the colors editor page : "http://localhost:3000/colors/add"
     Then I see the warning "You haven't been authorized to access this page."
 
@@ -64,7 +72,27 @@ Feature: 002 Manage colors
     Then I see my user drop-down menu.
 
   @watch
+  Scenario: Create a new color
+    Given I have opened the 'add colors' page : "http://localhost:3000/colors/add"
+    When I create a "32" years old "Orange" item with text "Orange is the new Boredom",
+    Then I see a new record with the same title, age and contents.
+
+  @watch
+  Scenario: Unable to update color
+    Given I have opened the colors list page : "http://localhost:3000/colors"
+    And I have elected to view the "Orange" item,
+    When I attempt to edit the item,
+    Then I see it is disabled.
+
+  @watch
+  Scenario: Log in as an administrator
+    Given I have opened the login page : "http://localhost:3000/login"
+    When I provide my email "administrator@example.com" and password "apple_01"
+    And I submit the form
+    Then I see my user drop-down menu.
+
+  @watch
   Scenario: Hide color
     Given I have opened the colors list page : "http://localhost:3000/colors"
-    And I have elected to "delete" the "Pink" item.
+    And I have elected to "delete" the "Orange" item.
     Then I no longer see that color record.

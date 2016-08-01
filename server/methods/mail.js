@@ -1,7 +1,8 @@
+
+
 var nodemailer = require('nodemailer');
 var mg = require('nodemailer-mailgun-transport');
-
-import _lgr from '/lib/Logging/server/serverLogger';
+import _lgr from '/lib/logging/server/serverLogger';
 const Lgr = new _lgr( __filename, 'verbose' );
 
 var auth = {

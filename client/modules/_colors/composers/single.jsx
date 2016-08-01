@@ -1,7 +1,11 @@
 import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
-export const singleComposer = ({context, _id, clearErrors}, onData) => {
+import authComposer from '/client/access_control/acComposer';
+
+export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData) => {
+  // console.log( ' composer/single.jsx', accesspoints );
+
   const {Meteor, Collections, LocalState} = context();
   const error = LocalState.get('_colors.DELETE_ERROR');
   if (Meteor.subscribe('_colors.single', _id).ready()) {
@@ -25,6 +29,7 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
+    composeWithTracker(authComposer),
     composeWithTracker(singleComposer),
     useDeps(depsMapper)
   )(component);

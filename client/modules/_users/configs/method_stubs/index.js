@@ -1,4 +1,4 @@
-import _lgr from '/lib/Logging/client/clientLogger';
+import _lgr from '/lib/logging/client/clientLogger';
 const Lgr = new _lgr(__filename, 'warn', true);
 
 // XXX: Here we can auto generate this file based on the method stubs

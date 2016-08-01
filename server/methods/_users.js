@@ -1,10 +1,16 @@
+
+
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
+
 import {User} from '/lib/user.js';
+
 import mailer from './mail.js';
 
-import _lgr from '/lib/Logging/server/serverLogger';
+import _lgr from '/lib/logging/server/serverLogger';
 const Lgr = new _lgr( __filename, 'verbose' );
+
+
 
 const AllRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
 const numRoles = AllRoles.length;
@@ -33,7 +39,6 @@ export default function () {
         password: String,
         role: String
       });
-
       Lgr.a = '_users.add';
 
       const _idNew = Accounts.createUser( data );

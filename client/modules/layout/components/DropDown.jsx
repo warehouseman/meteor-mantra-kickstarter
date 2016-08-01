@@ -12,18 +12,17 @@ export default ({links = [], name = 'Empty name'}) => (
           link.classes = link.classes ? link.classes : {};
           link.url = link.url ? link.url : '';
           link.name = link.name ? link.name : '';
-          // let classes = classNames(link.classes);
+          let enabled = link.enabled ? 'enabled' : 'disabled';
 
           let response = '';
           if (link.url) {
-            response = <li key={index}><a href={link.url}>{link.name}</a></li>;
+            response = <li key={index} className={enabled}><a href={link.url}>{link.name}</a></li>;
           } else {
-            response = <li key={index}>{link.name}</li>;
+            response = <li key={index} className={enabled}>{link.name}</li>;
           }
           return response;
         })
       }
-
     </ul>
   </li>
 );

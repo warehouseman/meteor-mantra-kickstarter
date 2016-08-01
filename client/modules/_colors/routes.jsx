@@ -6,10 +6,10 @@ import {
   // Simple
 } from '../../configs/theme.jsx';
 
-import ColorsList from './components/colors/collection.jsx';
-import ColorsView from './components/colors/single.jsx';
-import ColorsAdd from './components/colors/add.jsx';
-import ColorsEdit from './components/colors/edit.jsx';
+import ColorsList from './containers/collection.jsx';
+import ColorsView from './containers/single.jsx';
+import ColorsAdd from './containers/add.jsx';
+import ColorsEdit from './containers/edit.jsx';
 
 export default function (injectDeps, {FlowRouter}) {
 

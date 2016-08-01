@@ -1,14 +1,21 @@
 import React from 'react';
-import Sidebar from './_sidebar.jsx';
 
-// import Container from '../../containers/colors/single.jsx';
-import dataComposer from '../../composers/colors/single.jsx';
-import Component from './_single.jsx';
+import Sidebar from '../containers/sidebar.jsx';
+
+
+
+import dataComposer from '../composers/single.jsx';
+import Component from '../components/_single.jsx';
 const Container = dataComposer(Component);
 
 export default class extends React.Component {
 
   render() {
+
+    const apEdit = {module: 'colors', action: 'update'};
+    const apDelete = {module: 'colors', action: 'delete'};
+    const accPnts = [ apEdit, apDelete ];
+
     const {_id} = this.props;
     return (
       <div className="bs-docs-section clearfix">
@@ -17,7 +24,9 @@ export default class extends React.Component {
             <Sidebar />
           </div>
           <div className="col-md-9">
-            <Container _id={_id}/>
+
+            <Container _id={_id} accesspoints={accPnts}/>
+
           </div>
         </div>
       </div>

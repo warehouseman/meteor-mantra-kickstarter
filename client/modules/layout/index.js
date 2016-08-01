@@ -1,13 +1,11 @@
-import initAuthorizations from './configs/authInit';
 import methodStubs from './configs/method_stubs';
 import actions from './actions';
-import routes from './routes.jsx';
+// import routes from './routes.jsx';
 
 export default {
-  routes,
+//  routes,
   actions,
   load(context) {
     methodStubs(context);
-    initAuthorizations(context);
   }
 };

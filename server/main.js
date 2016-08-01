@@ -23,6 +23,6 @@ Meteor.startup(function () {
 
 publications();
 methods();
-addInitialUsers();
 initPosts();
 initAccessPoints();
+addInitialUsers();

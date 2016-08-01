@@ -1,3 +1,5 @@
+
+
 import {Colors, _Colors, AccessControl} from '../../lib/collections';
 
 import App from '/lib/app';
@@ -5,17 +7,24 @@ import App from '/lib/app';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
-import _lgr from '/lib/Logging/server/serverLogger';
+import _lgr from '/lib/logging/server/serverLogger';
 const Lgr = new _lgr( __filename, 'verbose' );
+
+const module = 'colors';
 
 export default function () {
   Meteor.methods({
 
     '_colors.add'(data, _id) {
       Lgr.a = '_colors.add';
+      const action = 'add';
+      const ap = AccessControl.findAccessPoint( module, action, App.group );
 
-      const ap = AccessControl.findAccessPoint( 'colors.add', App.group );
-      const authorized = Roles.userIsInRole(Meteor.userId(), ap.trusted, ap.group);
+      const authorized = Roles.userIsInRole(
+        Meteor.userId(),
+        ap.trusted,
+        ap.group
+      );
 
       Lgr.debug( 'User, ' + Meteor.userId() + ', wants to add a color.');
       if ( authorized ) {
@@ -41,7 +50,7 @@ export default function () {
         return;
       }
 
-      Lgr.warn('Unauthorized attempt to add a color by user : ' + Meteor.userId() + '\n');
+      Lgr.warn(`Unauthorized attempt to add a color by user : ${Meteor.userId()}\n`);
       throw new Meteor.Error(
         ' UNAUTHORIZED ACCESS ATTEMPT',
         'You are not authorized for that action',
@@ -50,6 +59,7 @@ export default function () {
 
     '_colors.update'(data, _id) {
       Lgr.a = '_colors.update';
+      const action = 'add';
       check(data, {
         title: String,
         age: Number,
@@ -57,7 +67,7 @@ export default function () {
       });
       check(_id, String);
 
-      const ap = AccessControl.findAccessPoint( 'colors.update', App.group );
+      const ap = AccessControl.findAccessPoint( module, action, App.group );
       const authorized = Roles.userIsInRole(
         Meteor.userId(),
         ap.trusted,
@@ -85,7 +95,7 @@ export default function () {
         return;
       }
 
-      Lgr.verbose('Unauthorized attempt to edit color by user : ' + Meteor.userId() + '\n');
+      Lgr.verbose(`Unauthorized attempt to edit color by user : ${Meteor.userId()}\n`);
       throw new Meteor.Error(
         ' UNAUTHORIZED ACCESS ATTEMPT',
         'You are not authorized for that action',
@@ -97,7 +107,7 @@ export default function () {
       check(_id, String);
       Lgr.a = '_colors.delete';
 
-      Lgr.info('\nDeleting : ' + JSON.stringify(record) + '\n');
+      Lgr.info(`\nDeleting : ${JSON.stringify(record)}\n`);
 
       let record = Colors.findOne(_id);
       record.remove();
@@ -110,7 +120,7 @@ export default function () {
       let record = Colors.findOne(_id);
       record.softRemove();
 
-      Lgr.info('\nHidden : ' + JSON.stringify(record) + '\n');
+      Lgr.info(`\nHidden : ${JSON.stringify(record)}\n`);
 
     },
 

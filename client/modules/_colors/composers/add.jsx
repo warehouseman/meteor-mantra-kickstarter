@@ -1,13 +1,12 @@
 import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
-import {singleComposer} from './single.jsx';
+export const addComposer = ({context, clearErrors}, onData) => {
 
-export const editComposer = ({context, clearErrors}, onData) => {
   const {LocalState} = context();
-  const exception = LocalState.get('_colors.UPDATE_ERROR');
+  const exception = LocalState.get('_colors.ADD_ERROR');
 
-  onData(null, {exception});
+  onData(null, { exception } );
 
   //    returns clearErrors when unmounting the component
   //    Caution : actions always unmount the component,
@@ -16,13 +15,12 @@ export const editComposer = ({context, clearErrors}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-  submitAction: actions._colors.update,
+  submitAction: actions._colors.add,
   clearErrors: actions._colors.clearErrors,
   context: () => context
 });
 
 export default (component) => composeAll(
-    composeWithTracker(singleComposer),
-    composeWithTracker(editComposer),
+    composeWithTracker(addComposer),
     useDeps(depsMapper)
   )(component);

@@ -1,5 +1,6 @@
-import * as Collections from '../../lib/collections';
+import * as Collections from '/lib/collections';
 
+import ACL from '/lib/access_control';
 import App from '/lib/app';
 
 import {Meteor} from 'meteor/meteor';
@@ -9,6 +10,7 @@ import {Tracker} from 'meteor/tracker';
 
 
 export default function () {
+
   return {
     Meteor,
     FlowRouter,
@@ -16,5 +18,6 @@ export default function () {
     LocalState: new ReactiveDict(),
     Tracker,
     App,
+    ACL
   };
 }

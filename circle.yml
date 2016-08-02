@@ -14,17 +14,16 @@ machine:
 dependencies:
   cache_directories:
     - ~/.meteor
-    - ~/node_modules
     - ~/nvm/versions/node/v4.4.7/bin
     - ~/nvm/versions/node/v4.4.7/lib/node_modules
     - "~/.npm"
-    - "~/_opt"
-    
+
   pre:
     - mkdir -p ~/.meteor
     - sudo mkdir -p /var/log/meteor; sudo chmod a+rwx /var/log/meteor; touch /var/log/meteor/ci4meteor.log
     - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh 2>&1 | cat; fi
     - npm install --no-spin
+    - npm install selenium-standalone@latest -g
     - npm install -g chimp
 
 test:

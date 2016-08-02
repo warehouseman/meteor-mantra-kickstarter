@@ -28,11 +28,6 @@ dependencies:
     - ~/nvm/versions/node/v4.4.7/lib/node_modules
     - "~/.npm"
     - "~/_opt"
-    - "src/.meteor/local/build"
-    - "src/.meteor/local/bundler-cache"
-    - "src/.meteor/local/db"
-    - "src/.meteor/local/isopacks"
-    - "src/.meteor/local/plugin-cache"    
   # Dependencies of the build run before CircleCI's inferred commands
   pre:
     # Prepare TinyTest dependencies
@@ -43,19 +38,19 @@ dependencies:
     # Make a place for meteor logs
     - sudo mkdir -p /var/log/meteor; sudo chmod a+rwx /var/log/meteor; touch /var/log/meteor/ci4meteor.log
     # If Meteor is already cached, do not need to build it again.
-    - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh; fi
+    - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh 2>&1 | cat; fi
     # Cache npm deps
     - npm install --no-spin
     # Prepare Nightwatch dependencies
-        - npm install -g chimp
+    - npm install -g chimp
     #- ./tests/nightwatch/bin/install-nightwatch-dependencies.sh
     # Pull each of our packages and link them into our project
     #- ./packages/obtain_managed_packages.sh
     # ADD_MORE_DEPENDENCY_PREPARATIONS_ABOVE_THIS_LINE
     #
-test:
-  post:
-    - npm run acceptance
+    test:
+      post:
+        - npm run acceptance
 #   # Tests that replace CircleCI's inferred tests
 #   override:
 #     # Perform per package CI Tasks

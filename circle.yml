@@ -8,7 +8,7 @@
 general:
   branches:
     only:
-      - v0.2.1
+      - ci_trial
 
 machine:
   environment:
@@ -44,18 +44,18 @@ dependencies:
     - sudo mkdir -p /var/log/meteor; sudo chmod a+rwx /var/log/meteor; touch /var/log/meteor/ci4meteor.log
     # If Meteor is already cached, do not need to build it again.
     - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh; fi
-    # Prepare Linting dependencies
-    #- if [ ! -d ~/nvm/versions/node/v4.1.0/lib/node_modules/eslint ]; then npm install -gy eslint; fi;
-    #- if [ ! -d ~/nvm/versions/node/v4.1.0/lib/node_modules/eslint-plugin-react ]; then npm install -gy eslint-plugin-react; fi;
-    #- if [ ! -d ~/nvm/versions/node/v4.1.0/lib/node_modules/babel-eslint ]; then npm install -gy babel-eslint; fi;
-    #- if [ ! -d ~/nvm/versions/node/v4.1.0/lib/node_modules/jsdoc ]; then npm install -gy jsdoc; fi;
+    # Cache npm deps
+    - npm install --no-spin
     # Prepare Nightwatch dependencies
+        - npm install -g chimp
     #- ./tests/nightwatch/bin/install-nightwatch-dependencies.sh
     # Pull each of our packages and link them into our project
     #- ./packages/obtain_managed_packages.sh
     # ADD_MORE_DEPENDENCY_PREPARATIONS_ABOVE_THIS_LINE
     #
-# test:
+test:
+  post:
+    - npm run acceptance
 #   # Tests that replace CircleCI's inferred tests
 #   override:
 #     # Perform per package CI Tasks

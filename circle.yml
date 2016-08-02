@@ -1,0 +1,73 @@
+# This is the configuration file for continuous deployment of
+# your project in CircleCi.
+#
+# The full reference is available at :
+#             https://circleci.com/docs/configuration
+#
+
+general:
+  branches:
+    only:
+      - v0.2.1
+
+machine:
+  environment:
+    METEOR_CMD: ${HOME}/.meteor/meteor
+    # ADD_MORE_ENVIRONMENT_VARIABLES_ABOVE_THIS_LINE
+  node:
+    # Can't be certain that this build wlll work with all future versions: so specify.
+    version: 4.4.7
+
+dependencies:
+  # Whatever is written to these directories during one build will be
+  #    restored verbatim on every future build.
+  cache_directories:
+    - ~/.meteor
+    - ~/node_modules
+    - ~/nvm/versions/node/v4.4.7/bin
+    - ~/nvm/versions/node/v4.4.7/lib/node_modules
+    - "~/.npm"
+    - "~/_opt"
+    - "src/.meteor/local/build"
+    - "src/.meteor/local/bundler-cache"
+    - "src/.meteor/local/db"
+    - "src/.meteor/local/isopacks"
+    - "src/.meteor/local/plugin-cache"    
+  # Dependencies of the build run before CircleCI's inferred commands
+  pre:
+    # Prepare TinyTest dependencies
+    # If WebDriver is already cached, do not need to build it again.
+    # - if [ ! -d ${HOME}/node_modules/selenium-webdriver/ ]; then ./tests/tinyTests/ci/installSeleniumWebDriver.sh; else echo "Selenium Webdriver seems to be cached"; fi;
+    # Install  Meteor
+    - mkdir -p ~/.meteor
+    # Make a place for meteor logs
+    - sudo mkdir -p /var/log/meteor; sudo chmod a+rwx /var/log/meteor; touch /var/log/meteor/ci4meteor.log
+    # If Meteor is already cached, do not need to build it again.
+    - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh; fi
+    # Prepare Linting dependencies
+    #- if [ ! -d ~/nvm/versions/node/v4.1.0/lib/node_modules/eslint ]; then npm install -gy eslint; fi;
+    #- if [ ! -d ~/nvm/versions/node/v4.1.0/lib/node_modules/eslint-plugin-react ]; then npm install -gy eslint-plugin-react; fi;
+    #- if [ ! -d ~/nvm/versions/node/v4.1.0/lib/node_modules/babel-eslint ]; then npm install -gy babel-eslint; fi;
+    #- if [ ! -d ~/nvm/versions/node/v4.1.0/lib/node_modules/jsdoc ]; then npm install -gy jsdoc; fi;
+    # Prepare Nightwatch dependencies
+    #- ./tests/nightwatch/bin/install-nightwatch-dependencies.sh
+    # Pull each of our packages and link them into our project
+    #- ./packages/obtain_managed_packages.sh
+    # ADD_MORE_DEPENDENCY_PREPARATIONS_ABOVE_THIS_LINE
+    #
+# test:
+#   # Tests that replace CircleCI's inferred tests
+#   override:
+#     # Perform per package CI Tasks
+#     - ${HOME}/${CIRCLE_PROJECT_REPONAME}/packages/perform_per_package_ci_tasks.sh
+#     # Run all unit tests
+#     - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tests/tinyTests/test-all.sh
+#     # Launch Meteor in background
+#     - ${METEOR_CMD}:
+#           background: true
+#     # Prepare for end to end tests
+#     - mkdir -p ${CIRCLE_TEST_REPORTS}/nightwatch/
+#     # Run all end to end tests
+#     - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tests/nightwatch/runTests.js > ${CIRCLE_TEST_REPORTS}/nightwatch/result.json
+#     # Display end to end tests results
+#     - cat ${CIRCLE_TEST_REPORTS}/nightwatch/result.json | bunyan -o short

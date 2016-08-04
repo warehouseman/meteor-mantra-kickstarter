@@ -11,7 +11,8 @@ notify:
 
 machine:
   environment:
-    _JAVA_OPTIONS: "-Xms512m -Xmx1024m"machine:
+    _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
+  machine:
     METEOR_CMD: ${HOME}/.meteor/meteor 
     CHIMP_PATH: ${HOME}/nvm/versions/node/v4.4.7/lib/node_modules/chimp
   node:

@@ -35,10 +35,12 @@ dependencies:
     - .workarounds/fix.sh
 
   post:
-    - ${METEOR_CMD} --settings=settings.json > meteor.log 2>&1 & :
+    - date > meteor.log
+    - ${METEOR_CMD} --settings=settings.json >> meteor.log 2>&1 & :
         background: true
 
 test:
   post:
+    - sleep 5min
     - chimp .e2e_tests/chimp-config.js --browser=phantomjs --ddp=http://localhost:3000 --path=.e2e_tests
 

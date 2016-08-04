@@ -41,6 +41,6 @@ dependencies:
 
 test:
   post:
-    - sleep 5min
+    - sleep 3m
     - chimp .e2e_tests/chimp-config.js --browser=phantomjs --ddp=http://localhost:3000 --path=.e2e_tests
 

@@ -33,7 +33,7 @@ dependencies:
     - ${METEOR_CMD} npm install
 
   post:
-    - ${METEOR_CMD}:
+    - METEOR_PROFILE=1 METEOR_LOG=debug ${METEOR_CMD} --verbose --settings=settings.json:
         background: true
 
 test:

@@ -27,7 +27,13 @@ dependencies:
     - mkdir -p ~/.meteor
     - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh 2>&1 | cat; fi
     - if [ ! -d ${CHIMP_PATH} ]; then npm install -g chimp --no-progress;  fi
-    - ${METEOR_CMD} --settings=settings.json:
+
+  override:
+    - pwd
+    - ${METEOR_CMD} npm install
+
+  post:
+    - ${METEOR_CMD}:
         background: true
 
 test:

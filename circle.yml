@@ -30,6 +30,7 @@ dependencies:
 
   override:
     - pwd
+    - cp settings.json.example settings.json
     - ${METEOR_CMD} npm install
 
   post:
@@ -37,6 +38,6 @@ dependencies:
         background: true
 
 test:
-  override:
+  post:
     - chimp .e2e_tests/chimp-config.js --browser=phantomjs --ddp=http://localhost:3000 --path=.e2e_tests
 

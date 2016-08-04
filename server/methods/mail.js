@@ -8,11 +8,12 @@ const Lgr = new _lgr( __filename, 'verbose' );
 var auth = {
 /* eslint-disable camelcase   */
   auth: {
-    api_key: Meteor.settings.MAILGUN_KEY,
+    api_key: process.env.MAILGUN_KEY || Meteor.settings.MAILGUN_KEY,
     domain: Meteor.settings.MAILGUN_DOMAIN
   }
 /* eslint-enable camelcase   */
 };
+
 
 let mailer = nodemailer.createTransport(mg(auth));
 

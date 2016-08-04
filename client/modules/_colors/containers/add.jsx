@@ -14,7 +14,7 @@ export default class extends React.Component {
 
     const apAdd = {module: 'colors', action: 'add'};
     const accPnts = [ apAdd ];
-    console.log(' ad cont - -   apAdd : ', apAdd);
+//    console.log(' ad cont - -   apAdd : ', apAdd);
 
     return (
       <div className="bs-docs-section clearfix">

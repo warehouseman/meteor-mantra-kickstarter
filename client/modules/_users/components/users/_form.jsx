@@ -13,8 +13,8 @@ export default class extends React.Component {
       event.preventDefault();
       var values = this.refs.form.getValue();
       if (values) {
-        console.log('submitForm values', values);
-        console.log('submitForm props._id', this.props._id);
+        // console.log('submitForm values', values);
+        // console.log('submitForm props._id', this.props._id);
         if (this.props._id) {
           this.props.submitAction(values, this.props._id);
         } else {
@@ -106,7 +106,7 @@ export default class extends React.Component {
     const formTitle = _id ? 'Edit ' + email : 'Add new record';
     const buttonLabel = 'Save';
 
-    console.log('_users/components/users/_form.jsx --> exception :', exception);
+//    console.log('_users/components/users/_form.jsx --> exception :', exception);
 
     return (
       <div>

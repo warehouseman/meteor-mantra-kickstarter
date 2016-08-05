@@ -1,5 +1,3 @@
-
-
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
@@ -8,9 +6,7 @@ import {User} from '/lib/user.js';
 import mailer from './mail.js';
 
 import _lgr from '/lib/logging/server/serverLogger';
-const Lgr = new _lgr( __filename, 'verbose' );
-
-
+const Lgr = new _lgr( __filename, 'warn' );
 
 const AllRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
 const numRoles = AllRoles.length;

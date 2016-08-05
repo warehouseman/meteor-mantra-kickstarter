@@ -4,7 +4,7 @@ import {Posts, AccessControl, TrustLevel} from '/lib/collections';
 import {Groups} from './initial_users';
 
 import _lgr from '/lib/logging/server/serverLogger';
-const Lgr = new _lgr( __filename, 'verbose' );
+const Lgr = new _lgr( __filename, 'warn' );
 
 
 export const initPosts = () => {

@@ -8,7 +8,7 @@ import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
 import _lgr from '/lib/logging/server/serverLogger';
-const Lgr = new _lgr( __filename, 'verbose' );
+const Lgr = new _lgr( __filename, 'warn' );
 
 const module = 'colors';
 

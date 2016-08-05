@@ -7,9 +7,9 @@ Please make sure you read [Mantra Specification](https://kadirahq.github.io/mant
 
 [![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/ci_trial.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/ci_trial)
 
-[![Dependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter)
+[![Dependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/ci_trial/status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/ci_trial)
 
-[![devDependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/dev-status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter?type=dev)
+[![devDependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/ci_trial/dev-status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/ci_trial?type=dev)
 
 [![Join the chat at https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter)
 

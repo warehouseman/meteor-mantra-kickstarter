@@ -2,8 +2,8 @@ module.exports = {
 
   // - - - - WEBDRIVER-IO  - - - -
   webdriverio: {
-    waitforTimeout: 10000,
-    waitforInterval: 10000,
+    waitforTimeout: 15000,
+    waitforInterval: 15000,
   },
 
 };

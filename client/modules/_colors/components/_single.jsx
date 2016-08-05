@@ -1,6 +1,6 @@
 import React from 'react';
 import _lgr from '/lib/logging/client/clientLogger';
-const Lgr = new _lgr( __filename, 'debug', true );
+const Lgr = new _lgr( __filename, 'warn', true );
 
 
 export default class extends React.Component {

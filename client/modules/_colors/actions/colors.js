@@ -1,5 +1,5 @@
 import _lgr from '/lib/logging/client/clientLogger';
-const Lgr = new _lgr(__filename, 'verbose', true);
+const Lgr = new _lgr(__filename, 'warn', true);
 
 export default {
 

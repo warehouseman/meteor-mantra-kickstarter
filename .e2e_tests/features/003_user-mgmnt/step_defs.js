@@ -50,8 +50,11 @@ module.exports = function () {
   });
 
   this.When(/^I submit the form$/, function () {
+    console.log(' Submitting form . . . ');
     browser.submitForm(cukeFrmSubmit);
+    console.log('  . . . submitted form. Waiting for account page ...');
     browser.waitForExist(cukeAccountPage);
+    console.log('  . . . found account page.');
   });
 
   this.Then(/^I see my user drop\-down menu\.$/, function () {

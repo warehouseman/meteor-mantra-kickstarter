@@ -3,7 +3,7 @@
 general:
   branches:
     only:
-      - ci_trial
+      - v0.2.1
 
 notify:
   webhooks:

@@ -25,7 +25,7 @@ export default class extends React.Component {
     return (
       <ul className="nav navbar-nav navbar-right">
         <li><a href="/register">Register</a></li>
-        <li><a href="/login">Login</a></li>
+        <li><a data-cuke='user-control-login' href="/login">Login</a></li>
       </ul>
     );
   }

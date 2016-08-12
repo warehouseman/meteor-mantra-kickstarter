@@ -29,7 +29,8 @@
     "mocha": "3.0.1",
     "react-addons-test-utils": "~15.3.0",
     "sinon": "1.17.x",
-    "jsdom": "9.x.x"
+    "jsdom": "9.x.x",
+    "chimp": "^0.39.3"
   },
   "dependencies": {
     "classnames": "2.2.5",

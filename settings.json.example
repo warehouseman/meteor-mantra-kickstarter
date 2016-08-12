@@ -1,16 +1,18 @@
 {
   "HOST_URI": "localhost:3000",
-  "MAILGUN_DOMAIN": "yourhost.yourpublic.work",
+  "MAILGUN_DOMAIN": "yourpublic.work",
   "MAILGUN_KEY": "(As if I'm gonna to leave THAT lying around.)  A valid key has 36 characters and begins with 'key-'.",
-  "PASSWORD_RESET": {
-    "Route": "/prrq/",
-    "Html_1": "<b>If you did not request a password reset just ignore this.</b><br /><b>If you did request it, then please click <a href='http://",
-    "Html_2": "'>this link</a> to open your password reset page.",
-    "Text_1": "If you did not request a password reset just ignore this.\nIf you did request it, then please go to http://",
-    "Text_2": " in order to reset your password.",
-    "Subject": "Your Mantra Kickstarter password reset request",
-    "From": "yourself@yourpublic.work"
-  },
   "LOGGLY_SUBDOMAIN": "yourwork",
-  "LOGGLY_TOKEN": " ( not this either ) "
+  "LOGGLY_TOKEN": " ( not this either ) ",
+  "public": {
+    "PASSWORD_RESET": {
+      "Route": "/prrq/",
+      "Html_1": "<b>If you did not request a password reset just ignore this.</b><br /><b>If you did request it, then please click <a href='http://",
+      "Html_2": "'>this link</a> to open your password reset page.",
+      "Text_1": "If you did not request a password reset just ignore this.\nIf you did request it, then please go to http://",
+      "Text_2": " in order to reset your password.",
+      "Subject": "Your Mantra Kickstarter password reset request",
+      "From": "yourself@yourpublic.work"
+    }
+  }
 }

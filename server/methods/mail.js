@@ -14,7 +14,6 @@ var auth = {
 /* eslint-enable camelcase   */
 };
 
-
 let mailer = nodemailer.createTransport(mg(auth));
 
 mailer.resetPassword = function resetPassword(_email, _id, _validator) {

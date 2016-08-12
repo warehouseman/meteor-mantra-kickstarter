@@ -4,6 +4,8 @@ const cukeFrmSubmit = '//form[@data-cuke="login"]';
 
 const urlLogout = 'http://localhost:3000/logout';
 const cukeLogin = '//x-cuke[@id="login"]';
+
+const cukeHrefLogin = '//a[@data-cuke="user-control-login"]';
 const cukeInpEmail = '//input[@data-cuke="email"]';
 const cukeInpPwd = '//input[@data-cuke="password"]';
 
@@ -41,6 +43,8 @@ module.exports = function () {
 
     server.call('_users.removeByEmail', 'jj@gmail.com');
 
+    browser.waitForVisible(cukeHrefLogin);
+
   });
 
   this.When(/^I provide my email "([^"]*)" and password "([^"]*)"$/, function (_email, _pwd) {
@@ -50,11 +54,8 @@ module.exports = function () {
   });
 
   this.When(/^I submit the form$/, function () {
-    console.log(' Submitting form . . . ');
     browser.submitForm(cukeFrmSubmit);
-    console.log('  . . . submitted form. Waiting for account page ...');
     browser.waitForExist(cukeAccountPage);
-    console.log('  . . . found account page.');
   });
 
   this.Then(/^I see my user drop\-down menu\.$/, function () {
@@ -172,11 +173,10 @@ module.exports = function () {
   });
 
   this.Then(/^I no longer see that user record\.$/, function () {
-
     browser.waitUntil(function () {
+      console.log('still there?');
       return !browser.isExisting(selector);
-    }, 5000, `expected ${selector} to disappear within 5s`);
-
+    }, 10000, ' what the?', 2000);
     expect(browser.isExisting(selector) ? email : 'Gone').toBe('Gone');
 
   });

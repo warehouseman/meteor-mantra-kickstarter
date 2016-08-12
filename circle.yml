@@ -47,5 +47,5 @@ test:
   post:
     - node --version; npm --version; java -version; ${METEOR_CMD} --version;
     - sleep 3m
-    - chimp .e2e_tests/chimp-config.js --browser=phantomjs --ddp=http://localhost:3000 --debug --path=.e2e_tests
+    - chimp .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
 

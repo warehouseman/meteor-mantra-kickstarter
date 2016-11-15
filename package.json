@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "babel-core": "6.x.x",
-    "babel-eslint": "6.x.x",
-    "babel-plugin-react-require": "2.x.x",
+    "babel-eslint": "7.x.x",
+    "babel-plugin-react-require": "3.x.x",
     "babel-polyfill": "6.x.x",
     "babel-preset-es2015": "6.x.x",
     "babel-preset-react": "6.x.x",
@@ -26,13 +26,14 @@
     "enzyme": "^2.3.0",
     "eslint": "^3.2.2",
     "eslint-plugin-react": "^6.0.0",
-    "mocha": "3.0.1",
+    "mocha": "3.1.2",
     "react-addons-test-utils": "~15.3.0",
     "sinon": "1.17.x",
     "jsdom": "9.x.x",
-    "chimp": "^0.39.3"
+    "chimp": "^0.41.2"
   },
   "dependencies": {
+    "babel-runtime": "^6.18.0",
     "classnames": "2.2.5",
     "domready": "^1.0.8",
     "formsy-react": "0.18.1",

@@ -7,22 +7,23 @@ function refreshApt()
 {
   if [[ -f ${FLAG} ]]; then
     declare -i LAPSE=$(expr $(date +%s) - $(date +%s -r /tmp/updatedApt ));
-    if (( LAPSE < 90000 )); then 
+    if (( LAPSE < 90000 )); then
       echo "### APT is up to date.";
       return;
     fi;
   fi
 
   echo "### Update APT";
-	sudo apt-get -y update && \
-	sudo apt-get -y upgrade && \
-	sudo apt-get -y dist-upgrade && \
-	sudo apt-get -y clean && \
-	sudo apt-get -y autoremove;
-	
-	sudo apt-get -y install curl git;
-	
-	touch ${FLAG};
+  sudo apt-get -y update && \
+  sudo apt-get -y upgrade && \
+  sudo apt-get -y dist-upgrade && \
+  sudo apt-get -y clean && \
+  sudo apt-get -y autoremove;
+
+  sudo apt-get -y install curl git;
+  sudo apt-get -y install build-essential g++;
+
+  touch ${FLAG};
   echo "### APT Updated";
 }
 #
@@ -49,10 +50,10 @@ function installNodeJs()
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get install -y nodejs;
 
-    
+
   fi
 
-  mkdir -p ~/.npm-global; 
+  mkdir -p ~/.npm-global;
   ADD2PROFILE=$(cat ~/.profile | grep -c ".npm-global");
   if [[ "${ADD2PROFILE}" -lt "1" ]]; then
      echo -e "export PATH=~/.npm-global/bin:\$PATH\n" >> ~/.profile
@@ -79,19 +80,24 @@ function installChimp()
 
 function installMeteor()
 {
-  declare METEORVERSION=$(meteor --version 2>&1 >/dev/null) >/dev/null;
-  if [[ "${METEORVERSION#*$NOCOMMAND}" != "$METEORVERSION" ]]; then
+  local INSTALL_METEOR="yes";
+  if [[ -d "${HOME}/.meteor/packages/meteor-tool" ]]; then
+	  declare METEORVERSION=$(meteor --version  2>&1);
+	  if [[ "${METEORVERSION#*$NOCOMMAND}" == "$METEORVERSION" ]]; then
+      INSTALL_METEOR="no";
+	  fi
+  fi
 
+  if [[ "${INSTALL_METEOR}" == "yes" ]]; then
     echo "### Installing Meteor";
     curl https://install.meteor.com/ | sh;
-    echo " The 'meteor-tool' installation sometimes hangs up.  Give it 10 minutes or so, then cancel and retry ...";
-
   fi
+
   echo "### Meteor Installed";
   meteor --version;
 
   echo "### Installing npm packages for Meteor";
-  npm -y install;
+  meteor npm -y install;
 
 }
 
@@ -100,3 +106,12 @@ installJava;
 installNodeJs;
 installChimp;
 installMeteor;
+
+echo -e "
+
+  Next steps :
+     1) cp settings.json.example settings.json
+     2) # Correctly configure 'settings.json'
+     3) meteor --settings=settings.json
+     ";
+

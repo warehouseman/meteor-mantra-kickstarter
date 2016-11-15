@@ -12,9 +12,9 @@ notify:
 machine:
   environment:
     _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
-    METEOR_CMD: ${HOME}/.meteor/meteor 
-    CHIMP_PATH: /opt/circleci/nodejs/v4.4.7/lib/node_modules/chimp
-    CHIMP_CMD: /opt/circleci/nodejs/v4.4.7/lib/node_modules/chimp/bin/chimp.js
+    METEOR_CMD: ${HOME}/.meteor/meteor
+    CHIMP_PATH: ./node_modules/.bin/
+    CHIMP_CMD: ./node_modules/.bin/chimp
 
   node:
     version: 4.4.7
@@ -30,7 +30,7 @@ dependencies:
     - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh 2>&1 | cat; fi
     - ls -l /opt/circleci/nodejs/v4.4.7/lib/node_modules
 #    - if [ ! -d ${CHIMP_PATH} ]; then npm install -g chimp --no-progress;  fi
-    - npm install -g chimp --no-progress;
+#    - npm install chimp --no-progress;
 
   override:
     - pwd
@@ -47,5 +47,6 @@ test:
   post:
     - node --version; npm --version; java -version; ${METEOR_CMD} --version;
     - sleep 3m
-    - chimp .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
+#    - chimp .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
+    - ${CHIMP_CMD} .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
 

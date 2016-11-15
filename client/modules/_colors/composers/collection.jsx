@@ -1,8 +1,6 @@
 import {useDeps} from 'react-simple-di';
 import {composeWithTracker, composeAll} from 'react-komposer';
 
-// import authComposer from '/client/access_control/Authorize';
-
 export const collectionComposer = ({context}, onData) => {
 
   const accessPoint = {module: 'colors', action: 'add'};

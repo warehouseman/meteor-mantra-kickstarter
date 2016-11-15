@@ -3,7 +3,7 @@
 general:
   branches:
     only:
-      - v0.2.1
+      - trunk
 
 notify:
   webhooks:

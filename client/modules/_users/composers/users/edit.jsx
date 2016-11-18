@@ -1,5 +1,6 @@
 import {useDeps} from 'react-simple-di';
-import {composeWithTracker, composeAll} from 'react-komposer';
+import {composeAll} from 'react-komposer';
+import composeWithTracker from '../../../../../lib/compose-with-tracker.js';
 
 import {singleComposer} from './single.jsx';
 

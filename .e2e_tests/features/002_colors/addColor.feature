@@ -21,7 +21,7 @@ Feature: 002 Manage colors
     And I have elected to edit the "Pink" item,
     When I set 'Age' to "12"
     And I save the item,
-    Then I see the validation hint "Nope. 12 is too young, Pool Party Age : 21".
+    Then I see the age validation hint "Nope. 12 is too young, Pool Party Age : 21".
 
   @watch
   Scenario: Update color
@@ -95,4 +95,4 @@ Feature: 002 Manage colors
   Scenario: Hide color
     Given I have opened the colors list page : "http://localhost:3000/colors"
     And I have elected to "delete" the "Orange" item.
-    Then I no longer see that color record.
+    Then I no longer see that record.

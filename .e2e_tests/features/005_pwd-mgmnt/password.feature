@@ -1,4 +1,4 @@
-Feature: 004 Password Management
+Feature: 005 Password Management
   As an authorized user
   I need to reset my password
 

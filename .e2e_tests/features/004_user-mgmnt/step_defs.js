@@ -28,9 +28,10 @@ const xCukeRole = '//x-cuke[@id="role"]';
 
 const cukeUserListPage = '//x-cuke[@id="user-list"]';
 
-let myEmail = '';
+// let myEmail = '';
 module.exports = function () {
 
+/*
 //  Scenario: Log in as administrator
 // ------------------------------------------------------------------------
 
@@ -63,7 +64,7 @@ module.exports = function () {
     expect(idAcct).toEqual(myEmail);
   });
 // =======================================================================
-
+*/
 
 //   Scenario: Create a new user
 // ------------------------------------------------------------------------

@@ -35,26 +35,17 @@ export default class extends React.Component {
         <p>
           <x-cuke id="content">{record.content}</x-cuke>
           <br />
-          <a data-cuke='edit-color' href={'/colors/' + _id + '/edit'}
+          <a data-cuke='edit-item' href={'/colors/' + _id + '/edit'}
                                                         className={ editAllowed }>
             edit
           </a>
           &nbsp;|&nbsp;
-          <a data-cuke='delete-color' href="#" onClick={this.hideRecord.bind(this)}
+          <a data-cuke='delete-item' href="#" onClick={this.hideRecord.bind(this)}
                                                         className={ deleteAllowed }>
             delete
           </a>
         </p>
       </div>
     );
-/*
-          <Authorized accesspoint='colors.update'>
-            <a data-cuke='edit-color' href={'/colors/' + _id + '/edit'}>edit</a> |&nbsp;
-          </Authorized>
-          <Authorized accesspoint='colors.update'>
-            <a data-cuke='delete-color' href="#" onClick={this.hideRecord.bind(this)}>delete</a>
-          </Authorized>
-*/
-
   }
 }

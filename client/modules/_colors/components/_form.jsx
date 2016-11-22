@@ -103,7 +103,7 @@ export default class extends React.Component {
 
           />
         <button
-          data-cuke="save-color" className="btn btn-primary"
+          data-cuke="save-item" className="btn btn-primary"
           onClick={this.submitForm}>{buttonLabel}
         </button>
 

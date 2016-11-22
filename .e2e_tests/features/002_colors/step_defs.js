@@ -1,6 +1,6 @@
 /* eslint-disable no-undef   */
 
-const cukeBtnSubmit = '//button[@data-cuke="save-color"]';
+const cukeBtnSubmit = '//button[@data-cuke="save-item"]';
 
 const cukeInpAge = '//input[@data-cuke="age"]';
 const cukeInpTitle = '//input[@data-cuke="title"]';
@@ -10,16 +10,9 @@ const cukeAge = '//x-cuke[@id="age"]';
 const cukeTitle = '//x-cuke[@id="title"]';
 const cukeContent = '//x-cuke[@id="content"]';
 
-const cukeHrefEdit = '//a[@data-cuke="edit-color"]';
-const cukeHrefDelete = '//a[@data-cuke="delete-color"]';
-
 const cukeColorsList = '//ul[@data-cuke="colors-list"]';
 
 const cukeInvalidAge = '//span[@class="help-block error-block"]';
-
-const cukeBadContent = '//div[@data-cuke="bad-content"]';
-
-const cukeWarning = '//x-cuke[@id="warning"]';
 
 let age = '';
 let title = '';
@@ -51,7 +44,6 @@ module.exports = function () {
       browser.setValue(cukeInpContent, content);
 
       browser.click(cukeBtnSubmit);
-      // browser.waitForEnabled(cukeHrefEdit);
 
     });
 
@@ -72,6 +64,7 @@ module.exports = function () {
     browser.url(_url);
   });
 
+/*
   let link = '';
   this.Given(/^I have elected to edit the "([^"]*)" item,$/, function (_color) {
     link = '//a[@data-cuke="' + _color + '"]';
@@ -80,49 +73,14 @@ module.exports = function () {
     browser.waitForEnabled( cukeHrefEdit );
     browser.click(cukeHrefEdit);
   });
+*/
 
   this.When(/^I set 'Age' to "([^"]*)"$/, function (_age) {
     browser.setValue(cukeInpAge, _age);
   });
 
-  this.When(/^I save the item,$/, function () {
-    browser.click(cukeBtnSubmit);
-  });
-
-  this.Then(/^I see the validation hint "([^"]*)"\.$/, function (_message) {
+  this.Then(/^I see the age validation hint "([^"]*)"\.$/, function (_message) {
     expect(browser.getText(cukeInvalidAge)).toEqual(_message);
-  });
-
-
-  this.When(/^I save the item with new content "([^"]*)",$/, function (_content) {
-    content = _content;
-    browser.setValue(cukeInpContent, content);
-    browser.click(cukeBtnSubmit);
-  });
-
-  this.Then(/^I see the record with the new content\.$/, function () {
-    browser.waitForEnabled( cukeTitle );
-    expect(browser.getText(cukeContent)).toEqual(content);
-  });
-
-// =======================================================================
-
-
-//   Scenario: Fail to update color
-// ------------------------------------------------------------------------
-
-  // this.When(/^I save the item with unsuitable content "([^"]*)",$/, function (_badContent) {
-  //   browser.setValue(cukeInpContent, _badContent);
-  //   browser.click(cukeBtnSubmit);
-  // });
-
-  this.Then(/^I see the message, "([^"]*)"\.$/, function (rude) {
-    browser.waitUntil(function () {
-      return browser.getText(cukeBadContent).length > 0;
-    }, 5000, 'expected text to be there after 5s');
-
-    const msg = browser.getText(cukeBadContent);
-    expect( msg ).toEqual(rude);
   });
 
 // =======================================================================
@@ -141,18 +99,6 @@ module.exports = function () {
 
   });
 
-  let href = null;
-  this.When(/^I elect to delete the item,$/, function () {
-    href = cukeHrefDelete;
-
-    browser.waitForExist( href );
-
-  });
-
-  this.Then(/^I see it is disabled\.$/, function () {
-    expect(browser.isEnabled( href )).toBe(true);
-  });
-
 // =======================================================================
 
 
@@ -160,12 +106,12 @@ module.exports = function () {
 
 //   Scenario: Unable to update color
 // ------------------------------------------------------------------------
-
+/*
   this.When(/^I attempt to edit the item,$/, function () {
     href = cukeHrefEdit;
     browser.waitForExist( href );
   });
-
+*/
 // =======================================================================
 
 
@@ -183,29 +129,34 @@ module.exports = function () {
     browser.url(_url);
   });
 
+/*
   this.Then(/^I see the warning "([^"]*)"$/, function (_warning) {
     expect(_warning).toEqual(browser.getText(cukeWarning));
   });
+*/
 // =======================================================================
 
 
-//   Scenario: Hide color
+//   Scenario: Hide item
 // ------------------------------------------------------------------------
-  this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _color) {
-    link = '//a[@data-cuke="' + _color + '"]';
+/*
+  this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _item) {
+    link = '//a[@data-cuke="' + _item + '"]';
     browser.waitForEnabled( link );
     browser.click(link);
-    let cukeHrefCmd = '//a[@data-cuke="' + _cmd + '-color"]';
+    let cukeHrefCmd = '//a[@data-cuke="' + _cmd + '-item"]';
 
     browser.waitForEnabled( cukeHrefCmd );
     browser.click( cukeHrefCmd );
 
   });
+*/
 
+/*
   this.Then(/^I no longer see that color record\.$/, function () {
     browser.waitForEnabled( cukeColorsList );
     let item = browser.elements(link);
     expect(item.value.length).toEqual(0);
   });
-
+*/
 };

@@ -1,6 +1,5 @@
 import {useDeps} from 'react-simple-di';
-import {composeAll} from 'react-komposer';
-import composeWithTracker from '../../../../../lib/compose-with-tracker.js';
+import { composeAll, composeWithTracker } from 'mantra-core';
 // import _ from 'lodash';
 
 export const singleComposer = ({context, _id, clearErrors}, onData) => {

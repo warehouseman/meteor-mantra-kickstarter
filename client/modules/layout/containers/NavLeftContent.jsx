@@ -10,7 +10,8 @@ export default class extends React.Component {
 
     const apAddPosts = {module: 'posts', action: 'add'};
     const apAddColors = {module: 'colors', action: 'add'};
-    const accPnts = [ apAddColors, apAddPosts ];
+    const apAddWidgets = {module: 'widgets', action: 'add'};
+    const accPnts = [ apAddPosts, apAddColors, apAddWidgets ];
 
     return (
             <Container accesspoints={accPnts}/>

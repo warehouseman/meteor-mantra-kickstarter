@@ -28,8 +28,8 @@ export const initPosts = () => {
 
 };
 
-export const initAccessPoints = () => {
-  Lgr.a = 'initAccessPoints';
+export const initColors = () => {
+  Lgr.a = 'initColors';
 
   /* eslint-disable no-multi-spaces */
   const accessPoints = [];
@@ -49,6 +49,31 @@ export const initAccessPoints = () => {
 
   Lgr.verbose( ' Access Point trust level : ',
     AccessControl.findOne( { module: 'colors', action: 'add', group: Groups.defaultGroup } ).level
+  );
+
+};
+
+export const initWidgets = () => {
+  Lgr.a = 'initWidgets';
+
+  /* eslint-disable no-multi-spaces */
+  const accessPoints = [];
+  accessPoints.push( [ 'widgets', 'delete', 'Administrator', Groups.defaultGroup ] );
+  accessPoints.push( [ 'widgets', 'update', 'Staff',         Groups.defaultGroup ] );
+  accessPoints.push( [ 'widgets',    'add', 'Member',        Groups.defaultGroup ] );
+  accessPoints.push( [ 'widgets', 'delete', 'Owner',         Groups.subsidiaryGroup ] );
+  accessPoints.push( [ 'widgets', 'update', 'Administrator', Groups.subsidiaryGroup ] );
+  accessPoints.push( [ 'widgets',    'add', 'Administrator', Groups.subsidiaryGroup ] );
+  /*  eslint-enable no-multi-spaces  */
+
+  _.each(accessPoints, function (ap) {
+    AccessControl.upsertRecord(ap[0], ap[1], TrustLevel[ap[2]], ap[3]);
+  });
+
+  Lgr.info( ' Claims initialized => ' );
+
+  Lgr.verbose( ' Access Point trust level : ',
+    AccessControl.findOne( { module: 'widgets', action: 'add', group: Groups.defaultGroup } ).level
   );
 
 };

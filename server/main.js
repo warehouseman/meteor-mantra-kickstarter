@@ -1,7 +1,8 @@
 import publications from './publications';
 import methods from './methods';
 import addInitialUsers from './configs/initial_users.js';
-import { initPosts, initAccessPoints } from './configs/initial_adds.js';
+import { initPosts, initColors, initWidgets } from './configs/initial_adds.js';
+
 
 Meteor.startup(function () {
 
@@ -34,5 +35,6 @@ Meteor.startup(function () {
 publications();
 methods();
 initPosts();
-initAccessPoints();
+initColors();
+initWidgets();
 addInitialUsers();

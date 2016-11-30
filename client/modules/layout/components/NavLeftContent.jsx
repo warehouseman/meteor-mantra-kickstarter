@@ -17,9 +17,11 @@ export default class extends React.Component {
 
     const enablePostsAdd = this.props.permissions['posts:add'];
     const enableColorsAdd = this.props.permissions['colors:add'];
+    const enableWidgetsAdd = this.props.permissions['widgets:add'];
 
-    Lgr.verbose(`enableColorsAdd permitted? : ${enableColorsAdd}`);
     Lgr.verbose(`enablePostsAdd permitted? : ${enablePostsAdd}.`);
+    Lgr.verbose(`enableColorsAdd permitted? : ${enableColorsAdd}`);
+    Lgr.verbose(`enableWidgetsAdd permitted? : ${enableWidgetsAdd}`);
 
     var linksAdmin = [];
     linksAdmin.push({ url: '/users', name: '/users', enabled: true} );
@@ -37,9 +39,14 @@ export default class extends React.Component {
     linksColors.push({ url: '/colors', name: '/colors', enabled: true } );
     linksColors.push({ url: '/colors/add', name: '/colors/add', enabled: enableColorsAdd } );
 
-    let navColors = React.createElement(DropDown, { name: 'Colors', links: linksColors });
+    var linksWidgets = [];
+    linksWidgets.push({ url: '/widgets', name: '/widgets', enabled: true } );
+    linksWidgets.push({ url: '/widgets/add', name: '/widgets/add', enabled: enableWidgetsAdd } );
+
     let navAccounts = React.createElement(DropDown, {name: 'Accounts', links: linksAccounts });
     let navAdmin = React.createElement(DropDown, { name: 'Admin', links: linksAdmin });
+    let navColors = React.createElement(DropDown, { name: 'Colors', links: linksColors });
+    let navWidgets = React.createElement(DropDown, { name: 'Widgets', links: linksWidgets });
 
     return (
 
@@ -56,6 +63,7 @@ export default class extends React.Component {
         </li>
 
         { navColors }
+        { navWidgets }
         { navAccounts }
         { Meteor.userId() ? navAdmin : null }
 

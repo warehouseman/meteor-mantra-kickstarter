@@ -10,10 +10,18 @@ import _colorsModule from './modules/_colors';
 
 import _layoutModule from './modules/layout';
 
-// import logging from '/lib/log_control';
+import Logger from '/lib/logging/client/clientLogger';
+import { LayoutDefault } from './configs/theme.jsx';
+import AccessControlComposer from './access_control/acComposer';
+import Authorized from './access_control/acContainer.js';
 
+import { Client as _widget } from 'mmks_widget';
+
+
+/* eslint-disable no-console   */
 // init context
 const context = initContext();
+
 
 // create app
 const app = createApp(context);
@@ -22,6 +30,13 @@ app.loadModule(commentsModule);
 app.loadModule(_usersModule);
 app.loadModule(_colorsModule);
 app.loadModule(_layoutModule);
-// app.loadModule(logging);
+
+let Widget = _widget.new({
+  Logger,
+  LayoutDefault,
+  AccessControlComposer,
+  Authorized
+});
+app.loadModule(Widget);
 
 app.init();

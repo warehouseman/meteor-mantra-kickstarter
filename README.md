@@ -11,7 +11,6 @@ Please make sure you read [Mantra Specification](https://kadirahq.github.io/mant
 [![Code Climate](https://codeclimate.com/github/warehouseman/meteor-mantra-kickstarter/badges/gpa.svg)](https://codeclimate.com/github/warehouseman/meteor-mantra-kickstarter)
 
 ### Features
-
 * follows mantra feature specific modules approach, if interested please join an [ongoing discussion here](https://github.com/kadirahq/mantra/issues/3)
 
 * formsy-react for user login, registration and password forms [formsy-react](https://github.com/christianalfoni/formsy-react) and [formsy-react-components](https://github.com/twisty/formsy-react-components)

@@ -1,7 +1,5 @@
-// import ColorSingle from '../components/ColorsSingle/index.jsx';
 import {useDeps} from 'react-simple-di';
-import {composeAll} from 'react-komposer';
-import composeWithTracker from '../../../../../lib/compose-with-tracker.js';
+import { composeAll, composeWithTracker } from 'mantra-core';
 
 export const composer = ({context}, onData) => {
   const {Meteor} = context();

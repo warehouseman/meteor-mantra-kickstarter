@@ -12,6 +12,7 @@ export default class extends React.Component {
   render() {
     Lgr.a = 'render ';
 
+    // console.log( ' side bar component : props ', this.props );
     // console.log( ' side bar component : permissions ', this.props.permissions );
 
     const enableColorsAdd = this.props.permissions['colors:add'];

@@ -9,6 +9,8 @@ This a starter app for Meteor developers who want to structure their work accord
 
 Please feel welcome to comment on any experience you have with it [here](https://talk.mantrajs.com/) ( and previously [ongoing discussion here](https://github.com/kadirahq/mantra/issues/3) )
 
+[![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk)  [![Dependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk/status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk)  [![devDependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk/dev-status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk?type=dev)  [![Join the chat at https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 ### Features
 
 You get :
@@ -16,7 +18,7 @@ You get :
 * a thoroughly tested application from which to launch your apllication development
 * [single command installation](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/install_all.sh) of all dependencies and support services
 * full [end to end, functional testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
-* continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter) 
+* continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter) Latest build result :: [![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk)
 * [unit testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon
 * client side **and** server side [logging](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/lib/logging) to Loggly:
     * [logatim](https://github.com/sospedra/logatim): isomorphic multilevel logging, that feeds into 

@@ -1,5 +1,5 @@
 
-# meteor-mantra-kickstarter
+# Meteor Mantra Kickstarter
 
 ![screen register](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/public/screens/register.png)
 

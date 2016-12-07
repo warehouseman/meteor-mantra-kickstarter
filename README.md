@@ -1,82 +1,180 @@
 
 # meteor-mantra-kickstarter
 
-### bring your meteor mantra development up to speed
+![screen register](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/public/screens/register.png)
 
-Please make sure you read [Mantra Specification](https://kadirahq.github.io/mantra/) and visit the [official repository](https://github.com/kadirahq/mantra). Keep in mind that Mantra is an approach to application architecture rather than a framework. It is supposed to keep our options open and not lock us in to any particular library, we are free to choose how manage routing, state management and data-binding. In other words bring your own toolkit: flow router / react router GraphQL, Redux or any other shiny new thing.
+### tl, dr!
 
-[![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk)  [![Dependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk/status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk)  [![devDependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk/dev-status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk?type=dev)  [![Join the chat at https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+This a starter app for Meteor developers who want to structure their work according to the [Mantra Specification](https://kadirahq.github.io/mantra/).
 
-
-[![Code Climate](https://codeclimate.com/github/warehouseman/meteor-mantra-kickstarter/badges/gpa.svg)](https://codeclimate.com/github/warehouseman/meteor-mantra-kickstarter)
+Please feel welcome to comment on any experience you have with it [here](https://talk.mantrajs.com/) ( and previously [ongoing discussion here](https://github.com/kadirahq/mantra/issues/3) )
 
 ### Features
-* follows mantra feature specific modules approach, if interested please join an [ongoing discussion here](https://github.com/kadirahq/mantra/issues/3)
 
-* formsy-react for user login, registration and password forms [formsy-react](https://github.com/christianalfoni/formsy-react) and [formsy-react-components](https://github.com/twisty/formsy-react-components)
+You get :
 
-* user registration, login, logout with application wide state, composed in pure React JS components with [react-komposer](https://github.com/kadirahq/react-komposer) (there is no blaze ui, or any blaze to react)
+* a thoroughly tested application from which to launch your apllication development
+* [single command installation](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/install_all.sh) of all dependencies and support services
+* full [end to end, functional testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
+* continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter) 
+* [unit testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon
+* client side **and** server side [logging](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/lib/logging) to Loggly:
+    * [logatim](https://github.com/sospedra/logatim): isomorphic multilevel logging, that feeds into 
+    * [winston](https://github.com/winstonjs/winston) server side transports
+* [Mailgun ready](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/methods/mail.js) password reset example 
+* several different CRUD examples, including
+    * an isomorphic CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/.pkgs/mmks_widget), which contains all client **and** server elements
+    * user management CRUD module: user registration, password reset, login, logout
+* full [multi-level access control](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/lib/access_control.js) authorizations:
+    * levels: Owner, Administrator, Staff, Member, Customer, Registered
+    * acts on: [menu items](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/layout/components/NavLeftContent.jsx#L40), React [components](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/_colors/components/_sidebar.jsx#L24) and server side [methods](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/methods/_colors.js#L23)
+* uses [mantra-core](https://github.com/mantrajs/mantra-core) modularization, with application wide state, composed in pure React JS components with [react-komposer](https://github.com/kadirahq/react-komposer) (Blaze is not used at all)
+* [Astronomy v2](https://github.com/jagi/meteor-astronomy) model schema
+* forms based development examples with:
+    * [tcomb-form](https://github.com/gcanti/tcomb-form): for CRUD modules
+    * [formsy-react](https://github.com/christianalfoni/formsy-react): for user login, registration and password forms. Also [formsy-react-components](https://github.com/twisty/formsy-react-components)
+* [Flatly](https://bootswatch.com/flatly/) bootstrap theme module
+* completely linted with eslint, with specs available to editors such as Sublime Text 3
 
-* simple but complete Colors modules wih CRUD
+### Getting started
 
-* simple but not fully complete user management module
+My default development, test and run environment is a virtual machine running Xubuntu Xenial Xerus, with 12Gb of disk, 3Gb memory and 2 processors.
 
-* [tcomb-form](https://github.com/gcanti/tcomb-form) based forms in Colors module.
+If you are in a disposable virtual machine with a recent fresh Ubuntu installation, you can follow the steps below more or less blindly. **Please, do NOT do this in a machine that has stuff you care about!**
 
-* [meteor astronomy](https://github.com/jagi/meteor-astronomy) models (looking forward to the upcoming v2)
+1.  Pull in your GitHub SSH credentials from somewhere, for example a sister VM...
 
-* bootstrap theme module based on [Flatly](https://bootswatch.com/flatly/) with a configuration file, you can replace it or remove if you have other requirements
+    ```
+    pushd ~/.ssh
+    scp -r 192.168.122.xxx:/home/you/.ssh .
+    popd
+    ```
+
+1.  Ensure dependencies are clean and up-to-date : 
+
+    ```
+    sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y clean && sudo apt-get -y autoremove;
+    ```
+
+1.  Install and configure git : 
+
+    ```
+    git config --global user.name "You Yourself"
+    git config --global user.email "yourself.yourorg@gmail.com"
+    git config --global credential.helper cache
+    git config --global credential.helper 'cache --timeout=36000'
+    git config --global push.default simple
+    ```
+
+1. Make a parent directory and step into it : 
+
+    ```
+    mkdir -p ~/projects
+    cd ~/projects
+    ```
+
+1. Clone our repository and step into it :
+
+    ```
+    git clone git@github.com:warehouseman/meteor-mantra-kickstarter.git
+    cd meteor-mantra-kickstarter    
+    ```
+
+1. Switch over to our branch : 
+
+    ```
+    git checkout trunk
+    git branch # verify being on trunk
+    ```
+
+1. Shorten the time it will take to reload and rerun after code changes : 
+
+    ```
+    echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+    ```
+
+1. Run the script to set up for development and testing (installs Java, NodeJS, Chimp, Meteor and the project's NodeJS package dependencies) : 
+
+    ```
+    ./install_all.sh
+    ```
+
+1. Prepare our `settings.json` : 
+
+    ```
+    cp settings.json.example settings.json
+    nano settings.json
+    ```
+    You'll need to go [get your Mailgun API key.](https://mailgun.com/app/dashboard) and [your Loggly domain token](https://www.loggly.com/),  then correct these settings : 
+    ```
+    >   "HOST_URI": "localhost:3000",
+    >   "MAILGUN_DOMAIN": "yourhost.yourpublic.work",
+    >   "MAILGUN_KEY": "(As if I'm gonna to leave THAT lying around.)  A valid key has 36 characters and begins with 'key-'.",
+    >   "LOGGLY_SUBDOMAIN": "yourwork",
+    >   "LOGGLY_TOKEN": " ( not this either ) ",
+    ```
+
+    * Note : If you don't care whether password reset works, you don't need Mailgun.  In that case, you can use this as your API key ...  ```key-dead0dead0dead0dead0dead0dead000```.
+  
+1. Now we can run Meteor and explore at [http://localhost:3000](http://localhost:3000) : 
+
+    ```
+    meteor --settings=settings.json
+    ```
+    (The first time through, you may see it terminate with the message `killed`.  Just run it again.)
+
+1. Open a **new** terminal window to run linting and unit-tests : 
+
+    ```
+    cd ~/projects/meteor-mantra-kickstarter/
+    npm test
+    ```
+    A goodly portion of the client side is fully tested using the familiar tools Mocha, Chai and Sinon.
+
+1. Open another terminal window and run acceptance tests : 
+
+    ```
+    source ~/.profile # if you have not yet logged out since running './install_all.sh'
+    cd ~/projects/meteor-mantra-kickstarter/
+    meteor npm run acceptance
+    ```
+1. See the `scripts` section of `package.json` for details of other testing and setup commands.
 
 
-![screen homepage](public/screens/homepage.png)
+### Other Notes
 
-![screen register](public/screens/register.png)
+For my own use, I keep open at least 4 terminal windows, with these commands, ready to run :
 
-![screen login](public/screens/login.png)
+1. For running Meteor
 
-![screen password](public/screens/password.png)
+    ```
+    cd projects/meteor-mantra-kickstarter/
+    meteor --settings=settings.json
+    ```
 
-![screen users-collection](public/screens/users.collection.png)
+2. For running acceptance tests
 
-![screen users-add](public/screens/users.add.png)
+    ```
+    cd projects/meteor-mantra-kickstarter/
+    meteor npm run acceptance
+    ```
 
-![screen colors-collection](public/screens/colors.collection.png)
+3. For checking changes in the database
 
-![screen colors-add](public/screens/colors.add.png)
+    ```
+    cd projects/meteor-mantra-kickstarter/
+    meteor mongo
+    # then
+     db.users.findOne({ "emails.address" : "member@example.com" });
+     db.getCollection("_colors").find({});
+    ```
 
-![screen colors-single](public/screens/colors.single.png)
+4. For searching for keywords in the code
 
-### Setting Up and Running Tests
+    ```
+    cd projects/meteor-mantra-kickstarter/
+    grep -R --exclude=\*.{css,txt,min.js} --exclude-dir={.git,.meteor,node_modules} "key" -A 1
+    ```
 
-Please refer to the ['Installation Steps' wiki page](https://github.com/warehouseman/meteor-mantra-kickstarter/wiki/Installation-steps).
-
-### Roadmap
-
-This is an early draft. Mantra architecture is very fresh and React environment is quite dynamic, that means things will change and break. We will be following the discussions and will try to keep this project up to date.
-
-The goal is to bring some simple yet valuable to most apps features:
-
-☑  user management
-
-☐  role management
-
-☐  ACL management
-
-☐  proper logging with Winston and Loggly
-
-☐  profile page
-
-☐  account page
-
-☐  advanced CRUD component with pagination
-
-☑  full Cucumber acceptance testing
-
-☐  mixed server-side rendering (SSR) and client-side rendering (CSR)
-
-☑  script to assist installation for development
-
-☐  scripts to install in a remote server with mup
-
-☐  scripts to assist working with Android and iPhone
-
+I tend to use the above commands daily.
+To get quickly ready to work, I open this README page, open the four terminal windows and cut and paste into them.

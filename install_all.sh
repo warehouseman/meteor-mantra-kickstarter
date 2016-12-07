@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#
 
 source .pkgs/install_local_packages.sh;
 source .e2e_tests/installChimp.sh;

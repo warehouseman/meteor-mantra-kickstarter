@@ -28,7 +28,7 @@ Please make sure you read [Mantra Specification](https://kadirahq.github.io/mant
 * bootstrap theme module based on [Flatly](https://bootswatch.com/flatly/) with a configuration file, you can replace it or remove if you have other requirements
 
 
-![screen homepage](public/screens/homepage.png)
+![screen homepage](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/public/screens/homepage.png)
 
 ![screen register](public/screens/register.png)
 

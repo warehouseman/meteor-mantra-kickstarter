@@ -1,4 +1,5 @@
 declare FLAG="/tmp/updatedApt";
+set -e;
 function refreshApt()
 {
   if [[ -f ${FLAG} ]]; then

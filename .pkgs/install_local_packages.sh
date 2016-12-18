@@ -15,5 +15,3 @@ function install_local_packages() {
 
   popd >/dev/null;
 }
-
-install_local_packages;

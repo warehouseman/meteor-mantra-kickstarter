@@ -31,8 +31,8 @@ dependencies:
 
   override:
     - cp settings.json.example settings.json
+    - source .pkgs/install_local_packages.sh; install_local_packages;
     - ${METEOR_CMD} npm install
-    - .pkgs/install_local_packages.sh
 
   post:
     - date > ${CIRCLE_ARTIFACTS}/meteor.log

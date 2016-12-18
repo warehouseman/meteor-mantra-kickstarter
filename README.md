@@ -52,13 +52,13 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
     popd
     ```
 
-1.  Ensure dependencies are clean and up-to-date : 
+1.  Ensure dependencies are clean and up-to-date :
 
     ```
     sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get -y clean && sudo apt-get -y autoremove;
     ```
 
-1.  Install and configure git : 
+1.  Install and configure git :
 
     ```
     git config --global user.name "You Yourself"
@@ -68,7 +68,7 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
     git config --global push.default simple
     ```
 
-1. Make a parent directory and step into it : 
+1. Make a parent directory and step into it :
 
     ```
     mkdir -p ~/projects
@@ -79,35 +79,35 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 
     ```
     git clone git@github.com:warehouseman/meteor-mantra-kickstarter.git
-    cd meteor-mantra-kickstarter    
+    cd meteor-mantra-kickstarter
     ```
 
-1. Switch over to our branch : 
+1. Switch over to our branch :
 
     ```
     git checkout trunk
     git branch # verify being on trunk
     ```
 
-1. Shorten the time it will take to reload and rerun after code changes : 
+1. Shorten the time it will take to reload and rerun after code changes :
 
     ```
     echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
     ```
 
-1. Run the script to set up for development and testing (installs Java, NodeJS, Chimp, Meteor and the project's NodeJS package dependencies) : 
+1. Run the script to set up for development and testing (installs Java, NodeJS, Chimp, Meteor and the project's NodeJS package dependencies) :
 
     ```
     ./install_all.sh
     ```
 
-1. Prepare our `settings.json` : 
+1. Prepare our `settings.json` :
 
     ```
     cp settings.json.example settings.json
     nano settings.json
     ```
-    You'll need to go [get your Mailgun API key.](https://mailgun.com/app/dashboard) and [your Loggly domain token](https://www.loggly.com/),  then correct these settings : 
+    You'll need to go [get your Mailgun API key.](https://mailgun.com/app/dashboard) and [your Loggly domain token](https://www.loggly.com/),  then correct these settings :
     ```
     >   "HOST_URI": "localhost:3000",
     >   "MAILGUN_DOMAIN": "yourhost.yourpublic.work",
@@ -117,15 +117,15 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
     ```
 
     * Note : If you don't care whether password reset works, you don't need Mailgun.  In that case, you can use this as your API key ...  ```key-dead0dead0dead0dead0dead0dead000```.
-  
-1. Now we can run Meteor and explore at [http://localhost:3000](http://localhost:3000) : 
+
+1. Now we can run Meteor and explore at [http://localhost:3000](http://localhost:3000) :
 
     ```
     meteor --settings=settings.json
     ```
     (The first time through, you may see it terminate with the message `killed`.  Just run it again.)
 
-1. Open a **new** terminal window to run linting and unit-tests : 
+1. Open a **new** terminal window to run linting and unit-tests :
 
     ```
     cd ~/projects/meteor-mantra-kickstarter/
@@ -133,7 +133,7 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
     ```
     A goodly portion of the client side is fully tested using the familiar tools Mocha, Chai and Sinon.
 
-1. Open another terminal window and run acceptance tests : 
+1. Open another terminal window and run acceptance tests :
 
     ```
     source ~/.profile # if you have not yet logged out since running './install_all.sh'

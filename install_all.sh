@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 #
 
-source .pkgs/install_local_packages.sh;
-source .e2e_tests/installChimp.sh;
-source .scripts/installMeteor.sh;
+source .scripts/refreshApt.sh;
 source .scripts/installJava.sh;
 source .scripts/installNodeJs.sh;
-source .scripts/refreshApt.sh;
+source .e2e_tests/installChimp.sh;
+source .scripts/installMeteor.sh;
+# source .pkgs/install_local_packages.sh;
 
 refreshApt;
 installJava;
 installNodeJs;
 installChimp;
 installMeteor;
-install_local_packages;
 
 echo -e "
 

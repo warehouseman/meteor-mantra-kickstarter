@@ -1,4 +1,4 @@
-declare NOCOMMAND="command not found";
+source .pkgs/install_local_packages.sh;
 function installMeteor()
 {
   local INSTALL_METEOR="yes";
@@ -15,24 +15,28 @@ function installMeteor()
   fi
 
   echo "### Meteor Installed";
-  meteor --version;
+  export METEOR_CMD="meteor";
+  ${METEOR_CMD} --version;
 
-  echo "### Installing included npm packages for Meteor";
-  mkdir -p node_modules;
-  pushd node_modules >/dev/null;
+  install_local_packages;
 
-    for dir in ../.pkgs/*/
-    do
-      echo "~~~~~~~~~~  Installing and Linking '${dir}'   ~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-      meteor npm link ${dir};
-    done
+  # echo "### Installing included npm packages for Meteor";
+  # mkdir -p node_modules;
+  # pushd node_modules >/dev/null;
 
-    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+  #   for dir in ../.pkgs/*/
+  #   do
+  #     echo "~~~~~~~~~~  Installing and Linking '${dir}'   ~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+  #     meteor npm link ${dir};
+  #   done
 
-  popd >/dev/null;
+  #   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+
+  # popd >/dev/null;
 
   echo "### Installing 3rd party npm packages.";
-  meteor npm -y install;
+  ${METEOR_CMD} npm -y install;
+  # yarn install;
 
 }
 

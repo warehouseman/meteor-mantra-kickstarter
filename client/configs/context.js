@@ -9,8 +9,13 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 import {Tracker} from 'meteor/tracker';
 
 
-export default function () {
+import apolloClient from 'apollo-client';
+import GQL from 'graphql-tag';
+import { meteorClientConfig as MeteorClientConfig } from 'meteor/apollo';
 
+const ApolloClient = new apolloClient(MeteorClientConfig());
+
+export default function () {
   return {
     Meteor,
     FlowRouter,
@@ -18,6 +23,9 @@ export default function () {
     LocalState: new ReactiveDict(),
     Tracker,
     App,
+    ApolloClient,
+    GQL,
+    MeteorClientConfig,
     ACL
   };
 }

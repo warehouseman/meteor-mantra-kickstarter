@@ -62,7 +62,7 @@ module.exports = function () {
 
   });
 
-  this.Given(/^I am at my personal account page, "([^"]*)"$/, function (_urlAccount) {
+  this.Given(/^I am at the user account page, "([^"]*)"$/, function (_urlAccount) {
     browser.url(_urlAccount);
   });
 

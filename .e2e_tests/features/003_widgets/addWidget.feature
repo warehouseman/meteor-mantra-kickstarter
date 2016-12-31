@@ -96,3 +96,10 @@ Feature: 003 Manage widgets
     Given I have opened the widgets list page : "http://localhost:3000/widgets"
     And I have elected to "delete" the "Silver" item.
     Then I no longer see that record.
+
+
+  @watch
+  Scenario: Logout administrator
+    Given I am at the user account page, "http://localhost:3000/account"
+    When I logout,
+    Then I see the login page submit button : "Login".

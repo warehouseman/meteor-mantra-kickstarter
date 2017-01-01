@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#
 declare FLAG="/tmp/updatedApt";
 set -e;
 function refreshApt()
@@ -25,3 +27,7 @@ function refreshApt()
   touch ${FLAG};
   echo "### APT Updated";
 }
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  refreshApt;
+fi;

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#
 declare NOCOMMAND="command not found";
 declare BUILD_DIR="./.habitat/results/";
 declare APP_NAME="mmks";
@@ -65,3 +67,7 @@ function buildMeteor()
   popd >/dev/null;
 
 }
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  buildMeteor;
+fi;

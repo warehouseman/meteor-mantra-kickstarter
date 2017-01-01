@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#
 function install_local_packages() {
   echo -e "### Installing included npm packages for Meteor";
 
@@ -32,3 +34,7 @@ function install_local_packages() {
 
   popd >/dev/null;
 }
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  install_local_packages;
+fi;

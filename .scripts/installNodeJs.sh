@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#
 declare NOCOMMAND="command not found";
 function installNodeJs()
 {
@@ -9,7 +11,6 @@ function installNodeJs()
 
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get install -y nodejs;
-
 
   fi
 
@@ -25,3 +26,7 @@ function installNodeJs()
   echo "### Npm and NodeJS installed ";
 
 }
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  installNodeJs;
+fi;

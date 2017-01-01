@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#
 declare NOCOMMAND="command not found";
 function installJava()
 {
@@ -10,3 +12,7 @@ function installJava()
   fi
   echo "### Java Installed";
 }
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  installJava;
+fi;

@@ -14,6 +14,13 @@ installNodeJs;
 installChimp;
 installMeteor;
 
+if [ -f ./settings.json ]; then
+  if [ "${1}" = "run" ]; then
+    meteor --settings=settings.json;
+    exit 0;
+  fi;
+fi;
+
 echo -e "
 
   Next steps :

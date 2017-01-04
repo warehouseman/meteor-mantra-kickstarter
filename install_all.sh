@@ -1,30 +1,47 @@
 #!/usr/bin/env bash
 #
+RUN_IT=${1:-null};
 
 source .scripts/refreshApt.sh;
 source .scripts/installJava.sh;
 source .scripts/installNodeJs.sh;
 source .e2e_tests/installChimp.sh;
-source .scripts/installMeteor.sh;
+source .scripts/installMeteorFramework.sh;
+source .scripts/android/installAndroid.sh;
+source .scripts/installMeteorApp.sh;
 # source .pkgs/install_local_packages.sh;
 
 refreshApt;
 installJava;
 installNodeJs;
 installChimp;
-installMeteor;
+installMeteorFramework;
+installAndroid;
+installMeteorApp;
 
+declare MSG="";
 if [ -f ./settings.json ]; then
-  if [ "${1}" = "run" ]; then
+  if [ "${RUN_IT}" = "run" ]; then
     meteor --settings=settings.json;
-    exit 0;
-  fi;
-fi;
+    MSG="
+    Done!
+    ";
+  else
+    MSG="
 
-echo -e "
+  Next step :
+     1) meteor --settings=settings.json
+     ";
+
+  fi;
+else
+  MSG="
 
   Next steps :
      1) cp settings.json.example settings.json
      2) # Correctly configure 'settings.json'
      3) meteor --settings=settings.json
      ";
+fi;
+
+echo -e "${MSG}";

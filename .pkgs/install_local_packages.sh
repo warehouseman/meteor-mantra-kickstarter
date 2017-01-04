@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
+declare METEOR_CMD=""; : ${METEOR_CMD:=meteor};
 function install_local_packages() {
   echo -e "### Installing included npm packages for Meteor";
 
-  if [[ "X${METEOR_CMD}X" == "XX" ]]; then declare METEOR_CMD="meteor"; fi;
   pushd .pkgs >/dev/null;
 
     for mdl in ./*/

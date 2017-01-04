@@ -67,6 +67,14 @@ export default class extends React.Component {
         { navAccounts }
         { Meteor.userId() ? navAdmin : null }
 
+        <li className="">
+          <a aria-expanded="false" role="button"
+            href="/mobile/android/meteor-mantra-kickstarter.apk" download>
+             <img src="/mobile/android/Android_robot.svg"
+                  alt="Android APK" width="28" height="28" border="0" />
+          </a>
+        </li>
+
       </ul>
 
     );

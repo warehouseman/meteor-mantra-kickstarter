@@ -1,34 +1,28 @@
 #!/usr/bin/env bash
 #
+pushd `dirname $0` > /dev/null; SCRIPTPATH=`pwd`; popd > /dev/null;
+PROJECT_ROOT=${SCRIPTPATH%/.scripts};
+
+
+source ${PROJECT_ROOT}/.scripts/trap.sh;
+source ${PROJECT_ROOT}/.scripts/installMeteorFramework.sh;
+# source ${PROJECT_ROOT}/.scripts/android/buildAndroid.sh;
+
 declare NOCOMMAND="command not found";
 declare BUILD_DIR="./.habitat/results/";
-declare APP_NAME="mmks";
+declare APP_NAME="${APP_NAME:-meteor-mantra-kickstarter}";
 
 function buildMeteor()
 {
-  echo -e "Install Meteor if not installed.";
-  local INSTALL_METEOR="yes";
-  if [[ -d "${HOME}/.meteor/packages/meteor-tool" ]]; then
-    declare METEORVERSION=$(meteor --version  2>&1);
-    if [[ "${METEORVERSION#*$NOCOMMAND}" == "$METEORVERSION" ]]; then
-      INSTALL_METEOR="no";
-    fi
-  fi
-
-  if [[ "${INSTALL_METEOR}" == "yes" ]]; then
-    echo "### Building Meteor";
-    curl https://install.meteor.com/ | sh;
-  fi
-
-  echo "### Meteor Built";
-  meteor --version;
+  installMeteorFramework;
 
   if [[ $(find .pkgs/* -maxdepth 0 -type d | wc -l) -gt 0 ]]; then
 
     mkdir -p node_modules;
     pushd .pkgs >/dev/null;
 
-      echo "~~~~~~~~~~  Copy external modules to node_modules directory ~~~~~~~~~~~~~~~~~~~~~~";
+      echo -e "
+      ~~~~~~~~~~  Copy external modules to node_modules directory ~~~~~~~~~~~~~~~~~~~~~~";
       for dir in ./*/
       do
         DNAME=${dir/#.\/};
@@ -45,13 +39,18 @@ function buildMeteor()
   fi;
 
   if [[ ! -d ./node_modules/react ]]; then
-    echo "### Building 3rd party npm packages.";
+    echo -e "
+    ### Building 3rd party npm packages.";
     meteor npm -y install --production;
   fi;
 
   mkdir -p ${BUILD_DIR};
-  meteor build ${BUILD_DIR} --directory --server-only --architecture os.linux.x86_64
+  echo -e "
+  ### Building app, '${APP_NAME}', to ${BUILD_DIR}.";
+  meteor build ${BUILD_DIR} --directory --server-only --architecture os.linux.x86_64;
 
+  echo -e "
+  ### Preparing app bundle as ${APP_NAME}.tar.gz.";
   cp ./settings.json ${BUILD_DIR}/bundle;
   chmod ug+rw,o-rwx ${BUILD_DIR}/bundle/settings.json;
   cp ./.scripts/deployMeteor.sh ${BUILD_DIR}/bundle;

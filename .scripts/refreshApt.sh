@@ -13,16 +13,17 @@ function refreshApt()
   fi
 
   echo "### Update APT";
-  sudo apt-get -y update && \
-  sudo apt-get -y upgrade && \
-  sudo apt-get -y dist-upgrade && \
-  sudo apt-get -y clean && \
-  sudo apt-get -y autoremove;
+  sudo apt -y update && \
+  sudo apt -y upgrade && \
+  sudo apt -y dist-upgrade && \
+  sudo apt -y clean && \
+  sudo apt -y autoremove;
 
-  sudo apt-get -y install curl git;
-  sudo apt-get -y install build-essential g++;
+  sudo apt -y install jq;
+  sudo apt -y install curl git;
+  sudo apt -y install build-essential g++;
 
-#  sudo apt-get -y install yarn;
+#  sudo apt -y install yarn;
 
   touch ${FLAG};
   echo "### APT Updated";

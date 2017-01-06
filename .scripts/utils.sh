@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #
+
+
 function UpdateEnvVars() {
 
   local ENV_FILE=$1;
@@ -22,6 +24,7 @@ function UpdateEnvVars() {
 
 }
 
+[ -z $(jq --version) ] && sudo apt -y install jq # || echo "found jq version «$(jq --version)»";
 function GetProjectName() {
 
   local JSON_FILE=$1;

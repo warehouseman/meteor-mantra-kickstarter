@@ -2,6 +2,8 @@
 #
 RUN_IT=${1:-null};
 
+source .scripts/trap.sh;
+
 source .scripts/refreshApt.sh;
 source .scripts/installJava.sh;
 source .scripts/installNodeJs.sh;

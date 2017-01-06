@@ -7,8 +7,7 @@ export const singleComposer = ({context, _id, clearErrors}, onData) => {
 
   const {LocalState, App, Tracker} = context();
   const error = LocalState.get('_colors.DELETE_ERROR');
-  const sluts = 'dick';
-  onData(null, {error, sluts, LocalState, App, Tracker});
+  onData(null, {error, LocalState, App, Tracker});
 
 };
 

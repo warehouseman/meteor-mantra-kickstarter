@@ -17,5 +17,3 @@ export default class extends React.Component {
     );
   }
 }
-
-/*            {this.props.content()} == piñacolada?  */

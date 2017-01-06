@@ -1,6 +1,8 @@
 import React from 'react';
 import DropDown from './DropDown.jsx';
 
+import MobileApps from '../containers/MobileApps.jsx';
+
 import _lgr from '/lib/logging/client/clientLogger.js';
 const Lgr = new _lgr(__filename, 'info', true);
 
@@ -48,17 +50,18 @@ export default class extends React.Component {
     let navColors = React.createElement(DropDown, { name: 'Colors', links: linksColors });
     let navWidgets = React.createElement(DropDown, { name: 'Widgets', links: linksWidgets });
 
+/*
+        <li className="">
+          <a aria-expanded="false" role="button" href="/" target="">Start</a>
+        </li>
+*/
     return (
 
       <ul className="nav navbar-nav">
 
-        <li className="">
-          <a aria-expanded="false" role="button" href="/" target="">Start</a>
-        </li>
-
         <li className={enablePostsAdd}>
           <a aria-expanded="false" role="button" href="/new-post" target="">
-            New Post
+            Posts
           </a>
         </li>
 
@@ -67,13 +70,7 @@ export default class extends React.Component {
         { navAccounts }
         { Meteor.userId() ? navAdmin : null }
 
-        <li className="">
-          <a aria-expanded="false" role="button"
-            href="/mobile/android/meteor-mantra-kickstarter.apk" download>
-             <img src="/mobile/android/Android_robot.svg"
-                  alt="Android APK" width="28" height="28" border="0" />
-          </a>
-        </li>
+        { Meteor.isCordova ? null : <li><MobileApps /></li> }
 
       </ul>
 

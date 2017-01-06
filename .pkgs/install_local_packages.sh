@@ -8,7 +8,7 @@ function install_local_packages() {
 
     for mdl in ./*/
     do
-      echo -e "~~~~~~~~~~  Placing NPM Link in '${mdl}'   ~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+      echo -e "~~~~~~~~~~  Link '${mdl}' into project  ~~~~~~~~~~~~~~~~~~~~~~~~~~~";
       pushd ${mdl} >/dev/null;
         pwd;
         ${METEOR_CMD} npm link

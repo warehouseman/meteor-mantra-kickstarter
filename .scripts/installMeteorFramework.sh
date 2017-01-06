@@ -19,6 +19,10 @@ function installMeteorFramework()
   export METEOR_CMD="meteor";
   ${METEOR_CMD} --version;
 
+  cat /etc/sysctl.conf | grep "fs.inotify.max_user_watches" >/dev/null || \
+    echo fs.inotify.max_user_watches=524288 | \
+    sudo tee -a /etc/sysctl.conf && sudo sysctl -p;
+
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

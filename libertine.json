@@ -23,7 +23,7 @@
     "babel-preset-stage-2": "6.x.x",
     "babel-root-slash-import": "1.x.x",
     "chai": "3.x.x",
-    "chimp": "^0.45.0",
+    "chimp": "0.45.1",
     "enzyme": "^2.6.x",
     "eslint": "^3.10.2",
     "eslint-plugin-babel": "^4.0.0",

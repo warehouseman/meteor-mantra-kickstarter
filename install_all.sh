@@ -13,6 +13,19 @@ source .scripts/android/installAndroid.sh;
 source .scripts/installMeteorApp.sh;
 # source .pkgs/install_local_packages.sh;
 
+export FREESPACE=$(($(stat -f --format="%a*%S" ${HOME})/1000000));
+if [ ${FREESPACE} -lt 5000 ]; then
+  echo -e "
+    Your free disk space is '${FREESPACE}MB'.
+     You must have at least '5000MB' free!
+
+  Press any key to continue or <ctrl-c> to quit.
+  ";
+  read -n 1 -s;
+else
+  echo "Found '${FREESPACE}MB' of free disk space.";
+fi;
+
 refreshApt;
 installJava;
 installNodeJs;

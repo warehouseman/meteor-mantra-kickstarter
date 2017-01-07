@@ -5,7 +5,10 @@ function CleanAllInstalledPackages() {
   rm -fr node_modules;
   rm -fr .meteor/local/;
   rm -fr .meteor/version;
+  rm -fr .habitat/results;
   rm -fr .pkgs/mmks_widget/node_modules;
+  rm -fr .pkgs/mmks_widget/dist;
+  rm -fr npm-debug.log;
 
   echo "Cleaned.";
 }

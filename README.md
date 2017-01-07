@@ -17,7 +17,7 @@ You get :
 
 * a thoroughly tested application from which to launch your application development
 * [single command installation](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/install_all.sh) of all dependencies and support services
-* [single command build](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/install_all.sh) of all dependencies and support services
+* [single command build](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/build_all.sh) of Android APK, with download from app menu bar.
 * full [end to end, functional testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
 * continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter).  (Latest build result :: [![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/try_apollo.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/try_apollo))
 * [unit testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon

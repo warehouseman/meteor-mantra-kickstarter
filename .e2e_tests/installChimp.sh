@@ -16,11 +16,10 @@ function installChimp()
 {
   installPhantomJS;
 
-  declare CHIMPVERSION=$(chimp --version 2>&1 >/dev/null) >/dev/null;
-  if [[ "${CHIMPVERSION#*$NOCOMMAND}" != "$CHIMPVERSION" ]]; then
+  if ! npm list -g chimp &>/dev/null; then
 
     echo -e "### Installing Chimp";
-    npm install -g chimp@0.45.1;
+    npm install -gy chimp@0.45.1;
 
   fi
   echo -e "### Chimp Installed";

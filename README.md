@@ -2,7 +2,7 @@
 
 # Meteor Mantra Kickstarter
 
-![screen register](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/public/screens/users_android_vm.png)
+![screen register](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/public/screens/users.collection.png)
 
 ### tl, dr!
 

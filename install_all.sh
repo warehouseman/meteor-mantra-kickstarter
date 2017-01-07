@@ -14,17 +14,28 @@ source .scripts/installMeteorApp.sh;
 # source .pkgs/install_local_packages.sh;
 
 export FREESPACE=$(($(stat -f --format="%a*%S" ${HOME})/1000000));
-if [ ${FREESPACE} -lt 5000 ]; then
+export MINFREE=7000
+if [ ${FREESPACE} -lt ${MINFREE} ]; then
   echo -e "
-    Your free disk space is '${FREESPACE}MB'.
-     You must have at least '5000MB' free!
+             * * *   WARNING * * *
+    Your free disk space is: '${FREESPACE}MB'.
+    You must have at least:  '${MINFREE}MB' free!
 
-  Press any key to continue or <ctrl-c> to quit.
+------------------------------------------------
   ";
-  read -n 1 -s;
 else
   echo "Found '${FREESPACE}MB' of free disk space.";
 fi;
+
+[ -f settings.json ] || cp settings.json.example settings.json;
+echo -e "
+  While the system builds, you should prepare your settings:
+
+       nano $(pwd)/settings.json;
+
+Press any key to continue or <ctrl-c> to quit.
+";
+read -n 1 -s;
 
 refreshApt;
 installJava;
@@ -44,19 +55,26 @@ if [ -f ./settings.json ]; then
   else
     MSG="
 
-  Next steps :
+  Next steps:
 
-      meteor --settings=settings.json
+      Sanity check
+      ~~~~~~~~~~~~
 
-  *OR*
+        Terminal #1 : meteor --settings=settings.json
+        Terminal #2 : meteor npm run acceptance
 
-      export KEYSTORE_PWD=\"obscuregobbledygook\";
-      export HOST_SERVER_NAME=\"http://moon.planet.sun:3000/\";
-      export ROOT_URL=\"\${HOST_SERVER_NAME}\";
-      export YOUR_FULLNAME=\"You Yourself\";
-      export GITHUB_ORGANIZATION_NAME=\"YourOrg\";
-      ./build_all.sh;
-      meteor run --mobile-server=\${HOST_SERVER_NAME}  --settings=settings.json;
+*OR*
+
+      Build and launch server for mobile
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        export KEYSTORE_PWD=\"obscuregobbledygook\";
+        export HOST_SERVER_NAME=\"http://moon.planet.sun:3000/\";
+        export ROOT_URL=\"\${HOST_SERVER_NAME}\";
+        export YOUR_FULLNAME=\"You Yourself\";
+        export GITHUB_ORGANIZATION_NAME=\"YourOrg\";
+        ./build_all.sh;
+        meteor run --mobile-server=\${HOST_SERVER_NAME}  --settings=settings.json;
    ";
 
   fi;

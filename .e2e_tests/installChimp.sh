@@ -1,5 +1,52 @@
 #!/usr/bin/env bash
 #
+
+function aptNotYetInstalled() {
+
+  set -e;
+  return $(dpkg-query -W --showformat='${Status}\n' $1 2>/dev/null | grep -c "install ok installed");
+
+}
+
+function installLatestChrome()
+{
+
+  X="libxss1"; if aptNotYetInstalled "${X}"; then
+    sudo apt-get -y install "${X}";
+  fi;
+
+  X="fonts-liberation"; if aptNotYetInstalled "${X}"; then
+    sudo apt-get -y install "${X}";
+  fi;
+
+  CPU_WIDTH=$(lshw -class cpu 2>/dev/null | grep -m 1 width | sed 's/^[ \t]*//' | cut -d' ' -f2);
+  CPU_MSG="CPU bit width : |${CPU_WIDTH}|.";
+  echo -e ${CPU_WIDTH};
+
+  ARCH_NAME="amd64";
+  if [[ ${CPU_WIDTH} -ne 64  ]]; then ARCH_NAME="i386"; fi;
+  DEB_FILE="google-chrome-stable_current_${ARCH_NAME}.deb";
+
+  # Install 'chrome'
+  wget -O ${DEB_FILE} https://dl.google.com/linux/direct/${DEB_FILE};
+  sudo dpkg -i ${DEB_FILE};
+
+}
+
+
+function installChrome()
+{
+  if aptNotYetInstalled "${X}"; then installLatestChrome; fi;
+
+  if [[  "$(google-chrome --version | cut -d " " -f 3)" < "54.0.2840.0" ]]; then
+    echo "Need to upgrade Chrome to 54.0.2840.0 or later";
+    installLatestChrome;
+  fi;
+  echo "Chrome version is $(google-chrome --version | cut -d " " -f 3)";
+}
+
+
+
 function installPhantomJS()
 {
 
@@ -14,6 +61,7 @@ function installPhantomJS()
 
 function installChimp()
 {
+  installChrome;
   installPhantomJS;
 
   if ! npm list -g chimp &>/dev/null; then
@@ -26,5 +74,6 @@ function installChimp()
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  installChimp;
+  installChrome;
+#  installChimp;
 fi;

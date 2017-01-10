@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 #
 declare METEOR_CMD="${METEOR_CMD:=${HOME}/.meteor/meteor}";
-echo ${METEOR_CMD};
-exit;
 
 function install_local_packages() {
   echo -e "### Installing included npm packages for Meteor";

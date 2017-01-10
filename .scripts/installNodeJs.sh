@@ -35,6 +35,10 @@ fi;
 
   echo "### Npm and NodeJS installed ";
 
+  NCU_ID="npm-check-updates";
+  NCU_VER=$(npm view ${NCU_ID} version 2>/dev/null) || npm install -g npm-check-updates;
+  echo -e "### '${NCU_ID}@$(npm view ${NCU_ID} version)' installed";
+
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

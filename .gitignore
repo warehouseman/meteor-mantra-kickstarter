@@ -3,3 +3,4 @@ node_modules
 .DS_Store
 settings.json
 README.html
+*.log

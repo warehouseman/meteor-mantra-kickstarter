@@ -8,6 +8,8 @@ function aptNotYetInstalled() {
 
 }
 
+SHL_CHROME="google-chrome";
+APT_CHROME="${SHL_CHROME}-stable";
 function installLatestChrome()
 {
 
@@ -36,13 +38,13 @@ function installLatestChrome()
 
 function installChrome()
 {
-  if aptNotYetInstalled "${X}"; then installLatestChrome; fi;
+  if aptNotYetInstalled "${APT_CHROME}"; then installLatestChrome; fi;
 
-  if [[  "$(google-chrome --version | cut -d " " -f 3)" < "54.0.2840.0" ]]; then
+  if [[  "$(${SHL_CHROME} --version | cut -d " " -f 3)" < "54.0.2840.0" ]]; then
     echo "Need to upgrade Chrome to 54.0.2840.0 or later";
     installLatestChrome;
   fi;
-  echo "Chrome version is $(google-chrome --version | cut -d " " -f 3)";
+  echo "### Chrome version is $(${SHL_CHROME} --version | cut -d " " -f 3)";
 }
 
 
@@ -74,6 +76,5 @@ function installChimp()
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  installChrome;
-#  installChimp;
+  installChimp;
 fi;

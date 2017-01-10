@@ -34,8 +34,20 @@ fi;
   npm config set prefix '${HOME}/.npm-global';
 
   echo "### Npm and NodeJS installed ";
+  
+  NCU_ID="npm-check-updates";
+  NCU_VER=$(npm view ${NCU_ID} version 2>/dev/null) || npm install -g npm-check-updates;
+  echo -e "### '${NCU_ID}@$(npm view ${NCU_ID} version)' installed";
 
 }
+
+function aptNotYetInstalled() {
+
+  set -e;
+  return $(dpkg-query -W --showformat='${Status}\n' $1 2>/dev/null | grep -c "install ok installed");
+
+}
+
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   installNodeJs;

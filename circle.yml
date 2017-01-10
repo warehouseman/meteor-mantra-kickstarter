@@ -28,6 +28,7 @@ dependencies:
     - mkdir -p ~/.meteor
     - if [ ! -e ${METEOR_CMD} ]; then curl https://install.meteor.com | /bin/sh 2>&1 | cat; fi
     - ls -l /opt/circleci/nodejs/v4.4.7/lib/node_modules
+    - .e2e_tests/installChimp.sh
 
   override:
     - cp settings.json.example settings.json

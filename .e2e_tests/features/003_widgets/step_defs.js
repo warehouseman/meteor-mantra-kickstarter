@@ -27,8 +27,8 @@ module.exports = function () {
   this.Given(/^I have opened the 'add widgets' page : "([^"]*)"$/, function (_url) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
-    browser.timeouts('implicit', 2000);
-    browser.timeouts('page load', 2000);
+    browser.timeouts('implicit', 20000);
+    browser.timeouts('page load', 20000);
 
     browser.url(_url);
     server.call('_widgets.wipe');
@@ -141,8 +141,8 @@ module.exports = function () {
   this.Given(/^I have opened the widgets editor page : "([^"]*)"$/, function (_url) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
-    browser.timeouts('implicit', 2000);
-    browser.timeouts('page load', 2000);
+    browser.timeouts('implicit', 30000);
+    browser.timeouts('page load', 30000);
 
     browser.url(_url);
   });

@@ -3,6 +3,11 @@ Feature: 003 Manage widgets
   I want to update or create a new widget
 
   @watch
+  Scenario: Open main page
+    Given I have opened the main page : "http://localhost:3000/"
+    Then I see the login menu item.
+
+  @watch
   Scenario: Log in as a staff member
     Given I have opened the login page : "http://localhost:3000/login"
     When I provide my email "staff@example.com" and password "apple_01"

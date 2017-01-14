@@ -52,11 +52,22 @@ module.exports = function () {
 //  Scenario: Log in as administrator
 // ------------------------------------------------------------------------
 
+
+  this.Given(/^I have opened the main page : "([^"]*)"$/, function (urlMain) {
+    browser.setViewportSize({ width: 1024, height: 480 });
+    browser.url(urlMain);
+    browser.waitForVisible(cukeHrefLogin);
+  });
+
+  this.Then(/^I see the login menu item\.$/, function () {
+    browser.waitForVisible(cukeHrefLogin);
+  });
+
   this.Given(/^I have opened the login page : "([^"]*)"$/, function (urlLogin) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
     browser.url(urlLogout);
-    browser.waitForVisible(cukeLogin);
+    browser.waitForExist(cukeLogin);
     browser.url(urlLogin);
 
     server.call('_users.removeByEmail', 'jj@gmail.com');

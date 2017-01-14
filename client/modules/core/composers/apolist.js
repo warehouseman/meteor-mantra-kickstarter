@@ -1,7 +1,5 @@
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
-let posts = [{_id: "QQ", title: "KK-HHLL"}, {_id: "nn", title: "mnm  nmn"}];
-
 const apoComposer = ({context}, onData) => {
 
   const {ApolloClient, GQL} = context();
@@ -14,6 +12,7 @@ const apoComposer = ({context}, onData) => {
       }
     }`;
 
+/* eslint-disable no-console */
   ApolloClient.query({
     query: MyQuery,
     forceFetch: false,
@@ -21,7 +20,7 @@ const apoComposer = ({context}, onData) => {
     const { errors, data } = graphQLResult;
 
     if (data) {
-      posts = data.posts;
+      let posts = data.posts;
       console.log('ApoList: Query data', data.posts);
       onData(null, {posts});
     }
@@ -31,6 +30,7 @@ const apoComposer = ({context}, onData) => {
   }).catch((error) => {
     console.log('there was an error sending the query', error);
   });
+/* eslint-enable no-console */
 
 };
 

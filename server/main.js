@@ -3,10 +3,25 @@ import methods from './methods';
 import addInitialUsers from './configs/initial_users.js';
 import { initPosts, initColors, initWidgets } from './configs/initial_adds.js';
 
+import { createApolloServer } from 'meteor/apollo';
+import { makeExecutableSchema } from 'graphql-tools';
+
+import typeDefs from '/lib/graphql/schema';
+import resolvers from '/lib/graphql/resolvers';
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
+
+createApolloServer({
+    graphiql: true,
+    pretty: true,
+    schema
+});
+
 
 Meteor.startup(function () {
-
-//  console.log( ' settings', process.env );
 
   if ( process.env.LOGGLY_TOKEN &&
        process.env.LOGGLY_TOKEN.length &&

@@ -6,6 +6,8 @@ const urlLogout = 'http://localhost:3000/logout';
 const cukeLogin = '//x-cuke[@id="login"]';
 
 const cukeHrefLogin = '//a[@data-cuke="user-control-login"]';
+const classBrand = '//a[@class="navbar-brand"]';
+
 const cukeInpEmail = '//input[@data-cuke="email"]';
 const cukeInpPwd = '//input[@data-cuke="password"]';
 
@@ -55,12 +57,19 @@ module.exports = function () {
 
   this.Given(/^I have opened the main page : "([^"]*)"$/, function (urlMain) {
     browser.setViewportSize({ width: 1024, height: 480 });
+    browser.timeouts('implicit', 60000);
+    browser.timeouts('page load', 60000);
+
     browser.url(urlMain);
-    browser.waitForVisible(cukeHrefLogin);
+    browser.waitForVisible(classBrand);
   });
 
   this.Then(/^I see the login menu item\.$/, function () {
     browser.waitForVisible(cukeHrefLogin);
+  });
+
+  this.Then(/^I see the navigation header\.$/, function () {
+    browser.waitForVisible(classBrand);
   });
 
   this.Given(/^I have opened the login page : "([^"]*)"$/, function (urlLogin) {
@@ -145,21 +154,37 @@ module.exports = function () {
     expect(_warning).toEqual(browser.getText(cukeWarning));
   });
 
+  let cnt = 0;
+//  let itm = '';
   this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _item) {
+//    itm = _item;
     link = '//a[@data-cuke="' + _item + '"]';
     browser.waitForEnabled( link );
+//    browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
     browser.click(link);
     let cukeHrefCmd = '//a[@data-cuke="' + _cmd + '-item"]';
-
     browser.waitForEnabled( cukeHrefCmd );
     browser.click( cukeHrefCmd );
 
   });
 
   this.Then(/^I no longer see that record\.$/, function () {
+// console.log("Waiting for ", cukeItemsList);
     browser.waitForEnabled( cukeItemsList );
-    let item = browser.elements(link);
-    expect(item.value.length).toEqual(0);
+    browser.timeouts('implicit', 1000);
+//    browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
+// console.log("Getting " + link);
+    let listItem = browser.elements(link);
+    browser.waitUntil(function () {
+// console.log(link + ' still there?');
+//      browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
+      listItem = browser.elements(link);
+// console.log("Got list item" + listItem);
+// console.log("Got list item.value " + listItem.value);
+// console.log("Got list item.value.length " + listItem.value.length);
+      return 1 > listItem.value.length;
+    }, 10000, ' what the?', 2000);
+    expect(listItem.value.length).toEqual(0);
   });
 
 // =======================================================================

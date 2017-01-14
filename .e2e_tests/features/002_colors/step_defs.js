@@ -24,8 +24,8 @@ module.exports = function () {
   this.Given(/^I have opened the 'add colors' page : "([^"]*)"$/, function (_url) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
-    browser.timeouts('implicit', 2000);
-    browser.timeouts('page load', 2000);
+    browser.timeouts('implicit', 20000);
+    browser.timeouts('page load', 20000);
 
     browser.url(_url);
     server.call('_colors.wipe');
@@ -60,7 +60,7 @@ module.exports = function () {
 // ------------------------------------------------------------------------
   this.Given(/^I have opened the colors list page : "([^"]*)"$/, function (_url) {
     browser.setViewportSize({ width: 1024, height: 480 });
-    browser.timeoutsImplicitWait(1000);
+    browser.timeoutsImplicitWait(60000);
     browser.url(_url);
   });
 
@@ -123,8 +123,8 @@ module.exports = function () {
   this.Given(/^I have opened the colors editor page : "([^"]*)"$/, function (_url) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
-    browser.timeouts('implicit', 2000);
-    browser.timeouts('page load', 2000);
+    browser.timeouts('implicit', 60000);
+    browser.timeouts('page load', 60000);
 
     browser.url(_url);
   });

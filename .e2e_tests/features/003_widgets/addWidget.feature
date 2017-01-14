@@ -5,7 +5,7 @@ Feature: 003 Manage widgets
   @watch
   Scenario: Open main page
     Given I have opened the main page : "http://localhost:3000/"
-    Then I see the login menu item.
+    Then I see the navigation header.
 
   @watch
   Scenario: Log in as a staff member

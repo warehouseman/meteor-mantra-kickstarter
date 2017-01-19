@@ -6,8 +6,8 @@ import { initPosts, initColors, initWidgets } from './configs/initial_adds.js';
 import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema } from 'graphql-tools';
 
-import typeDefs from '/lib/graphql/schema';
-import resolvers from '/lib/graphql/resolvers';
+import typeDefs from './api/schema';
+import resolvers from './api/resolvers';
 
 const schema = makeExecutableSchema({
   typeDefs,

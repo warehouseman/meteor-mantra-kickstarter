@@ -1,4 +1,4 @@
-import { Post } from '/lib/graphql/db-connectors';
+import { Post } from './db-connectors';
 
 const resolvers = {
   Query: {

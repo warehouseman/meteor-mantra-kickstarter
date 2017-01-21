@@ -4,7 +4,7 @@ export APP_NAME="":
 
 source .scripts/trap.sh;
 source .scripts/utils.sh;
-source .scripts/android/installAndroid.sh;
+source .scripts/android/installAndBuildTools.sh;
 
 declare JSON_FILE="./package.json";
 GetProjectName ${JSON_FILE};

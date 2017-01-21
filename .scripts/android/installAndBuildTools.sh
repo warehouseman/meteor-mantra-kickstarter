@@ -253,9 +253,9 @@ function BuildAndroidAPK() {
     meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_NAME};
     echo "Built project : ${BUILD_DIRECTORY} in ${TARGET_DIRECTORY} for server ${HOST_SERVER_NAME}";
     mv ${TARGET_DIRECTORY}/android/release-unsigned.apk ${TARGET_DIRECTORY}/android/${APP_NAME}_unaligned.apk
-    echo "Stashed plain version.  Building debug version ...";
-    meteor build ${TARGET_DIRECTORY} --debug --server=${HOST_SERVER_NAME}
-    echo "Built debug version.";
+    # echo "Stashed plain version.  Building debug version ...";
+    # meteor build ${TARGET_DIRECTORY} --debug --server=${HOST_SERVER_NAME};
+    echo "Built APK.";
 
   popd >/dev/null;
 

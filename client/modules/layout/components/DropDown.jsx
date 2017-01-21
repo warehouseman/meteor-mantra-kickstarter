@@ -17,6 +17,8 @@ export default ({links = [], name = 'Empty name'}) => (
           let response = '';
           if (link.url) {
             response = <li key={index} className={enabled}><a href={link.url}>{link.name}</a></li>;
+          } else if (link.divider) {
+            response = <li key={index} className="divider"></li>;
           } else {
             response = <li key={index} className={enabled}>{link.name}</li>;
           }

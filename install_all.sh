@@ -9,7 +9,7 @@ source .scripts/installJava.sh;
 source .scripts/installNodeJs.sh;
 source .e2e_tests/installChimp.sh;
 source .scripts/installMeteorFramework.sh;
-source .scripts/android/installAndroid.sh;
+source .scripts/android/installAndBuildTools.sh;
 source .scripts/installMeteorApp.sh;
 # source .pkgs/install_local_packages.sh;
 
@@ -89,3 +89,11 @@ else
 fi;
 
 echo -e "${MSG}";
+
+exit 0;
+
+export KEYSTORE_PWD="obscuregobbledygook";
+export HOST_SERVER_NAME="http://moon.planet.sun:3000/";
+export ROOT_URL="${HOST_SERVER_NAME}";
+export YOUR_FULLNAME="You Yourself";
+export GITHUB_ORGANIZATION_NAME="YourOrg";

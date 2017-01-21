@@ -11,7 +11,6 @@ export default class extends React.Component {
     return (
 
       <div className="bs-docs-section clearfix">
-        Goodykins
         <Container />
       </div>
     );

@@ -97,3 +97,6 @@ export HOST_SERVER_NAME="http://moon.planet.sun:3000/";
 export ROOT_URL="${HOST_SERVER_NAME}";
 export YOUR_FULLNAME="You Yourself";
 export GITHUB_ORGANIZATION_NAME="YourOrg";
+meteor run --mobile-server=${HOST_SERVER_NAME}  --settings=settings.json;
+#
+

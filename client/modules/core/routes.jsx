@@ -10,6 +10,7 @@ import PostList from './containers/postlist';
 import Post from './containers/post';
 import NewPost from './containers/newpost';
 import ApolloList from './containers/apolist';
+import ApolloPost from './containers/apopost';
 
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(LayoutDefault);
@@ -46,6 +47,15 @@ export default function (injectDeps, {FlowRouter}) {
     action() {
       mount(MainLayoutCtx, {
         content: () => (<ApolloList/>)
+      });
+    }
+  });
+
+  FlowRouter.route('/apop', {
+    name: 'apollolist',
+    action() {
+      mount(MainLayoutCtx, {
+        content: () => (<ApolloPost/>)
       });
     }
   });

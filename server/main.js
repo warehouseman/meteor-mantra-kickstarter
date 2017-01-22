@@ -35,7 +35,7 @@ var haveLogglyToken = () => {
     return true;
   }
   return false;
-}
+};
 
 Meteor.startup( () => {
 
@@ -44,14 +44,17 @@ Meteor.startup( () => {
     WebApp.rawConnectHandlers.use( ( request, response, next ) => {
       // We need to echo the origin provided in the request
       const origin = request.headers.origin;
-      if ( origin ) response.setHeader( 'Access-Control-Allow-Origin', origin );
+      if ( origin ) { response.setHeader( 'Access-Control-Allow-Origin', origin ); }
 
       // For the preflight
-      if ( request.method == 'OPTIONS' ) {
-        response.setHeader( 'Access-Control-Allow-Headers', request.headers[ 'access-control-request-headers' ] );
+      if ( request.method === 'OPTIONS' ) {
+        response.setHeader(
+          'Access-Control-Allow-Headers'
+          , request.headers['access-control-request-headers']
+        );
         response.end();
       } else {
-        next();
+        return next();
       }
 
     });

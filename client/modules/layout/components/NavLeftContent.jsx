@@ -49,8 +49,8 @@ export default class extends React.Component {
     linksWidgets.push( optionsListWidgets );
     linksWidgets.push( optionsAddWidget);
 
-    let navColors = React.createElement(DropDown, { name: 'Colors', links: linksColors });
-    let navWidgets = React.createElement(DropDown, { name: 'Widgets', links: linksWidgets });
+    // let navColors = React.createElement(DropDown, { name: 'Colors', links: linksColors });
+    // let navWidgets = React.createElement(DropDown, { name: 'Widgets', links: linksWidgets });
 
     let navAccounts = React.createElement(DropDown, {name: 'Accounts', links: linksAccounts });
     let navAdmin = React.createElement(DropDown, { name: 'Admin', links: linksAdmin });

@@ -17,10 +17,11 @@ source .scripts/buildMeteor.sh;
 export BUILD_DIR="./.habitat/results";
 
 refreshApt;
-# install_local_packages;
+echo -e "### Preparing To Build AndroidAPK";
 PrepareToBuildAndroidAPK;
+echo -e "### Building AndroidAPK";
 BuildAndroidAPK;
-
+echo -e "### Building Meteor App";
 buildMeteor;
 
 echo -e "

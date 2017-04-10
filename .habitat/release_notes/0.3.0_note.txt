@@ -1,0 +1,8 @@
+0.3.0_note.txt
+# Before adding Apollo
+
+I'm about to release a whole new version of Meteor Mantra Kickstarter with far more enhancements than everyone might want, so I thought it appropriate to begin to make real formal releases.
+
+If MMKS at this stage of development is all you want then you just have to come back to this release.
+
+If the release note directory naming and structure seem odd, please note that future versions of MMKS will use HabitatForMeteor for deployment, and this is the release notes layout that it uses.

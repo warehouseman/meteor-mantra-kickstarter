@@ -1,16 +1,22 @@
+import { merge } from 'lodash';
+
 import publications from './publications';
 import methods from './methods';
 import addInitialUsers from './configs/initial_users.js';
-import { initPosts, initColors, initWidgets } from './configs/initial_adds.js';
+import { initPosts, initColors, initWidgets, initBooks } from './configs/initial_adds.js';
 
 import { WebApp } from 'meteor/webapp';
 import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema } from 'graphql-tools';
 
-import typeDefs from './api/schema';
-import resolvers from './api/resolvers';
 
-const schema = makeExecutableSchema({
+import typeDefs from '../lib/api/typeDefs';
+
+import bookResolvers from './api/bookResolvers';
+import authorResolvers from './api/authorResolvers';
+const resolvers = merge( bookResolvers, authorResolvers );
+
+const executableSchema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
@@ -18,8 +24,9 @@ const schema = makeExecutableSchema({
 createApolloServer({
   graphiql: true,
   pretty: true,
-  schema
+  schema: executableSchema
 });
+
 
 var haveLogglyToken = () => {
 
@@ -78,4 +85,5 @@ methods();
 initPosts();
 initColors();
 initWidgets();
+initBooks();
 addInitialUsers();

@@ -10,8 +10,6 @@ const cukeAge = '//x-cuke[@id="age"]';
 const cukeTitle = '//x-cuke[@id="title"]';
 const cukeContent = '//x-cuke[@id="content"]';
 
-const cukeColorsList = '//ul[@data-cuke="colors-list"]';
-
 const cukeInvalidAge = '//span[@class="help-block error-block"]';
 
 let age = '';
@@ -64,17 +62,6 @@ module.exports = function () {
     browser.url(_url);
   });
 
-/*
-  let link = '';
-  this.Given(/^I have elected to edit the "([^"]*)" item,$/, function (_color) {
-    link = '//a[@data-cuke="' + _color + '"]';
-    browser.waitForExist( link );
-    browser.click(link);
-    browser.waitForEnabled( cukeHrefEdit );
-    browser.click(cukeHrefEdit);
-  });
-*/
-
   this.When(/^I set 'Age' to "([^"]*)"$/, function (_age) {
     browser.setValue(cukeInpAge, _age);
   });
@@ -104,18 +91,6 @@ module.exports = function () {
 
 
 
-//   Scenario: Unable to update color
-// ------------------------------------------------------------------------
-/*
-  this.When(/^I attempt to edit the item,$/, function () {
-    href = cukeHrefEdit;
-    browser.waitForExist( href );
-  });
-*/
-// =======================================================================
-
-
-
 
 //   Scenario: Prohibited from add and from update
 // ------------------------------------------------------------------------
@@ -129,34 +104,4 @@ module.exports = function () {
     browser.url(_url);
   });
 
-/*
-  this.Then(/^I see the warning "([^"]*)"$/, function (_warning) {
-    expect(_warning).toEqual(browser.getText(cukeWarning));
-  });
-*/
-// =======================================================================
-
-
-//   Scenario: Hide item
-// ------------------------------------------------------------------------
-/*
-  this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _item) {
-    link = '//a[@data-cuke="' + _item + '"]';
-    browser.waitForEnabled( link );
-    browser.click(link);
-    let cukeHrefCmd = '//a[@data-cuke="' + _cmd + '-item"]';
-
-    browser.waitForEnabled( cukeHrefCmd );
-    browser.click( cukeHrefCmd );
-
-  });
-*/
-
-/*
-  this.Then(/^I no longer see that color record\.$/, function () {
-    browser.waitForEnabled( cukeColorsList );
-    let item = browser.elements(link);
-    expect(item.value.length).toEqual(0);
-  });
-*/
 };

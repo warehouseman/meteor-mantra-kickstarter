@@ -23,6 +23,7 @@ function refreshApt()
   sudo apt -y install curl git;
   sudo apt -y install build-essential g++;
   sudo apt -y install libpq-dev;
+  sudo apt -y install inotify-tools;
 
 #  sudo apt -y install yarn;
 

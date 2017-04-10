@@ -8,10 +8,6 @@ export const addComposer = ({context, clearErrors}, onData) => {
 
   onData(null, { exception } );
 
-  //    returns clearErrors when unmounting the component
-  //    Caution : actions always unmount the component,
-  //           so clearErrors will wipe action errors before than can be seen
-  // return clearErrors;
 };
 
 export const depsMapper = (context, actions) => ({
@@ -20,7 +16,9 @@ export const depsMapper = (context, actions) => ({
   context: () => context
 });
 
-export default (component) => composeAll(
+const Component = (component) => composeAll(
     composeWithTracker(addComposer),
     useDeps(depsMapper)
   )(component);
+
+export default Component;

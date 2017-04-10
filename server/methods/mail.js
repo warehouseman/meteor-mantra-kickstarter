@@ -20,7 +20,7 @@ mailer.resetPassword = function resetPassword(_email, _id, _validator) {
   Lgr.a = 'mailer.resetPassword';
 
   const cfg = Meteor.settings.public.PASSWORD_RESET;
-  const host = Meteor.settings.public.HOST_URI;
+  const host = process.env.HOST_SERVER_NAME || Meteor.settings.public.HOST_SERVER_NAME;
 
   mailer.sendMail({
     from: cfg.From,

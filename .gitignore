@@ -4,3 +4,4 @@ node_modules
 settings.json
 README.html
 *.log
+nohup.*

@@ -1,7 +1,7 @@
 import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
-import {singleComposer} from './single.js';
+import { singleComposer } from './single.js';
 
 export const editComposer = ({context, clearErrors}, onData) => {
 

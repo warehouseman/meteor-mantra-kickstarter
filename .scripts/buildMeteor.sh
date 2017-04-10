@@ -3,9 +3,10 @@
 pushd `dirname $0` > /dev/null; SCRIPTPATH=`pwd`; popd > /dev/null;
 PROJECT_ROOT=${SCRIPTPATH%/.scripts};
 
-
-source ${PROJECT_ROOT}/.scripts/trap.sh;
+set -e;
+# source ${PROJECT_ROOT}/.scripts/trap.sh;
 source ${PROJECT_ROOT}/.scripts/installMeteorFramework.sh;
+source ${PROJECT_ROOT}/.scripts/installMeteorApp.sh;
 # source ${PROJECT_ROOT}/.scripts/android/buildAndroid.sh;
 
 declare NOCOMMAND="command not found";
@@ -16,33 +17,35 @@ function buildMeteor()
 {
   installMeteorFramework;
 
-  if [[ $(find .pkgs/* -maxdepth 0 -type d | wc -l) -gt 0 ]]; then
+  installMeteorApp;
 
-    mkdir -p node_modules;
-    pushd .pkgs >/dev/null;
+  # if [[ $(find .pkgs/* -maxdepth 0 -type d | wc -l) -gt 0 ]]; then
 
-      echo -e "
-      ~~~~~~~~~~  Copy external modules to node_modules directory ~~~~~~~~~~~~~~~~~~~~~~";
-      for dir in ./*/
-      do
-        DNAME=${dir/#.\/};
-        DNAME=${DNAME/%\//};
-        echo "~~~~~~~~~~  Copying module '${DNAME}' ~~~~~~~~~~~~~~~~~~~~~~";
-        rm -fr ../node_modules/${DNAME};
-        cp -r ${DNAME} ../node_modules;
-      done
+  #   mkdir -p node_modules;
+  #   pushd .pkgs >/dev/null;
 
-      echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+  #     echo -e "
+  #     ~~~~~~~~~~  Copy external modules to node_modules directory ~~~~~~~~~~~~~~~~~~~~~~";
+  #     for dir in ./*/
+  #     do
+  #       DNAME=${dir/#.\/};
+  #       DNAME=${DNAME/%\//};
+  #       echo "~~~~~~~~~~  Copying module '${DNAME}' ~~~~~~~~~~~~~~~~~~~~~~";
+  #       rm -fr ../node_modules/${DNAME};
+  #       cp -r ${DNAME} ../node_modules;
+  #     done
 
-    popd >/dev/null;
+  #     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
-  fi;
+  #   popd >/dev/null;
 
-  if [[ ! -d ./node_modules/react ]]; then
-    echo -e "
-    ### Building 3rd party npm packages.";
-    meteor npm -y install --production;
-  fi;
+  # fi;
+
+  # if [[ ! -d ./node_modules/react ]]; then
+  #   echo -e "
+  #   ### Building 3rd party npm packages.";
+  #   meteor npm -y install --production;
+  # fi;
 
   mkdir -p ${BUILD_DIR};
   echo -e "
@@ -64,6 +67,8 @@ function buildMeteor()
     popd >/dev/null;
     tar zcf ${APP_NAME}.tar.gz ${APP_NAME};
   popd >/dev/null;
+
+  mkdir -p /tmp/db; touch /tmp/db/mmks.sqlite
 
 }
 

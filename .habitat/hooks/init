@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+echo "~~~~~~~~~~  Habitat hook - init  »»»»»»»»»»»»";
+ln -sf {{pkg.path}}/main.js                   {{pkg.svc_var_path}}
+ln -sf {{pkg.path}}/star.json                 {{pkg.svc_var_path}}
+ln -sf {{pkg.path}}/template.settings.json.sh {{pkg.svc_var_path}}
+ln -sf {{pkg.path}}/server                    {{pkg.svc_var_path}}
+ln -sf {{pkg.path}}/programs                  {{pkg.svc_var_path}}
+echo "««««««««««  Habitat hook - init  ------------";

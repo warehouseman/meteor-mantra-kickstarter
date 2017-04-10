@@ -1,0 +1,66 @@
+0.4.0_note.txt
+# This is release 0.4.0
+## Synopsis:
+Enhancement (all): Apollo, Uniforms, Sequelize, Postgres, SqlLite, HabitatForMeteor, Knex
+
+## Description:
+
+This release adds three major areas of functionality, as well updating to all latest versions of Meteor, Meteor packages and NPM packages where possible. Additionally it introduces a release regimen for the kickstarter.
+
+### Apollo & Uniforms
+
+A separate NPM module [mmks_book](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/.pkgs/mmks_book) demonstrates the client side of an Apollo app and uses Uniforms as the form interface.
+
+The corresponding GraphQL schema can be found in the [./lib/api](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/lib/api) directory and the Sequelize schema and database connectors in [./server/api](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/server/api)
+
+### Habitat For Meteor
+
+[Habitat For Meteor](https://github.com/your0rg/HabitatForMeteor) is an alpha stage deployment alternative for Meteor. The Meteor Mantra Kickstarter has unobtrusive elements of Habitat For Meteor under the .habitat directory.  That directory can be safely deleted, if not desired.
+
+
+
+## Significant commits:
+2017-04-07 : Test (cd): Test semver.sh Pull Request Release 0.2.80
+2017-03-27 : Bug (install): Requires predefined HOST_SERVER_NAME to get correct secrets.sh
+2017-03-26 : Dev (cd): Execution markers in habitat init and run hooks
+2017-03-24 : Enhancement (cd): Bundle 'template.settings.json.sh' instead of 'settings.json'.
+2017-03-23 : Enhancement (scripts): Now 'settings.json' is generated from template and envvars
+2017-03-19 : Doc (android): APK correctly reported
+2017-03-19 : Bug (android): Previous APK gets bundled into current APK
+2017-03-19 : Bug (ci): Cache directory for Meteor. Also :  - preflight check can be run explicitly  - settings refer to latest test database back up -- http://bit.ly/mmks170317G
+2017-03-17 : Enhancement (ci): Better use of existing scripts and of available PostgreSQL
+2017-03-16 : Admin (versions):  Upgrade Meteor and Android to all latest versions
+2017-03-16 : Bug (ci):  CircleCI's version of chrome is out of date
+2017-03-16 : Bug (ci): Enforce Meteor version
+2017-03-15 : Enhancement (api): Modularize resolvers
+2017-03-15 : Enhancement (api):  Modularize Graphql types, queries and mutations
+2017-03-12 : Bug (mobile):Corrected APK name in public HREF
+2017-03-11 : Enhancement (responsivity): Trying 'viewport' meta tag
+2017-03-05 : Enhancement (settings): Adds DB backup URL reference.
+2017-03-04 : Bug (test): Test directory gets created in preflight check.
+2017-03-03 : Enhancement (api): Pass Postgres credentials in settings.json
+2017-03-03 : Experiment (api):  Tentative "core/postgresql" connection settings
+2017-03-02 : Bug (plan): Meteor settings removed from hart bundle
+2017-02-22 : Enhancement (deploy): Add HabitatForMeteor control files
+2017-02-21 : Enhancement (scripts): Adds preflight check wizard for env vars
+2017-02-20 : Enhancement (build): Clarifies use of ngrok for spontaneous hosting
+2017-02-20 : Enhancement (e2e): Tests that queries retrieve latest mutated records
+2017-02-20 : Enhancement (api): Refresh queries following mutations
+2017-02-19 : Enhancement (books): Clean up form component. Refetch after new book insert.
+2017-02-19 : Bug (ci): No longer try to use 'npm install'
+2017-02-19 : Bug (ci): CI env var correctly trapped
+2017-02-19 : Enhancement (ci): Overload 'npm install' command with our installer.
+2017-02-16 : Enhancement (doc): Describe setup of Android /etc/hosts file
+2017-02-15 : Bug (db): Knex always called during install/build. Purge all apk files before building new.
+2017-02-14 : Bug (ci): Create path for SQLite file
+2017-02-14 : Bug (ci): CI script has missing database prep.
+2017-02-14 : Enhancement (api): Record "delete" (hiding) working and passing tests
+2017-02-13 : Enhancement (api): Adds: 1) SQLite for dev mode 2) Database record hiding.
+2017-02-12 : Enhancement (mmks_book): Add Apollo and Uniforms (lacks record delete)
+2017-02-05 : Enhancement (forms):  Try adding custom attributes
+2017-02-04 : Enhancement (linting): Add script to lint packaged modules
+2017-02-04 : Enhancement (graphql): mmks_book module creates new database record via graphql mutation
+2017-01-27 : Enhancement (api): Add new module (partly) with GraphQL query. Clone mmks_widget pkg to mmks_book.
+2017-01-23 : Enhance (scripts): Verify sufficient available memory before building
+2017-01-23 : Upgrade (all): Bring up to date with 'warehouseman/try_apollo'
+

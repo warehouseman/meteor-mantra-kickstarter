@@ -20,10 +20,12 @@ export default class extends React.Component {
     const enablePostsAdd = this.props.permissions['posts:add'];
     const enableColorsAdd = this.props.permissions['colors:add'];
     const enableWidgetsAdd = this.props.permissions['widgets:add'];
+    const enableBooksAdd = this.props.permissions['books:add'];
 
     Lgr.verbose(`enablePostsAdd permitted? : ${enablePostsAdd}.`);
     Lgr.verbose(`enableColorsAdd permitted? : ${enableColorsAdd}`);
     Lgr.verbose(`enableWidgetsAdd permitted? : ${enableWidgetsAdd}`);
+    Lgr.verbose(`enableBooksAdd permitted? : ${enableBooksAdd}`);
 
     var linksAdmin = [];
     linksAdmin.push({ url: '/users', name: '/users', enabled: true} );
@@ -49,16 +51,16 @@ export default class extends React.Component {
     linksWidgets.push( optionsListWidgets );
     linksWidgets.push( optionsAddWidget);
 
-    // let navColors = React.createElement(DropDown, { name: 'Colors', links: linksColors });
-    // let navWidgets = React.createElement(DropDown, { name: 'Widgets', links: linksWidgets });
+    var linksBooks = [];
+    let optionsListBooks = { url: 'List Books', name: '/books', enabled: true };
+    let optionsAddBook = { url: 'Add Book', name: '/books/add', enabled: enableBooksAdd };
+    linksBooks.push( optionsListBooks );
+    linksBooks.push( optionsAddBook);
 
     let navAccounts = React.createElement(DropDown, {name: 'Accounts', links: linksAccounts });
     let navAdmin = React.createElement(DropDown, { name: 'Admin', links: linksAdmin });
 
     let linksTasks = [];
-    linksTasks.push({ name: 'List APosts', url: '/apo', enabled: true } );
-    linksTasks.push({ name: 'Add APost', url: '/new-post', enabled: true } );
-    linksTasks.push({ divider: true } );
     linksTasks.push({ name: 'List Posts', url: '/', enabled: true } );
     linksTasks.push({ name: 'Add Post', url: '/new-post', enabled: true } );
     linksTasks.push({ divider: true } );
@@ -67,6 +69,8 @@ export default class extends React.Component {
     linksTasks.push({ divider: true } );
     linksTasks.push({ name: 'List Widgets', url: '/widgets', enabled: true } );
     linksTasks.push({ name: 'Add Widget', url: '/widgets/add', enabled: enableWidgetsAdd } );
+    linksTasks.push({ name: 'List Books', url: '/books', enabled: true } );
+    linksTasks.push({ name: 'Add Book', url: '/books/add', enabled: enableBooksAdd } );
     let navTasks = React.createElement(DropDown, { name: 'Tasks', links: linksTasks });
 
     return (

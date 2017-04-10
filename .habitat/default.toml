@@ -1,0 +1,6 @@
+# Message of the Day
+message = "Hello, Happy Meteor People!"
+
+mongo_url = "mongodb://meteor:REPLACE_WITH_REAL_PASSWORD@localhost:27017/todos"
+root_url = "http://localhost"
+port = "3000"

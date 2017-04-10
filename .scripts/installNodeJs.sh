@@ -16,7 +16,7 @@ function installNodeJs()
   fi
 
   mkdir -p ${HOME}/.npm-global;
-  if [ -z $(cat ~/.profile | grep ".npm-global") ]; then
+  if (( $(cat ~/.profile | grep -c '.npm-global') < 1 )); then
     echo -e "
 if [ -d "\${HOME}/.npm-global/bin" ]; then
   export PATH=\${HOME}/.npm-global/bin:\$PATH
@@ -34,10 +34,10 @@ fi;
   npm config set prefix '${HOME}/.npm-global';
 
   echo "### Npm and NodeJS installed ";
-  
+
   NCU_ID="npm-check-updates";
   NCU_VER=$(npm view ${NCU_ID} version 2>/dev/null) || npm install -g npm-check-updates;
-  echo -e "### '${NCU_ID}@$(npm view ${NCU_ID} version)' installed";
+  # echo -e "### '${NCU_ID}@$(npm view ${NCU_ID} version)' installed";
 
 }
 

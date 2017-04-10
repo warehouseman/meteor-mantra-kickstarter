@@ -1,9 +1,26 @@
 import _lgr from '/lib/logging/client/clientLogger';
-const Lgr = new _lgr(__filename, 'warn', true);
+const Lgr = new _lgr(__filename, 'info', true);
 
 export default {
 
   // create
+  // create({Meteor, LocalState, FlowRouter}, data, mutate) {
+  //   Lgr.a = 'create';
+  //   Lgr.info("Create record with :: ", data.title);
+  //   console.log("Colors.create.  With : ", data);
+  //   let result = mutate({
+  //     variables: {
+  //       title : data.title,
+  //       content: data.content,
+  //       pages: data.pages,
+  //       authorId: data.author
+  //     }
+  //   });
+  //   console.log("Colors.created. Result : ", result);
+
+  // },
+
+  // add
   add({Meteor, LocalState, FlowRouter}, data) {
     Lgr.a = 'add';
     const _id = Meteor.uuid();

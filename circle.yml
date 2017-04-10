@@ -3,7 +3,7 @@
 general:
   branches:
     only:
-      - apollo
+      - try_apollo
 
 notify:
   webhooks:

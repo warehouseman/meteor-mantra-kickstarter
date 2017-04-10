@@ -308,13 +308,14 @@ function PrepareToBuildAndroidAPK() {
   echo "   ~                                  Your organization is  : " ${YOUR_ORGANIZATION_NAME}
   echo "   ~ Align android-sdk bundle on "${ZIPALIGN_BOUNDARY}"-byte boundary when using : " ${ZIPALIGN_PATH}/zipalign
   echo "   ~                              Temporary build directory : " ${TMP_DIRECTORY}
-  echo "### ~   ~   ~    "
+  echo "### ~   ~   ~    ";
 
   set +e;
   set -e;
-  local KTEXISTS=0;
-  [ -f ${HOME}/.keystore ] && KTEXISTS=$(keytool -list -v  -storepass ${KEYSTORE_PWD} | grep "Alias name" | grep -c "${APP_NAME}");
+
   declare CCODE="";
+
+  echo "### Asking ip-api.com for country code.";
   if ping -c 1 -w 5 ip-api.com; then
     CCODE=$(curl -s ip-api.com/json | jq '.countryCode');
     echo "### Will set key pair country code to '${CCODE}'.";
@@ -330,6 +331,9 @@ function PrepareToBuildAndroidAPK() {
     exit 1;
   fi;
 
+  local KTEXISTS=0;
+  echo "### Checking for key store and pre-existing alias.";
+  [ -f ${HOME}/.keystore ] && KTEXISTS=$(keytool -list -v  -storepass ${KEYSTORE_PWD} | grep "Alias name" | grep -c "${APP_NAME}");
   if [[ ${KTEXISTS} -lt 1 ]]; then
     echo "Creating key pair for '${APP_NAME}'.";
     until keytool -genkeypair -dname "cn=${YOUR_FULLNAME}, ou=IT, o=${YOUR_ORGANIZATION_NAME}, c=${CCODE}" \

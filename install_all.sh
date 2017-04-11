@@ -117,8 +117,8 @@ validateMeteorSettings;
 #   grep "LOGGLY_SUBDOMAIN" settings.json;
 # fi;
 
+refreshApt;
 if [[ "${CI:-false}" == "false" ]]; then
-  refreshApt;
   installJava;
   installNodeJs;
   installAndroid;

@@ -14,6 +14,8 @@ tracker #  @1.1.1              # Meteor's client-side reactive programming libra
 es5-shim #  @4.6.15            # ECMAScript 5 compatibility for older browsers.
 ecmascript #  @0.6.1           # Enable ECMAScript2015+ syntax in app code
 
+apollo
+
 kadira:flow-router
 reactive-dict #  @1.1.8
 audit-argument-checks #  @1.0.7

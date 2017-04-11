@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+echo "~~~~~~~~~~  Habitat hook - run!  »»»»»»»»»»»»»";
+cd {{pkg.svc_var_path}}
+
+export MONGO_URL={{cfg.mongo_url}};
+export ROOT_URL={{cfg.root_protocol}}://{{cfg.root_domain}}{{cfg.root_port}};
+export PORT={{cfg.port}};
+
+export METEOR_SETTINGS_TEMPLATE_FILE="template.settings.json.sh";
+export METEOR_SETTINGS_FILE="settings.json";
+export SOURCE_SECRETS_FILE="/home/hab/.ssh/hab_vault/{{cfg.root_domain}}/secrets.sh";
+
+echo "~~~~~~~~~~~~  {{cfg.message}}   ~~~~~~~~~~~~~~~";
+. ${SOURCE_SECRETS_FILE};
+sh ${METEOR_SETTINGS_TEMPLATE_FILE} > ${METEOR_SETTINGS_FILE};
+export METEOR_SETTINGS="`cat ${METEOR_SETTINGS_FILE}`";
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+
+echo "###########################################################";
+
+echo "########## ROOT_URL           >{{cfg.root_protocol}}://{{cfg.root_domain}}{{cfg.root_port}}< ";
+echo "########## ROOT_URL           >${ROOT_URL}< ";
+echo "########## Base directory     {{pkg.svc_path}} ";
+echo "########## Current directory  {{pkg.svc_var_path}} ";
+echo "########## Config directory   {{pkg.svc_config_path}} ";
+echo "########## Mongo URL          {{cfg.mongo_url}}";
+echo "########## Meteor app URL     {{cfg.root_url}} ";
+echo "########## Meteor app port    {{cfg.port}} ";
+echo "########## Settings template  ${METEOR_SETTINGS_TEMPLATE_FILE} ";
+echo "########## Meteor settings    ${METEOR_SETTINGS_FILE} ";
+echo "########## Secrets            ${SOURCE_SECRETS_FILE} ";
+echo "########## PG_BKP             >${PG_BKP}< ";
+echo "########## LOGGLY_SUBDOMAIN   >$(cat settings.json | jq .LOGGLY_SUBDOMAIN)< ";
+echo "###########################################################";
+
+
+mkdir -p {{pkg.svc_var_path}}/logs;
+touch {{pkg.svc_var_path}}/logs/stdout.log;
+touch {{pkg.svc_var_path}}/logs/stderr.log;
+
+# `exec` makes it so the process that the Habitat supervisor uses is
+# 'node main.js`, rather than the run hook itself.
+
+exec node main.js >{{pkg.svc_var_path}}/logs/stdout.log 2>{{pkg.svc_var_path}}/logs/stderr.log
+
+echo "«««««««««««  Habitat hook - run  ~~~~~~~~~~~~";

@@ -40,7 +40,7 @@ function installChrome()
 {
   if aptNotYetInstalled "${APT_CHROME}"; then installLatestChrome; fi;
 
-  if [[  "$(${SHL_CHROME} --version | cut -d " " -f 3)" < "54.0.2840.0" ]]; then
+  if [[  "$(${SHL_CHROME} --version | cut -d " " -f 3)" < "55.0.2883.0" ]]; then
     echo "Need to upgrade Chrome to 54.0.2840.0 or later";
     installLatestChrome;
   fi;

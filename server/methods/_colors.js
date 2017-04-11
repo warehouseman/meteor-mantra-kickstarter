@@ -1,5 +1,3 @@
-
-
 import {Colors, _Colors, AccessControl} from '../../lib/collections';
 
 import App from '/lib/app';
@@ -10,7 +8,7 @@ import {check} from 'meteor/check';
 import _lgr from '/lib/logging/server/serverLogger';
 const Lgr = new _lgr( __filename, 'warn' );
 
-const module = 'colors';
+const nameModule = 'colors';
 
 export default function () {
   Meteor.methods({
@@ -18,7 +16,7 @@ export default function () {
     '_colors.add'(data, _id) {
       Lgr.a = '_colors.add';
       const action = 'add';
-      const ap = AccessControl.findAccessPoint( module, action, App.group );
+      const ap = AccessControl.findAccessPoint( nameModule, action, App.group );
 
       const authorized = Roles.userIsInRole(
         Meteor.userId(),
@@ -67,7 +65,7 @@ export default function () {
       });
       check(_id, String);
 
-      const ap = AccessControl.findAccessPoint( module, action, App.group );
+      const ap = AccessControl.findAccessPoint( nameModule, action, App.group );
       const authorized = Roles.userIsInRole(
         Meteor.userId(),
         ap.trusted,

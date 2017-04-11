@@ -53,6 +53,32 @@ export const initColors = () => {
 
 };
 
+export const initBooks = () => {
+  Lgr.a = 'initBooks';
+
+  /* eslint-disable no-multi-spaces */
+  const accessPoints = [];
+  accessPoints.push( [ 'books', 'delete', 'Administrator', Groups.defaultGroup ] );
+  accessPoints.push( [ 'books', 'update', 'Staff',         Groups.defaultGroup ] );
+  accessPoints.push( [ 'books',    'add', 'Member',        Groups.defaultGroup ] );
+  accessPoints.push( [ 'books', 'delete', 'Owner',         Groups.subsidiaryGroup ] );
+  accessPoints.push( [ 'books', 'update', 'Administrator', Groups.subsidiaryGroup ] );
+  accessPoints.push( [ 'books',    'add', 'Administrator', Groups.subsidiaryGroup ] );
+  /*  eslint-enable no-multi-spaces  */
+
+  _.each(accessPoints, function (ap) {
+    AccessControl.upsertRecord(ap[0], ap[1], TrustLevel[ap[2]], ap[3]);
+  });
+
+  Lgr.info( ' Claims initialized => ' );
+
+  Lgr.verbose( ' Access Point trust level : ',
+    AccessControl.findOne( { module: 'books', action: 'add', group: Groups.defaultGroup } ).level
+  );
+
+};
+
+
 export const initWidgets = () => {
   Lgr.a = 'initWidgets';
 
@@ -77,3 +103,4 @@ export const initWidgets = () => {
   );
 
 };
+

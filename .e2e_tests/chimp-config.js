@@ -2,8 +2,8 @@ module.exports = {
 
   // - - - - WEBDRIVER-IO  - - - -
   webdriverio: {
-    waitforTimeout: 15000,
-    waitforInterval: 15000,
+    waitforTimeout: 20000,
+    waitforInterval: 20000,
     logOutput: '/tmp/logs/meteor/'
   },
 

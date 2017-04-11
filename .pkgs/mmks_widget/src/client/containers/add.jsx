@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Sidebar from '../containers/sidebar.js';
+import Sidebar from '../containers/sidebar';
 
-import dataComposer from '../composers/add.js';
-import Component from '../components/_form.js';
+import dataComposer from '../composers/add';
+import Component from '../components/_form';
 
 import Utils from '../../utils';
 

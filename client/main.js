@@ -16,6 +16,7 @@ import AccessControlComposer from './access_control/acComposer';
 import Authorized from './access_control/acContainer.js';
 
 import { Client as _widget } from 'mmks_widget';
+import { Client as _book } from 'mmks_book';
 
 
 /* eslint-disable no-console   */
@@ -39,4 +40,13 @@ let Widget = _widget.new({
 });
 app.loadModule(Widget);
 
+let Book = _book.new({
+  Logger,
+  LayoutDefault,
+  AccessControlComposer,
+  Authorized
+});
+app.loadModule(Book);
+
 app.init();
+console.log('App initialized');

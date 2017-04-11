@@ -6,6 +6,8 @@ const urlLogout = 'http://localhost:3000/logout';
 const cukeLogin = '//x-cuke[@id="login"]';
 
 const cukeHrefLogin = '//a[@data-cuke="user-control-login"]';
+const classBrand = '//a[@class="navbar-brand"]';
+
 const cukeInpEmail = '//input[@data-cuke="email"]';
 const cukeInpPwd = '//input[@data-cuke="password"]';
 
@@ -14,6 +16,10 @@ const cukeAcctEmail = '//x-cuke[@id="acct-email"]';
 
 const cukeBtnSubmit = '//button[@data-cuke="save-item"]';
 const cukeInpContent = '//textarea[@data-cuke="content"]';
+
+const cukeDivSubmit = '//div[@data-cuke="save-item"]/input';
+const cukeDivContent = '//div[@data-cuke="content"]/*/textarea';
+const cukeErrorMessage = '//div[@data-cuke="errorMessage"]/*/div';
 
 const cukeTitle = '//x-cuke[@id="title"]';
 const cukeContent = '//x-cuke[@id="content"]';
@@ -52,11 +58,29 @@ module.exports = function () {
 //  Scenario: Log in as administrator
 // ------------------------------------------------------------------------
 
+
+  this.Given(/^I have opened the main page : "([^"]*)"$/, function (urlMain) {
+    browser.setViewportSize({ width: 1024, height: 480 });
+    browser.timeouts('implicit', 60000);
+    browser.timeouts('page load', 60000);
+
+    browser.url(urlMain);
+    browser.waitForVisible(classBrand);
+  });
+
+  this.Then(/^I see the login menu item\.$/, function () {
+    browser.waitForVisible(cukeHrefLogin);
+  });
+
+  this.Then(/^I see the navigation header\.$/, function () {
+    browser.waitForVisible(classBrand);
+  });
+
   this.Given(/^I have opened the login page : "([^"]*)"$/, function (urlLogin) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
     browser.url(urlLogout);
-    browser.waitForVisible(cukeLogin);
+    browser.waitForExist(cukeLogin);
     browser.url(urlLogin);
 
     server.call('_users.removeByEmail', 'jj@gmail.com');
@@ -85,10 +109,20 @@ module.exports = function () {
     browser.click(cukeBtnSubmit);
   });
 
+  this.When(/^I submit the item,$/, function () {
+    browser.click(cukeDivSubmit);
+  });
+
   this.When(/^I save the item with new content "([^"]*)",$/, function (_content) {
     content = _content;
     browser.setValue(cukeInpContent, content);
     browser.click(cukeBtnSubmit);
+  });
+
+  this.When(/^I submit the item with new content "([^"]*)",$/, function (_content) {
+    content = _content;
+    browser.setValue(cukeDivContent, content);
+    browser.click(cukeDivSubmit);
   });
 
   this.Then(/^I see the record with the new content\.$/, function () {
@@ -103,6 +137,16 @@ module.exports = function () {
 
     const msg = browser.getText(cukeBadContent);
     expect( msg ).toEqual(_msg);
+  });
+
+  this.Then(/^I see the error message, "([^"]*)"\.$/, function (_msg) {
+    browser.waitUntil(function () {
+      return browser.getText(cukeErrorMessage).length > 0;
+    }, 5000, 'expected text to be there after 5s');
+
+    const msg = browser.getText(cukeErrorMessage);
+    expect( msg ).toEqual(_msg);
+
   });
 
   this.Given(/^I have elected to edit the "([^"]*)" item,$/, function (_item) {
@@ -134,21 +178,41 @@ module.exports = function () {
     expect(_warning).toEqual(browser.getText(cukeWarning));
   });
 
+//  let cnt = 0;
+//  let itm = '';
   this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _item) {
+//    itm = _item;
     link = '//a[@data-cuke="' + _item + '"]';
     browser.waitForEnabled( link );
+//    browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
     browser.click(link);
     let cukeHrefCmd = '//a[@data-cuke="' + _cmd + '-item"]';
-
     browser.waitForEnabled( cukeHrefCmd );
     browser.click( cukeHrefCmd );
 
   });
 
   this.Then(/^I no longer see that record\.$/, function () {
+// console.log("Waiting for ", cukeItemsList);
     browser.waitForEnabled( cukeItemsList );
-    let item = browser.elements(link);
-    expect(item.value.length).toEqual(0);
+    browser.refresh();
+
+// console.log("Waiting for ", cukeItemsList);
+    browser.waitForEnabled( cukeItemsList );
+    browser.timeouts('implicit', 1000);
+//    browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
+// console.log("Getting ", link);
+    let listItem = browser.elements(link);
+    browser.waitUntil(function () {
+// console.log(link + ' still there?');
+//      browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
+      listItem = browser.elements(link);
+// console.log("Got list item ", listItem);
+// console.log("Got list item.value ", listItem.value);
+// console.log("Got list item.value.length ", listItem.value.length);
+      return ( listItem.value.length < 1 );
+    }, 10000, ' what the?', 2000);
+    expect(listItem.value.length).toEqual(0);
   });
 
 // =======================================================================

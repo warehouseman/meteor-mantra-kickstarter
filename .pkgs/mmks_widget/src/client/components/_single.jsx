@@ -41,11 +41,13 @@ export default class extends React.Component {
         <p>
           <x-cuke id="content">{record.content}</x-cuke>
           <br />
+          <br />
+          <br />
           <a data-cuke='edit-item' href={'/widgets/' + _id + '/edit'}
                                                         className={ editAllowed }>
             edit
           </a>
-          &nbsp;|&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <a data-cuke='delete-item' href="#" onClick={this.hideRecord.bind(this)}
                                                         className={ deleteAllowed }>
             delete

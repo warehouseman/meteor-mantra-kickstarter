@@ -39,8 +39,10 @@ dependencies:
 
 
 test:
-  post:
+  pre:
     - node --version; npm --version; java -version; ${METEOR_CMD} --version;
-    - sleep 4m
+    - export IDX=10; while printf "."; ! httping -qc1 http://localhost:3000 && ((IDX-- > 0)); do sleep 5 ; done;
+
+  post:
     - ${CHIMP_CMD} .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
 

@@ -6,9 +6,9 @@
 
 ### tl, dr!
 
-This a starter app for Meteor developers who want to structure their work according to the [Mantra Specification](https://kadirahq.github.io/mantra/).
+This is a starter app for Meteor developers who want to structure their work according to the [Mantra Specification](https://kadirahq.github.io/mantra/).
 
-Please feel welcome to comment on any experience you have with it in the on going discussion [here](https://talk.mantrajs.com/) ( for reference, prior discussion venues are available [here](https://talk.mantrajs.com/) and, even earlier, [here](https://github.com/kadirahq/mantra/issues/3) )
+Please feel welcome to comment on any experience you have with it in the [Meteor Forum](https://forums.meteor.com/), but flag with @warehouseman to get my attention. ( for reference, prior discussion venues are available [here](https://talk.mantrajs.com/) and, even earlier, [here](https://github.com/kadirahq/mantra/issues/3) )
 
 
 ### Features
@@ -16,26 +16,26 @@ Please feel welcome to comment on any experience you have with it in the on goin
 You get :
 
 * a thoroughly tested application from which to launch your application development
-* [single command installation](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/install_all.sh) of all dependencies and support services
-* [single command build](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/build_all.sh) of Android APK, with download from app menu bar.
-* [database flexibility](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/server/api/db-connectors.js#L5) ready for SQLite for development and PostgreSQL for production, thanks to [Sequelize](http://docs.sequelizejs.com/en/v3/) and [Apollo](http://www.apollodata.com/).
-* [database migration](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/server/api/.knex) with [knex](http://knexjs.org/)
-* full [end to end, functional testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
-* continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter).  (Latest build result :: [![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/try_apollo.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/try_apollo))
-* [unit testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon
-* client side **and** server side [logging](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/try_apollo/lib/logging) to [Loggly](https://www.loggly.com/):
+* [single command installation](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/install_all.sh) of all dependencies and support services
+* [single command build](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/build_all.sh) of Android APK, with download from app menu bar.
+* [database flexibility](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/api/db-connectors.js#L5) ready with SQLite for development and PostgreSQL for production, thanks to [Sequelize](http://docs.sequelizejs.com/en/v3/) and [Apollo](http://www.apollodata.com/).
+* [database seeding](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/api/.knex) with [knex](http://knexjs.org/)
+* full [end to end, functional testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
+* continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter).  (Latest build result :: [![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk))
+* [unit testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon
+* client side **and** server side [logging](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/lib/logging) to [Loggly](https://www.loggly.com/):
     * [logatim](https://github.com/sospedra/logatim): isomorphic multilevel logging, that feeds into
     * [winston](https://github.com/winstonjs/winston) server side transports
-* [Mailgun ready](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/server/methods/mail.js) password reset example
+* [Mailgun ready](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/methods/mail.js) password reset example
 * several different CRUD examples, including
-    * an isomorphic MongoDB CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/try_apollo/.pkgs/mmks_widget), which contains all client **and** server elements, as well as all Chimp tests
-    * a isomorphic Apollo CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/try_apollo/.pkgs/mmks_book), which contains all client **and** server elements, as well as all Chimp tests
+    * an isomorphic MongoDB CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/.pkgs/mmks_widget), which contains all client **and** server elements, as well as all Chimp tests
+    * a isomorphic Apollo CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/.pkgs/mmks_book), which contains all client **and** server elements, as well as all Chimp tests
     * user management CRUD module: user registration, password reset, login, logout
-* full [multi-level access control](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/lib/access_control.js) authorizations:
+* full [multi-level access control](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/lib/access_control.js) authorizations:
     * levels: Owner, Administrator, Staff, Member, Customer, Registered
-    * acts on: [menu items](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/client/modules/layout/components/NavLeftContent.jsx#L40), React [components](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/client/modules/_colors/components/_sidebar.jsx#L24) and server side [methods](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/try_apollo/server/methods/_colors.js#L23)
+    * acts on: [menu items](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/layout/components/NavLeftContent.jsx#L40), React [components](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/_colors/components/_sidebar.jsx#L24) and server side [methods](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/methods/_colors.js#L23)
 * uses [mantra-core](https://github.com/mantrajs/mantra-core) modularization, with application wide state, composed in pure React JS components with [react-komposer](https://github.com/kadirahq/react-komposer) (Blaze is not used at all)
-* [Astronomy v2](https://github.com/jagi/meteor-astronomy) model schema
+* [Astronomy v2](https://github.com/jagi/meteor-astronomy) model schema **AND/OR** [GraphQL](https://github.com/apollographql) model schema
 * forms based development examples with:
     * [uniforms](https://github.com/vazco/uniforms): in the 'books' module
     * [tcomb-form](https://github.com/gcanti/tcomb-form): for most of the CRUD modules
@@ -96,8 +96,8 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 1. Switch over to our branch :
 
     ```
-    git checkout try_apollo;
-    git branch # verify being on try_apollo;
+    git checkout trunk;
+    git branch # verify being on trunk;
 
     ```
 
@@ -105,31 +105,45 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 
     ```
     meteor npm run install_all;
+    
+    ```
+
+1. Prepare your `settings.json` file :
+    
+    Using `template.settings.json.sh` you can generate your `settings.json` file automatically from environment variables.  So, if you edit the file `settings.sh` and then [source](https://superuser.com/questions/46139/what-does-source-do) it, you will load the entries as environment variables
+
+    ```
+    cat EXAMPLE_settings.sh;
+        export MAILGUN_DOMAIN="";
+        export MAILGUN_KEY="";
+        export LOGGLY_SUBDOMAIN="";
+        export LOGGLY_TOKEN="";
+        export PG_DB=""; # PostgreSQL database name
+        export PG_UID=""; # PostgreSQL user ID of Meteor app
+        export PG_PWD=""; # PostgreSQL user password of Meteor app
+        export PG_HST=""; # PostgreSQL server host name
+        export PG_BKP=""; # HTTP URL of a PostgreSQL database backup
+
+    cp EXAMPLE_settings.sh settings.sh;
+    nano settings.sh;
+    source settings.sh;
 
     ```
 
-1. Prepare your `settings.json` :
+    You can keep that file out of harm's way, and using `template.settings.json.sh` when needed to create `settings.json` just before launching your Meteor app.
+    ```
+    ./template.settings.json.sh > `settings.json`
 
     ```
-    cp settings.json.example settings.json;
-    nano settings.json;
 
-    ```
-    You'll need to go [get your Mailgun API key.](https://mailgun.com/app/dashboard) and [your Loggly domain token](https://www.loggly.com/),  then correct these settings :
-    ```
-    >   "HOST_SERVER_NAME": "localhost:3000",
-    >   "MAILGUN_DOMAIN": "yourhost.yourpublic.work",
-    >   "MAILGUN_KEY": "(As if I'm gonna to leave THAT lying around.)  A valid key has 36 characters and begins with 'key-'.",
-    >   "LOGGLY_SUBDOMAIN": "yourwork",
-    >   "LOGGLY_TOKEN": " ( not this either ) ",
-    ```
+    Obviously, you'll need to go [get your Mailgun API key.](https://mailgun.com/app/dashboard) and [your Loggly domain token](https://www.loggly.com/),  to set the corresponding values in `settings.sh`.
 
     * Note : If you don't care whether password reset works, you don't need Mailgun.  In that case, you can use this as your API key ...  ```key-dead0dead0dead0dead0dead0dead000```.
 
 1. Now we can run Meteor and explore at [http://localhost:3000](http://localhost:3000) :
 
     ```
-    meteor --settings=settings.json;
+    meteor npm run run_development;
 
     ```
     (The first time through, you may see it terminate with the message `killed`.  Just run it again.)

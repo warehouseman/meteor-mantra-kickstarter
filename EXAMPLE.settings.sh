@@ -1,0 +1,9 @@
+export MAILGUN_DOMAIN="";
+export MAILGUN_KEY="";
+export LOGGLY_SUBDOMAIN="";
+export LOGGLY_TOKEN="";
+export PG_DB=""; # PostgreSQL database name
+export PG_UID=""; # PostgreSQL user ID of Meteor app
+export PG_PWD=""; # PostgreSQL user password of Meteor app
+export PG_HST=""; # PostgreSQL server host name
+export PG_BKP=""; # HTTP URL of a PostgreSQL database backup

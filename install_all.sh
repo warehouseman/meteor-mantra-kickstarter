@@ -117,8 +117,8 @@ validateMeteorSettings;
 #   grep "LOGGLY_SUBDOMAIN" settings.json;
 # fi;
 
-refreshApt;
 if [[ "${CI:-false}" == "false" ]]; then
+  refreshApt;
   installJava;
   installNodeJs;
   installAndroid;
@@ -126,6 +126,8 @@ fi;
 installChimp;
 installMeteorFramework;
 installMeteorApp;
+
+sudo apt -y install httping;
 
 declare MSG="";
 if [ -f ./settings.json ]; then

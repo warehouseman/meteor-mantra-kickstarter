@@ -33,7 +33,7 @@ dependencies:
 
   post:
     - date > ${CIRCLE_ARTIFACTS}/meteor.log
-    - .scripts/startInDevMode.sh :
+    - .scripts/startInProdMode.sh :
         background: true
 
 
@@ -42,3 +42,5 @@ test:
     - node --version; npm --version; java -version; ${METEOR_CMD} --version;
     - export IDX=10; while printf "."; ! httping -qc1 http://localhost:3000 && ((IDX-- > 0)); do sleep 5 ; done;
 
+  post:
+    - .scripts/startAcceptanceTest.sh

@@ -11,5 +11,4 @@ ${PROJECT_ROOT}/.scripts/free.sh;
 declare CHIMP="${CHIMP_CMD:-${PROJECT_ROOT}/node_modules/.bin/chimp}";
 declare LOGS_DIR="${CIRCLE_ARTIFACTS:-/var/log/meteor}";
 
-${CHIMP} ${E2E}/chimp-config.js --ddp=http://localhost:3000 --watch --path=${E2E};
-exit $?;
+${CHIMP} ${E2E}/chimp-config.js --ddp=http://localhost:3000 --path=${E2E};

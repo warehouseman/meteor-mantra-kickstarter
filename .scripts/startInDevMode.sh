@@ -15,8 +15,9 @@ sudo chmod +rwx ${LOGS_DIR};
 export RELEASE=$(cat ${PROJECT_ROOT}/.meteor/release | cut -d "@" -f 2);
 export ANAME=$(cat package.json | jq -r .name);
 export APP_NAME="${ANAME:-app}";
+date > ${LOGS_DIR}/${APP_NAME}.log;
 #
-echo -e "Using meteor version : ${RELEASE}";
+echo -e "Using meteor version : ${RELEASE}" | tee -a ${LOGS_DIR}/${APP_NAME}.log;
 #
 cd ${PROJECT_ROOT};
 meteor npm run knex_cont;

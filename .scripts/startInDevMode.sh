@@ -6,8 +6,15 @@ PROJECT_ROOT=${SCRIPTPATH%/.scripts};
 echo PROJECT_ROOT=${PROJECT_ROOT};
 ${PROJECT_ROOT}/.scripts/free.sh;
 #
-rm -rf ${PROJECT_ROOT}/.meteor/local;
+declare METEOR="${METEOR_CMD:-meteor}";
+declare LOGS_DIR="${CIRCLE_ARTIFACTS:-/var/log/meteor}";
+echo -e "Will write logs to : ${LOGS_DIR}";
+sudo mkdir -p ${LOGS_DIR};
+sudo chmod +rwx ${LOGS_DIR};
+#
 export RELEASE=$(cat ${PROJECT_ROOT}/.meteor/release | cut -d "@" -f 2);
+export ANAME=$(cat package.json | jq -r .name);
+export APP_NAME="${ANAME:-app}";
 #
 echo -e "Using meteor version : ${RELEASE}";
 #
@@ -18,4 +25,7 @@ export X=${HOST_SERVER_PROTOCOL:="http"};
 export X=${HOST_SERVER_NAME:="localhost"};
 export X=${HOST_SERVER_PORT:="3000"};
 export ROOT_URL=${HOST_SERVER_PROTOCOL}://${HOST_SERVER_NAME}:${HOST_SERVER_PORT};
-meteor run --release ${RELEASE} --settings=settings.json;
+${METEOR} run \
+    --release ${RELEASE} \
+    --settings=settings.json \
+   2>&1 | tee -a ${LOGS_DIR}/${APP_NAME}.log;

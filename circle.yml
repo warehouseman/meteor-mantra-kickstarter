@@ -3,7 +3,7 @@
 general:
   branches:
     only:
-      - trunk
+      - AsSub
 
 notify:
   webhooks:
@@ -27,14 +27,13 @@ dependencies:
 
   pre:
     - .scripts/initialize_server.sh
-    - ls -l /opt/circleci/nodejs/v4.8.0/lib/node_modules
 
   override:
     - ./install_all.sh;
 
   post:
     - date > ${CIRCLE_ARTIFACTS}/meteor.log
-    - ${METEOR_CMD} --production --settings=settings.json >> ${CIRCLE_ARTIFACTS}/meteor.log 2>&1 & :
+    - .scripts/startInDevMode.sh
         background: true
 
 
@@ -44,5 +43,4 @@ test:
     - export IDX=10; while printf "."; ! httping -qc1 http://localhost:3000 && ((IDX-- > 0)); do sleep 5 ; done;
 
   post:
-    - ${CHIMP_CMD} .e2e_tests/chimp-config.js --ddp=http://localhost:3000 --path=.e2e_tests
-
+    - scripts/startAcceptanceTest.sh

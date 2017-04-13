@@ -33,7 +33,7 @@ dependencies:
 
   post:
     - date > ${CIRCLE_ARTIFACTS}/meteor.log
-    - .scripts/startInDevMode.sh
+    - .scripts/startInDevMode.sh :
         background: true
 
 

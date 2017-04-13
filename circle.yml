@@ -29,7 +29,7 @@ dependencies:
     - .scripts/initialize_server.sh
 
   override:
-    - ./install_all.sh;
+    - ./install_all.sh
 
   post:
     - date > ${CIRCLE_ARTIFACTS}/meteor.log
@@ -43,4 +43,4 @@ test:
     - export IDX=10; while printf "."; ! httping -qc1 http://localhost:3000 && ((IDX-- > 0)); do sleep 5 ; done;
 
   post:
-    - scripts/startAcceptanceTest.sh
+    - .scripts/startAcceptanceTest.sh

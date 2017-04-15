@@ -4,7 +4,7 @@
 
 ![screen register](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/public/screens/users.collection.png)
 
-### tl, dr!
+### TL;DR
 
 This is a starter app for Meteor developers who want to structure their work according to the [Mantra Specification](https://kadirahq.github.io/mantra/).
 

@@ -28,5 +28,9 @@ export X=${HOST_SERVER_PORT:="3000"};
 export ROOT_URL=${HOST_SERVER_PROTOCOL}://${HOST_SERVER_NAME}:${HOST_SERVER_PORT};
 ${METEOR} run \
     --release ${RELEASE} \
-    --settings=settings.json \
-   2>&1 | tee -a ${LOGS_DIR}/${APP_NAME}.log;
+    --settings=settings.json;
+
+# ${METEOR} run \
+#     --release ${RELEASE} \
+#     --settings=settings.json \
+#    2>&1 | tee -a ${LOGS_DIR}/${APP_NAME}.log;

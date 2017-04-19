@@ -3,44 +3,48 @@
 pushd `dirname $0` > /dev/null; SCRIPTPATH=`pwd`; popd > /dev/null;
 PROJECT_ROOT=${SCRIPTPATH%/android};
 PROJECT_ROOT=${PROJECT_ROOT%/.scripts};
+PROJECT_PARENT=$(dirname ${PROJECT_ROOT});
+
+echo ${PROJECT_PARENT};
+
+source ${PROJECT_ROOT}/.scripts/free.sh;
 
 # source ${PROJECT_ROOT}/.scripts/trap.sh;
-source ${PROJECT_ROOT}/.pkgs/install_local_packages.sh;
+# source ${PROJECT_ROOT}/.pkgs/install_local_packages.sh;
+source ${PROJECT_ROOT}/.pkgs/exportCorePackagesPaths.sh;
+source ${PROJECT_PARENT}/.pkgs/exportImplementationPackagesPaths.sh;
 
-# export METEOR_CMD=${METEOR_CMD:=meteor};
+source ${PROJECT_ROOT}/.scripts/linkInLocalNodePackages.sh;
+
+export LOCAL_NODEJS_PACKAGES_LIST=/dev/shm/localNodeJsPackagesList.txt;
 
 function installMeteorApp()
 {
 
-  FREEMEM=$(awk '/MemFree/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo);
-  NEEDMEM=1.0;
-  # echo "Fail if free:${FREEMEM} -lt  needed:${NEEDMEM}";
-  if echo ${FREEMEM} ${NEEDMEM} | awk '{exit $1 < $2 ? 0 : 1}'; then
-    echo -e "
-      * * * WARNING * * *
+  assess_memory 1.0;
 
-      You have only ${FREEMEM} of available memory!
-      Less then ${NEEDMEM}GB of memory may cause random
-      misreported build or execution failures as well as
-      longer build times.
+  echo "" > ${LOCAL_NODEJS_PACKAGES_LIST};
+  exportCorePackagesPaths ${PROJECT_ROOT}/.pkgs;
+  exportImplementationPackagesPaths ${PROJECT_PARENT}/.pkgs;
 
-    Press any key to continue or <ctrl-c> to quit.
-    ";
-    read -n 1 -s;
-  fi;
+  linkInLocalNodePackages ${LOCAL_NODEJS_PACKAGES_LIST};
 
   pushd ${PROJECT_ROOT} > /dev/null;
-    install_local_packages;
+
+#    install_local_packages;
+
+    echo "### Installing 3rd party npm packages. ###";
+    ${METEOR_CMD} npm -y install;
+    # yarn install;
+
   popd > /dev/null;
 
-  echo "### Installing 3rd party npm packages. ###";
-  ${METEOR_CMD} npm -y install;
-  # yarn install;
-
   mkdir -p /tmp/db; touch /tmp/db/mmks.sqlite;
+
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  echo "### Installing Meteor App.";
   installMeteorApp;
   echo "### Installed Meteor App.";
 fi;

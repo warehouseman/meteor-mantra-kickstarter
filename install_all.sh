@@ -12,110 +12,12 @@ source .e2e_tests/installChimp.sh;
 source .scripts/installMeteorFramework.sh;
 source .scripts/android/installAndBuildTools.sh;
 source .scripts/installMeteorApp.sh;
-# source .pkgs/install_local_packages.sh;
 
-storage;
-export MINFREE=7000
-# export FREESPACE=$(($(stat -f --format="%a*%S" ${HOME})/1000000));
-if [ ${FREESPACE} -lt ${MINFREE} ]; then
-  echo -e "
-             * * *   WARNING * * *
-    Your free disk space is: '${FREESPACE}MB'.
-     You must have at least: '${MINFREE}MB' free!
+assess_storage 7000;
 
-------------------------------------------------
-  ";
-else
-  echo "Found '${FREESPACE}MB' of free disk space.";
-fi;
+assess_memory 0.4;
 
-memory;
-NEEDMEM=0.4;
-# FREEMEM=$(awk '/MemFree/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo);
-# echo "Fail if free:${FREEMEM} -lt  needed:${NEEDMEM}";
-if echo ${FREEMEM} ${NEEDMEM} | awk '{exit $1 < $2 ? 0 : 1}'; then
-  echo -e "
-    * * * WARNING * * *
-
-    You have only ${FREEMEM} of available memory!
-    Less then ${NEEDMEM}GB of memory may cause random
-    misreported build or execution failures as well as
-    longer build times.
-
-  Press any key to continue or <ctrl-c> to quit.
-  ";
-  read -n 1 -s;
-fi;
-
-# if [ -z ${CI} ]; then
-#   echo -e "
-#       Running in development environment.";
-#   if [ ! -f settings.json ]; then
-#     if [ -f ${HOME}/.ssh/secrets.sh ]; then
-#       echo -e "      Generating 'settings.json' from template";
-#       source ${HOME}/.ssh/secrets.sh;
-#       ./template.settings.json.sh > settings.json;
-#     else
-#       echo -e "
-#       While the system builds, you should prepare your settings secrets:
-
-#            nano ${HOME}/.ssh/secrets.sh;
-
-#       Press any key to continue or <ctrl-c> to quit.
-#       ";
-#       read -n 1 -s;
-#     fi;
-#   fi;
-# else
-#   echo -e "
-#       Running in CircleCI.  Generating 'settings.json' from template";
-#   ./template.settings.json.sh > settings.json;
-# fi;
-
-# haveUtils;
 validateMeteorSettings;
-
-# declare SECRETS_FILE="${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh";
-# echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";
-# pwd;
-# if [[ "${CI}" = "true" ]]; then
-#   echo "A";
-#   ./template.settings.json.sh > settings.json;
-# else
-#   echo "B";
-#   if [ ! -f settings.json ]; then
-#   echo "C";
-#     if [ -f ${SECRETS_FILE} ]; then
-#   echo "D";
-#       source ${SECRETS_FILE};
-#       ./template.settings.json.sh > settings.json;
-#     else
-#       echo -e "
-#       Your secret settings were not found at :
-
-#            ${SECRETS_FILE};\n";
-#       exit 1;
-#     fi;
-#   echo "E";
-#   fi;
-#   echo "F";
-# fi;
-
-
-# if [ -f settings.json ]; then
-#   LG_DOM=$(jq -r .LOGGLY_SUBDOMAIN settings.json);
-#   echo ${LG_DOM};
-#   if [[ -z ${LG_DOM} || "${LG_DOM}" = "null" ]]; then
-#     echo -e "
-#     Your secret settings file, '${SECRETS_FILE}', is incomplete.
-#     'LOGGLY_SUBDOMAIN' is required\n";
-#     cat ${SECRETS_FILE};
-#     exit 1;
-#   fi;
-#   echo -e "Result : ";
-#   pwd;
-#   grep "LOGGLY_SUBDOMAIN" settings.json;
-# fi;
 
 if [[ "${CI:-false}" == "false" ]]; then
   refreshApt;

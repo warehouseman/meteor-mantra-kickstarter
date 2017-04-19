@@ -64,7 +64,7 @@ function installPhantomJS()
 function installChimp()
 {
   installChrome;
-  installPhantomJS;
+#  installPhantomJS;
 
   if ! npm list -g chimp &>/dev/null; then
 

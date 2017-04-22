@@ -12,7 +12,8 @@ source ${PROJECT_ROOT}/.scripts/free.sh;
 # source ${PROJECT_ROOT}/.scripts/trap.sh;
 # source ${PROJECT_ROOT}/.pkgs/install_local_packages.sh;
 source ${PROJECT_ROOT}/.pkgs/exportCorePackagesPaths.sh;
-source ${PROJECT_PARENT}/.pkgs/exportImplementationPackagesPaths.sh;
+# source ${PROJECT_PARENT}/.pkgs/exportImplementationPackagesPaths.sh;
+source ${PROJECT_PARENT}/.pkgs/copyPackagesToSubmodule.sh;
 
 source ${PROJECT_ROOT}/.scripts/linkInLocalNodePackages.sh;
 
@@ -24,8 +25,9 @@ function installMeteorApp()
   assess_memory 1.0;
 
   echo "" > ${LOCAL_NODEJS_PACKAGES_LIST};
+#  exportImplementationPackagesPaths ${PROJECT_PARENT}/.pkgs;
+  copyPackagesToSubmodule ${PROJECT_PARENT}/.pkgs ${PROJECT_ROOT}/.pkgs;
   exportCorePackagesPaths ${PROJECT_ROOT}/.pkgs;
-  exportImplementationPackagesPaths ${PROJECT_PARENT}/.pkgs;
 
   linkInLocalNodePackages ${LOCAL_NODEJS_PACKAGES_LIST};
 

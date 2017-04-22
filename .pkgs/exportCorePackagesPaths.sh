@@ -9,13 +9,14 @@ function exportCorePackagesPaths() {
   echo -e "### Identifying core npm packages for Meteor Mantra Kickstarter";
   pushd ${PKGS_DIR} >/dev/null;
 
-    for mdl in ./*/
+    for MODULE_PATH in ./*/
     do
-      if touch ${mdl}package.json 2>/dev/null; then
-        if [[ "X$(cat ${mdl}package.json  | jq -r .name)X" != "XX" ]]; then
-          echo -e "~~~~~~~~~~  Link '${mdl}' into project ~~~~~~~~~~~~~~~~~~~~";
-          pushd ${mdl} >/dev/null;
-            echo "$(basename ${mdl})" >> ${LOCAL_NODEJS_PACKAGES_LIST};
+      if touch ${MODULE_PATH}package.json 2>/dev/null; then
+        MODULE=$(cat ${MODULE_PATH}package.json  | jq -r .name);
+        if [[ "X${MODULE}X" != "XX" ]]; then
+          echo -e "~~~~~~~~~~  Link '${MODULE}' into project ~~~~~~~~~~~~~~~~~~~~";
+          pushd ${MODULE_PATH} >/dev/null;
+            echo "${MODULE}" >> ${LOCAL_NODEJS_PACKAGES_LIST};
             ${METEOR_CMD} npm link;
           popd >/dev/null;
         fi;

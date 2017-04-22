@@ -7,16 +7,19 @@ declare METEOR_CMD="${METEOR_CMD:=${HOME}/.meteor/meteor}";
 
 function linkInLocalNodePackages() {
 
+  local LIST=${1};
   mkdir -p ${PROJECT_ROOT}/node_modules;
   pushd ${PROJECT_ROOT}/node_modules >/dev/null;
 
-    local MODULES=( $(cat "$1") )
+    local MODULES=( $(cat "${LIST}") )
 
     for MODULE in "${MODULES[@]}"
     do
       echo -e "~~~~~~~~~~  Importing '${MODULE}'  ~~~~~~~~~~~~~~~~~~";
       ${METEOR_CMD} npm link ${MODULE};
     done
+
+    rm -f "${LIST}";
 
   popd >/dev/null;
 }

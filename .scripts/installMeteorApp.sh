@@ -13,7 +13,6 @@ source ${PROJECT_ROOT}/.scripts/free.sh;
 # source ${PROJECT_ROOT}/.pkgs/install_local_packages.sh;
 source ${PROJECT_ROOT}/.pkgs/exportCorePackagesPaths.sh;
 # source ${PROJECT_PARENT}/.pkgs/exportImplementationPackagesPaths.sh;
-source ${PROJECT_PARENT}/.pkgs/copyPackagesToSubmodule.sh;
 
 source ${PROJECT_ROOT}/.scripts/linkInLocalNodePackages.sh;
 
@@ -26,7 +25,12 @@ function installMeteorApp()
 
   echo "" > ${LOCAL_NODEJS_PACKAGES_LIST};
 #  exportImplementationPackagesPaths ${PROJECT_PARENT}/.pkgs;
-  copyPackagesToSubmodule ${PROJECT_PARENT}/.pkgs ${PROJECT_ROOT}/.pkgs;
+
+  if [[ -x "${PROJECT_PARENT}/.pkgs/copyPackagesToSubmodule.sh" ]]; then
+    source ${PROJECT_PARENT}/.pkgs/copyPackagesToSubmodule.sh;
+    copyPackagesToSubmodule ${PROJECT_PARENT}/.pkgs ${PROJECT_ROOT}/.pkgs;
+  fi;
+
   exportCorePackagesPaths ${PROJECT_ROOT}/.pkgs;
 
   linkInLocalNodePackages ${LOCAL_NODEJS_PACKAGES_LIST};

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #
+
+declare PKGS_DIR=".pkgs";
 function CleanLocalNodePackages() {
   local PKGS_DIR=$1;
   # echo "Cleaning local node packages . . . ";
@@ -28,8 +30,11 @@ function CleanAllInstalledPackages() {
   rm -fr public/mobile/android/*.apk*;
   rm -fr npm-debug.log;
 
-  CleanLocalNodePackages .pkgs;
-  CleanLocalNodePackages ../.pkgs;
+  CleanLocalNodePackages ${PKGS_DIR};
+  if [[ -d ../${PKGS_DIR} ]]; then
+    CleanLocalNodePackages ../${PKGS_DIR};
+  fi;
+
 
   sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
   echo "Cleaned.";

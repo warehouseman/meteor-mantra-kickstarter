@@ -12,10 +12,16 @@ import NewPost from './containers/newpost';
 
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(LayoutDefault);
+  // console.log("=========== core/routes -- default function ");
+  // console.log(LayoutDefault);
+  // console.log(injectDeps);
 
   FlowRouter.route('/', {
     name: 'posts.list',
     action() {
+      // console.log("=========== core/routes -- / (root) ");
+      // console.log(MainLayoutCtx);
+
       mount(MainLayoutCtx, {
         content: () => (<PostList />)
       });

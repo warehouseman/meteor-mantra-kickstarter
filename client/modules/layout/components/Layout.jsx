@@ -14,7 +14,7 @@ export default class extends React.Component {
       <div>
 
         <NavHeader
-          brand={ () => (AppConfig.name) }
+          brand={ () => ("MMKS") }
           leftContent={ () => (<NavLeftContent { ...this.props }/>) }
           rightContent={ () => (<NavRightContent />) }
         />
@@ -29,3 +29,4 @@ export default class extends React.Component {
     );
   }
 }
+//            brand={ () => (AppConfig.name) }

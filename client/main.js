@@ -8,13 +8,14 @@ import commentsModule from './modules/comments';
 import _usersModule from './modules/_users';
 import _colorsModule from './modules/_colors';
 
-import _layoutModule from './modules/layout';
-
 import Logger from '/lib/logging/client/clientLogger';
 import { LayoutDefault } from './configs/theme.jsx';
 import AccessControlComposer from './access_control/acComposer';
 import Authorized from './access_control/acContainer.js';
 
+
+// import _layoutModule from './modules/layout';
+// import { Client as _layout } from 'mmks_layout';
 import { Client as _widget } from 'mmks_widget';
 import { Client as _book } from 'mmks_book';
 
@@ -30,7 +31,7 @@ app.loadModule(coreModule);
 app.loadModule(commentsModule);
 app.loadModule(_usersModule);
 app.loadModule(_colorsModule);
-app.loadModule(_layoutModule);
+// app.loadModule(_layoutModule);
 
 let Widget = _widget.new({
   Logger,
@@ -39,6 +40,14 @@ let Widget = _widget.new({
   Authorized
 });
 app.loadModule(Widget);
+
+/// let Layout = _layout.new({
+///   Logger,
+///   LayoutDefault,
+///   AccessControlComposer,
+///   Authorized
+/// });
+/// app.loadModule(Layout);
 
 let Book = _book.new({
   Logger,

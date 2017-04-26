@@ -11,7 +11,7 @@ ${PROJECT_ROOT}/.scripts/free.sh;
 declare CHIMP="${CHIMP_CMD:-${PROJECT_ROOT}/node_modules/.bin/chimp}";
 declare LOGS_DIR="${CIRCLE_ARTIFACTS:-/var/log/meteor}";
 
-export IDX=10;
+export IDX=25;
 while printf "."; ! httping -qc1 http://localhost:3000 && ((IDX-- > 0));
 do
   sleep 5;

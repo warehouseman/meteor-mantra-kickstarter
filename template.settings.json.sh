@@ -14,6 +14,7 @@ cat <<EOF
   "PG_HST": "${PG_HST}",
   "PG_BKP": "${PG_BKP}",
   "public": {
+    "IS_GITSUBMODULE":"${IS_GITSUBMODULE}",
     "PASSWORD_RESET": {
       "Route": "/prrq/",
       "Html_1": "<b>If you did not request a password reset just ignore this.</b><br /><b>If you did request it, then please click <a href='http://",

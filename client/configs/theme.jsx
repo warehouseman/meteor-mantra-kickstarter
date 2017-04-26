@@ -1,21 +1,13 @@
-
-// import {LayoutDefault} from 'mmks_layout';
-// console.log("=========== configs/theme -- default function ");
-// console.log(LayoutDefault);
-
-const r = require;
-var LayoutDefault = null;
-// if ( 0 === 1 ) {
-//   LayoutDefault = require('../modules/layout/containers/Layout.jsx').default;
-// }
-try {
-  LayoutDefault = r('mmks_layout').LayoutDefault;
-}
-catch (e) {
-  LayoutDefault = r('../modules/layout/containers/Layout.jsx').default;
+function requireLayout(isModule) {
+//  console.log( "******* isModule : ", isModule );
+  if ( isModule.toLowerCase() === 'true' ) {
+    return require('mmks_layout').LayoutDefault;
+  } else {
+    return require('../modules/layout/containers/Layout.jsx').default;
+  }
 }
 
-// import LayoutDefault from '../modules/layout/containers/Layout.jsx';
+const LayoutDefault = requireLayout(Meteor.settings.public.IS_GITSUBMODULE);
 
 export {
 

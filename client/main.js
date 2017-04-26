@@ -41,14 +41,6 @@ let Widget = _widget.new({
 });
 app.loadModule(Widget);
 
-/// let Layout = _layout.new({
-///   Logger,
-///   LayoutDefault,
-///   AccessControlComposer,
-///   Authorized
-/// });
-/// app.loadModule(Layout);
-
 let Book = _book.new({
   Logger,
   LayoutDefault,

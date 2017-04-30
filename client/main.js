@@ -13,7 +13,7 @@ import { LayoutDefault } from './configs/theme.jsx';
 import AccessControlComposer from './access_control/acComposer';
 import Authorized from './access_control/acContainer.js';
 
-import _layoutModule from './modules/layout';
+// import _layoutModule from './modules/layout';
 
 // import { Client as _layout } from 'mmks_layout';
 import { Client as _widget } from 'mmks_widget';

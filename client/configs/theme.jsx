@@ -1,5 +1,6 @@
 function requireLayout(isModule) {
-  console.log( "******* isModule : ", isModule );
+  console.log( '******* isModule : ', isModule );  // eslint-disable-line no-console
+
   if ( isModule.toLowerCase() === 'true' ) {
     return require('mmks_layout').LayoutDefault;
   }

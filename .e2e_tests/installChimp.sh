@@ -66,6 +66,7 @@ function installChimp()
   installChrome;
 #  installPhantomJS;
 
+  echo -e "### Is Chimp installed?";
   if ! npm list -g chimp &>/dev/null; then
 
     echo -e "### Installing Chimp";

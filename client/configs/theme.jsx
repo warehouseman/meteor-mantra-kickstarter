@@ -1,5 +1,5 @@
 function requireLayout(isModule) {
-//  console.log( "******* isModule : ", isModule );
+  console.log( "******* isModule : ", isModule );
   if ( isModule.toLowerCase() === 'true' ) {
     return require('mmks_layout').LayoutDefault;
   }

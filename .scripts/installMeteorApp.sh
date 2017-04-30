@@ -24,7 +24,6 @@ function installMeteorApp()
   assess_memory 1.0;
 
   echo "" > ${LOCAL_NODEJS_PACKAGES_LIST};
-#  exportImplementationPackagesPaths ${PROJECT_PARENT}/.pkgs;
 
   if [[ -x "${PROJECT_PARENT}/.pkgs/copyPackagesToSubmodule.sh" ]]; then
     source ${PROJECT_PARENT}/.pkgs/copyPackagesToSubmodule.sh;

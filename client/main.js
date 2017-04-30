@@ -13,8 +13,8 @@ import { LayoutDefault } from './configs/theme.jsx';
 import AccessControlComposer from './access_control/acComposer';
 import Authorized from './access_control/acContainer.js';
 
+import _layoutModule from './modules/layout';
 
-// import _layoutModule from './modules/layout';
 // import { Client as _layout } from 'mmks_layout';
 import { Client as _widget } from 'mmks_widget';
 import { Client as _book } from 'mmks_book';
@@ -48,6 +48,14 @@ let Book = _book.new({
   Authorized
 });
 app.loadModule(Book);
+
+// let Layout = _layout.new({
+//   Logger,
+// //  LayoutDefault,
+//   AccessControlComposer,
+//   Authorized
+// });
+// // app.loadModule(Layout);
 
 app.init();
 console.log('App initialized');

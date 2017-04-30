@@ -27,6 +27,7 @@ function CleanAllInstalledPackages() {
   rm -fr .meteor/local/;
   rm -fr .meteor/version;
   rm -fr .habitat/results;
+  rm -fr .pkgs/gitignored*fl;
   rm -fr public/mobile/android/*.apk*;
   rm -fr npm-debug.log;
 
@@ -35,7 +36,9 @@ function CleanAllInstalledPackages() {
     CleanLocalNodePackages ../${PKGS_DIR};
   fi;
 
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~??????~~~>>            rm -fr ~/.meteor
 
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
   echo "Cleaned.";
 }

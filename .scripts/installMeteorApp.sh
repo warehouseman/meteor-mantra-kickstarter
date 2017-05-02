@@ -10,9 +10,9 @@ echo ${PROJECT_PARENT};
 source ${PROJECT_ROOT}/.scripts/free.sh;
 
 # source ${PROJECT_ROOT}/.scripts/trap.sh;
-# source ${PROJECT_ROOT}/.pkgs/install_local_packages.sh;
+# source ${PROJECT_ROOT}/.pkgs/install_local_packages.sh;   DEPRECATED ????
 source ${PROJECT_ROOT}/.pkgs/exportCorePackagesPaths.sh;
-# source ${PROJECT_PARENT}/.pkgs/exportImplementationPackagesPaths.sh;
+# source ${PROJECT_PARENT}/.pkgs/exportImplementationPackagesPaths.sh;  DEPRECATED ????
 
 source ${PROJECT_ROOT}/.scripts/linkInLocalNodePackages.sh;
 
@@ -22,6 +22,8 @@ function installMeteorApp()
 {
 
   assess_memory 1.0;
+
+  ${METEOR_CMD} npm -y -g install npm-link-save;
 
   echo "" > ${LOCAL_NODEJS_PACKAGES_LIST};
 
@@ -36,7 +38,7 @@ function installMeteorApp()
 
   pushd ${PROJECT_ROOT} > /dev/null;
 
-#    install_local_packages;
+#    install_local_packages;  DEPRECATED???
 
     echo "### Installing 3rd party npm packages. ###";
     ${METEOR_CMD} npm -y install;

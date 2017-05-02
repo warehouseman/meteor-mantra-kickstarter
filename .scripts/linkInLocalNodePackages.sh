@@ -10,18 +10,21 @@ function linkInLocalNodePackages() {
  echo -e "~~~~~~~~~~ '.scripts/linkInLocalNodePackages'  ~~~~~~~~~~~~~~~~~~";
 
   local LIST=${1};
-  mkdir -p ${PROJECT_ROOT}/node_modules;
-  pushd ${PROJECT_ROOT}/node_modules >/dev/null;
+  # mkdir -p ${PROJECT_ROOT}/node_modules;
+  # pushd ${PROJECT_ROOT}/node_modules >/dev/null;
+  mkdir -p ${PROJECT_ROOT};
+  pushd ${PROJECT_ROOT} >/dev/null;
+    echo -e " Now in directory : \n$(pwd) "
     local MODULES=( $(cat "${LIST}") )
     for MODULE in "${MODULES[@]}"
     do
-      echo -e "~~~~~~~~~~  Importing '${MODULE}'  ~~~~~~~~~~~~~~~~~~";
-      ${METEOR_CMD} npm link ${MODULE};
+      echo -e "~~~~~~~~~~  Linking and saving '${MODULE}'  ~~~~~~~~~~~~~~~~~~";
+      # ${METEOR_CMD} npm link ${MODULE};
+      npm-link-save ${MODULE};
     done
-
   #   rm -f "${LIST}";
-
   popd >/dev/null;
+
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

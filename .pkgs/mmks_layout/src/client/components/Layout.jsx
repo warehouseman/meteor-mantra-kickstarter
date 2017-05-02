@@ -4,7 +4,7 @@ import NavHeader from '../containers/NavHeader';
 import NavLeftContent from '../containers/NavLeftContent';
 import NavRightContent from '../containers/NavRightContent';
 
-import AppConfig from '/lib/app.js';
+// import AppConfig from '/lib/app.js';
 
 export default class extends React.Component {
 
@@ -14,7 +14,7 @@ export default class extends React.Component {
       <div>
 
         <NavHeader
-          brand={ () => (AppConfig.name) }
+          brand={ () => ( 'MMKS' ) }
           leftContent={ () => (<NavLeftContent { ...this.props }/>) }
           rightContent={ () => (<NavRightContent />) }
         />

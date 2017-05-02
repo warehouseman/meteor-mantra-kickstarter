@@ -23,7 +23,9 @@ function installMeteorApp()
 
   assess_memory 1.0;
 
-  ${METEOR_CMD} npm -y -g install npm-link-save;
+  echo "### Installing 'npm-link-save'. ###";
+  # ${METEOR_CMD} npm -y -g install npm-link-save;
+  npm -y -g install npm-link-save;
 
   echo "" > ${LOCAL_NODEJS_PACKAGES_LIST};
 

@@ -18,7 +18,7 @@ function CleanLocalNodePackages() {
   popd >/dev/null;
 
   sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
-  # echo "Cleaned local node packages .";
+  echo "Cleaned local node packages .";
 }
 
 function CleanAllInstalledPackages() {
@@ -39,7 +39,6 @@ function CleanAllInstalledPackages() {
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~??????~~~>>            rm -fr ~/.meteor
 
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
   echo "Cleaned.";
 }
 

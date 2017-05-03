@@ -21,7 +21,9 @@ export LOCAL_NODEJS_PACKAGES_LIST=/dev/shm/localNodeJsPackagesList.txt;
 function installMeteorApp()
 {
 
-  assess_memory 1.0;
+  if [[ "${CI:-false}" == "false" ]]; then
+    assess_memory 1.0;
+  fi;
 
   echo "### Installing 'npm-link-save'. ###";
   # ${METEOR_CMD} npm -y -g install npm-link-save;

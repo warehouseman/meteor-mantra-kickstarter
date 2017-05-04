@@ -5,7 +5,7 @@ function init( _context) {
   return function () {
     Meteor.methods({
       '_books.wipe'() {
-        console.log('<|> <|> <|> <|> (mmks_book/src/server/methods=>_books.wipe) <|> <|> <|> <|> ');
+        console.log('<|> <|> (mmks_book/src/server/methods=>_book.wipe) <|> <|> ');
         return true;
       }
     });

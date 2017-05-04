@@ -8,6 +8,7 @@ ${PROJECT_ROOT}/.scripts/free.sh;
 #
 declare METEOR="${METEOR_CMD:-meteor}";
 declare LOGS_DIR="${CIRCLE_ARTIFACTS:-/var/log/meteor}";
+
 echo -e "Will write logs to : ${LOGS_DIR}";
 sudo mkdir -p ${LOGS_DIR};
 sudo chmod +rwx ${LOGS_DIR};
@@ -26,6 +27,14 @@ export X=${HOST_SERVER_PROTOCOL:="http"};
 export X=${HOST_SERVER_NAME:="localhost"};
 export X=${HOST_SERVER_PORT:="3000"};
 export ROOT_URL=${HOST_SERVER_PROTOCOL}://${HOST_SERVER_NAME}:${HOST_SERVER_PORT};
+
+if [[ "$1" = "reset" ]]; then
+  echo -e "Resetting the database.";
+  ${METEOR} reset;
+else
+  echo -e "Append 'reset' to the command to solve stuck 'Starting your app...' problems.";
+fi;
+
 ${METEOR} run \
     --release ${RELEASE} \
     --settings=settings.json;

@@ -15,19 +15,24 @@ function exportCorePackagesPaths() {
 
     echo -e "### Identifying core npm packages for Meteor Mantra Kickstarter.";
 
-    local CORE_EXCLUSIONS=$(jq -r .packages_excluded_from_core ${PKG_EXCL_PATH});
-    # echo -e "Core Excl : ${CORE_EXCLUSIONS}";
+    local CORE_EXCLUSIONS='[""]';
+    local CONTAINER_EXCLUSIONS='[""]';
+    if [ -f ${PKG_EXCL_PATH} ]; then
 
-    local CONTAINER_EXCLUSIONS=$(jq -r .packages_excluded_from_wrapper ${PKG_EXCL_PATH});
-    # echo -e "Wrapper Excl : ${CONTAINER_EXCLUSIONS}";
+      CORE_EXCLUSIONS=$(jq -r .packages_excluded_from_core ${PKG_EXCL_PATH});
+      echo -e "Core Excl : ${CORE_EXCLUSIONS}";
+
+      CONTAINER_EXCLUSIONS=$(jq -r .packages_excluded_from_wrapper ${PKG_EXCL_PATH});
+      echo -e "Wrapper Excl : ${CONTAINER_EXCLUSIONS}";
+
+    fi;
 
     # local EXCLUSIONS='[""]';
 
-
-    if [[ -f ${PKG_EXCL_PATH} ]]; then
-      EXCLUSIONS=$(jq -r .packages_excluded_from_core ${PKG_EXCL_PATH});
-    fi;
-    echo ${EXCLUSIONS};
+    # if [[ -f ${PKG_EXCL_PATH} ]]; then
+    #   EXCLUSIONS=$(jq -r .packages_excluded_from_core ${PKG_EXCL_PATH});
+    # fi;
+    # echo ${EXCLUSIONS};
 
     for MODULE_PATH in ./*/
     do

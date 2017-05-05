@@ -72,7 +72,6 @@
     "meteor-node-stubs": "0.2.6",
     "mkdirp": "0.5.1",
     "mmks_book": "^0.0.1",
-    "mmks_layout": "^0.0.1",
     "mmks_widget": "^0.0.1",
     "mysql": "^2.13.0",
     "nodemailer": "2.7.2",

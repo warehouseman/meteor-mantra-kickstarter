@@ -23,7 +23,7 @@ export default () => {
       {
         firstName: 'Martin',
         lastName: 'Bramwell',
-        email: 'administrator@example.com',
+        email: 'adm@ec.ec',
         roles: AllRoles.slice(idx++)
       },
       {
@@ -45,8 +45,8 @@ export default () => {
         roles: AllRoles.slice(idx++)
       },
       {
-        firstName: 'Alejandro',
-        lastName: 'Vasquez',
+        firstName: 'Daniel',
+        lastName: 'Gandarillas',
         email: 'registered@example.com',
         roles: AllRoles.slice(idx++)
       }
@@ -57,7 +57,7 @@ export default () => {
 
       id = Accounts.createUser({
         email: user.email,
-        password: 'apple_01',
+        password: 'okok',
         profile: { firstName: user.firstName, lastName: user.lastName }
       });
 

@@ -5,7 +5,7 @@ Feature: 004 User Management
   @~watch
   Scenario: Log in as administrator
     Given I have opened the login page : "http://localhost:3000/login"
-    When I provide my email "administrator@example.com" and password "apple_01"
+    When I provide my email "adm@ec.ec" and password "okok"
     And I submit the form
     Then I see my user drop-down menu.
 

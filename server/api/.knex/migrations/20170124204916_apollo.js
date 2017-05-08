@@ -9,7 +9,7 @@ exports.up = function (knex, Promise) {
 
       table.timestamp('createdAt').defaultTo(knex.fn.now());
       table.timestamp('updatedAt').defaultTo(knex.fn.now());
-      table.timestamp('deletedAt');
+      table.timestamp('deletedAt').defaultTo(knex.fn.now());
       table.boolean('deleted');
     }),
 
@@ -19,12 +19,12 @@ exports.up = function (knex, Promise) {
       table.text('content');
       table.integer('pages');
 
-      table.integer('authorId');
+      table.integer('authorId').unsigned();
       table.foreign('authorId').references('_id').inTable('author');
 
       table.timestamp('createdAt').defaultTo(knex.fn.now());
       table.timestamp('updatedAt').defaultTo(knex.fn.now());
-      table.timestamp('deletedAt');
+      table.timestamp('deletedAt').defaultTo(knex.fn.now());
       table.boolean('deleted');
     })
 

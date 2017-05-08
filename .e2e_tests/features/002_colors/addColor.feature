@@ -5,7 +5,7 @@ Feature: 002 Manage colors
   @~watch
   Scenario: Log in as a staff member
     Given I have opened the login page : "http://localhost:3000/login"
-    When I provide my email "staff@example.com" and password "apple_01"
+    When I provide my email "staff@example.com" and password "okok"
     And I submit the form
     Then I see my user drop-down menu.
 
@@ -48,7 +48,7 @@ Feature: 002 Manage colors
   @~watch
   Scenario: Log in as a registered member
     Given I have opened the login page : "http://localhost:3000/login"
-    When I provide my email "registered@example.com" and password "apple_01"
+    When I provide my email "registered@example.com" and password "okok"
     And I submit the form
     Then I see my user drop-down menu.
 
@@ -67,7 +67,7 @@ Feature: 002 Manage colors
   @~watch
   Scenario: Log in as a member
     Given I have opened the login page : "http://localhost:3000/login"
-    When I provide my email "member@example.com" and password "apple_01"
+    When I provide my email "member@example.com" and password "okok"
     And I submit the form
     Then I see my user drop-down menu.
 
@@ -87,7 +87,7 @@ Feature: 002 Manage colors
   @~watch
   Scenario: Log in as an administrator
     Given I have opened the login page : "http://localhost:3000/login"
-    When I provide my email "administrator@example.com" and password "apple_01"
+    When I provide my email "adm@ec.ec" and password "okok"
     And I submit the form
     Then I see my user drop-down menu.
 

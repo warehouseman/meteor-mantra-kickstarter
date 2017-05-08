@@ -6,6 +6,8 @@ PROJECT_ROOT=${SCRIPTPATH%/.scripts};
 echo PROJECT_ROOT=${PROJECT_ROOT};
 ${PROJECT_ROOT}/.scripts/free.sh;
 #
+declare DATABASE_TYPE=${1};
+
 declare METEOR="${METEOR_CMD:-meteor}";
 declare LOGS_DIR="${CIRCLE_ARTIFACTS:-/var/log/meteor}";
 echo -e "Will write logs to : ${LOGS_DIR}";
@@ -20,7 +22,21 @@ date > ${LOGS_DIR}/${APP_NAME}.log;
 echo -e "Using meteor version : ${RELEASE}" | tee -a ${LOGS_DIR}/${APP_NAME}.log;
 #
 cd ${PROJECT_ROOT};
-# meteor npm run knex_prod;
+if [[ "${DATABASE_TYPE}" = "postgres" ]]; then
+  meteor npm run knex_prod_pgres;
+elif [[ "${DATABASE_TYPE}" = "mysql" ]]; then
+  meteor npm run knex_prod_mysql;
+else
+  echo -e "
+
+  * * Must specify either 'postgres' OR 'mysql' * *
+
+  Usage : ./startInProdMode.sh <database brand>
+
+  ";
+  exit;
+fi;
+		#statements
 #
 export X=${HOST_SERVER_PROTOCOL:="http"};
 export X=${HOST_SERVER_NAME:="localhost"};

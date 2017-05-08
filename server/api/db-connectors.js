@@ -13,15 +13,17 @@ if ( Meteor.isProduction ) {
 
   console.log(' Meteor mode -- "Production" using PostgreSQL'); // eslint-disable-line no-console
 
-/* var sequelize = new Sequelize('database', 'username', 'password', {options})  */
+
   // sequelize = new Sequelize(
-  //   'apollo',
-  //   'apollo',
-  //   'okmmpl,,',
-    // {
-    //   host: 'pgdb',
-    //   dialect: 'postgres'
-    // }
+  //   Meteor.settings.PG_DB,
+  //   Meteor.settings.PG_UID,
+  //   Meteor.settings.PG_PWD,
+  //   {
+  //     host: Meteor.settings.PG_HST,
+  //     dialect: 'postgres'
+  //   }
+  // );
+
 
   sequelize = new Sequelize(
     Meteor.settings.PG_DB,
@@ -29,7 +31,7 @@ if ( Meteor.isProduction ) {
     Meteor.settings.PG_PWD,
     {
       host: Meteor.settings.PG_HST,
-      dialect: 'postgres'
+      dialect: 'mysql'
     }
   );
 

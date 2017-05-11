@@ -8,11 +8,12 @@ cat <<EOF
   "LOGGLY_SUBDOMAIN": "${LOGGLY_SUBDOMAIN}",
   "LOGGLY_TOKEN": "${LOGGLY_TOKEN}",
 
-  "PG_DB": "${PG_DB}",
-  "PG_UID": "${PG_UID}",
-  "PG_PWD": "${PG_PWD}",
-  "PG_HST": "${PG_HST}",
-  "PG_BKP": "${PG_BKP}",
+  "RDBMS_BKP": "${RDBMS_BKP}",
+  "RDBMS_DB": "${RDBMS_DB}",
+  "RDBMS_DIALECT": "${RDBMS_DIALECT}",
+  "RDBMS_HST": "${RDBMS_HST}",
+  "RDBMS_PWD": "${RDBMS_PWD}",
+  "RDBMS_UID": "${RDBMS_UID}",
   "public": {
     "IS_GITSUBMODULE":"${IS_GITSUBMODULE}",
     "PASSWORD_RESET": {

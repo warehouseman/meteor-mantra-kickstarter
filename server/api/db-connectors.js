@@ -2,36 +2,27 @@ import Sequelize from 'sequelize';
 
 /* eslint-disable no-console */
 console.log(' Sanity Check -- Can we see settings?');
-console.log(' PG  DB --> ', Meteor.settings.PG_DB );
-console.log(' PG UID --> ', Meteor.settings.PG_UID );
-console.log(' PG PWD --> ', Meteor.settings.PG_PWD );
-console.log(' PG HST --> ', Meteor.settings.PG_HST );
+console.log(' RDBMS_DB --> ', Meteor.settings.RDBMS_DB );
+console.log(' RDBMS UID --> ', Meteor.settings.RDBMS_UID );
+console.log(' RDBMS PWD --> ', Meteor.settings.RDBMS_PWD );
+console.log(' RDBMS HST --> ', Meteor.settings.RDBMS_HST );
+console.log(' RDBMS DIALECT --> ', Meteor.settings.RDBMS_DIALECT );
+
 /* eslint-enable no-console */
 
 let sequelize = null;
 if ( Meteor.isProduction ) {
 
-  console.log(' Meteor mode -- "Production" using PostgreSQL'); // eslint-disable-line no-console
-
-
-  // sequelize = new Sequelize(
-  //   Meteor.settings.PG_DB,
-  //   Meteor.settings.PG_UID,
-  //   Meteor.settings.PG_PWD,
-  //   {
-  //     host: Meteor.settings.PG_HST,
-  //     dialect: 'postgres'
-  //   }
-  // );
-
+  console.log(' Meteor mode -- "Production" using RDBMS \'' + // eslint-disable-line no-console
+                       Meteor.settings.RDBMS_DIALECT + '\'');
 
   sequelize = new Sequelize(
-    Meteor.settings.PG_DB,
-    Meteor.settings.PG_UID,
-    Meteor.settings.PG_PWD,
+    Meteor.settings.RDBMS_DB,
+    Meteor.settings.RDBMS_UID,
+    Meteor.settings.RDBMS_PWD,
     {
-      host: Meteor.settings.PG_HST,
-      dialect: 'mysql'
+      host: Meteor.settings.RDBMS_HST,
+      dialect: Meteor.settings.RDBMS_DIALECT
     }
   );
 

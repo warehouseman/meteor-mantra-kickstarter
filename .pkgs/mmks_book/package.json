@@ -36,8 +36,8 @@
   },
   "dependencies": {
     "babel-runtime": "6.23.0",
-    "uniforms": "^1.10.0",
-    "uniforms-bootstrap3": "^1.10.0"
+    "uniforms": "^1.18.0",
+    "uniforms-bootstrap3": "^1.18.0"
   }
 
 }

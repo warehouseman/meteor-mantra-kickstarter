@@ -6,7 +6,6 @@ import {Groups} from './initial_users';
 import _lgr from '/lib/logging/server/serverLogger';
 const Lgr = new _lgr( __filename, 'warn' );
 
-
 export const initPosts = () => {
   if (!Posts.findOne()) {
     for (let lc = 1; lc <= 5; lc++) {

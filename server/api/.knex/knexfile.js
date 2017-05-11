@@ -7,28 +7,30 @@ module.exports = {
     }
   },
 
-  prod_mysql: {
-    client: 'mysql',
-    connection: {
-      port : 3306,
-      host : 'db_srv',
-      database : 'mmks',
-      user : 'meteor',
-      password : 'memorablehieroglyphs'
-    }
-  },
+// //  prod_pg: {
+//   prod_pgres: {
+//     client: 'postgresql',
+//     connection: {
+//       port: 5432,
+//       host: 'db_srv',
+//       database: 'apollo',
+//       user: 'apollo',
+//       password: 'okmmpl,,',
+//     }
+//   },
 
-//  prod_pg: {
-  prod_pgres: {
-    client: 'postgresql',
+  production: {
+    client: process.env.RDBMS_DIALECT,
     connection: {
-      port: 5432,
-      host: 'db_srv',
-      database: 'apollo',
-      user: 'apollo',
-      password: 'okmmpl,,',
+      port : process.env.RDBMS_PORT,
+      host : process.env.RDBMS_HST,
+      database : process.env.RDBMS_DB,
+      user : process.env.RDBMS_UID,
+      password : process.env.RDBMS_PWD
     }
   }
 
 };
+
+
 //       filename: '../../../.meteor/local/build/programs/server/mmks.sqlite'

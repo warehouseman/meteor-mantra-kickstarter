@@ -3,11 +3,13 @@
 pushd `dirname $0` > /dev/null; SCRIPTPATH=`pwd`; popd > /dev/null;
 PROJECT_ROOT=${SCRIPTPATH%/.scripts};
 
-if [[ ! -f ${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh ]]; then
-  echo -e "Unable to find the file \"${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh\".
-          Did you run \".scripts/preFlightCheck.sh\"
-  ";
-  exit;
+if [[ ! ${CI} ]]; then
+  if [[ ! -f ${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh ]]; then
+    echo -e "Unable to find the file \"${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh\".
+            Did you run \".scripts/preFlightCheck.sh\"
+    ";
+    exit;
+  fi;
 fi;
 
 source ${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh;
@@ -29,6 +31,16 @@ date > ${LOGS_DIR}/${APP_NAME}.log;
 echo -e "Using meteor version : ${RELEASE}" | tee -a ${LOGS_DIR}/${APP_NAME}.log;
 #
 cd ${PROJECT_ROOT};
+echo -e "
+   dialect: ${RDBMS_DIALECT},
+connection: {
+        port : ${RDBMS_PORT},
+        host : ${RDBMS_HST},
+    database : ${RDBMS_DB},
+        user : ${RDBMS_UID},
+    password : $(head -c $(( ${#RDBMS_PWD} - 4 )) /dev/zero | tr '\0' '*')${RDBMS_PWD:$(( ${#RDBMS_PWD} - 4 ))}
+}
+"
 meteor npm run knex_prod;
 #
 export X=${HOST_SERVER_PROTOCOL:="http"};
@@ -40,6 +52,13 @@ echo -e "${METEOR} run \
     --production \
     --settings=settings.json \
    2>&1 | tee -a ${LOGS_DIR}/${APP_NAME}.log;"
+
+if [[ "$1" = "reset" ]]; then
+  echo -e "Resetting the database.";
+  ${METEOR} reset;
+else
+  echo -e "Append 'reset' to the command to solve stuck 'Starting your app...' problems.";
+fi;
 
 ${METEOR} run \
     --release ${RELEASE} \

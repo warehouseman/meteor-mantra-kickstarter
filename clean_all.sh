@@ -27,7 +27,8 @@ function CleanAllInstalledPackages() {
   rm -fr .meteor/local/;
   rm -fr .meteor/version;
   rm -fr .habitat/results;
-  rm -fr .pkgs/gitignored*fl;
+  rm -fr .e2e_tests/features/5*;
+  rm -fr .pkgs/gitignored*;
   rm -fr public/mobile/android/*.apk*;
   rm -fr npm-debug.log;
 
@@ -36,10 +37,10 @@ function CleanAllInstalledPackages() {
     CleanLocalNodePackages ../${PKGS_DIR};
   fi;
 
-  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~??????~~~>>            rm -fr ~/.meteor
+  rm -fr ~/.meteor;
 
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  echo "Cleaned.";
+  echo "... cleaned.";
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

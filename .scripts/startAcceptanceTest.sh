@@ -7,6 +7,8 @@ declare E2E=${PROJECT_ROOT}/.e2e_tests;
 declare E2E_FEATURES=".e2e_tests/features";
 declare E2E_FEATURES_PATH="/dev/null";
 
+declare GITIG_PREFIX="gitignored_";
+
 declare TRANSIENT_FEATURES_PREFIX=5;
 declare WILDCARD="${TRANSIENT_FEATURES_PREFIX}*";
 
@@ -39,7 +41,6 @@ if pushd ${E2E_FEATURES} &>/dev/null; then
   popd &>/dev/null;
 fi;
 
-
 pushd .pkgs >/dev/null;
   let COUNTER=$(( 100 * TRANSIENT_FEATURES_PREFIX ));
   # echo -e "Prefix is ${COUNTER}";
@@ -50,18 +51,21 @@ pushd .pkgs >/dev/null;
 
       MODULE_FILENAME=$(basename ${MODULE_PATH})
       MODULE_CODENAME=${MODULE_FILENAME#${GITIG_PREFIX}};
-      # echo -e "MODULE_CODENAME : ${MODULE_CODENAME}";
+      # echo -e "MODULE_FILENAME : ${MODULE_FILENAME} ";
+      # echo -e "MODULE_CODENAME : ${MODULE_CODENAME} ";
       EXCLUDE=true;
       if [[  ${MODULE_FILENAME} = ${MODULE_CODENAME} ]]; then
-        echo -e "Core : ${MODULE_CODENAME}";
+        # echo -e "Core : ${MODULE_CODENAME}";
         EXCLUDE=$(echo ${CORE_EXCLUSIONS} | jq ". | contains([\"${MODULE_CODENAME}\"])");
       else
-        echo -e "Container : ${MODULE_CODENAME}";
+        # echo -e "Container : ${MODULE_CODENAME}";
         EXCLUDE=$(echo ${CONTAINER_EXCLUSIONS} | jq ". | contains([\"${MODULE_CODENAME}\"])");
       fi;
 
+      # echo -e "   * * *  EXCLUDE * * *  : ${EXCLUDE}";
+
       if [[  ${EXCLUDE} != "true"  ]]; then
-        echo -e "\n * * Collecting e2e tests for '${MODULE_FILENAME}'";
+        # echo -e "\n * * Collecting e2e tests for '${MODULE_FILENAME}'";
         MODULE=$(cat ${MODULE_PATH}package.json | jq -r .name);
         if [[ "X${MODULE}X" != "XX" ]]; then
           pushd ${MODULE_PATH} >/dev/null;
@@ -69,29 +73,24 @@ pushd .pkgs >/dev/null;
               ((COUNTER++));
               # ls ${E2E_FEATURES};
               MODULE_NAME=$(ls ${E2E_FEATURES});
-              echo -e "~~~~~~~~~~  Link '${MODULE}' e2e tests into submodule as '${COUNTER}_${MODULE_NAME}'  ~~~~~~~~~~~~~~~~~~~~";
+              echo -e "\n~~~~~~~~~~  Link '${MODULE}' e2e tests into submodule as '${COUNTER}_${MODULE_NAME}'";
               pushd ${E2E_FEATURES_PATH} >/dev/null;
-                echo -e "ln -s ../../.pkgs/$(basename ${MODULE_PATH})/.e2e_tests/features/${MODULE_NAME} ${COUNTER}_${MODULE_NAME}";
+                echo -e "ln -s ../../.pkgs/$(basename ${MODULE_PATH})/.e2e_tests/features/${MODULE_NAME} ${COUNTER}_${MODULE_NAME}\n";
                 ln -s ../../.pkgs/$(basename ${MODULE_PATH})/.e2e_tests/features/${MODULE_NAME} ${COUNTER}_${MODULE_NAME};
               popd >/dev/null;
             else
-              echo -e "~~~~~~~~~~  '${MODULE}' has no e2e tests ~~~~~~~~~~~~~~~~~~~~\n{none}";
+              echo -e "\n~~~~~~~~~~  Found '${MODULE}' but no e2e tests for it\n{not linked}\n";
             fi;
           popd >/dev/null;
         fi;
       else
-        echo -e "\n * * Found '${MODULE_FILENAME}' on exclusion list"
+        echo -e "\n~~~~~~~~~~  Found '${MODULE_FILENAME}' on exclusion list\n(not linked)\n"
       fi;
 
     fi;
   done;
 
 popd >/dev/null;
-
-# # pushd ${E2E_FEATURES} &>/dev/null \
-# #   && ( ls -la ) \
-# #   && popd;
-# # .scripts/startAcceptanceTest.sh;
 
 export IDX=150;  # 15 minutes
 while printf "."; ! httping -qc1 http://localhost:3000 && ((IDX-- > 0));
@@ -100,3 +99,6 @@ do
 done;
 
 ${CHIMP} ${E2E}/chimp-config.js --ddp=http://localhost:3000 --path=${E2E};
+echo -e "
+
+................................................................";

@@ -37,7 +37,8 @@ function CleanAllInstalledPackages() {
     CleanLocalNodePackages ../${PKGS_DIR};
   fi;
 
-  rm -fr ~/.meteor;
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~??????~~~>>
+  rm -fr ~/.meteor
 
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   echo "... cleaned.";

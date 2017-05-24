@@ -31,7 +31,7 @@ date > ${LOGS_DIR}/${APP_NAME}.log;
 echo -e "Using meteor version : ${RELEASE}" | tee -a ${LOGS_DIR}/${APP_NAME}.log;
 #
 cd ${PROJECT_ROOT};
-echo -e "
+echo -e "  * * * CONFIGURATION FOR APP SERVER ; ${HOST_SERVER_NAME} * * *
    dialect: ${RDBMS_DIALECT},
 connection: {
         port : ${RDBMS_PORT},
@@ -57,7 +57,12 @@ if [[ "$1" = "reset" ]]; then
   echo -e "Resetting the database.";
   ${METEOR} reset;
 else
-  echo -e "Append 'reset' to the command to solve stuck 'Starting your app...' problems.";
+  echo -e "
+  If you find you get stuck at
+       'Starting your app...'
+  then append 'reset' to the command to clear the problem: Eg.,
+       .scripts/startInProdMode.sh reset
+  ";
 fi;
 
 ${METEOR} run \

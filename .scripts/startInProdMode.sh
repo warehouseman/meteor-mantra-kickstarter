@@ -10,9 +10,9 @@ if [[ ! ${CI} ]]; then
     ";
     exit;
   fi;
+  source ${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh;
 fi;
 
-source ${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh;
 
 echo PROJECT_ROOT=${PROJECT_ROOT};
 ${PROJECT_ROOT}/.scripts/free.sh;

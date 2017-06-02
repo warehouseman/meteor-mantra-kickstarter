@@ -1,6 +1,6 @@
 import utils from '../utils';
 import initAuthorizations from './configs/authInit';
-import methodStubs from './configs/method_stubs';
+// import methodStubs from './configs/method_stubs';
 import actions from './actions';
 import routes from './routes';
 
@@ -17,7 +17,7 @@ function init( _utils ) {
     routes,
     actions,
     load(context) {
-      methodStubs(context);
+//      methodStubs(context);
       initAuthorizations(context);
     }
   };

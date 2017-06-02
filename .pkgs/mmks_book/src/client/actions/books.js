@@ -70,13 +70,15 @@ export default {
     Lgr.a = 'update';
     console.log('Update book (data) : ', book);        // eslint-disable-line no-console
     console.log('Update book (_id) : ', book._id);        // eslint-disable-line no-console
+    let idAuthor = book.author;
+    if ( book.author._id ) { idAuthor = book.author._id; }
     mutate({
       variables: {
         id: book._id,
         title: book.title,
         content: book.content,
         pages: book.pages,
-        authorId: book.author._id
+        authorId: idAuthor
       }
     }).then(function (result) {
       const { errors, data } = result;
@@ -102,7 +104,7 @@ export default {
         variables: { deletion: false },
       } ],
 
-      variables: { id: _id, deletion: false },
+      variables: { id: _id, deletion: true },
 
     }).then(function (result) {
       const { errors, data } = result;

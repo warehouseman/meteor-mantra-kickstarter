@@ -31,17 +31,30 @@ const BookForm = class extends React.Component {
       this.props.validateAction(model);
     };
 
+    this.updateState = (field, value) => {
+      if ( field === 'author' ) {
+//        console.log('Author', this.schemaData);
+        this.schemaData.author.value = value;
+      }
+    };
+
     const { API_AST } = this.props.context();
 
-    this.model = this.props.record || { author: {} };
-    this.state = {model: this.model};
+    this.state = {model: this.props.record || { author: {} }};
 
     this.schemaType = API_AST.getType(nameModule);
-    this.schemaData = this.props.schemaData || { };
-    this.schemaData.author = {
-      options: this.props.authorOptions,
-      value: this.model.author._id,
+    this.schemaData = {
+      author: {
+        options: this.props.authorOptions,
+        value: this.state.model.author._id,
+      }
     };
+
+    // this.schemaData = { };
+    // this.schemaData.author = {
+    //   options: this.props.authorOptions,
+    //   value: this.state.model.author._id,
+    // };
 
     /* eslint-disable no-console */
     console.log('Book model record : ', this.props.record);
@@ -59,9 +72,9 @@ const BookForm = class extends React.Component {
 
   render() {
 
-    console.log('Rendering model : ', this.model);        // eslint-disable-line no-console
+    console.log('Rendering model : ', this.state.model);        // eslint-disable-line no-console
 
-    const title = this.props._id ? 'Edit: ' + this.model.title : 'Add a book :';
+    const title = this.props._id ? 'Editing : ' + this.state.model.title : 'Add a book :';
 
     return (
       <div>
@@ -70,7 +83,8 @@ const BookForm = class extends React.Component {
           <AutoForm
                schema={this.bridge}
                onSubmit={doc => this.submitForm(doc)}
-               model={this.model}
+               onChange={(field, value) => this.updateState(field, value)}
+               model={this.state.model}
                validate="onChange"
           >
             <div className="row-fluid">

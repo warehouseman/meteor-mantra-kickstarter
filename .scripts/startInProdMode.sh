@@ -38,9 +38,9 @@ connection: {
         host : ${RDBMS_HST},
     database : ${RDBMS_DB},
         user : ${RDBMS_UID},
+    password : $(head -c $(( ${#RDBMS_PWD} - 4 )) /dev/zero | tr '\0' '*')${RDBMS_PWD:$(( ${#RDBMS_PWD} - 4 ))}
 }
 ";
-#    password : $(head -c $(( ${#RDBMS_PWD} - 4 )) /dev/zero | tr '\0' '*')${RDBMS_PWD:$(( ${#RDBMS_PWD} - 4 ))}
 
 meteor npm run knex_prod;
 #

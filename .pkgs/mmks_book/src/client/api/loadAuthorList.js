@@ -15,13 +15,13 @@ export default ( args ) => {
 
     fetchPolicy: false,
   }).then((rslt) => {
-    console.log('Authors query result ', rslt);
+//    console.log('Authors query result ', rslt);
     const { errors, data } = rslt;
 
     if (data) {
       authors = data.author;
-      console.log('AuthorList: All', authors);
-      console.log('Author #1: ', data.author[0]._id, data.author[0].lastName);
+      // console.log('AuthorList: All', authors);
+      // console.log('Author #1: ', data.author[0]._id, data.author[0].lastName);
       authorOptions = authors.map((item) => {
         return {
           value: item._id, label: [ item.lastName,item.firstName ].join(', ')

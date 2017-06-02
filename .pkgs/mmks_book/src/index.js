@@ -1,12 +1,9 @@
-import bookModule from './client';
-// import { methods, publications } from './server';
+import bookClient from './client';
+import bookServer from './server';
+
 import { methods } from './server';
 
-// import { Book } from './lib';
+export const Client = bookClient;
+export const Server = bookServer;
 
-// export const Lib = Book;
-
-// export const Publications = publications;
 export const Methods = methods;
-
-export const Client = bookModule;

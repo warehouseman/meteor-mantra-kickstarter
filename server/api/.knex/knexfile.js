@@ -4,20 +4,9 @@ module.exports = {
     client: 'sqlite3',
     connection: {
       filename: '/tmp/db/mmks.sqlite'
-    }
+    },
+    useNullAsDefault: true
   },
-
-// //  prod_pg: {
-//   prod_pgres: {
-//     client: 'postgresql',
-//     connection: {
-//       port: 5432,
-//       host: 'db_srv',
-//       database: 'apollo',
-//       user: 'apollo',
-//       password: 'okmmpl,,',
-//     }
-//   },
 
   production: {
     client: process.env.RDBMS_DIALECT,
@@ -31,6 +20,3 @@ module.exports = {
   }
 
 };
-
-
-//       filename: '../../../.meteor/local/build/programs/server/mmks.sqlite'

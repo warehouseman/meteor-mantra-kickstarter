@@ -12,8 +12,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 
 import typeDefs from '../lib/api/typeDefs';
 
-import bookResolvers from './api/bookResolvers';
-import authorResolvers from './api/authorResolvers';
+import bookResolvers from './api/resolvers/bookResolvers';
+import authorResolvers from './api/resolvers/authorResolvers';
 const resolvers = merge( bookResolvers, authorResolvers );
 
 const executableSchema = makeExecutableSchema({

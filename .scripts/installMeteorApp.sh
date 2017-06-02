@@ -12,6 +12,7 @@ source ${PROJECT_ROOT}/.scripts/free.sh;
 # source ${PROJECT_ROOT}/.scripts/trap.sh;
 # source ${PROJECT_ROOT}/.pkgs/install_local_packages.sh;   DEPRECATED ????
 source ${PROJECT_ROOT}/.pkgs/exportCorePackagesPaths.sh;
+source ${PROJECT_ROOT}/.pkgs/addToKnexMigrationsList.sh;
 # source ${PROJECT_PARENT}/.pkgs/exportImplementationPackagesPaths.sh;  DEPRECATED ????
 
 source ${PROJECT_ROOT}/.scripts/linkInLocalNodePackages.sh;
@@ -37,6 +38,12 @@ function installMeteorApp()
   fi;
 
   exportCorePackagesPaths ${PROJECT_ROOT}/.pkgs;
+
+  # echo -e "##################################";
+  # cat ${LOCAL_NODEJS_PACKAGES_LIST};
+  # echo -e "##################################";
+
+  addToKnexMigrationsList ${LOCAL_NODEJS_PACKAGES_LIST};
 
   linkInLocalNodePackages ${LOCAL_NODEJS_PACKAGES_LIST};
 

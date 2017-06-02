@@ -22,8 +22,8 @@ module.exports = function () {
   this.Given(/^I have opened the 'add colors' page : "([^"]*)"$/, function (_url) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
-    browser.timeouts('implicit', 20000);
-    browser.timeouts('page load', 20000);
+    browser.timeouts('implicit', 60000);
+    browser.timeouts('page load', 60000);
 
     browser.url(_url);
     server.call('_colors.wipe');

@@ -1,4 +1,5 @@
-import { Author, Book } from './db-connectors';
+import { Author, Book } from '../db-connectors';
+import Sequelize from 'sequelize';
 
 /* eslint-disable no-console */
 const resolvers = {
@@ -83,10 +84,12 @@ const resolvers = {
             console.log('Unable to find the book :: ', args._id);
             return { message: 'Book not found' };
           }
+
+          console.log(' Date now : ', Date.now(), '  :  ' , Sequelize.literal('CURRENT_TIMESTAMP'));
           return theBook
             .update({
               deleted: true,
-              deletedAt: Date.now()
+              deletedAt: Sequelize.literal('CURRENT_TIMESTAMP')
             }).then(
               (sequelizeResult) => {
                 console.log('Book hidden :: #', sequelizeResult.dataValues._id);

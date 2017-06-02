@@ -10,118 +10,42 @@ console.log(' RDBMS DIALECT --> ', Meteor.settings.RDBMS_DIALECT );
 
 /* eslint-enable no-console */
 
-let sequelize = null;
+let db = null;
 if ( Meteor.isProduction ) {
 
   console.log(' Meteor mode -- "Production" using RDBMS \'' + // eslint-disable-line no-console
                        Meteor.settings.RDBMS_DIALECT + '\'');
 
-  sequelize = new Sequelize(
+  db = new Sequelize(
     Meteor.settings.RDBMS_DB,
     Meteor.settings.RDBMS_UID,
     Meteor.settings.RDBMS_PWD,
     {
       host: Meteor.settings.RDBMS_HST,
+      logging: false,
       dialect: Meteor.settings.RDBMS_DIALECT
     }
   );
 
 } else {
   console.log(' Meteor mode -- NOT "Production"; using SQLite'); // eslint-disable-line no-console
-  sequelize = new Sequelize('mmks', null, null, {
+  db = new Sequelize('mmks', null, null, {
     dialect: 'sqlite',
+    logging: false,
     storage: '/tmp/db/mmks.sqlite'
   });
 }
 
-export const db = sequelize;
+const AuthorModel = db.import('author', require('./models/author.js'));
+const Author = db.models.author;
 
-const AuthorModel = db.define('author', {
-  _id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true // Automatically gets converted to SERIAL for postgres
-  },
-  firstName: { type: Sequelize.STRING },
-  lastName: { type: Sequelize.STRING },
-  deleted: { type: Sequelize.BOOLEAN },
-  deletedAt: { type: Sequelize.DATE },
-}, {
-  freezeTableName: true // Model tableName will be the same as the model name
-});
+const BookModel = db.import('book', require('./models/book.js'));
+const Book = db.models.book;
 
-const BookModel = db.define('book', {
-  _id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  title: { type: Sequelize.STRING },
-  content: { type: Sequelize.STRING },
-  pages: { type: Sequelize.STRING },
-  deleted: { type: Sequelize.BOOLEAN },
-  deletedAt: { type: Sequelize.DATE },
-}, {
-  freezeTableName: true
-});
-
-const PartnerModel = db.define( // eslint-disable-line no-unused-vars
-  'tb_partners', {
-    /* eslint-disable camelcase  */
-    partner_id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    name: { type: Sequelize.STRING },
-    company: { type: Sequelize.BOOLEAN },
-    client: { type: Sequelize.BOOLEAN },
-    supplier: { type: Sequelize.BOOLEAN },
-    civil_status: { type: Sequelize.BOOLEAN },
-    gender: { type: Sequelize.BOOLEAN },
-    nationality: { type: Sequelize.BOOLEAN },
-    legal_id: { type: Sequelize.STRING },
-    group_code: { type: Sequelize.INTEGER },
-    telf_primary: { type: Sequelize.STRING },
-    telf_secundary: { type: Sequelize.STRING },
-    celular_phone: { type: Sequelize.STRING },
-    email: { type: Sequelize.STRING },
-    webPage: { type: Sequelize.STRING },
-    contact_person: { type: Sequelize.STRING },
-    notes: { type: Sequelize.STRING },
-    sales_person: { type: Sequelize.STRING },
-    status: { type: Sequelize.BOOLEAN },
-    create_by: { type: Sequelize.STRING },
-    creation_date: { type: Sequelize.DATE },
-    last_update: { type: Sequelize.DATE },
-    country_acc: { type: Sequelize.STRING },
-    state_acc: { type: Sequelize.STRING },
-    city_acc: { type: Sequelize.STRING },
-    canton_acc: { type: Sequelize.STRING },
-    parish_acc: { type: Sequelize.STRING },
-    postal_code_acc: { type: Sequelize.STRING },
-    street_acc: { type: Sequelize.STRING },
-    bulding_acc: { type: Sequelize.STRING },
-    country_res: { type: Sequelize.STRING },
-    state_res: { type: Sequelize.STRING },
-    city_res: { type: Sequelize.STRING },
-    canton_res: { type: Sequelize.STRING },
-    parish_res: { type: Sequelize.STRING },
-    postal_code_res: { type: Sequelize.STRING },
-    street_res: { type: Sequelize.STRING },
-    bulding_res: { type: Sequelize.STRING },
-    /* eslint-enable camelcase  */
-  }, {
-    freezeTableName: true
-  }
-);
 
 AuthorModel.hasMany(BookModel, { as: 'books' });
 BookModel.belongsTo(AuthorModel, { as: 'author' });
 
-const Author = db.models.author;
-const Book = db.models.book;
-const Partner = db.models.tb_partners;
 
 let book = Book.findAll();
 book.then(function (result) {
@@ -130,13 +54,21 @@ book.then(function (result) {
   console.log('Sequelize error while finding books...', error); // eslint-disable-line no-console
 });
 
+let Partner = null;
+
 if ( Meteor.isProduction ) {
+
+//  const PartnerModel =
+  db.import('tbPartners', require('./models/tbPartners.js'));
+
+  Partner = db.models.tbPartners;
   let partner = Partner.findAll();
   partner.then(function (result) {
-    console.log(' We got the first partner -- ', result[0].name); // eslint-disable-line no-console
+    console.log(' We got the first partner -- ', result[0].partnerName); // eslint-disable-line no-console
   }).catch( (error) => {
     console.log('Sequelize error while finding partners...', error); // eslint-disable-line no-console
   });
+
 }
 
 export { Author, Book, Partner };

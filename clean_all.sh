@@ -37,11 +37,9 @@ function CleanAllInstalledPackages() {
     CleanLocalNodePackages ../${PKGS_DIR};
   fi;
 
-  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~??????~~~>>
   rm -fr ~/.meteor
-
-  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   echo "... cleaned.";
+
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

@@ -5,7 +5,6 @@ import _colors from './_colors';
 import { Methods as mthdsWidget } from 'mmks_widget';
 import { Methods as mthdsBook } from 'mmks_book';
 
-// import { AccessControl, Widgets, _Widgets, Books, _Books, AccessControl } from '../../lib/collections';
 import { AccessControl, Widgets, _Widgets } from '../../lib/collections';
 
 import App from '/lib/app';

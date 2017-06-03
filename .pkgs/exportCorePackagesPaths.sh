@@ -60,6 +60,7 @@ function exportCorePackagesPaths() {
               echo "${MDL} to list ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>";
               echo "${MDL}" >> ${LOCAL_NODEJS_PACKAGES_LIST};
               # ${METEOR_CMD} npm link;
+              # npm install;
               npm link;
             popd >/dev/null;
           fi;

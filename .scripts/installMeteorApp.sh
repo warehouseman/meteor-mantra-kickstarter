@@ -32,18 +32,33 @@ function installMeteorApp()
 
   echo "" > ${LOCAL_NODEJS_PACKAGES_LIST};
 
+  echo -e "#####################################################";
+  echo -e "Copy packages to submodule with 'gitignored' prefix";
+  echo -e "#####################################################";
+
   if [[ -x "${PROJECT_PARENT}/.pkgs/copyPackagesToSubmodule.sh" ]]; then
     source ${PROJECT_PARENT}/.pkgs/copyPackagesToSubmodule.sh;
     copyPackagesToSubmodule ${PROJECT_PARENT}/.pkgs ${PROJECT_ROOT}/.pkgs;
   fi;
 
+  echo -e "######################################################################";
+  echo -e "'npm link' all eligible packages in '${PROJECT_ROOT}/.pkgs'.";
+  echo -e "######################################################################";
+  # read -n 1 -s -p "Press any key to continue";
+
   exportCorePackagesPaths ${PROJECT_ROOT}/.pkgs;
 
-  # echo -e "##################################";
-  # cat ${LOCAL_NODEJS_PACKAGES_LIST};
-  # echo -e "##################################";
+  echo -e "##################################";
+  echo -e "Prepare knex migrations. Working dir '$(pwd)'";
+  echo -e "##################################";
+  # read -n 1 -s -p "Press any key to continue";
 
   addToKnexMigrationsList ${LOCAL_NODEJS_PACKAGES_LIST};
+
+  echo -e "###################################";
+  echo -e "'npm-link-save' all local packages.";
+  echo -e "###################################";
+  # read -n 1 -s -p "Press any key to continue";
 
   linkInLocalNodePackages ${LOCAL_NODEJS_PACKAGES_LIST};
 
@@ -52,6 +67,7 @@ function installMeteorApp()
 #    install_local_packages;  DEPRECATED???
 
     echo "### Installing 3rd party npm packages. ###";
+    # read -n 1 -s -p "Press any key to continue";
     ${METEOR_CMD} npm -y install;
     # yarn install;
 

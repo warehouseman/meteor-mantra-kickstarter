@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 const composer = ({context}, onData) => {
 
+  // console.log( "~~~~~~ auth.jsx ~~>> ", context());
   const {Meteor} = context();
 
   if (Meteor.subscribe('users.current').ready()) {

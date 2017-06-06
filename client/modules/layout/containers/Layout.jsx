@@ -12,6 +12,7 @@ export default class extends React.Component {
   render() {
 
     this.context = initContext();
+    // console.log("Props : ", this.props);
 
     return (
 

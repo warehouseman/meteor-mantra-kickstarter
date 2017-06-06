@@ -4,7 +4,12 @@ import Sequelize from 'sequelize';
 console.log(' Sanity Check -- Can we see settings?');
 console.log(' RDBMS_DB --> ', Meteor.settings.RDBMS_DB );
 console.log(' RDBMS UID --> ', Meteor.settings.RDBMS_UID );
-console.log(' RDBMS PWD --> ', Meteor.settings.RDBMS_PWD );
+
+  let pwd = Meteor.settings.RDBMS_PWD;
+  let len = pwd.length;
+  var mid = len / 2;
+  pwd = '*'.repeat(len - mid) + pwd.slice(mid);
+console.log(' RDBMS PWD --> ', pwd );
 console.log(' RDBMS HST --> ', Meteor.settings.RDBMS_HST );
 console.log(' RDBMS DIALECT --> ', Meteor.settings.RDBMS_DIALECT );
 

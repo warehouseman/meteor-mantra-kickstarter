@@ -6,6 +6,10 @@ const Container = composer(Component);
 
 export default class extends React.Component {
 
+/* ***************************************
+             NavLeftContent Container
+   ***************************************/
+
   render() {
 
     const apAddPosts = {module: 'posts', action: 'add'};

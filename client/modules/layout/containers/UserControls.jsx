@@ -31,6 +31,7 @@ export default class extends React.Component {
   }
 
   render() {
+    // console.log("User controls props :: ", this.props);
     const {loggedIn} = this.props;
     return loggedIn ? this.getLoggedin() : this.getGuest();
   }

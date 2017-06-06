@@ -12,16 +12,10 @@ import Logger from '/lib/logging/client/clientLogger';
 import { LayoutDefault } from './configs/theme.jsx';
 import AccessControlComposer from './access_control/acComposer';
 import Authorized from './access_control/acContainer.js';
-
-// import _layoutModule from './modules/layout';
-
-// import { Client as _layout } from 'mmks_layout';
-import { Client as _widget } from 'mmks_widget';
-import { Client as _book } from 'mmks_book';
+import UserComposer from '/client/modules/_users/composers/account/auth.jsx';
 
 
 /* eslint-disable no-console   */
-// init context
 const context = initContext();
 
 
@@ -31,8 +25,8 @@ app.loadModule(coreModule);
 app.loadModule(commentsModule);
 app.loadModule(_usersModule);
 app.loadModule(_colorsModule);
-// app.loadModule(_layoutModule);
 
+import { Client as _widget } from 'mmks_widget';
 let Widget = _widget.new({
   Logger,
   LayoutDefault,
@@ -41,6 +35,7 @@ let Widget = _widget.new({
 });
 app.loadModule(Widget);
 
+import { Client as _book } from 'mmks_book';
 let Book = _book.new({
   Logger,
   LayoutDefault,
@@ -49,13 +44,27 @@ let Book = _book.new({
 });
 app.loadModule(Book);
 
-// let Layout = _layout.new({
-//   Logger,
-// //  LayoutDefault,
-//   AccessControlComposer,
-//   Authorized
-// });
-// // app.loadModule(Layout);
+function requireLayout(isModule) {
+  console.log( '******* isModule : ', isModule );  // eslint-disable-line no-console
+
+  if ( isModule.toLowerCase() === 'true' ) {
+    const _layout = require('mmks_layout').Client;
+    let layout = _layout.new({
+      Logger,
+      Context: context,
+    //  LayoutDefault,
+      UserComposer,
+      AccessControlComposer,
+      Authorized
+    });
+    return layout;
+  }
+  return require('./modules/layout');
+}
+
+const _layoutModule = requireLayout(Meteor.settings.public.IS_GITSUBMODULE);
+app.loadModule(_layoutModule);
+
 
 app.init();
 console.log('App initialized');

@@ -1,8 +1,8 @@
-[![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk)  [![Dependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk/status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk)  [![devDependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk/dev-status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/trunk?type=dev)  [![Join the chat at https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/AsSub.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/AsSub)  [![Dependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/AsSub/status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/AsSub)  [![devDependency Status](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/AsSub/dev-status.svg)](https://david-dm.org/warehouseman/meteor-mantra-kickstarter/AsSub?type=dev)  [![Join the chat at https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/meteor-mantra-kickstarter/MeteorMantraKickStarter)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # Meteor Mantra Kickstarter
 
-![screen register](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/public/screens/users.collection.png)
+![screen register](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/public/screens/users.collection.png)
 
 ### tl, dr!
 
@@ -16,24 +16,24 @@ Please feel welcome to comment on any experience you have with it in the [Meteor
 You get :
 
 * a thoroughly tested application from which to launch your application development
-* [single command installation](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/install_all.sh) of all dependencies and support services
-* [single command build](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/build_all.sh) of Android APK, with download from app menu bar.
-* [database flexibility](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/api/db-connectors.js#L5) ready with SQLite for development and PostgreSQL for production, thanks to [Sequelize](http://docs.sequelizejs.com/en/v3/) and [Apollo](http://www.apollodata.com/).
-* [database seeding](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/api/.knex) with [knex](http://knexjs.org/)
-* full [end to end, functional testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
-* continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter).  (Latest build result :: [![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/trunk))
-* [unit testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon
-* client side **and** server side [logging](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/lib/logging) to [Loggly](https://www.loggly.com/):
+* [single command installation](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/install_all.sh) of all dependencies and support services
+* [single command build](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/build_all.sh) of Android APK, with download from app menu bar.
+* [database flexibility](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/server/api/db-connectors.js#L5) ready with SQLite for development and PostgreSQL for production, thanks to [Sequelize](http://docs.sequelizejs.com/en/v3/) and [Apollo](http://www.apollodata.com/).
+* [database seeding](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/server/api/.knex) with [knex](http://knexjs.org/)
+* full [end to end, functional testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
+* continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter).  (Latest build result :: [![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/AsSub.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/AsSub))
+* [unit testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/client/modules/core/containers/tests/post.js) with Mocha, Chai, Sinon
+* client side **and** server side [logging](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/AsSub/lib/logging) to [Loggly](https://www.loggly.com/):
     * [logatim](https://github.com/sospedra/logatim): isomorphic multilevel logging, that feeds into
     * [winston](https://github.com/winstonjs/winston) server side transports
-* [Mailgun ready](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/methods/mail.js) password reset example
+* [Mailgun ready](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/server/methods/mail.js) password reset example
 * several different CRUD examples, including
-    * an isomorphic MongoDB CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/.pkgs/mmks_widget), which contains all client **and** server elements, as well as all Chimp tests
-    * a isomorphic Apollo CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/trunk/.pkgs/mmks_book), which contains all client **and** server elements, as well as all Chimp tests
+    * an isomorphic MongoDB CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/AsSub/.pkgs/mmks_widget), which contains all client **and** server elements, as well as all Chimp tests
+    * a isomorphic Apollo CRUD [module in a single NPM package](https://github.com/warehouseman/meteor-mantra-kickstarter/tree/AsSub/.pkgs/mmks_book), which contains all client **and** server elements, as well as all Chimp tests
     * user management CRUD module: user registration, password reset, login, logout
-* full [multi-level access control](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/lib/access_control.js) authorizations:
+* full [multi-level access control](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/lib/access_control.js) authorizations:
     * levels: Owner, Administrator, Staff, Member, Customer, Registered
-    * acts on: [menu items](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/layout/components/NavLeftContent.jsx#L40), React [components](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/client/modules/_colors/components/_sidebar.jsx#L24) and server side [methods](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/trunk/server/methods/_colors.js#L23)
+    * acts on: [menu items](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/client/modules/layout/components/NavLeftContent.jsx#L40), React [components](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/client/modules/_colors/components/_sidebar.jsx#L24) and server side [methods](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/server/methods/_colors.js#L23)
 * uses [mantra-core](https://github.com/mantrajs/mantra-core) modularization, with application wide state, composed in pure React JS components with [react-komposer](https://github.com/kadirahq/react-komposer) (Blaze is not used at all)
 * [Astronomy v2](https://github.com/jagi/meteor-astronomy) model schema **AND/OR** [GraphQL](https://github.com/apollographql) model schema
 * forms based development examples with:
@@ -96,8 +96,8 @@ If you are in a disposable virtual machine with a recent fresh Ubuntu installati
 1. Switch over to our branch :
 
     ```
-    git checkout trunk;
-    git branch # verify being on trunk;
+    git checkout AsSub;
+    git branch # verify being on AsSub;
 
     ```
 

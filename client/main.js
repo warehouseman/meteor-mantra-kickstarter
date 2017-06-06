@@ -67,4 +67,4 @@ app.loadModule(_layoutModule);
 
 
 app.init();
-console.log('App initialized');
+console.log('App initialized');  // eslint-disable-line no-console

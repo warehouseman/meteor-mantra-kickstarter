@@ -15,10 +15,11 @@ Please feel welcome to comment on any experience you have with it in the [Meteor
 
 You get :
 
-* a thoroughly tested application from which to launch your application development
+* a thoroughly tested application from which to launch your application development.
+* Use it as a `git` submodule of your application.  [Dynamic loading hooks](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/client/main.js#L47-L66) and [shell scripts](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/.pkgs/exportCorePackagesPaths.sh) link your app's npm modules into the Kickstarter at build time.  Since, it's a git  submodule within your app, you can benefit from new improvements made to it, without being forced to to alter your code with each later release. 
 * [single command installation](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/install_all.sh) of all dependencies and support services
 * [single command build](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/build_all.sh) of Android APK, with download from app menu bar.
-* [database flexibility](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/server/api/db-connectors.js#L5) ready with SQLite for development and PostgreSQL for production, thanks to [Sequelize](http://docs.sequelizejs.com/en/v3/) and [Apollo](http://www.apollodata.com/).
+* [database flexibility](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/server/api/db-connectors.js#L5) ready with SQLite for development and PostgreSQL or MySql for production, thanks to [Sequelize](http://docs.sequelizejs.com/en/v3/) and [Apollo](http://www.apollodata.com/).
 * [database seeding](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/server/api/.knex) with [knex](http://knexjs.org/)
 * full [end to end, functional testing](https://github.com/warehouseman/meteor-mantra-kickstarter/blob/AsSub/.e2e_tests/features/002_colors/addColor.feature) with [Chimp](https://chimp.readme.io/) and [Cucumber](https://cucumber.io/)
 * continuous integration and test in [CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter).  (Latest build result :: [![CircleCI](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/AsSub.svg?style=svg)](https://circleci.com/gh/warehouseman/meteor-mantra-kickstarter/tree/AsSub))

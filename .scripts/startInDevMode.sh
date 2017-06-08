@@ -11,6 +11,7 @@ declare LOGS_DIR="${CIRCLE_ARTIFACTS:-/var/log/meteor}";
 
 echo -e "Will write logs to : ${LOGS_DIR}";
 sudo mkdir -p ${LOGS_DIR};
+sudo chown $(whoami):$(whoami) ${LOGS_DIR};
 sudo chmod +rwx ${LOGS_DIR};
 #
 export RELEASE=$(cat ${PROJECT_ROOT}/.meteor/release | cut -d "@" -f 2);
@@ -21,6 +22,9 @@ date > ${LOGS_DIR}/${APP_NAME}.log;
 echo -e "Using meteor version : ${RELEASE}" | tee -a ${LOGS_DIR}/${APP_NAME}.log;
 #
 cd ${PROJECT_ROOT};
+declare SQLITE_DIR="/tmp/db";
+[ ! -d ${SQLITE_DIR} ] && mkdir -p ${SQLITE_DIR};
+
 meteor npm run knex_cont;
 #
 export X=${HOST_SERVER_PROTOCOL:="http"};

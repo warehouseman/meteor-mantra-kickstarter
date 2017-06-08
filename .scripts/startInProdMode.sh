@@ -21,6 +21,7 @@ declare METEOR="${METEOR_CMD:-meteor}";
 declare LOGS_DIR="${CIRCLE_ARTIFACTS:-/var/log/meteor}";
 echo -e "Will write logs to : ${LOGS_DIR}";
 sudo mkdir -p ${LOGS_DIR};
+sudo chown $(whoami):$(whoami) ${LOGS_DIR};
 sudo chmod +rwx ${LOGS_DIR};
 #
 export RELEASE=$(cat ${PROJECT_ROOT}/.meteor/release | cut -d "@" -f 2);

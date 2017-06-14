@@ -15,7 +15,8 @@ function installMeteorFramework()
     echo "### Installing Meteor";
     local release_num=$(cat .meteor/release | cut -d "@" -f 2);
     echo "Obtaining release number : ${release_num}";
-    curl https://install.meteor.com/?release=${release_num} | sh;
+    curl https://install.meteor.com/ | sh;
+    meteor update --release ${release_num};
   fi
 
   echo "### Meteor Installed";

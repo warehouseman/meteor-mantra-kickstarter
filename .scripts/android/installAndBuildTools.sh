@@ -332,8 +332,13 @@ function PrepareToBuildAndroidAPK() {
   fi;
 
   local KTEXISTS=0;
-  echo "### Checking for key store and pre-existing alias.";
-  [ -f ${HOME}/.keystore ] && KTEXISTS=$(keytool -list -v  -storepass ${KEYSTORE_PWD} | grep "Alias name" | grep -c "${APP_NAME}");
+  echo "### Checking for key store and pre-existing alias for '${APP_NAME}'.";
+  if [[ -f ${HOME}/.keystore ]]; then
+    if [[ 0 -lt $(keytool -list -v  -storepass ${KEYSTORE_PWD} | grep "Alias name" | grep -c "${APP_NAME}") ]]; then
+      KTEXISTS=1;
+    fi;
+  fi;
+
   if [[ ${KTEXISTS} -lt 1 ]]; then
     echo "Creating key pair for '${APP_NAME}'.";
     until keytool -genkeypair -dname "cn=${YOUR_FULLNAME}, ou=IT, o=${YOUR_ORGANIZATION_NAME}, c=${CCODE}" \

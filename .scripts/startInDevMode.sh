@@ -39,9 +39,11 @@ else
   echo -e "Append 'reset' to the command to solve stuck 'Starting your app...' problems.";
 fi;
 
-${METEOR} run \
+declare START="${METEOR} run \
     --release ${RELEASE} \
-    --settings=settings.json;
+    --settings=settings.json"
+echo -e ${START};
+${START};
 
 # ${METEOR} run \
 #     --release ${RELEASE} \

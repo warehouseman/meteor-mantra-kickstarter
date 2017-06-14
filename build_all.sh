@@ -1,29 +1,45 @@
 #!/usr/bin/env bash
 #
-export APP_NAME="":
+export APP_NAME="";
+export BUILD_DIR="./.habitat/results";
 
 set -e;
 # source .scripts/trap.sh;
+
 source .scripts/utils.sh;
 source .scripts/android/installAndBuildTools.sh;
+source .scripts/refreshApt.sh;
+source .scripts/buildMeteor.sh;
+source .scripts/installMeteorApp.sh;
+
 
 declare JSON_FILE="./package.json";
 GetProjectName ${JSON_FILE};
-echo -e "Extracted project name "${APP_NAME}" from : ${JSON_FILE}.";
+echo -e "Extracted project name '${APP_NAME}' from '${JSON_FILE}'.";
+echo -e "Ignoring project name '${APP_NAME}' setting 'mmks' instead.";
+APP_NAME="mmks";
 
-source .scripts/refreshApt.sh;
-# source .pkgs/install_local_packages.sh;
-source .scripts/buildMeteor.sh;
-
-export BUILD_DIR="./.habitat/results";
-
+echo -e "### Refreshing APT";
 refreshApt;
+
 echo -e "### Preparing To Build AndroidAPK";
 PrepareToBuildAndroidAPK;
+read -n 1 -s -p "Press any key to continue";
+echo "";
+
+echo -e "### Prebuild Meteor App";
+installMeteorApp;
+read -n 1 -s -p "Press any key to continue";
+echo "";
+
 echo -e "### Building AndroidAPK";
 BuildAndroidAPK;
-echo -e "### Building Meteor App";
+read -n 1 -s -p "Press any key to continue";
+echo "";
+
+echo -e "### Re-building Meteor App; bundling APK ";
 buildMeteor;
+
 
 echo -e "
 

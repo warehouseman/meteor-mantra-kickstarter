@@ -370,15 +370,19 @@ function BuildAndroidAPK() {
   pushd ${BUILD_DIRECTORY} >/dev/null;
 
     export APP_RELEASE=$(jq -r .version package.json);
-    export APP_NAME=$(jq -r .name package.json);
+#    export APP_NAME=$(jq -r .name package.json);
 
-    echo -e "\nRemoving any '*.apk' left in public directory.";
+    echo -e "\nRemoving any '${APP_NAME}.apk' left in publish directory : './${APK_PUBLISH_DIR}'";
     rm -f ./${APK_PUBLISH_DIR}/${APP_NAME}.apk;
 
-    echo -e "\nBuilding project : meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_URI};\n\n";
-    meteor build ${TARGET_DIRECTORY}         --server=${HOST_SERVER_URI};
+    echo -e "\nRemoving any 'mmks.apk' left in publish directory : './${APK_PUBLISH_DIR}'";
+    rm -f ./${APK_PUBLISH_DIR}/mmks.apk;
+
+    echo -e "\nBuilding project '${APP_NAME}' : meteor build ${TARGET_DIRECTORY} --mobile-settings=settings.json --server=${HOST_SERVER_URI};\n\n";
+    meteor build ${TARGET_DIRECTORY} --mobile-settings=settings.json --server=${HOST_SERVER_URI};
 
     echo "Built project : ${BUILD_DIRECTORY} in ${TARGET_DIRECTORY} for server ${HOST_SERVER_URI}";
+    echo -e "mv ${TARGET_DIRECTORY}/android/release-unsigned.apk ${TARGET_DIRECTORY}/android/${APP_NAME}_unaligned.apk";
     mv ${TARGET_DIRECTORY}/android/release-unsigned.apk ${TARGET_DIRECTORY}/android/${APP_NAME}_unaligned.apk;
 
     # echo "Stashed plain version.  Building debug version ...";

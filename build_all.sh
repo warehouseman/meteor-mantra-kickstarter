@@ -24,18 +24,12 @@ refreshApt;
 
 echo -e "### Preparing To Build AndroidAPK";
 PrepareToBuildAndroidAPK;
-read -n 1 -s -p "Press any key to continue";
-echo "";
 
 echo -e "### Prebuild Meteor App";
 installMeteorApp;
-read -n 1 -s -p "Press any key to continue";
-echo "";
 
-echo -e "### Building AndroidAPK";
+echo -e "### Building AndroidAPK as ${APP_NAME}";
 BuildAndroidAPK;
-read -n 1 -s -p "Press any key to continue";
-echo "";
 
 echo -e "### Re-building Meteor App; bundling APK ";
 buildMeteor;

@@ -55,10 +55,6 @@ let link = '';
 
 module.exports = function () {
 
-//  Scenario: Log in as administrator
-// ------------------------------------------------------------------------
-
-
   this.Given(/^I have opened the main page : "([^"]*)"$/, function (urlMain) {
     browser.setViewportSize({ width: 1024, height: 480 });
     browser.timeouts('implicit', 60000);
@@ -67,6 +63,24 @@ module.exports = function () {
     browser.url(urlMain);
     browser.waitForVisible(classBrand);
   });
+
+  this.Given(/^that the kickstarter is running stand\-alone$/, function () {
+   return true;
+  });
+
+  this.Then(/^the title in the top left is "([^"]*)" or something else$/, function (arg1) {
+    let isSubmodule = server.call('system.isSubModule');
+    console.log('It is ' + isSubmodule + ' and we get ' + browser.getText(classBrand));
+    if ( isSubmodule === 'Stand-alone') {
+      expect(browser.getText(classBrand)).toEqual('Kickstarter');
+    } else {
+      expect(browser.getText(classBrand)).not.toEqual('Kickstarter');
+    }
+  });
+
+//  Scenario: Log in as administrator
+// ------------------------------------------------------------------------
+
 
   this.Then(/^I see the login menu item\.$/, function () {
     browser.waitForVisible(cukeHrefLogin);

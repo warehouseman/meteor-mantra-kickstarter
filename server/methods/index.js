@@ -1,3 +1,4 @@
+import system from './system';
 import posts from './posts';
 import _users from './_users';
 import _colors from './_colors';
@@ -18,6 +19,7 @@ let _widgets = mthdsWidget.new(Widgets, _Widgets, ctx);
 let _books = mthdsBook.new(ctx);
 
 export default function () {
+  system();
   posts();
   _users();
   _colors();

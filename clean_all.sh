@@ -17,7 +17,7 @@ function CleanLocalNodePackages() {
     done
   popd >/dev/null;
 
-  sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
+  [ -f ~/.userVars.sh ] && sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
   echo "Cleaned local node packages .";
 }
 

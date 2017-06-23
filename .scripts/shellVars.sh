@@ -64,6 +64,12 @@ addShellVar 'KEYSTORE_PWD' \
 export X=${NON_STOP:="no"}
 addShellVar 'NON_STOP' \
             'Run scripts without stopping to check environment variables  :: ' \
-            'Assume env vars are correct : \"${NON_STOP}\";' \
+            'Assume env vars are correct? : \"${NON_STOP}\";' \
             '7';
+
+export X=${IS_GITSUBMODULE:="no"}
+addShellVar 'IS_GITSUBMODULE' \
+            'Tell Meteor Mantra Kickstarter that it is running as a Git Submodule  :: ' \
+            'Run as submodule? : \"${IS_GITSUBMODULE}\";' \
+            '8';
 

@@ -23,7 +23,7 @@ function preFlightCheck()
       echo -e "${PRTY} Environment variables need to be set...";
       source ./ManageShellVars.sh "";
       loadShellVars;
-      PARM_NAMES=( "YOUR_FULLNAME" "YOUR_ORGANIZATION_NAME" "HOST_SERVER_PROTOCOL" "HOST_SERVER_NAME" "HOST_SERVER_PORT" "KEYSTORE_PWD" "NON_STOP" );
+      PARM_NAMES=( "YOUR_FULLNAME" "YOUR_ORGANIZATION_NAME" "HOST_SERVER_PROTOCOL" "HOST_SERVER_NAME" "HOST_SERVER_PORT" "KEYSTORE_PWD" "NON_STOP" "IS_GITSUBMODULE" );
       askUserForParameters PARM_NAMES[@];
     popd >/dev/null;
 

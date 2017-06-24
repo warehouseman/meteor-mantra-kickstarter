@@ -4,6 +4,7 @@ import Sequelize from 'sequelize';
 console.log(' Sanity Check -- Can we see settings?');
 console.log(' RDBMS_DB --> ', Meteor.settings.RDBMS_DB );
 console.log(' RDBMS UID --> ', Meteor.settings.RDBMS_UID );
+console.log(' IS_GITSUBMODULE --> ', Meteor.settings.public.IS_GITSUBMODULE );
 
 let pwd = Meteor.settings.RDBMS_PWD;
 let len = pwd.length;

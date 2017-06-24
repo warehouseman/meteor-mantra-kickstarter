@@ -45,9 +45,9 @@ let Book = _book.new({
 app.loadModule(Book);
 
 function requireLayout(isModule) {
-  console.log( '******* isModule : ', isModule );  // eslint-disable-line no-console
+  console.log( '******* main:isModule? ', isModule );  // eslint-disable-line no-console
 
-  if ( isModule.toLowerCase() === 'true' ) {
+  if ( isModule.toLowerCase() === 'true' || isModule.toLowerCase() === 'yes' ) {
     const _layout = require('mmks_layout').Client;
     let layout = _layout.new({
       Logger,

@@ -1,8 +1,8 @@
 const R = require;
 function requireLayout(isModule) {
-  console.log( '******* isModule : ', isModule );  // eslint-disable-line no-console
+//  console.log( '******* theme:isModule? ', isModule );  // eslint-disable-line no-console
 
-  if ( isModule.toLowerCase() === 'true' ) {
+  if ( isModule.toLowerCase() === 'true' || isModule.toLowerCase() === 'yes' ) {
     return R('mmks_layout').LayoutDefault;
   }
   return R('../modules/layout/containers/Layout.jsx').default;

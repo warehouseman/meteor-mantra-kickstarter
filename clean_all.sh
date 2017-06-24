@@ -4,7 +4,7 @@
 declare PKGS_DIR=".pkgs";
 function CleanLocalNodePackages() {
   local PKGS_DIR=$1;
-  # echo "Cleaning local node packages . . . ";
+  echo "Cleaning local node packages . . . ";
   pushd ${PKGS_DIR} >/dev/null;
     echo -e "In dir $(pwd)";
 
@@ -22,15 +22,13 @@ function CleanLocalNodePackages() {
 }
 
 function CleanAllInstalledPackages() {
-  echo "Cleaning . . . ";
+  echo "Cleaning build artifacts . . . ";
   rm -fr node_modules;
   rm -fr .meteor/local/;
-  rm -fr .meteor/version;
   rm -fr .habitat/results;
-  rm -fr .e2e_tests/features/5*;
-  rm -fr .pkgs/gitignored*;
   rm -fr public/mobile/android/*.apk*;
   rm -fr npm-debug.log;
+  rm -fr ${HOME}/.npm-global/lib/node_modules
 
   CleanLocalNodePackages ${PKGS_DIR};
   if [[ -d ../${PKGS_DIR} ]]; then
@@ -39,7 +37,14 @@ function CleanAllInstalledPackages() {
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~??????~~~>>   rm -fr ~/.meteor;
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  echo "... cleaned.";
+  echo "... cleaned build artifacts.";
+}
+
+function RemoveImportedPackages() {
+  echo "Removing Imported Packages . . . ";
+  rm -fr .e2e_tests/features/5*;
+  rm -fr .pkgs/gitignored*;
+  echo "... Imported Packages Removed.";
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

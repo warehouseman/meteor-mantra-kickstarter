@@ -16,8 +16,7 @@ echo -e "PROJECT_ROOT=${PROJECT_ROOT}";
 echo -e "Acceptance test dir : ${E2E}";
 ${PROJECT_ROOT}/.scripts/free.sh;
 
-declare PKG_EXCLUSIONS="package_exclusions.json";
-declare PKG_EXCL_PATH="../.pkgs/${PKG_EXCLUSIONS}";
+declare PKG_EXCL_PATH="${PACKAGE_EXCLUSIONS:-../.pkgs/package_exclusions.json}";
 
 declare CORE_EXCLUSIONS="[]";
 declare CONTAINER_EXCLUSIONS="[]";

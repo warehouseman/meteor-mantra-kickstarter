@@ -39,13 +39,13 @@ function validateMeteorSettings() {
     echo -e "
      The environment variable 'HOST_SERVER_NAME' is undefined!
          Secret settings under ...
-            '/home/$(whoami)/.ssh/hab_vault/\${HOST_SERVER_NAME}/secrets.sh;'
+            '/home/$(whoami)/.ssh/deploy_vault/\${HOST_SERVER_NAME}/secrets.sh;'
                 ... could not be read.
     ";
     exit 1;
   fi;
 
-  declare SECRETS_FILE="${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh";
+  declare SECRETS_FILE="${HOME}/.ssh/deploy_vault/${HOST_SERVER_NAME}/secrets.sh";
   echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";
   if [[ "${CI}" = "true" ]]; then
     # echo "A";

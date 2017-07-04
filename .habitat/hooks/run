@@ -9,7 +9,7 @@ export PORT={{cfg.port}};
 
 export METEOR_SETTINGS_TEMPLATE_FILE="template.settings.json.sh";
 export METEOR_SETTINGS_FILE="settings.json";
-export SOURCE_SECRETS_FILE="/home/hab/.ssh/hab_vault/{{cfg.root_domain}}/secrets.sh";
+export SOURCE_SECRETS_FILE="/home/hab/.ssh/deploy_vault/{{cfg.root_domain}}/secrets.sh";
 
 echo "~~~~~~~~~~~~  {{cfg.message}}   ~~~~~~~~~~~~~~~";
 . ${SOURCE_SECRETS_FILE};

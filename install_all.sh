@@ -72,8 +72,8 @@ else
   MSG="
 
   Next steps :
-     1) # Correctly configure '${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh;'
-     2) source ${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh;
+     1) # Correctly configure '${HOME}/.ssh/deploy_vault/${HOST_SERVER_NAME}/secrets.sh;'
+     2) source ${HOME}/.ssh/deploy_vault/${HOST_SERVER_NAME}/secrets.sh;
      3) ./template.settings.json.sh > settings.json;
      4) meteor --settings=settings.json
      ";

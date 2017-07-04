@@ -3,14 +3,14 @@
 
 export APP_HOST_DOMAIN_NAME=${1};
 
-echo -e "Verifying secrets file presence ( '${HOME}/.ssh/hab_vault/${APP_HOST_DOMAIN_NAME}/secrets.sh;' )";
-if [[ ! -f "${HOME}/.ssh/hab_vault/${APP_HOST_DOMAIN_NAME}/secrets.sh" ]]; then
+echo -e "Verifying secrets file presence ( '${HOME}/.ssh/deploy_vault/${APP_HOST_DOMAIN_NAME}/secrets.sh;' )";
+if [[ ! -f "${HOME}/.ssh/deploy_vault/${APP_HOST_DOMAIN_NAME}/secrets.sh" ]]; then
   echo -e "* * No such file. * * ";
   exit;
 fi;
 
 echo -e "Found.";
-source ${HOME}/.ssh/hab_vault/${APP_HOST_DOMAIN_NAME}/secrets.sh;
+source ${HOME}/.ssh/deploy_vault/${APP_HOST_DOMAIN_NAME}/secrets.sh;
 
 echo -e "Trial SSH login to target host finds user : $(ssh ${SETUP_USER_UID}@${RDBMS_HST} 'whoami;')";
 

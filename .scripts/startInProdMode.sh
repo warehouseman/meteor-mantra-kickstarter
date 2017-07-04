@@ -4,13 +4,13 @@ pushd `dirname $0` > /dev/null; SCRIPTPATH=`pwd`; popd > /dev/null;
 PROJECT_ROOT=${SCRIPTPATH%/.scripts};
 
 if [[ ! ${CI} ]]; then
-  if [[ ! -f ${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh ]]; then
-    echo -e "Unable to find the file \"${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh\".
+  if [[ ! -f ${HOME}/.ssh/deploy_vault/${HOST_SERVER_NAME}/secrets.sh ]]; then
+    echo -e "Unable to find the file \"${HOME}/.ssh/deploy_vault/${HOST_SERVER_NAME}/secrets.sh\".
             Did you run \".scripts/preFlightCheck.sh\"
     ";
     exit;
   fi;
-  source ${HOME}/.ssh/hab_vault/${HOST_SERVER_NAME}/secrets.sh;
+  source ${HOME}/.ssh/deploy_vault/${HOST_SERVER_NAME}/secrets.sh;
 fi;
 
 

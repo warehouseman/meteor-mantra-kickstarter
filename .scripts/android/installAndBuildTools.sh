@@ -334,7 +334,7 @@ function PrepareToBuildAndroidAPK() {
   local KTEXISTS=0;
   echo "### Checking for key store and pre-existing alias for '${APP_NAME}'.";
   if [[ -f ${HOME}/.keystore ]]; then
-    if [[ 0 -lt $(keytool -list -v  -storepass ${KEYSTORE_PWD} | grep "Alias name" | grep -c "${APP_NAME}") ]]; then
+    if [[ 0 -lt $(keytool -list -v  -storepass ${KEYSTORE_PWD} | grep "Alias name" | grep -ic "${APP_NAME}") ]]; then
       KTEXISTS=1;
     fi;
   fi;

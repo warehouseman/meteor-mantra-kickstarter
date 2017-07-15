@@ -8,6 +8,8 @@ shift;
 
 IGNORE_PATHS="$@";
 
+PKG="inotify-tools" apt show ${PKG} &>/dev/null || sudo apt -y install ${PKG};
+
 echo "Will execute : '${EVENT_TASK}'";
 
 function doIt() {

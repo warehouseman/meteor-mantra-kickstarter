@@ -22,7 +22,7 @@ export default {
       }
     });
 
-/*
+    /*
     Meteor.call('_users.add', userObject, (err, response) => {
       console.log('actions._users.add call', userObject);
       if (err) {

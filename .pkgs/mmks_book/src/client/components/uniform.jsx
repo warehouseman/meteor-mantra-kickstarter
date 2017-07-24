@@ -33,7 +33,7 @@ const BookForm = class extends React.Component {
 
     this.updateState = (field, value) => {
       if ( field === 'author' ) {
-//        console.log('Author', this.schemaData);
+        //        console.log('Author', this.schemaData);
         this.schemaData.author.value = value;
       }
     };
@@ -64,57 +64,57 @@ const BookForm = class extends React.Component {
     console.log('Schema data : ', this.schemaData);
     /* eslint-enable no-console */
     this.bridge = new GraphQLBridge(
-                           this.schemaType
-                         , this.schemaValidator
-                         , this.schemaData
+      this.schemaType
+      , this.schemaValidator
+      , this.schemaData
     );
   }
 
   render() {
 
-    console.log('Rendering model : ', this.state.model);        // eslint-disable-line no-console
+    console.log('Rendering model : ', this.state.model); // eslint-disable-line no-console
 
     const title = this.props._id ? 'Editing : ' + this.state.model.title : 'Add a book :';
 
     return (
       <div>
-          <h3>{title}</h3>
+        <h3>{title}</h3>
 
-          <AutoForm
-               schema={this.bridge}
-               onSubmit={doc => this.submitForm(doc)}
-               onChange={(field, value) => this.updateState(field, value)}
-               model={this.state.model}
-               validate="onChange"
-          >
-            <div className="row-fluid">
-              <div data-cuke="title" className="col-md-4">
-                <TextField data-cuke="title" name="title" label="Title"
-                           placeholder="The book's title."/>
-              </div>
-              <div data-cuke="author" className="col-md-6">
-                <SelectField name="author" label="Author" />
-              </div>
-              <div data-cuke="pages" className="col-md-2">
-                <NumField name="pages" label="# of pages"/>
-              </div>
+        <AutoForm
+          schema={this.bridge}
+          onSubmit={doc => this.submitForm(doc)}
+          onChange={(field, value) => this.updateState(field, value)}
+          model={this.state.model}
+          validate="onChange"
+        >
+          <div className="row-fluid">
+            <div data-cuke="title" className="col-md-4">
+              <TextField data-cuke="title" name="title" label="Title"
+                placeholder="The book's title."/>
             </div>
-            <div data-cuke="content" className="row-fluid">
-              <LongTextField name="content" label="Content"
-                placeholder="Brief synopsis" />
+            <div data-cuke="author" className="col-md-6">
+              <SelectField name="author" label="Author" />
             </div>
+            <div data-cuke="pages" className="col-md-2">
+              <NumField name="pages" label="# of pages"/>
+            </div>
+          </div>
+          <div data-cuke="content" className="row-fluid">
+            <LongTextField name="content" label="Content"
+              placeholder="Brief synopsis" />
+          </div>
 
-            <ErrorsField data-cuke="errorMessage"/>
+          <ErrorsField data-cuke="errorMessage"/>
 
-            {this.props.errorMessage ? (
-              <span children={this.props.errorMessage} />
-            ) : (
-              <br />
-            )}
+          {this.props.errorMessage ? (
+            <span children={this.props.errorMessage} />
+          ) : (
+            <br />
+          )}
 
-            <SubmitField data-cuke="save-item"/>
+          <SubmitField data-cuke="save-item"/>
 
-          </AutoForm>
+        </AutoForm>
       </div>
     );
   }

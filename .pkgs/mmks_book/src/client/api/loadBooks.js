@@ -4,7 +4,7 @@ export default ( args ) => {
 
   const { ApolloClient, onData } = args;
 
-/* eslint-disable no-console */
+  /* eslint-disable no-console */
   ApolloClient.query({
     query: LOAD_BOOKS_QUERY,
     variables: { deletion: false },

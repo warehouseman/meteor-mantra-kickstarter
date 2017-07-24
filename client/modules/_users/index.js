@@ -6,7 +6,7 @@ export default {
   routes,
   actions,
   load(context) {
-//    console.log(' loading method_stubs ', context);
+    //    console.log(' loading method_stubs ', context);
     methodStubs(context);
   }
 };

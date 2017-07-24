@@ -21,7 +21,7 @@ export default class extends React.Component {
 
         <div className="container">
 
-            {this.props.content()}
+          {this.props.content()}
 
         </div>
 

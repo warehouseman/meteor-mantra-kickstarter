@@ -8,15 +8,15 @@ export default class extends React.Component {
     super(props);
 
     this.onChange = () => {
-//      let vals = this.refs.form.getValue(); // <- validate on every change
-//      this.info( ' @ onChange ', JSON.stringify(vals) );
+      //      let vals = this.refs.form.getValue(); // <- validate on every change
+      //      this.info( ' @ onChange ', JSON.stringify(vals) );
     };
 
     // this.submitForm = this.submitForm.bind(this);
     this.submitForm = (event) => {
       event.preventDefault();
       var values = this.refs.form.getValue();
-//      this.debug('submitForm', JSON.stringify(values));
+      //      this.debug('submitForm', JSON.stringify(values));
       if (values) {
         this.props.clearErrors();
         if (this.props._id) {
@@ -36,7 +36,7 @@ export default class extends React.Component {
     const ctx = {poolParty: { age: 21 }};
     const Age = t.refinement(t.Number, (n) => n >= ctx.poolParty.age);
     Age.getValidationErrorMessage = (value, path, context) =>
-         'Nope. ' + value + ' is too young, Pool Party Age : ' + context.poolParty.age;
+      'Nope. ' + value + ' is too young, Pool Party Age : ' + context.poolParty.age;
 
     const formModel = t.struct({
       title: t.String,
@@ -84,24 +84,24 @@ export default class extends React.Component {
     return (
       <div>
 
-          <h3>{title}</h3>
-          {exception ?
+        <h3>{title}</h3>
+        {exception ?
           <div data-cuke="bad-content" className="alert alert-danger" onClick="">
             <span className="unicon fatal icon-white icon-24" ></span>
             {exception}
           </div> : null }
 
-          <Form ref="form"
+        <Form ref="form"
 
-            type={formModel}
-            options={formOptions}
+          type={formModel}
+          options={formOptions}
 
-            value ={record}
-            onChange={this.onChange}
+          value ={record}
+          onChange={this.onChange}
 
-            context={ ctx }
+          context={ ctx }
 
-          />
+        />
         <button
           data-cuke="save-item" className="btn btn-primary"
           onClick={this.submitForm}>{buttonLabel}

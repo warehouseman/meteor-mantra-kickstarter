@@ -13,7 +13,7 @@ const BookList = ({books}) => (
           <a data-cuke={aBook.title} href={`/book/${aBook._id}`}>{aBook.title} </a>
             written by
           <a href={`/books/${aBook.author._id}`}>&nbsp;
-             {aBook.author.lastName}, {aBook.author.firstName}</a>
+            {aBook.author.lastName}, {aBook.author.firstName}</a>
         </li>
       ))}
     </ul>

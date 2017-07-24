@@ -26,9 +26,9 @@ export const depsMapper = (context, actions) => ({
 });
 
 const Component = (component) => composeAll(
-    graphql(CREATE_BOOK_MUTATION),
-    composeWithTracker(authorSelectListOptions),
-    useDeps(depsMapper)
-  )(component);
+  graphql(CREATE_BOOK_MUTATION),
+  composeWithTracker(authorSelectListOptions),
+  useDeps(depsMapper)
+)(component);
 
 export default Component;

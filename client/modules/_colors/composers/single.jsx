@@ -3,7 +3,8 @@ import { composeAll, composeWithTracker } from 'mantra-core';
 
 import authComposer from '/client/access_control/acComposer';
 
-export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData) => {
+// export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData) => {
+export const singleComposer = ({context, _id}, onData) => {
   // console.log( ' composer/single.jsx', accesspoints );
 
   const {Meteor, Collections, LocalState} = context();
@@ -29,7 +30,7 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
-    composeWithTracker(authComposer),
-    composeWithTracker(singleComposer),
-    useDeps(depsMapper)
-  )(component);
+  composeWithTracker(authComposer),
+  composeWithTracker(singleComposer),
+  useDeps(depsMapper)
+)(component);

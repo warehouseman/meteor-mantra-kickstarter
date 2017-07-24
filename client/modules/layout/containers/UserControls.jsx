@@ -9,7 +9,7 @@ export default class extends React.Component {
         <li className="dropdown">
           <a href="#" className="dropdown-toggle"
             data-toggle="dropdown">
-              <x-cuke id="acct-email">{email}</x-cuke>
+            <x-cuke id="acct-email">{email}</x-cuke>
               &nbsp;<span className="caret"></span></a>
           <ul className="dropdown-menu" role="menu">
             <li><a href="/profile">Profile</a></li>

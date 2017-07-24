@@ -13,6 +13,6 @@ export const collectionComposer = ({context}, onData) => {
 };
 
 export default (component) => composeAll(
-    composeWithTracker(collectionComposer),
-    useDeps()
-  )(component);
+  composeWithTracker(collectionComposer),
+  useDeps()
+)(component);

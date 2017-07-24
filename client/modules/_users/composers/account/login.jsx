@@ -18,6 +18,6 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
-    composeWithTracker(composer),
-    useDeps(depsMapper)
-  )(component);
+  composeWithTracker(composer),
+  useDeps(depsMapper)
+)(component);

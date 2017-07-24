@@ -2,7 +2,8 @@
 import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
-export const composer = ({context, clearErrors}, onData) => {
+// export const composer = ({context, clearErrors}, onData) => {
+export const composer = ({context}, onData) => {
   const {LocalState, Meteor, Collections} = context();
 
   if (Meteor.subscribe('users.collection').ready()) {
@@ -23,6 +24,6 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
-    composeWithTracker(composer),
-    useDeps(depsMapper)
-  )(component);
+  composeWithTracker(composer),
+  useDeps(depsMapper)
+)(component);

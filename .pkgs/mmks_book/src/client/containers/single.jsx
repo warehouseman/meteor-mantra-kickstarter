@@ -16,7 +16,7 @@ export default class extends React.Component {
     Container = Composer(Component, Utils.AccessControlComposer);
   }
 
-/* ***************************************
+  /* ***************************************
              View A Book Container
    ***************************************/
 

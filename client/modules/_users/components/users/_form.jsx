@@ -106,25 +106,25 @@ export default class extends React.Component {
     const formTitle = _id ? 'Edit ' + email : 'Add new record';
     const buttonLabel = 'Save';
 
-//    console.log('_users/components/users/_form.jsx --> exception :', exception);
+    //    console.log('_users/components/users/_form.jsx --> exception :', exception);
 
     return (
       <div>
 
-          <h3 data-cuke="user-form-title">{formTitle}</h3>
+        <h3 data-cuke="user-form-title">{formTitle}</h3>
 
-          {exception ?
+        {exception ?
           <div className="alert alert-danger" onClick="">
             <span className="octicon octicon-megaphone" ></span>
             {exception}
           </div> : null }
 
-          <Form ref="form"
-            type={User}
-            options={formOptions}
-            onChange={this.onChange}
-            value={defaultValues}
-          />
+        <Form ref="form"
+          type={User}
+          options={formOptions}
+          onChange={this.onChange}
+          value={defaultValues}
+        />
 
         <button data-cuke='user-save' className="btn btn-primary" onClick={this.submitForm}>
           {buttonLabel}

@@ -27,7 +27,7 @@ export default class extends React.Component {
           <h3 className="box-title">Books navigation</h3>
         </div>
         <div className="box-body no-padding">
-            <Container accesspoints={accPnts}/>
+          <Container accesspoints={accPnts}/>
         </div>
       </div>
     );

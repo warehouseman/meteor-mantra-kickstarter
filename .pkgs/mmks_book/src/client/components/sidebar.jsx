@@ -24,7 +24,7 @@ export default class extends React.Component {
       classAddBook = 'enabled';
     }
 
-/* ***************************************
+    /* ***************************************
              Side Bar Component
    ***************************************/
 

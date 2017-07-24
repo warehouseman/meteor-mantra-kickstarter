@@ -3,7 +3,8 @@ import {
 } from 'mantra-core';
 import Component from '../components/comment_list.jsx';
 
-export const composer = ({context, clearErrors, postId}, onData) => {
+// export const composer = ({context, clearErrors, postId}, onData) => {
+export const composer = ({context, postId}, onData) => {
   const {Meteor, Collections} = context();
   if (Meteor.subscribe('posts.comments', postId).ready()) {
     const options = {

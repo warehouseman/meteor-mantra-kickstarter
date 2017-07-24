@@ -7,13 +7,14 @@ import loadBook from '../api/loadBook';
 
 import { UPDATE_BOOK_MUTATION } from '../api/mutationsBooks';
 
-export const singleComposer = ({context, _id, clearErrors}, onData) => {
+// export const singleComposer = ({context, _id, clearErrors}, onData) => {
+export const singleComposer = ({context, _id}, onData) => {
 
 //  const {Meteor, Collections, LocalState} = context();
   const {ApolloClient, LocalState} = context();
   const exception = LocalState.get('_books.DELETE_ERROR');
 
-  console.log('Composing book data for record #' + _id);  // eslint-disable-line no-console
+  console.log('Composing book data for record #' + _id); // eslint-disable-line no-console
   loadBook({ _id, ApolloClient, onData, exception });
 
 };
@@ -37,10 +38,10 @@ export const depsMapper = (context, actions) => ({
 });
 
 const Component = (component) => composeAll(
-    graphql(UPDATE_BOOK_MUTATION),
-    composeWithTracker(authorSelectListOptions),
-    composeWithTracker(singleComposer),
-    useDeps(depsMapper)
-  )(component);
+  graphql(UPDATE_BOOK_MUTATION),
+  composeWithTracker(authorSelectListOptions),
+  composeWithTracker(singleComposer),
+  useDeps(depsMapper)
+)(component);
 
 export default Component;

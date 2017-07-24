@@ -5,7 +5,7 @@ const Layout = ({content = () => null }) => (
   <div>
     <Navigation />
     Delete this! It's never used!
-        {content()}
+    {content()}
   </div>
 );
 

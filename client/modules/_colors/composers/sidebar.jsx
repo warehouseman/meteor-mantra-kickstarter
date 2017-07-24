@@ -3,16 +3,16 @@ import { composeAll, composeWithTracker } from 'mantra-core';
 
 import authComposer from '/client/access_control/acComposer';
 
-export const sideBarComposer = ({context, clearErrors}, onData) => {
+// export const sideBarComposer = ({context, clearErrors}, onData) => {
 
-//  const accessPoint = {module: 'colors', action: 'add'};
+// //  const accessPoint = {module: 'colors', action: 'add'};
 
-  onData(null, { } );
+//   onData(null, { } );
 
-};
+// };
 
 export default (component) => composeAll(
-    composeWithTracker(authComposer),
-    composeWithTracker(sideBarComposer),
-    useDeps()
-  )(component);
+  composeWithTracker(authComposer),
+  //  composeWithTracker(sideBarComposer),
+  useDeps()
+)(component);

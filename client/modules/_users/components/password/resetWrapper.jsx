@@ -14,31 +14,31 @@ export default class extends React.Component {
 
     return (
       <div className="bs-docs-section clearfix">
-          <div className="row">
+        <div className="row">
 
-              <div className="col-md-6">
-                  <h2 className="font-bold">Reset Your Password</h2>
+          <div className="col-md-6">
+            <h2 className="font-bold">Reset Your Password</h2>
 
-                  <p>
+            <p>
                     You're Back!
-                  </p>
-                  <p>
+            </p>
+            <p>
                     Please protect your password.
-                  </p>
+            </p>
 
 
-              </div>
-              <div className="col-md-6">
-                  <div className="ibox-content">
-
-                    <h2 className="font-bold">Password Change</h2>
-
-                    <Container _code={code}/>
-
-                  </div>
-              </div>
           </div>
-          <hr/>
+          <div className="col-md-6">
+            <div className="ibox-content">
+
+              <h2 className="font-bold">Password Change</h2>
+
+              <Container _code={code}/>
+
+            </div>
+          </div>
+        </div>
+        <hr/>
       </div>
 
     );

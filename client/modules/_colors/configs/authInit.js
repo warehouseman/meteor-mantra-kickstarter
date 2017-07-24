@@ -6,7 +6,7 @@ export default ( context ) => {
   LocalState.set('module.colors.subscription', 'waiting' );
   Meteor.subscribe('access-points', 'colors', App.group, function () {
     LocalState.set('module.colors.subscription', 'ready' );
-//    console.log('\n\n Finding => all: ', ACL.AccessControl.find({ }).fetch());
+    //    console.log('\n\n Finding => all: ', ACL.AccessControl.find({ }).fetch());
   });
 
 };

@@ -11,7 +11,7 @@ function lint_each_package() {
     do
       echo -e "~~~~~~~~~~  Lint '${mdl}' source files  ~~~~~~~~~~~~~~~~~~~~~~~~~~~";
       pushd ${mdl} >/dev/null;
-        ${METEOR_CMD} npm run lint
+        ${METEOR_CMD} npm run lintfix
       popd >/dev/null;
     done
     echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";

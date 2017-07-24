@@ -45,14 +45,14 @@ let Book = _book.new({
 app.loadModule(Book);
 
 function requireLayout(isModule) {
-  console.log( '******* main:isModule? ', isModule );  // eslint-disable-line no-console
+  console.log( '******* main:isModule? ', isModule ); // eslint-disable-line no-console
 
   if ( isModule.toLowerCase() === 'true' || isModule.toLowerCase() === 'yes' ) {
     const _layout = require('mmks_layout').Client;
     let layout = _layout.new({
       Logger,
       Context: context,
-    //  LayoutDefault,
+      //  LayoutDefault,
       UserComposer,
       AccessControlComposer,
       Authorized
@@ -67,4 +67,4 @@ app.loadModule(_layoutModule);
 
 
 app.init();
-console.log('App initialized');  // eslint-disable-line no-console
+console.log('App initialized'); // eslint-disable-line no-console

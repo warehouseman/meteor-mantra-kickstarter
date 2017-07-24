@@ -20,8 +20,8 @@ class Authorized extends React.Component {
 
     const errorComponent = this.errorComponent;
     Lgr.verbose( 'Access point : ' + accesspoint ?
-                     ( permissions[accesspoint] ? 'permitted' : 'NOT permitted' ) :
-                     'unknown permission' );
+      ( permissions[accesspoint] ? 'permitted' : 'NOT permitted' ) :
+      'unknown permission' );
 
 
     if ( permissions[accesspoint] ) {

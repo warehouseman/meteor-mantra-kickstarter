@@ -17,7 +17,7 @@ function init( _utils ) {
     routes,
     actions,
     load(context) {
-//      methodStubs(context);
+      //      methodStubs(context);
       initAuthorizations(context);
     }
   };

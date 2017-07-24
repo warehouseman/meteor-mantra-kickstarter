@@ -1,7 +1,8 @@
 import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
-export const addComposer = ({context, clearErrors}, onData) => {
+// export const addComposer = ({context, clearErrors}, onData) => {
+export const addComposer = ({context}, onData) => {
 
   const {LocalState} = context();
   const exception = LocalState.get('_widgets.ADD_ERROR');
@@ -17,6 +18,6 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
-    composeWithTracker(addComposer),
-    useDeps(depsMapper)
-  )(component);
+  composeWithTracker(addComposer),
+  useDeps(depsMapper)
+)(component);

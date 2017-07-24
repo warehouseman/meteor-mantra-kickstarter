@@ -44,12 +44,12 @@ export default class extends React.Component {
           <br />
           <br />
           <a data-cuke='edit-item' href={'/widgets/' + _id + '/edit'}
-                                                        className={ editAllowed }>
+            className={ editAllowed }>
             edit
           </a>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <a data-cuke='delete-item' href="#" onClick={this.hideRecord.bind(this)}
-                                                        className={ deleteAllowed }>
+            className={ deleteAllowed }>
             delete
           </a>
         </p>

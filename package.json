@@ -43,7 +43,7 @@
     "chai": "4.1.0",
     "chimp": "0.49.1",
     "enzyme": "2.9.1",
-    "eslint": "3.19.0",
+    "eslint": "4.3.0",
     "eslint-plugin-babel": "4.1.1",
     "eslint-plugin-react": "7.1.0",
     "jsdom": "9.12.0",

@@ -12,6 +12,6 @@ export const composer = ({context}, onData) => {
 };
 
 export default (component) => composeAll(
-    composeWithTracker(composer),
-    useDeps()
-  )(component);
+  composeWithTracker(composer),
+  useDeps()
+)(component);

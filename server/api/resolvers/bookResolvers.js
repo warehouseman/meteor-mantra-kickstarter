@@ -9,7 +9,7 @@ const resolvers = {
       // to select deleted and undeleted records use pass in :
       // args.deleted = { $like: '%' };
 
-//      args.deleted = args.deleted || { $not: true };
+      //      args.deleted = args.deleted || { $not: true };
       // console.log('####### Book.findAll({ where: args }); ', args);
 
       let res = Book.findAll({ where: args });
@@ -53,17 +53,17 @@ const resolvers = {
           if (dataValues) {
             console.log('New book data values : ', dataValues);
             return Book
-            .findById( dataValues._id )
-            .then(newBook => {
-              if (!newBook) {
-                console.log('Unable to find the newly created book :: ', dataValues._id);
-                return { message: 'New book <' + dataValues._id + '>  created, but not found!' };
-              }
-              return dataValues;
-            })
-            .catch((error) => {
-              console.log('Sequelize error while reloading the book, "' + args.title + '"', error);
-            });
+              .findById( dataValues._id )
+              .then(newBook => {
+                if (!newBook) {
+                  console.log('Unable to find the newly created book :: ', dataValues._id);
+                  return { message: 'New book <' + dataValues._id + '>  created, but not found!' };
+                }
+                return dataValues;
+              })
+              .catch((error) => {
+                console.log('Sequelize error while reloading the book, "' + args.title + '"', error);
+              });
           }
           if (errors) {
             console.log('Sequelize error while finding the book, "' + args.title + '"', errors);
@@ -149,7 +149,7 @@ const resolvers = {
           console.log('There was an error finding the book :: ', error);
         });
     },
-/* eslint-enable no-console */
+    /* eslint-enable no-console */
   }
 };
 

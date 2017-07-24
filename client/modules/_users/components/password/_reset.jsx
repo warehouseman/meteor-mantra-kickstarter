@@ -64,7 +64,7 @@ export default class extends React.Component {
     let formClassName = 'vertical m-t';
 
     const { exception, users, _code } = this.props;
-//    this.debug(' render() ', _code);
+    //    this.debug(' render() ', _code);
 
     let sharedProps = {
       layout: this.state.layout,
@@ -83,75 +83,75 @@ export default class extends React.Component {
 
     return (
 
-        <Formsy.Form className={formClassName}
-          onValidSubmit={this.validSubmit}
-          onInvalidSubmit={this.invalidSubmit}
-          onValid={this.enableButton}
-          onInvalid={this.disableButton}
-          onChange={this.onChange}
+      <Formsy.Form className={formClassName}
+        onValidSubmit={this.validSubmit}
+        onInvalidSubmit={this.invalidSubmit}
+        onValid={this.enableButton}
+        onInvalid={this.disableButton}
+        onChange={this.onChange}
 
-          data-cuke='register'
-          ref="form">
+        data-cuke='register'
+        ref="form">
 
-          <fieldset>
+        <fieldset>
 
-            {fail ?
+          {fail ?
             <div data-cuke="bad-content" className="alert alert-danger" onClick="">
               <span className="unicon fatal icon-white icon-24" ></span>
               {fail}
             </div> : null }
 
-            <p>
+          <p>
               Enter your password twice as shown.  Then log in again, please.
-            </p>
+          </p>
 
-            <Input
-                {...sharedProps}
-                name="password1"
-                value=""
-                label="Password"
-                type="password"
+          <Input
+            {...sharedProps}
+            name="password1"
+            value=""
+            label="Password"
+            type="password"
 
-                data-cuke="password1"
+            data-cuke="password1"
 
-                validations="minLength:8"
-                validationError="Your password must be at least 8 characters long."
-                placeholder="Choose a password"
-            />
-            <Input
-                {...sharedProps}
-                name="password2"
-                value=""
-                label="Confirm password"
-                type="password"
+            validations="minLength:8"
+            validationError="Your password must be at least 8 characters long."
+            placeholder="Choose a password"
+          />
+          <Input
+            {...sharedProps}
+            name="password2"
+            value=""
+            label="Confirm password"
+            type="password"
 
-                data-cuke="password2"
+            data-cuke="password2"
 
-                validations="equalsField:password1"
-                validationErrors={{
-                  equalsField: 'Passwords must match.'
-                }}
+            validations="equalsField:password1"
+            validationErrors={{
+              equalsField: 'Passwords must match.'
+            }}
 
-                placeholder="Retype password"
-            />
+            placeholder="Retype password"
+          />
 
-          </fieldset>
+        </fieldset>
 
-          <Row layout={this.state.layout}>
+        <Row layout={this.state.layout}>
 
-            <input
+          <input
 
-              data-cuke='submit'
-              className="btn btn-primary block full-width m-b"
+            data-cuke='submit'
+            className="btn btn-primary block full-width m-b"
 
-              formNoValidate={false}
-              disabled={!this.state.canSubmit}
-              type="submit"
-              defaultValue="Reset Password" />
+            formNoValidate={false}
+            disabled={!this.state.canSubmit}
+            type="submit"
+            defaultValue="Reset Password" />
 
-          </Row>
+        </Row>
 
-        </Formsy.Form>
+      </Formsy.Form>
 
     );
   }

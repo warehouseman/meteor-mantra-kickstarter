@@ -6,7 +6,7 @@ export default ( context ) => {
   LocalState.set('module.posts', 'waiting' );
   Meteor.subscribe('access-points', 'posts', App.group, function () {
     LocalState.set('module.posts', 'ready' );
-//    console.log('\n\n Finding => all: ', ACL.AccessControl.find({ }).fetch());
+    //    console.log('\n\n Finding => all: ', ACL.AccessControl.find({ }).fetch());
   });
 
 };

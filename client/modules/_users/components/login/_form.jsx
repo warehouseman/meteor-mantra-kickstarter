@@ -58,70 +58,70 @@ export default class extends React.Component {
 
     return (
 
-        <Formsy.Form className={formClassName}
-          onValidSubmit={this.validSubmit}
-          onInvalidSubmit={this.invalidSubmit}
-          onValid={this.enableButton}
-          onInvalid={this.disableButton}
-          onChange={this.onChange}
+      <Formsy.Form className={formClassName}
+        onValidSubmit={this.validSubmit}
+        onInvalidSubmit={this.invalidSubmit}
+        onValid={this.enableButton}
+        onInvalid={this.disableButton}
+        onChange={this.onChange}
 
-          data-cuke="login"
+        data-cuke="login"
 
-          ref="form">
+        ref="form">
 
-          <fieldset>
-            {error ?
+        <fieldset>
+          {error ?
             <div className="alert alert-danger" onClick="">
               <span className="octicon octicon-megaphone" ></span>
               {error}
             </div> : null }
 
-            <Input
-                {...sharedProps}
-                name="email"
-                value=""
-                label="Email"
-                type="email"
-                placeholder="This is an email input."
-                autoComplete="off"
+          <Input
+            {...sharedProps}
+            name="email"
+            value=""
+            label="Email"
+            type="email"
+            placeholder="This is an email input."
+            autoComplete="off"
 
-                data-cuke="email"
+            data-cuke="email"
 
-                validations="isEmail"
-                validationError="Please provide a valid email address."
+            validations="isEmail"
+            validationError="Please provide a valid email address."
 
-            />
-            <Input
-                {...sharedProps}
-                name="password"
-                value=""
-                label="Password"
-                type="password"
-                placeholder="Type in your password"
+          />
+          <Input
+            {...sharedProps}
+            name="password"
+            value=""
+            label="Password"
+            type="password"
+            placeholder="Type in your password"
 
-                data-cuke="password"
+            data-cuke="password"
 
-                validations="minLength:4"
-                validationError="That password looks a bit short, try again"
+            validations="minLength:4"
+            validationError="That password looks a bit short, try again"
 
-            />
+          />
 
-          </fieldset>
+        </fieldset>
 
-          <Row layout={this.state.layout}>
+        <Row layout={this.state.layout}>
 
-            <input className="btn btn-primary block full-width m-b"
-              formNoValidate={true}
-              disabled={!this.state.canSubmit}
-              type="submit"
+          <input className="btn btn-primary block full-width m-b"
+            formNoValidate={true}
+            disabled={!this.state.canSubmit}
+            type="submit"
 
-              data-cuke="login-button"
+            data-cuke="login-button"
 
-              defaultValue="Login" />
+            defaultValue="Login" />
 
-          </Row>
+        </Row>
 
-        </Formsy.Form>
+      </Formsy.Form>
 
     );
   }

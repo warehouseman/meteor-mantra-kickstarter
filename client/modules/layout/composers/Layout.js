@@ -1,9 +1,8 @@
 import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
-// import authComposer from '/client/access_control/Authorize';
-
-export const singleComposer = ({context, _id, clearErrors}, onData) => {
+// export const singleComposer = ({context, _id, clearErrors}, onData) => {
+export const singleComposer = ({context}, onData) => {
 
   const {LocalState, App, Tracker} = context();
   const error = LocalState.get('_colors.DELETE_ERROR');
@@ -17,7 +16,7 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
-    composeWithTracker(singleComposer),
-//    composeWithTracker(authComposer),
-    useDeps(depsMapper)
-  )(component);
+  composeWithTracker(singleComposer),
+  //    composeWithTracker(authComposer),
+  useDeps(depsMapper)
+)(component);

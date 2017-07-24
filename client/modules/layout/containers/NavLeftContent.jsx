@@ -20,7 +20,7 @@ export default class extends React.Component {
     const accPnts = [ apAddPosts, apAddColors, apAddWidgets, apAddBooks ];
 
     return (
-            <Container accesspoints={accPnts}/>
+      <Container accesspoints={accPnts}/>
     );
   }
 }

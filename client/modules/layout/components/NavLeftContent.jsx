@@ -15,7 +15,7 @@ export default class extends React.Component {
   render() {
     Lgr.a = 'render ';
 
-//    console.log( ' nav left component : permissions ', this.props.permissions );
+    //    console.log( ' nav left component : permissions ', this.props.permissions );
 
     const enablePostsAdd = this.props.permissions['posts:add'];
     const enableColorsAdd = this.props.permissions['colors:add'];

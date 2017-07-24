@@ -30,7 +30,7 @@ export default {
     }
 
     if (details.length) {
-      throw {details};         // eslint-disable-line no-throw-literal
+      throw {details}; // eslint-disable-line no-throw-literal
     }
 
   },
@@ -45,7 +45,7 @@ export default {
   create({ FlowRouter }, book, mutate) {
     Lgr.a = 'create';
     Lgr.info('Create book with :: ', book.title);
-    console.log('Book.create.  With : ', book);        // eslint-disable-line no-console
+    console.log('Book.create.  With : ', book); // eslint-disable-line no-console
     mutate({
 
       refetchQueries: [ {
@@ -66,10 +66,11 @@ export default {
   },
 
   // update
-  update({Meteor, LocalState, FlowRouter}, book, mutate) {
+  // update({Meteor, LocalState, FlowRouter}, book, mutate) {
+  update({FlowRouter}, book, mutate) {
     Lgr.a = 'update';
-    console.log('Update book (data) : ', book);        // eslint-disable-line no-console
-    console.log('Update book (_id) : ', book._id);        // eslint-disable-line no-console
+    console.log('Update book (data) : ', book); // eslint-disable-line no-console
+    console.log('Update book (_id) : ', book._id); // eslint-disable-line no-console
     let idAuthor = book.author;
     if ( book.author._id ) { idAuthor = book.author._id; }
     mutate({
@@ -91,9 +92,10 @@ export default {
   },
 
   // hide
-  hide({Meteor, LocalState, FlowRouter}, _id, mutate) {
+  // hide({Meteor, LocalState, FlowRouter}, _id, mutate) {
+  hide({FlowRouter}, _id, mutate) {
     Lgr.a = 'hide';
-    console.log('Hide book (_id) : ', _id);        // eslint-disable-line no-console
+    console.log('Hide book (_id) : ', _id); // eslint-disable-line no-console
     mutate({
 
       refetchQueries: [ {

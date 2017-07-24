@@ -1,7 +1,8 @@
 import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
-export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData) => {
+// export const singleComposer = ({context, _id, accesspoints, clearErrors}, onData) => {
+export const singleComposer = ({context, _id}, onData) => {
 
   const {Meteor, Collections, LocalState} = context();
   const error = LocalState.get('_widgets.DELETE_ERROR');
@@ -21,7 +22,7 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component, _authComposer) => composeAll(
-    composeWithTracker(_authComposer),
-    composeWithTracker(singleComposer),
-    useDeps(depsMapper)
-  )(component);
+  composeWithTracker(_authComposer),
+  composeWithTracker(singleComposer),
+  useDeps(depsMapper)
+)(component);

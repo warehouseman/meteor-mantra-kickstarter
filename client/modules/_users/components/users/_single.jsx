@@ -15,10 +15,10 @@ export default class extends React.Component {
       <div>
 
         {hideException ?
-        <div data-cuke="bad-content" className="alert alert-danger" onClick="">
-          <span className="unicon fatal icon-white icon-24" ></span>
-          {hideException}
-        </div> : null }
+          <div data-cuke="bad-content" className="alert alert-danger" onClick="">
+            <span className="unicon fatal icon-white icon-24" ></span>
+            {hideException}
+          </div> : null }
         <h3> <x-cuke id="user-record">User Record</x-cuke> </h3>
 
         <p><strong>First name:</strong> <x-cuke id="firstName">{firstName}</x-cuke></p>

@@ -57,53 +57,53 @@ export default class extends React.Component {
 
     return (
 
-        <Formsy.Form className={formClassName}
-          onValidSubmit={this.validSubmit}
-          onInvalidSubmit={this.invalidSubmit}
-          onValid={this.enableButton}
-          onInvalid={this.disableButton}
-          onChange={this.onChange}
-          ref="form">
+      <Formsy.Form className={formClassName}
+        onValidSubmit={this.validSubmit}
+        onInvalidSubmit={this.invalidSubmit}
+        onValid={this.enableButton}
+        onInvalid={this.disableButton}
+        onChange={this.onChange}
+        ref="form">
 
-          <fieldset>
-            {exception ?
+        <fieldset>
+          {exception ?
             <div data-cuke="bad-mailing" className="alert alert-danger" onClick="">
               <span className="unicon fatal icon-white icon-24" ></span>
               {exception}
             </div> : null }
-            <Input
-                {...sharedProps}
-                name="email"
-                value=""
-                label="Email"
-                type="email"
-                placeholder="This is an email input."
+          <Input
+            {...sharedProps}
+            name="email"
+            value=""
+            label="Email"
+            type="email"
+            placeholder="This is an email input."
 
-                data-cuke='rst-email'
+            data-cuke='rst-email'
 
-                autoComplete="off"
+            autoComplete="off"
 
-                validations="isEmail"
-                validationError="Please provide a valid email address."
+            validations="isEmail"
+            validationError="Please provide a valid email address."
 
-            />
+          />
 
-          </fieldset>
+        </fieldset>
 
-          <Row layout={this.state.layout}>
+        <Row layout={this.state.layout}>
 
-            <input className="btn btn-primary block full-width m-b"
-              formNoValidate={true}
-              disabled={!this.state.canSubmit}
+          <input className="btn btn-primary block full-width m-b"
+            formNoValidate={true}
+            disabled={!this.state.canSubmit}
 
-              data-cuke='submit-rst-email'
+            data-cuke='submit-rst-email'
 
-              type="submit"
-              defaultValue="Send new password" />
+            type="submit"
+            defaultValue="Send new password" />
 
-          </Row>
+        </Row>
 
-        </Formsy.Form>
+      </Formsy.Form>
 
     );
   }

@@ -3,7 +3,8 @@ import { composeAll, composeWithTracker } from 'mantra-core';
 
 import {singleComposer} from './single.jsx';
 
-export const editComposer = ({context, clearErrors}, onData) => {
+// export const editComposer = ({context, clearErrors}, onData) => {
+export const editComposer = ({context}, onData) => {
   const {LocalState} = context();
   const exception = LocalState.get('_users.UPDATE_ERROR');
   onData(null, {exception});
@@ -19,7 +20,7 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
-    composeWithTracker(singleComposer),
-    composeWithTracker(editComposer),
-    useDeps(depsMapper)
-  )(component);
+  composeWithTracker(singleComposer),
+  composeWithTracker(editComposer),
+  useDeps(depsMapper)
+)(component);

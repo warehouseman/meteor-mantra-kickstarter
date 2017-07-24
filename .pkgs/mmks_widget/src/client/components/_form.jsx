@@ -7,10 +7,10 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
 
-//     this.onChange = () => {
-// //      let vals = this.refs.form.getValue(); // <- validate on every change
-// //      this.info( ' @ onChange ', JSON.stringify(vals) );
-//     };
+    //     this.onChange = () => {
+    // //      let vals = this.refs.form.getValue(); // <- validate on every change
+    // //      this.info( ' @ onChange ', JSON.stringify(vals) );
+    //     };
 
     this.submitForm = (event) => {
       event.preventDefault();
@@ -33,7 +33,7 @@ export default class extends React.Component {
     const ctx = {someWidget: { size: 21 }};
     const Size = t.refinement(t.Number, (n) => n >= ctx.someWidget.size);
     Size.getValidationErrorMessage = (value, path, context) =>
-         'Nope. ' + value + ' is too small, Bronze Minimum : ' + context.someWidget.size;
+      'Nope. ' + value + ' is too small, Bronze Minimum : ' + context.someWidget.size;
 
     const formModel = t.struct({
       title: t.String,
@@ -81,24 +81,24 @@ export default class extends React.Component {
     return (
       <div>
 
-          <h3>{title}</h3>
-          {exception ?
+        <h3>{title}</h3>
+        {exception ?
           <div data-cuke="bad-content" className="alert alert-danger" onClick="">
             <span className="unicon fatal icon-white icon-24" ></span>
             {exception}
           </div> : null }
 
-          <Form ref="form"
+        <Form ref="form"
 
-            type={formModel}
-            options={formOptions}
+          type={formModel}
+          options={formOptions}
 
-            value ={record}
-            onChange={this.onChange}
+          value ={record}
+          onChange={this.onChange}
 
-            context={ ctx }
+          context={ ctx }
 
-          />
+        />
         <button
           data-cuke="save-item" className="btn btn-primary"
           onClick={this.submitForm}>{buttonLabel}

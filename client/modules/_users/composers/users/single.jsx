@@ -2,7 +2,8 @@ import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 // import _ from 'lodash';
 
-export const singleComposer = ({context, _id, clearErrors}, onData) => {
+// export const singleComposer = ({context, _id, clearErrors}, onData) => {
+export const singleComposer = ({context, _id}, onData) => {
   const {Meteor, LocalState, Collections} = context();
   const hideException = LocalState.get('_users.HIDE_ERROR');
   if (Meteor.subscribe('users.single', _id).ready()) {
@@ -28,6 +29,6 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
-    composeWithTracker(singleComposer),
-    useDeps(depsMapper)
-  )(component);
+  composeWithTracker(singleComposer),
+  useDeps(depsMapper)
+)(component);

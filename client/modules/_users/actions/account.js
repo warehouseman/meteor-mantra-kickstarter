@@ -37,7 +37,7 @@ export default {
     } else {
 
       return LocalState.set('_users.PASSWORD_RESET_ERROR',
-                            'Could not send to email address : <' + email + '>.');
+        'Could not send to email address : <' + email + '>.');
 
     }
 
@@ -51,7 +51,7 @@ export default {
 
     if ( !_password1 || !_password2 ) {
       return LocalState.set('_users.PASSWORD_RESET_ERROR'
-                          , 'Please fill out all the required fields!');
+        , 'Please fill out all the required fields!');
     }
 
     if ( _password1 !== _password2 ) {

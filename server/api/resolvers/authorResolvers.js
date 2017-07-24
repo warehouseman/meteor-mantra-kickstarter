@@ -35,7 +35,7 @@ const resolvers = {
         console.log('Sequelize error while creating the author, "' + args.lastName + '"', error);
       });
     },
-/* eslint-enable no-console */
+    /* eslint-enable no-console */
   }
 };
 

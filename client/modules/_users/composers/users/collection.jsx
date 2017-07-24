@@ -5,7 +5,7 @@ export const composer = ({context}, onData) => {
   const {Meteor, Collections} = context();
 
   if (Meteor.subscribe('users.collection').ready()) {
-//    const collection = Meteor.users.find().fetch();
+    //    const collection = Meteor.users.find().fetch();
     const collection = Collections.Users.find();
     onData(null, {collection});
   }
@@ -18,6 +18,6 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
-    composeWithTracker(composer),
-    useDeps(depsMapper)
-  )(component);
+  composeWithTracker(composer),
+  useDeps(depsMapper)
+)(component);

@@ -11,7 +11,7 @@ export default class extends React.Component {
   }
 
   hideRecord() {
-//    console.log('--------- Hiding : props', this.PROPS);
+    //    console.log('--------- Hiding : props', this.PROPS);
     this.props.hideAction(this.props._id, this.props.mutate);
   }
 
@@ -30,7 +30,7 @@ export default class extends React.Component {
     let editAllowed = `btn btn-large ${enableBooksUpdate ? 'enabled' : 'disabled'}`;
     let deleteAllowed = `btn btn-large ${enableBooksDelete ? 'enabled' : 'disabled'}`;
 
-/* ***************************************
+    /* ***************************************
              View A Book Component
    ***************************************/
 
@@ -49,12 +49,12 @@ export default class extends React.Component {
           <br />
           <br />
           <a data-cuke='edit-item' href={'/book/' + _id + '/edit'}
-                                                        className={ editAllowed }>
+            className={ editAllowed }>
             edit
           </a>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <a data-cuke='delete-item' href="#" onClick={this.hideRecord.bind(this)}
-                                                        className={ deleteAllowed }>
+            className={ deleteAllowed }>
             delete
           </a>
         </p>

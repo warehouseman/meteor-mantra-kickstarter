@@ -15,7 +15,7 @@ export default ( args ) => {
 
     fetchPolicy: false,
   }).then((rslt) => {
-//    console.log('Authors query result ', rslt);
+    //    console.log('Authors query result ', rslt);
     const { errors, data } = rslt;
 
     if (data) {

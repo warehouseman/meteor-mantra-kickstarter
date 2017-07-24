@@ -43,23 +43,24 @@ connection: {
 }
 ";
 
-meteor npm run knex_prod;
+#      ????????????????????????? meteor npm run knex_prod;
 #
 export X=${HOST_SERVER_PROTOCOL:="http"};
 export X=${HOST_SERVER_NAME:="localhost"};
 export X=${HOST_SERVER_PORT:="3000"};
 export ROOT_URL=${HOST_SERVER_PROTOCOL}://${HOST_SERVER_NAME}:${HOST_SERVER_PORT};
+#    --production \
 echo -e "${METEOR} run \
     --release ${RELEASE} \
-    --production \
     --settings=settings.json \
    2>&1 | tee -a ${LOGS_DIR}/${APP_NAME}.log;"
 
 if [[ "$1" = "reset" ]]; then
-  echo -e "Resetting the database.";
+  echo -e "Resetting the MongoDB database.";
   ${METEOR} reset;
 else
-  echo -e "
+  echo -e "Launching '${ROOT_URL}' . . .
+
   If you find you get stuck at
        'Starting your app...'
   then append 'reset' to the command to clear the problem: Eg.,
@@ -67,9 +68,9 @@ else
   ";
 fi;
 
+#    --production \
 ${METEOR} run \
     --release ${RELEASE} \
-    --production \
     --settings=settings.json \
    2>&1 | tee -a ${LOGS_DIR}/${APP_NAME}.log;
 

@@ -14,7 +14,16 @@ import typeDefs from '../lib/api/typeDefs';
 
 import bookResolvers from './api/resolvers/bookResolvers';
 import authorResolvers from './api/resolvers/authorResolvers';
-const resolvers = merge( bookResolvers, authorResolvers );
+import partnerResolvers from './api/resolvers/partnerResolvers';
+import dateTimeResolvers from './api/resolvers/dateTimeResolvers';
+import deliveryItemResolvers from './api/resolvers/deliveryItemResolvers';
+const resolvers = merge(
+  bookResolvers,
+  authorResolvers,
+  partnerResolvers,
+  dateTimeResolvers,
+  deliveryItemResolvers
+);
 
 const executableSchema = makeExecutableSchema({
   typeDefs,

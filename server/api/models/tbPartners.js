@@ -198,19 +198,18 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.TIME,
       allowNull: true,
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      field: 'createdAt'
     },
     updatedAt: {
       type: DataTypes.TIME,
       allowNull: true,
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      field: 'updatedAt'
+      field: 'partner_last_update'
     },
-    deletedAt: {
-      type: DataTypes.TIME,
-      allowNull: true,
-      field: 'deletedAt'
-    }
+    // deletedAt: {
+    //   type: DataTypes.TIME,
+    //   allowNull: true,
+    //   field: 'deletedAt'
+    // }
   }, {
     tableName: 'tb_partners'
   });

@@ -17,10 +17,23 @@ console.log(' RDBMS DIALECT --> ', Meteor.settings.RDBMS_DIALECT );
 /* eslint-enable no-console */
 
 let db = null;
-if ( Meteor.isProduction ) {
+if ( Meteor.settings.RDBMS_DIALECT === 'sqlite') {
 
-  console.log(' Meteor mode -- "Production" using RDBMS \'' + // eslint-disable-line no-console
-                       Meteor.settings.RDBMS_DIALECT + '\'');
+  console.log(' Meteor mode -- NOT "Production"; using SQLite'); // eslint-disable-line no-console
+  db = new Sequelize('mmks', null, null, {
+    dialect: 'sqlite',
+    logging: false,
+    storage: '/tmp/db/mmks.sqlite'
+  });
+
+} else {
+
+  console.log(' Meteor mode -- "Production" using RDBMS \', ' + // eslint-disable-line no-console
+                     '\'' + Meteor.settings.RDBMS_DB + '\', ' + // eslint-disable-line no-console
+                    '\'' + Meteor.settings.RDBMS_UID + '\', ' + // eslint-disable-line no-console
+                    '\'' + Meteor.settings.RDBMS_PWD + '\', ' + // eslint-disable-line no-console
+                    '\'' + Meteor.settings.RDBMS_HST + '\', ' + // eslint-disable-line no-console
+                '\'' + Meteor.settings.RDBMS_DIALECT + '\' ');
 
   db = new Sequelize(
     Meteor.settings.RDBMS_DB,
@@ -33,13 +46,6 @@ if ( Meteor.isProduction ) {
     }
   );
 
-} else {
-  console.log(' Meteor mode -- NOT "Production"; using SQLite'); // eslint-disable-line no-console
-  db = new Sequelize('mmks', null, null, {
-    dialect: 'sqlite',
-    logging: false,
-    storage: '/tmp/db/mmks.sqlite'
-  });
 }
 
 const AuthorModel = db.import('author', require('./models/author.js'));
@@ -61,12 +67,12 @@ book.then(function (result) {
 });
 
 let Partner = null;
+let DeliveryItem = null;
+let Dummy = null;
 
-if ( Meteor.isProduction ) {
+if ( Meteor.settings.RDBMS_DIALECT !== 'sqlite' ) {
 
-//  const PartnerModel =
   db.import('tbPartners', require('./models/tbPartners.js'));
-
   Partner = db.models.tbPartners;
   let partner = Partner.findAll();
   partner.then(function (result) {
@@ -75,6 +81,16 @@ if ( Meteor.isProduction ) {
     console.log('Sequelize error while finding partners...', error); // eslint-disable-line no-console
   });
 
+
+  db.import('tbDeliveryItems', require('./models/tbDeliveryItems.js'));
+  DeliveryItem = db.models.tbDeliveryItems;
+  let deliveryItem = DeliveryItem.findAll();
+  deliveryItem.then(function (result) {
+    console.log(' We got delivery item ' + ' -- ', result[0].cod); // eslint-disable-line no-console
+  }).catch( (error) => {
+    console.log('Sequelize error while finding delivery item...', error); // eslint-disable-line no-console
+  });
+
 }
 
-export { Author, Book, Partner };
+export { Author, Book, Partner, DeliveryItem, Dummy };

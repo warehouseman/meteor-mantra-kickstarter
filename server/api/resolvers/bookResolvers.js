@@ -1,4 +1,5 @@
-import { Author, Book } from '../db-connectors';
+// import { Author, Book } from '../db-connectors';
+import { Author, Book } from '../models';
 import Sequelize from 'sequelize';
 
 /* eslint-disable no-console */

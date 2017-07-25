@@ -1,5 +1,3 @@
-import { merge } from 'lodash';
-
 import publications from './publications';
 import methods from './methods';
 import addInitialUsers from './configs/initial_users.js';
@@ -11,19 +9,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 
 
 import typeDefs from '../lib/api/typeDefs';
-
-import bookResolvers from './api/resolvers/bookResolvers';
-import authorResolvers from './api/resolvers/authorResolvers';
-import partnerResolvers from './api/resolvers/partnerResolvers';
-import dateTimeResolvers from './api/resolvers/dateTimeResolvers';
-import deliveryItemResolvers from './api/resolvers/deliveryItemResolvers';
-const resolvers = merge(
-  bookResolvers,
-  authorResolvers,
-  partnerResolvers,
-  dateTimeResolvers,
-  deliveryItemResolvers
-);
+import resolvers from './api/resolvers';
 
 const executableSchema = makeExecutableSchema({
   typeDefs,

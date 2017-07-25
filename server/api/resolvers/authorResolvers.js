@@ -1,4 +1,5 @@
-import { Author } from '../db-connectors';
+// import { Author } from '../db-connectors';
+import { Author } from '../models';
 
 /* eslint-disable no-console */
 const resolvers = {

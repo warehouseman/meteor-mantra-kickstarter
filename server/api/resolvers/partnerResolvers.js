@@ -1,4 +1,5 @@
-import { Partner } from '../db-connectors';
+// import { Partner } from '../db-connectors';
+import { Partner } from '../models';
 
 /* eslint-disable no-console */
 const resolvers = {

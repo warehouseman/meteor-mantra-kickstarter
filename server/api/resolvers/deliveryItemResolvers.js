@@ -1,4 +1,5 @@
-import { DeliveryItem } from '../db-connectors';
+// import { DeliveryItem } from '../db-connectors';
+import { DeliveryItem } from '../models';
 
 /* eslint-disable no-console */
 const resolvers = {

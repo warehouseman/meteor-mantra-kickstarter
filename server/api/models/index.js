@@ -2,7 +2,7 @@ import db from '../db-connectors';
 
 function sanityCheck(table, label, attribute, row) {
   table.findAll().then(function (result) {
-    console.log(' %s #%s -- %s', label, row+1, result[row][attribute]); // eslint-disable-line no-console
+    console.log(' %s #%s -- %s', label, row + 1, result[row][attribute]); // eslint-disable-line no-console
   }).catch( (error) => {
     console.log('Sequelize error while finding delivery item...', error); // eslint-disable-line no-console
   });

@@ -14,6 +14,13 @@ import AccessControlComposer from './access_control/acComposer';
 import Authorized from './access_control/acContainer.js';
 import UserComposer from '/client/modules/_users/composers/account/auth.jsx';
 
+import { initImports, client, lib } from '../imports';
+
+
+Meteor.startup( () => {
+  initImports();
+  console.log("CLIENT : ", client()[0].default());
+});
 
 /* eslint-disable no-console   */
 const context = initContext();

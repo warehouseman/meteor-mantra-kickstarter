@@ -40,3 +40,4 @@ jagi:astronomy-softremove-behavior
 jagi:astronomy-timestamp-behavior
 shell-server@0.2.4
 dynamic-import@0.1.1
+dispatch:mocha-browser

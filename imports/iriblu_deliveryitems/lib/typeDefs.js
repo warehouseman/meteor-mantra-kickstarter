@@ -28,7 +28,7 @@ const Types = `
 `;
 
 
-export const schema = {
+export default {
   qry: Queries,
   mut: Mutations,
   typ: Types

@@ -2,6 +2,7 @@ import publications from './publications';
 import methods from './methods';
 import addInitialUsers from './configs/initial_users.js';
 import { initPosts, initColors, initWidgets, initBooks } from './configs/initial_adds.js';
+import { initImports, server } from '../imports';
 
 import { WebApp } from 'meteor/webapp';
 import { createApolloServer } from 'meteor/apollo';
@@ -10,6 +11,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 
 import typeDefs from '../lib/api/typeDefs';
 import resolvers from './api/resolvers';
+
+// console.log('server/main    @@@@@    all typeDefs  @@@@ ', typeDefs);
 
 const executableSchema = makeExecutableSchema({
   typeDefs,
@@ -40,6 +43,9 @@ var haveLogglyToken = () => {
 };
 
 Meteor.startup( () => {
+
+  initImports();
+  console.log("SERVER  : ", server()[0].default());
 
   if ( haveLogglyToken() ) {
 

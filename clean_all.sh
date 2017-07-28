@@ -14,7 +14,8 @@ function CleanLocalNodePackages() {
         rm -fr ${item}/node_modules 2>/dev/null;
         rm -fr ${item}/dist 2>/dev/null;
       fi;
-    done
+    done;
+    rm -fr .pkgs/gitignored_*;
   popd >/dev/null;
 
   [ -f ~/.userVars.sh ] && sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
@@ -29,6 +30,7 @@ function CleanAllInstalledPackages() {
   rm -fr public/mobile/android/*.apk*;
   rm -fr npm-debug.log;
   rm -fr ${HOME}/.npm-global/lib/node_modules
+  rm -fr .e2e_tests/features/5*;
 
   CleanLocalNodePackages ${PKGS_DIR};
   if [[ -d ../${PKGS_DIR} ]]; then

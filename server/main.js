@@ -2,7 +2,7 @@ import publications from './publications';
 import methods from './methods';
 import addInitialUsers from './configs/initial_users.js';
 import { initPosts, initColors, initWidgets, initBooks } from './configs/initial_adds.js';
-import { initImports, server } from '../imports';
+import { initImports } from '../imports';
 
 import { WebApp } from 'meteor/webapp';
 import { createApolloServer } from 'meteor/apollo';
@@ -45,7 +45,7 @@ var haveLogglyToken = () => {
 Meteor.startup( () => {
 
   initImports();
-  console.log("SERVER  : ", server()[0].default());
+  // console.log("SERVER  : ", server()[0].default());
 
   if ( haveLogglyToken() ) {
 

@@ -16,11 +16,11 @@ console.log(' RDBMS DIALECT --> ', Meteor.settings.RDBMS_DIALECT );
 
 /* eslint-enable no-console */
 
-let db = null;
+let RDBMS;
 if ( Meteor.settings.RDBMS_DIALECT === 'sqlite') {
 
   console.log(' Meteor mode -- NOT "Production"; using SQLite'); // eslint-disable-line no-console
-  db = new Sequelize('mmks', null, null, {
+  RDBMS = new Sequelize('mmks', null, null, {
     dialect: 'sqlite',
     logging: false,
     storage: '/tmp/db/mmks.sqlite'
@@ -35,7 +35,7 @@ if ( Meteor.settings.RDBMS_DIALECT === 'sqlite') {
                     '\'' + Meteor.settings.RDBMS_HST + '\', ' + // eslint-disable-line no-console
                 '\'' + Meteor.settings.RDBMS_DIALECT + '\' ');
 
-  db = new Sequelize(
+  RDBMS = new Sequelize(
     Meteor.settings.RDBMS_DB,
     Meteor.settings.RDBMS_UID,
     Meteor.settings.RDBMS_PWD,
@@ -48,4 +48,4 @@ if ( Meteor.settings.RDBMS_DIALECT === 'sqlite') {
 
 }
 
-export default db;
+export default RDBMS;

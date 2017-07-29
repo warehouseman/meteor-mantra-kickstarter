@@ -3,6 +3,6 @@
 export default {
   moduleName: 'partner',
   schemas: function schemas() {
-    return ['defs'];
+    return [ 'defs' ];
   }
-}
+};

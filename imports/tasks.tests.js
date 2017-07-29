@@ -1,15 +1,15 @@
 /* eslint-env mocha */
 
 import { Meteor } from 'meteor/meteor';
-import { names, client, lib, server } from '../imports';
+import { names } from '../imports';
 
 var generalTest = [];
 var soloTest = [];
 names().forEach((name, idx) => {
   if ( name === 'deliveryItems') {
-    soloTest.push({name: name, idx: idx});
+    soloTest.push({name, idx});
   } else {
-    generalTest.push({name: name, idx: idx});
+    generalTest.push({name, idx});
   }
 });
 

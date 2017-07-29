@@ -1,6 +1,8 @@
+import { Meteor } from './api/meteorDependencies.js';
 import listModules from './moduleList';
-// import srvr from './server';
-import libs from './lib';
+
+
+var libs = require('./lib');
 
 var srvr = Meteor.isServer ? require('./server') : null;
 var srvrContext = Meteor.isServer ? require('./server/context') : null;
@@ -13,15 +15,15 @@ var serverMethods = [];
 var moduleNames = [];
 
 function loadModules() {
-  if ( ! loaded ) {
+  if ( !loaded ) {
 
-    listModules.names.forEach((mdle, idx) => {
-//      console.log('#' + idx + ' - loaded module : %s', listModules[mdle].Name);
-      clientMethods.push(listModules[mdle].Client);
-      libMethods.push(listModules[mdle].Lib);
-      serverMethods.push(listModules[mdle].Server);
-      moduleNames.push(listModules[mdle].Name);
+    listModules().names.forEach((mdle) => {
+      clientMethods.push(listModules()[mdle].Client);
+      libMethods.push(listModules()[mdle].Lib);
+      serverMethods.push(listModules()[mdle].Server);
+      moduleNames.push(listModules()[mdle].Name);
     });
+    // console.log(' imports/index() after loading | ', clientMethods);
     loaded = true;
   }
 }
@@ -29,40 +31,44 @@ function loadModules() {
 export const names = () => {
   loadModules();
   return moduleNames;
-}
+};
 
 export const client = () => {
   loadModules();
+  // console.log(' imports/index() clientMethods ||| ', clientMethods);
   return clientMethods;
-}
+};
 
 export const lib = () => {
   loadModules();
+  // console.log(' imports/index()   libMethods ||||', libMethods);
   return libMethods;
-}
+};
 
 export const server = () => {
   loadModules();
   return serverMethods;
-}
+};
 
 export const resolvers = () => {
   loadModules();
+  // console.log(' imports/index()  resolvers >> ', serverMethods);
+  // console.log(' imports/index()  srvr >> ', srvr);
   return srvr.resolvers(serverMethods);
-}
+};
 
 export const schemas = () => {
   loadModules();
-//  console.log(' imports/index() schemas /////|\\\\\\\\\\', libs);
+  // console.log(' imports/index() schemas >>> ', libs);
   return libs.schemas(libMethods);
-}
+};
 
 export const serverContext = () => {
   return Meteor.isServer ? srvrContext : null;
-}
+};
 
 export const initImports = () => {
-   console.log('=========================  initialize imports ======================');
-   loadModules();
-}
+  console.log('===========  initialize imports ============'); // eslint-disable-line no-console
+  loadModules();
+};
 

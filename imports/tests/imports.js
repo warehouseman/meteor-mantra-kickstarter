@@ -1,17 +1,20 @@
 import { names, client, lib, server } from '../../imports';
 var assert = require('assert');
 
-var module = "";
-var pos = -1;
-var idxTest =-1;
+var moduleG = '';
+var moduleOne = '';
+var posG = -1;
+var posOne = -1;
+var idxTest = -1;
 
 var generalTest = [];
 var soloTest = [];
+
 names().forEach((name, idx) => {
   if ( name === 'deliveryItems') {
-    soloTest.push({name: name, idx: idx});
+    soloTest.push({name, idx});
   } else {
-    generalTest.push({name: name, idx: idx});
+    generalTest.push({name, idx});
   }
 });
 
@@ -21,102 +24,99 @@ names().forEach((name, idx) => {
 */
 
 idxTest = 0;
-module = generalTest[idxTest].name;
-pos = generalTest[idxTest].idx;
-describe('Imports', function() {
-  var idx = pos;
-  describe('#' + module + '.client()', function() {
-    var expected='Got ' + module + ':client';
-    it('should reply "' + expected + '" ?????????????????????????????????????????????', function() {
-      var result = client()[idx]();
+moduleG = generalTest[idxTest].name;
+posG = generalTest[idxTest].idx;
+describe('Imports 1', function () {
+  var idx = posG;
+  describe('#' + idx + '.client()', function () {
+    var expected = 'Got ' + moduleG + ':client';
+    it('should reply "' + expected + '"', function () {
+      var result = client()[idx].default();
       assert.equal(expected, result);
     });
   });
 });
 
-describe('Imports', function() {
-  var idx = pos;
-  describe('#' + module + '.lib()', function() {
-    var expected='Got ' + module + ':lib';
-    it('should reply "' + expected + '"', function() {
-      var result = lib()[idx]();
+describe('Imports 2', function () {
+  var idx = posG;
+  describe('#' + moduleG + '.lib()', function () {
+    var expected = 'Got "defs" from ' + moduleG + ':lib';
+    it('should reply "' + expected + '"', function () {
+      var result = 'Got "' + lib()[idx].default.schemas()[0] + '" from book:lib';
       assert.equal(expected, result);
     });
   });
 });
 
-describe('Imports', function() {
-  var idx = pos;
-  describe('#' + module + '.client()', function() {
-    var expected='Got ' + module + ':server';
-    it('should reply "' + expected + '"', function() {
-      var result = server()[idx]();
+describe('Imports 3', function () {
+  var idx = posG;
+  describe('#' + moduleG + '.server()', function () {
+    var expected = 'Got ' + moduleG + ':server';
+    it('should reply "' + expected + '"', function () {
+      var result = server()[idx].default.resolvers();
       assert.equal(expected, result);
     });
   });
 });
-
 
 idxTest = 1;
-module = generalTest[idxTest].name;
-pos = generalTest[idxTest].idx;
-describe('Imports', function() {
-  var idx = pos;
-  describe('#' + module + '.client()', function() {
-    var expected='Got ' + module + ':client';
-    it('should reply "' + expected + '"', function() {
-      var result = client()[idx]();
-      assert.equal(expected, result);
-    });
-  });
-});
-
-describe('Imports', function() {
-  var idx = pos;
-  describe('#' + module + '.lib()', function() {
-    var expected='Got ' + module + ':lib';
-    it('should reply "' + expected + '"', function() {
-      var result = lib()[idx]();
-      assert.equal(expected, result);
-    });
-  });
-});
-
-describe('Imports', function() {
-  var idx = pos;
-  describe('#' + module + '.client()', function() {
-    var expected='Got ' + module + ':server';
-    it('should reply "' + expected + '"', function() {
-      var result = server()[idx]();
+moduleG = generalTest[idxTest].name;
+posG = generalTest[idxTest].idx;
+describe('Imports 4', function () {
+  var idx = posG;
+  describe('#' + moduleG + '.client()', function () {
+    var expected = 'Got ' + moduleG + ':client';
+    it('should reply "' + expected + '"', function () {
+      var result = client()[idx].default();
       assert.equal(expected, result);
     });
   });
 });
 
 
+describe('Imports 5', function () {
+  var idx = posG;
+  describe('#' + moduleG + '.lib()', function () {
+    var expected = 'Got "defs" from partner:lib';
+    it('should reply "' + expected + '"', function () {
+      var result = 'Got "' + lib()[idx].default.schemas()[0] + '" from ' + moduleG + ':lib';
+      assert.equal(expected, result);
+    });
+  });
+});
 
-module = soloTest[0].name;
-pos = soloTest[0].idx;
-describe('Imports', function() {
-  var idx = pos;
-  describe('#' + module + '.server()', function() {
-    var expected='deliveryItems';
-    it('should reply "' + expected + '"', function() {
-      console.log("  SERVER()[POS].MODULEnAME ::: ");
-      var result = server()[pos].moduleName;
+describe('Imports 6', function () {
+  var idx = posG;
+  describe('#' + moduleG + '.server()', function () {
+    var expected = 'Got ' + moduleG + ':server';
+    it('should reply "' + expected + '"', function () {
+      var result = server()[idx].default.resolvers();
+      assert.equal(expected, result);
+    });
+  });
+});
+
+idxTest = 0;
+moduleOne = soloTest[idxTest].name;
+posOne = soloTest[idxTest].idx;
+describe('Imports', function () {
+  var idx = posOne;
+  describe('#' + module + '.server()', function () {
+    var expected = 'function';
+    it('should return a "' + expected + '"', function () {
+      var result = typeof server()[idx].default.resolvers().Queries.deliveryItem;
       assert.equal(expected, result);
     });
   });
 });
 
 
-describe('Imports', function() {
-  var idx = pos;
-  describe('#' + module + '.server()', function() {
-    var expected='resolvers';
-    it('should reply "' + expected + '"', function() {
-      console.log("  SERVER()[POS].RESOLVERS ::: ");
-      var result = server()[pos].resolvers();
+describe('Imports', function () {
+  var idx = posOne;
+  describe('#' + moduleOne + '.server()', function () {
+    var expected = 'function';
+    it('should return a "' + expected + '"', function () {
+      var result = typeof server()[idx].default.resolvers;
       assert.equal(expected, result);
     });
   });

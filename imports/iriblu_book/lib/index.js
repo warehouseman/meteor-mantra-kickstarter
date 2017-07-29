@@ -1,3 +1,8 @@
-export default () => {
-  return 'Got book:lib';
-}
+// import defs from './typeDefs'
+
+export default {
+  moduleName: 'book',
+  schemas: function schemas() {
+    return [ 'defs' ];
+  }
+};

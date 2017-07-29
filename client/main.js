@@ -14,12 +14,12 @@ import AccessControlComposer from './access_control/acComposer';
 import Authorized from './access_control/acContainer.js';
 import UserComposer from '/client/modules/_users/composers/account/auth.jsx';
 
-import { initImports, client, lib } from '../imports';
+import { initImports } from '../imports';
 
 
 Meteor.startup( () => {
   initImports();
-  console.log("CLIENT : ", client()[0].default());
+  // console.log('CLIENT : ', client()[0].default());
 });
 
 /* eslint-disable no-console   */

@@ -1,7 +1,7 @@
-import database from '/server/api/db-connectors.js';
+import { RDBMS } from '../api/meteorDependencies.js';
 
 export default function () {
   return {
-    Database: database,
-  }
+    Database: RDBMS,
+  };
 }

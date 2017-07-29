@@ -49,6 +49,7 @@
     "jsdom": "9.12.0",
     "mocha": "3.4.2",
     "react-addons-test-utils": "15.6.0",
+    "sequelize-mock": "^0.9.0",
     "sinon": "2.3.8"
   },
   "dependencies": {
@@ -94,6 +95,7 @@
     "sqlite3": "^3.1.8",
     "subscriptions-transport-ws": "^0.8.1",
     "tcomb-form": "0.9.17",
+    "testdouble": "^3.2.2",
     "touch": "3.1.0",
     "uniforms": "^1.18.1",
     "uniforms-bootstrap3": "^1.18.1",

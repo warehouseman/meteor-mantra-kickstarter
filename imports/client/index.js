@@ -2,20 +2,6 @@ import { merge } from 'lodash';
 
 // const LG = console.log; // eslint-disable-line no-console
 
-export const resolvers = (methods) => {
-  var collected = merge( null );
-  methods
-    .filter(method => method)
-    .filter(method => method.resolvers)
-    .filter(method => typeof method.resolvers === 'function')
-    .filter(method => typeof method.resolvers() === 'object')
-    .forEach((method) => {
-      // LG('   NULL 1 ? ', method.default.resolvers()); // eslint-disable-line no-console
-      merge( collected, method.resolvers() );
-    });
-  return collected;
-};
-
 export const tests = (methods) => {
   var collected = merge( null );
   methods

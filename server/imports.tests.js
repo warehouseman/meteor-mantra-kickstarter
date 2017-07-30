@@ -4,8 +4,11 @@
 import { names, server, lib } from '../imports';
 import assert from 'assert';
 
+const LG = console.log; // eslint-disable-line no-console
+
 var generalTest = [];
 var soloTest = [];
+LG(' Found tests for  ', names());
 names().forEach((name, idx) => {
   if ( name === 'deliveryItems') {
     soloTest.push({name, idx});
@@ -27,8 +30,8 @@ describe('Imports', function () {
   describe('#' + mdle + '.server()', function () {
     var expected = 'Got ' + mdle + ':server';
     it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + server()[idx].default.moduleName + ':server';
-      // var result = server()[idx].default();
+      var result = 'Got ' + server()[idx].moduleName + ':server';
+      // var result = server()[idx]();
       assert.equal(expected, result);
     });
   });
@@ -39,8 +42,8 @@ describe('Imports', function () {
   describe('#' + mdle + '.lib()', function () {
     var expected = 'Got ' + mdle + ':lib';
     it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + lib()[idx].default.moduleName + ':lib';
-      // var result = lib()[idx].default();
+      var result = 'Got ' + lib()[idx].moduleName + ':lib';
+      // var result = lib()[idx]();
       assert.equal(expected, result);
     });
   });
@@ -54,8 +57,8 @@ describe('Imports', function () {
   describe('#' + mdle + '.server()', function () {
     var expected = 'Got ' + mdle + ':server';
     it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + server()[idx].default.moduleName + ':server';
-      // var result = server()[idx].default();
+      var result = 'Got ' + server()[idx].moduleName + ':server';
+      // var result = server()[idx]();
       assert.equal(expected, result);
     });
   });
@@ -66,33 +69,33 @@ describe('Imports', function () {
   describe('#' + mdle + '.lib()', function () {
     var expected = 'Got ' + mdle + ':lib';
     it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + lib()[idx].default.moduleName + ':lib';
+      var result = 'Got ' + lib()[idx].moduleName + ':lib';
       assert.equal(expected, result);
     });
   });
 });
 
 
-mdle = soloTest[0].name;
-pos = soloTest[0].idx;
-describe('Imports', function () {
-  var idx = pos;
-  describe('#' + module + '.server()', function () {
-    var expected = 'deliveryItems';
-    it('should reply "' + expected + '"', function () {
-      var result = server()[idx].default.moduleName;
-      assert.equal(expected, result);
-    });
-  });
-});
+// mdle = soloTest[0].name;
+// pos = soloTest[0].idx;
+// describe('Imports', function () {
+//   var idx = pos;
+//   describe('#' + module + '.server()', function () {
+//     var expected = 'deliveryItems';
+//     it('should reply "' + expected + '"', function () {
+//       var result = server()[idx].moduleName;
+//       assert.equal(expected, result);
+//     });
+//   });
+// });
 
-describe('Imports', function () {
-  var idx = pos;
-  describe('#' + mdle + '.server()', function () {
-    var expected = mdle;
-    it('should reply "' + expected + '"', function () {
-      var result = server()[idx].default.moduleName;
-      assert.equal(expected, result);
-    });
-  });
-});
+// describe('Imports xxx', function () {
+//   var idx = pos;
+//   describe('#' + mdle + '.server()', function () {
+//     var expected = mdle;
+//     it('should reply "' + expected + '"', function () {
+//       var result = server()[idx].moduleName;
+//       assert.equal(expected, result);
+//     });
+//   });
+// });

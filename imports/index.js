@@ -1,6 +1,7 @@
 import { Meteor } from './api/meteorDependencies.js';
 import listModules from './moduleList';
 
+// const LG = console.log; // eslint-disable-line no-console
 
 var libs = require('./lib');
 
@@ -17,10 +18,15 @@ var moduleNames = [];
 function loadModules() {
   if ( !loaded ) {
 
+    // LG(' imports/index() loading | ', listModules());
     listModules().names.forEach((mdle) => {
-      clientMethods.push(listModules()[mdle].Client);
-      libMethods.push(listModules()[mdle].Lib);
-      serverMethods.push(listModules()[mdle].Server);
+      // LG(' imports/index() loading | ', listModules()[mdle]);
+      if ( Meteor.isServer ) {
+        serverMethods.push(listModules()[mdle].Server.default);
+      } else {
+        clientMethods.push(listModules()[mdle].Client.default);
+      }
+      libMethods.push(listModules()[mdle].Lib.default);
       moduleNames.push(listModules()[mdle].Name);
     });
     // console.log(' imports/index() after loading | ', clientMethods);

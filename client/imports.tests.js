@@ -3,8 +3,11 @@
 import { names, client, lib } from '../imports';
 import assert from 'assert';
 
+const LG = console.log; // eslint-disable-line no-console
+
 var generalTest = [];
 var soloTest = [];
+LG(' Found tests for  ', names());
 names().forEach((name, idx) => {
   if ( name === 'deliveryItems') {
     soloTest.push({name, idx});
@@ -20,14 +23,12 @@ var idxTest = -1;
 idxTest = 0;
 mdle = generalTest[idxTest].name;
 pos = generalTest[idxTest].idx;
-
 describe('Imports', function () {
   var idx = pos;
   describe('#' + mdle + '.client()', function () {
     var expected = 'Got ' + mdle + ':client';
     it('should reply "' + expected + '"', function () {
-      // console.log('  CLIENT '); // ();
-      var result = client()[idx].default();
+      var result = 'Got ' + client()[idx].moduleName + ':client';
       assert.equal(expected, result);
     });
   });
@@ -38,8 +39,8 @@ describe('Imports', function () {
   describe('#' + mdle + '.lib()', function () {
     var expected = 'Got ' + mdle + ':lib';
     it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + lib()[idx].default.moduleName + ':lib';
-      // var result = lib()[idx].default();
+      var result = 'Got ' + lib()[idx].moduleName + ':lib';
+      // var result = lib()[idx]();
       assert.equal(expected, result);
     });
   });
@@ -53,7 +54,7 @@ describe('Imports', function () {
   describe('#' + mdle + '.client()', function () {
     var expected = 'Got ' + mdle + ':client';
     it('should reply "' + expected + '"', function () {
-      var result = client()[idx].default();
+      var result = 'Got ' + client()[idx].moduleName + ':client';
       assert.equal(expected, result);
     });
   });
@@ -62,13 +63,15 @@ describe('Imports', function () {
 describe('Imports', function () {
   var idx = pos;
   describe('#' + mdle + '.lib()', function () {
-    var expected = mdle;
+    var expected = 'Got ' + mdle + ':lib';
     it('should reply "' + expected + '"', function () {
-      var result = lib()[idx].default.moduleName;
+      var result = 'Got ' + lib()[idx].moduleName + ':lib';
+      // var result = lib()[idx]();
       assert.equal(expected, result);
     });
   });
 });
+
 
 
 mdle = soloTest[0].name;
@@ -78,8 +81,9 @@ describe('Imports', function () {
   describe('#' + mdle + '.client()', function () {
     var expected = 'Got ' + mdle + ':client';
     it('should reply "' + expected + '"', function () {
-      var result = client()[idx].default();
+      var result = 'Got ' + client()[idx].moduleName + ':client';
       assert.equal(expected, result);
     });
   });
 });
+

@@ -1,3 +1,8 @@
-export default () => {
-  return 'Got deliveryItems:client';
+import tsts from './unit';
+
+export default {
+  moduleName: 'deliveryItems',
+  tests: function tests() {
+    return tsts;
+  },
 };

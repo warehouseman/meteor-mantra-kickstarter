@@ -27,7 +27,7 @@ pos = generalTest[idxTest].idx;
 
 describe('Imports', function () {
   var idx = pos;
-  describe('#' + mdle + '.server()', function () {
+  describe('# --' + mdle + '.server()', function () {
     var expected = 'Got ' + mdle + ':server';
     it('should reply "' + expected + '"', function () {
       var result = 'Got ' + server()[idx].moduleName + ':server';

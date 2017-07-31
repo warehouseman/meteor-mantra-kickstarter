@@ -22,11 +22,12 @@ function loadModules() {
     listModules().names.forEach((mdle) => {
       // LG(' imports/index() loading | ', listModules()[mdle]);
       if ( Meteor.isServer ) {
-        serverMethods.push(listModules()[mdle].Server.default);
-      } else {
-        clientMethods.push(listModules()[mdle].Client.default);
+        serverMethods.push(listModules()[mdle].Server);
       }
-      libMethods.push(listModules()[mdle].Lib.default);
+      if ( Meteor.isClient ) {
+        clientMethods.push(listModules()[mdle].Client);
+      }
+      libMethods.push(listModules()[mdle].Lib);
       moduleNames.push(listModules()[mdle].Name);
     });
     // console.log(' imports/index() after loading | ', clientMethods);

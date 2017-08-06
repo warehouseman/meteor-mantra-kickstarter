@@ -2,7 +2,7 @@ import rslvrs from './resolvers';
 import tsts from './unit';
 
 export default {
-  moduleName: 'deliveryItems',
+  moduleName: 'deliveryItem',
   resolvers: function resolvers() {
     return rslvrs;
   },

@@ -1,11 +1,14 @@
-import deliveryItems from '../../iriblu_deliveryitems';
+import deliveryItem from '../../iriblu_deliveryitem';
 import assert from 'assert';
 import rp from 'request-promise';
 
 const LG = console.log; // eslint-disable-line no-console,no-unused-vars
 
+const prot = process.env.HOST_SERVER_PROTOCOL;
+const name = process.env.HOST_SERVER_NAME;
+const port = process.env.HOST_SERVER_PORT;
 const options = {
-  uri: 'http://iridev:3000/graphql',
+  uri: prot + '://' + name + ':' + port + '/graphql',
   headers: { 'User-Agent': 'Request-Promise' },
   json: true,
   qs: {
@@ -21,22 +24,22 @@ const options = {
 };
 
 export default {
-  deliveryItemsServer() {
+  deliveryItemServer() {
 
-    describe('Delivery Items Tests', function () {
-      describe('deliveryItems.server() name test', function () {
-        var expected = 'deliveryItems';
+    describe('Delivery Item Tests', function () {
+      describe('deliveryItem.server() name test', function () {
+        var expected = 'deliveryItem';
         it('should return "' + expected + '"', function () {
-          var result = deliveryItems.Name;
+          var result = deliveryItem.Name;
           assert.equal(expected, result);
         });
       });
     });
 
-    describe('Book server tests', function () {
-      describe('book.server() graphql test', function () {
+    describe('Delivery Item Tests', function () {
+      describe('deliveryItem.server() graphql test', function () {
         var expected = 'IBAA001';
-        it('Should return the found book', function () { // no done
+        it('Should return the first delivery code', function () { // no done
           this.timeout(60000);
           return rp(options).then(function (rslt) {
             assert.equal(rslt.data.deliveryItem[0].cod, expected);

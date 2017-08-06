@@ -6,7 +6,7 @@ import { names } from '../imports';
 var generalTest = [];
 var soloTest = [];
 names().forEach((name, idx) => {
-  if ( name === 'deliveryItems') {
+  if ( name === 'deliveryItem') {
     soloTest.push({name, idx});
   } else {
     generalTest.push({name, idx});
@@ -14,7 +14,7 @@ names().forEach((name, idx) => {
 });
 
 if (Meteor.isServer) {
-  describe('Imports - Tasks', () => {
+  describe('Imports -- Tasks', () => {
     describe('methods', () => {
       it('can delete its own task', () => {
       });

@@ -14,8 +14,8 @@ let Dummy = null;
 
 if ( Meteor.settings.RDBMS_DIALECT !== 'sqlite' ) {
 
-  db.import('tbDeliveryItems', require('../../iriblu_deliveryitems/server/tbDeliveryItems'));
-  DeliveryItem = db.models.tbDeliveryItems;
+  db.import('tbDeliveryItem', require('../../iriblu_deliveryitem/server/tblSqlzr'));
+  DeliveryItem = db.models.tbDeliveryItem;
   sanityCheck(DeliveryItem, 'Delivery item', 'cod', 0);
 
 }

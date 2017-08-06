@@ -1,5 +1,5 @@
 import { merge, forOwn } from 'lodash';
-// import { names, client, lib, server } from '../../imports';
+
 import {
   client as mthdClient,
   lib as mthdLib,
@@ -9,16 +9,15 @@ import {
 import { tests as client } from '../../imports/client';
 import { tests as lib } from '../../imports/lib';
 import { tests as server } from '../../imports/server';
-// import deliveryItemsServerTests from '../iriblu_deliveryitems/server/unit';
-// var assert = require('assert');
 
-// const LG = console.log; // eslint-disable-line no-console
-
+const LG = console.log; // eslint-disable-line no-console,no-unused-vars
+LG(' ALL TESTS ==== ', allTests);
 const allTests = merge(client(mthdClient()), lib(mthdLib()), server(mthdServer()));
 forOwn(
   allTests,
   test => test()
 );
+
 
 // LG(' ALL TESTS ==== ', allTests);
 
@@ -69,7 +68,7 @@ forOwn(
 // var soloTest = [];
 
 // names().forEach((name, idx) => {
-//   if ( name === 'deliveryItems') {
+//   if ( name === 'deliveryItem') {
 //     soloTest.push({name, idx});
 //   } else {
 //     generalTest.push({name, idx});
@@ -179,5 +178,5 @@ forOwn(
 //   });
 // });
 
-// console.log( 'KKK --- LLL', deliveryItemsServerTests);
-// deliveryItemsServerTests();
+// console.log( 'KKK --- LLL', deliveryItemServerTests);
+// deliveryItemServerTests();

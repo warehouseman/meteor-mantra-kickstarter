@@ -1,10 +1,28 @@
 import partner from './iriblu_partner';
 import book from './iriblu_book';
-import deliveryItems from './iriblu_deliveryitems';
 
-const names = [ 'book', 'deliveryItems', 'partner' ];
+import deliveryItem from './iriblu_deliveryitem';
 
-const modules = { names, partner, book, deliveryItems, };
+const names = [
+  'book',
+  'partner',
+
+
+  'deliveryItem',
+
+
+];
+
+const modules = {
+  names,
+  partner,
+  book,
+
+
+  deliveryItem,
+
+
+};
 
 export default function () {
   return modules;

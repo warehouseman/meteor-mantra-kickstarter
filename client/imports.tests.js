@@ -1,89 +1,16 @@
-/* eslint-env mocha */
+import { forOwn } from 'lodash';
 
-import { names, client, lib } from '../imports';
-import assert from 'assert';
+import { lib as libMethods } from '../imports';
+import lib from '../imports/lib';
+import { client as clientMethods } from '../imports';
+import client from '../imports/client';
 
-const LG = console.log; // eslint-disable-line no-console
+// const LG = console.log; // eslint-disable-line no-console, no-unused-vars
+// LG(' lib ', lib);
+// LG(' libMethods ', libMethods);
 
-var generalTest = [];
-var soloTest = [];
-LG(' Found tests for  ', names());
-names().forEach((name, idx) => {
-  if ( name === 'deliveryItems') {
-    soloTest.push({name, idx});
-  } else {
-    generalTest.push({name, idx});
-  }
-});
+forOwn( client.tests(clientMethods()), test => test());
+client.tests(clientMethods());
 
-var mdle = '';
-var pos = -1;
-var idxTest = -1;
-
-idxTest = 0;
-mdle = generalTest[idxTest].name;
-pos = generalTest[idxTest].idx;
-describe('Imports', function () {
-  var idx = pos;
-  describe('#' + mdle + '.client()', function () {
-    var expected = 'Got ' + mdle + ':client';
-    it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + client()[idx].moduleName + ':client';
-      assert.equal(expected, result);
-    });
-  });
-});
-
-describe('Imports', function () {
-  var idx = pos;
-  describe('#' + mdle + '.lib()', function () {
-    var expected = 'Got ' + mdle + ':lib';
-    it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + lib()[idx].moduleName + ':lib';
-      // var result = lib()[idx]();
-      assert.equal(expected, result);
-    });
-  });
-});
-
-idxTest = 1;
-mdle = generalTest[idxTest].name;
-pos = generalTest[idxTest].idx;
-describe('Imports', function () {
-  var idx = pos;
-  describe('#' + mdle + '.client()', function () {
-    var expected = 'Got ' + mdle + ':client';
-    it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + client()[idx].moduleName + ':client';
-      assert.equal(expected, result);
-    });
-  });
-});
-
-describe('Imports', function () {
-  var idx = pos;
-  describe('#' + mdle + '.lib()', function () {
-    var expected = 'Got ' + mdle + ':lib';
-    it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + lib()[idx].moduleName + ':lib';
-      // var result = lib()[idx]();
-      assert.equal(expected, result);
-    });
-  });
-});
-
-
-
-mdle = soloTest[0].name;
-pos = soloTest[0].idx;
-describe('Imports', function () {
-  var idx = pos;
-  describe('#' + mdle + '.client()', function () {
-    var expected = 'Got ' + mdle + ':client';
-    it('should reply "' + expected + '"', function () {
-      var result = 'Got ' + client()[idx].moduleName + ':client';
-      assert.equal(expected, result);
-    });
-  });
-});
-
+forOwn( lib.tests(libMethods()), test => test());
+lib.tests(libMethods());

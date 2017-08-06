@@ -1,9 +1,7 @@
-import defs from './typeDefs';
 import tsts from './unit';
 
 export default {
-  moduleName: 'deliveryItems',
-  schemas: defs,
+  moduleName: 'deliveryItem',
   tests: function tests() {
     return tsts;
   },

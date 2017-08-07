@@ -1,5 +1,5 @@
 const Queries = `
-    ###  The itemised details of a delivery note.
+    ###  The items of the delivery note 'entrega_id'.
     ####  Example :
     #    {
     #      deliveryItem(entrega_lines_id: 1) {
@@ -13,13 +13,29 @@ const Queries = `
 `;
 
 const Mutations = `
+    createDeliveryItem(
+      entrega_lines_id: Int!
+      entrega_id: Int!
+      cod: String!
+    ): DeliveryItem
+
+    updateDeliveryItem(
+      _id: Int!
+      entrega_lines_id: Int!
+      entrega_id: Int!
+      cod: String!
+    ): DeliveryItem
+
+    hideDeliveryItem(
+      _id: Int!
+    ): DeliveryItem
 `;
 
 const Types = `
 
     type DeliveryItem {
 
-      entrega_lines_id:  Int
+      entrega_lines_id: Int
       entrega_id: Int
       cod: String
       createdAt: DateTime

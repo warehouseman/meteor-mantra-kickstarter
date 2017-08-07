@@ -11,8 +11,8 @@ import { tests as lib } from '../../imports/lib';
 import { tests as server } from '../../imports/server';
 
 const LG = console.log; // eslint-disable-line no-console,no-unused-vars
-LG(' ALL TESTS ==== ', allTests);
 const allTests = merge(client(mthdClient()), lib(mthdLib()), server(mthdServer()));
+LG(' ALL TESTS ==== ', allTests);
 forOwn(
   allTests,
   test => test()

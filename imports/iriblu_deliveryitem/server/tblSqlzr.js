@@ -5,22 +5,19 @@ module.exports = function (sequelize, DataTypes) {
     entregaLinesId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
-      field: 'entrega_lines_id',
       primaryKey: true,
+      autoIncrement: true,
+      field: 'entrega_lines_id',
     },
     entregaId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       field: 'entrega_id',
-      primaryKey: false,
     },
     cod: {
-      type: 'VARCHAR(7)',
+      type: DataTypes.STRING(7),
       allowNull: false,
-      defaultValue: null,
-      primaryKey: false
+      field: 'cod',
     },
     createdAt: {
       type: 'TIMESTAMP',

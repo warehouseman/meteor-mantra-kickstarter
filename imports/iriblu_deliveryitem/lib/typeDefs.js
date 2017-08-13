@@ -77,6 +77,8 @@ const Types = `
       fkDelivery: Int
       code: String
       createdAt: DateTime
+      updatedAt: DateTime
+      deletedAt: DateTime
     }
 `;
 

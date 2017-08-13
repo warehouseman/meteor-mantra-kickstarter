@@ -65,9 +65,8 @@ const resolvers = {
             return { message: 'Delivery Item not found' };
           }
           return theDeliveryItem
-            .update({
+            .destroy({
               code: args.code,
-              deletedAt: Sequelize.literal('CURRENT_TIMESTAMP'),
               fkDelivery: 9998
             }).then(
               (sequelizeResult) => {
@@ -103,10 +102,8 @@ const resolvers = {
 
           LG(' Date now : ', Date.now(), '  :  ' , Sequelize.literal('CURRENT_TIMESTAMP'));
           return theDeliveryItem
-            .update({
-              // schmug: true,
-              deletedAt: Sequelize.literal('CURRENT_TIMESTAMP')
-            }).then( sequelizeResult => {
+            .destroy()
+            .then( sequelizeResult => {
               LG('Delivery Item hidden :: #', sequelizeResult.dataValues.itemId);
               const { errors, dataValues } = sequelizeResult;
               if (dataValues) {

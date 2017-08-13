@@ -1,11 +1,16 @@
 import context from '../context';
 const db = context().Database;
 
+const LG = console.log; // eslint-disable-line no-console,no-unused-vars
+
+LG('||==>+++~~~~---                THIS SCRIPT IS NEVER CALLED!');
+
+
 function sanityCheck(table, label, attribute, row) {
   table.findAll().then(function (result) {
-    console.log(' %s #%s -- %s', label, row + 1, result[row][attribute]); // eslint-disable-line no-console
+    LG(' %s #%s -- %s', label, row + 1, result[row][attribute]);
   }).catch( (error) => {
-    console.log('Sequelize error while finding delivery item...', error); // eslint-disable-line no-console
+    LG('Sequelize error while finding delivery item...', error);
   });
 }
 
@@ -14,8 +19,11 @@ let Dummy = null;
 
 if ( Meteor.settings.RDBMS_DIALECT !== 'sqlite' ) {
 
+  LG('++||||||||||||||||||||||||||++');
   db.import('tbDeliveryItem', require('../../iriblu_deliveryitem/server/tblSqlzr'));
   DeliveryItem = db.models.tbDeliveryItem;
+  LG(db.models.sequelize.sync);
+  LG('||||||||||||||||||||||||||||');
   sanityCheck(DeliveryItem, 'Delivery item', 'cod', 0);
 
 }

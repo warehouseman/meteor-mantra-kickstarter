@@ -17,6 +17,7 @@ if (global.meteorBabelHelpers) { // This is only true in Meteor environment
   const SequelizeMock = require('sequelize-mock');
   RDBMS = new SequelizeMock();
   RDBMS.import = (name, callback) => { return { name, callback }; };
+  RDBMS.sync = () => new Promise( () => null );
   // createContainer = {};
 }
 

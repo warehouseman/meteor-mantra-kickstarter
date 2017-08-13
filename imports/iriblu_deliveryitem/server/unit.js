@@ -13,10 +13,10 @@ const options = {
   json: true,
   qs: {
     query: `{
-      deliveryItem(entrega_lines_id: 1) {
-        entrega_lines_id
-        cod
-        entrega_id
+      getDeliveryItem(itemId: 1) {
+        itemId
+        fkDelivery
+        code
         createdAt
       }
     }`
@@ -46,7 +46,9 @@ export default {
           } else {
             this.timeout(60000);
             return rp(options).then(function (rslt) {
-              assert.equal(rslt.data.deliveryItem[0].cod, expected);
+              // LG(' Got ::  ' );
+              // LG( rslt.data );
+              assert.equal(rslt.data.getDeliveryItem[0].code, expected);
             });
           }
         });

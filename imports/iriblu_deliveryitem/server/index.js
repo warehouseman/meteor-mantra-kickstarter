@@ -1,12 +1,12 @@
 import rslvrs from './resolvers';
-import tsts from './unit';
+import tests from './unit';
+import migr from './migration';
+import DeliveryItem from './attach';
 
 export default {
   moduleName: 'deliveryItem',
-  resolvers: function resolvers() {
-    return rslvrs;
-  },
-  tests: function tests() {
-    return tsts;
-  },
+  model: DeliveryItem,
+  migration: migr,
+  resolvers: () => rslvrs,
+  tests: () => tests,
 };

@@ -1,32 +1,35 @@
-/* jshint indent: 2 */
+const LG = console.log; // eslint-disable-line no-console,no-unused-vars
+
+const Instance = 'DeliveryItem';
+const Table = 'delivery_item';
 
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('tbDeliveryItem', {
-    entregaLinesId: {
+  let DeliveryItem = sequelize.define(Instance, {
+    itemId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-      field: 'entrega_lines_id',
+      field: 'item_id',
+      comment: 'entrega_lines_id',
     },
-    entregaId: {
+    fkDelivery: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      field: 'entrega_id',
+      field: 'fk_delivery',
+      comment: 'entrega_id',
     },
-    cod: {
+    code: {
       type: DataTypes.STRING(7),
       allowNull: false,
-      field: 'cod',
-    },
-    createdAt: {
-      type: 'TIMESTAMP',
-      allowNull: false,
-      defaultValue: 'current_timestamp()',
-      primaryKey: false
+      field: 'code',
+      comment: 'cod',
     }
   }, {
-    timestamps: false,
-    tableName: 'tb_entregas_lines'
+    tableName: Table,
+    timestamps: true,
+    paranoid: true,
   });
+
+  return DeliveryItem;
 };

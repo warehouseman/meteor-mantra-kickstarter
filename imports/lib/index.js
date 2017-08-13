@@ -1,35 +1,30 @@
 import { merge } from 'lodash';
 
-// const LG = console.log; // eslint-disable-line no-console
+const LG = console.log; // eslint-disable-line no-console,no-unused-vars
 
-export const schemas = (methods) => {
-//  console.log(' METHODS ::: ', methods);
+export const schemas = (modules) => {
   var collected = [];
-  methods
-    .filter(method => method)
-    .filter(method => method.schemas)
-    .filter(method => typeof method.schemas === 'object')
-    .forEach((method) => {
-      // console.log('   SCHEMA 1 ? ', method.schemas);
-      collected.push( method.schemas );
+  modules
+    .filter(module => module)
+    .filter(module => module.schemas)
+    .filter(module => typeof module.schemas === 'object')
+    .forEach((module) => {
+      // LG(' module :: %s has ', module.moduleName, module.schemas ); // eslint-disable-line no-console
+      collected.push( module.schemas );
     });
-  //  console.log('    COLLECTED  ::: ', collected);
+  LG('+++++++++++++  schemas  +++++++++++++++');
+  LG(collected);
+  LG('+++++++++++++  schemas  +++++++++++++++');
   return collected;
 };
 
-export const tests = (methods) => {
+export const tests = (modules) => {
   var collected = merge( null );
-  methods
-    .filter(method => method)
-    .filter(method => method.tests)
-    // .filter(method => typeof method.tests === 'function')
-    // .filter(method => typeof method.tests() === 'object')
-    .forEach((method) => {
-      // LG('   NULL 1 ? ', method); // eslint-disable-line no-console
-      // LG('   NULL 2 ? ', method.tests); // eslint-disable-line no-console
-      // LG('   NULL 3 ? ', method.tests()); // eslint-disable-line no-console
-      // LG('   NULL 4 ? ', method.tests().tests); // eslint-disable-line no-console
-      merge( collected, method.tests() );
+  modules
+    .filter(module => module)
+    .filter(module => module.tests)
+    .forEach((module) => {
+      merge( collected, module.tests() );
     });
 
   // LG('  Collected tests ', collected); // eslint-disable-line no-console

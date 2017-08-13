@@ -1,38 +1,34 @@
 import { merge } from 'lodash';
 
-// const LG = console.log; // eslint-disable-line no-console
+const LG = console.log; // eslint-disable-line no-console,no-unused-vars
 
-export const resolvers = (methods) => {
+export const resolvers = (modules) => {
   var collected = merge( null );
-  methods
-    .filter(method => method)
-    .filter(method => method.resolvers)
-    .filter(method => typeof method.resolvers === 'function')
-    .filter(method => typeof method.resolvers() === 'object')
-    .forEach((method) => {
-      // LG('   NULL 1 ? ', method.default.resolvers()); // eslint-disable-line no-console
-      merge( collected, method.resolvers() );
+  modules
+    .filter(module => module)
+    .filter(module => module.resolvers)
+    .filter(module => typeof module.resolvers === 'function')
+    .filter(module => typeof module.resolvers() === 'object')
+    .forEach((module) => {
+      LG(' module :: %s has ', module.moduleName, module.resolvers()); // eslint-disable-line no-console
+      merge( collected, module.resolvers() );
     });
+  LG('++++++++++++  resolvers +++++++++++++++');
+  LG(collected);
+  LG('++++++++++++  resolvers +++++++++++++++');
   return collected;
 };
 
-export const tests = (methods) => {
+export const tests = (modules) => {
   var collected = merge( null );
-  methods
-    .filter(method => method)
-    .filter(method => method.tests)
-    // .filter(method => typeof method.tests === 'function')
-    // .filter(method => typeof method.tests() === 'object')
-    .forEach((method) => {
-      // LG('   NULL 1 ? ', method); // eslint-disable-line no-console
-      // LG('   NULL 2 ? ', method.tests); // eslint-disable-line no-console
-      // LG('   NULL 3 ? ', method.tests()); // eslint-disable-line no-console
-      // LG('   NULL 4 ? ', method.tests().tests); // eslint-disable-line no-console
-      merge( collected, method.tests() );
+  modules
+    .filter(module => module)
+    .filter(module => module.tests)
+    .forEach((module) => {
+      merge( collected, module.tests() );
     });
 
   // LG('  Collected tests ', collected); // eslint-disable-line no-console
 
   return collected;
-  // return 'stuff';
 };

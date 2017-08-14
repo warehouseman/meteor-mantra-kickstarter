@@ -13,7 +13,7 @@ const Queries = `
       itemId: Int,
       fkDelivery: Int,
       code: String,
-      createdAt: Date,
+      createdAt: DateTime,
     ): [DeliveryItem]
 `;
 
@@ -30,7 +30,7 @@ const Mutations = `
   #### Variables
   #    {
   #       "fkDelivery": 3,
-  #       "code": "IBIB004"
+  #       "code": "IBIB004",
   #    }
   createDeliveryItem(
     fkDelivery: Int!
@@ -45,22 +45,25 @@ const Mutations = `
   #    }
   #### Variables
   #    {
-  #       "itemId": 3
+  #       "itemId": 3,
   #    }
   hideDeliveryItem(
     itemId: Int!
   ): DeliveryItem
 
   #### Update Delivery Item
-  #    mutation updateDeliveryItem($itemId: Int!, $code: String!) {
-  #      updateDeliveryItem(itemId: $itemId, code: $code) {
+  #    mutation updateDeliveryItem($itemId: Int!, $fkDelivery: Int!, $code: String!) {
+  #      updateDeliveryItem(itemId: $itemId, fkDelivery: $fkDelivery, code: $code) {
+  #        itemId
+  #        fkDelivery
   #        code
   #      }
   #    }
   #### Variables
   #    {
-  #       "itemId": 3,
-  #       "code": "IBIB004"
+  #       "itemId": 999,
+  #       "fkDelivery": 444,
+  #       "code": "Izzz004",
   #    }
   updateDeliveryItem(
     itemId: Int!
@@ -88,4 +91,3 @@ export default {
   mut: Mutations,
   typ: Types
 };
-

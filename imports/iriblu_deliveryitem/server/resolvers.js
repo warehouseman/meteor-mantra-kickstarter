@@ -65,7 +65,7 @@ const resolvers = {
             return { message: 'Delivery Item not found' };
           }
           return theDeliveryItem
-            .destroy({
+            .update({
               code: args.code,
               fkDelivery: 9998
             }).then(

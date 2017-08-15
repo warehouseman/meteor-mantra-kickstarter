@@ -39,7 +39,7 @@ export default {
     describe('Delivery Item Tests', function () {
       describe('deliveryItem.server() graphql test', function () {
         var expected = 'IBAA001';
-        it('Should return the first delivery code', function () { // no done
+        it('Should return the first delivery item', function () {
           if ( process.env.CI === 'true') {
             LG(' *** SHORT-CIRCUITED : Not Suitable For Continuous Integration Tests ***');
             assert.equal(expected, expected);

@@ -24,7 +24,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       field: 'code',
       comment: 'cod',
-    }
+    },
   }, {
     tableName: Table,
     timestamps: true,

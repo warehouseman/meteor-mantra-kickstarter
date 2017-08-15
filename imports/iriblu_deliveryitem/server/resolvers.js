@@ -7,7 +7,7 @@ const resolvers = {
 
   Queries: {
     getDeliveryItem(_, args) {
-      // LG('################################## DeliveryItem :: ', DeliveryItem);
+      // LG('DeliveryItem :: ', DeliveryItem);
       LG('DeliveryItem :: ', args);
       let res = DeliveryItem.findAll({ where: args });
       // LG('return :: ', res);
@@ -55,7 +55,7 @@ const resolvers = {
     updateDeliveryItem: (_, args) => {
       LG('Updating delivery item :: ', args);
       LG('... id\'d by :: ', args.itemId);
-      LG('... by codee :: ', args.code);
+      LG('... by code :: ', args.code);
 
       return DeliveryItem
         .findById( args.itemId )
@@ -66,8 +66,8 @@ const resolvers = {
           }
           return theDeliveryItem
             .update({
+              fkDelivery: args.fkDelivery,
               code: args.code,
-              fkDelivery: 9998
             }).then(
               (sequelizeResult) => {
                 LG('**** updated ****', sequelizeResult.dataValues);

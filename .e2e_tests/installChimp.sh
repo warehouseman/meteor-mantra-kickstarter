@@ -70,10 +70,12 @@ function installChimp()
   echo -e "### Is Chimp installed?";
   if ! npm list -g chimp &>/dev/null; then
 
-    echo -e "### Installing Chimp version '${VER}'";
+    echo -e "### Switching to Node 6 for Chimp";
+    rm -fr ${HOME}/.npmrc
     export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh";
     nvm use stable;
+    echo -e "### Installing Chimp version : '${VER}'";
     npm install -gy chimp@${VER};
 
   fi

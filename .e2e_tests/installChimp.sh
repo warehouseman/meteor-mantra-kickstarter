@@ -63,14 +63,18 @@ function installPhantomJS()
 
 function installChimp()
 {
+  export VER=$(cat package.json | grep '"chimp"' | cut -d ':' -f 2 | tr -d [\",] | tr -d [:space:])
   installChrome;
 #  installPhantomJS;
 
   echo -e "### Is Chimp installed?";
   if ! npm list -g chimp &>/dev/null; then
 
-    echo -e "### Installing Chimp";
-    npm install -gy chimp@0.45.1;
+    echo -e "### Installing Chimp version '${VER}'";
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    nvm use stable;
+    npm install -gy chimp@${VER};
 
   fi
   echo -e "### Chimp Installed";

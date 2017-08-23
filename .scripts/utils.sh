@@ -48,7 +48,7 @@ function validateMeteorSettings() {
   declare SECRETS_FILE="${HOME}/.ssh/deploy_vault/${HOST_SERVER_NAME}/secrets.sh";
   echo -e "${PRTY} Verify 'settings.json' or generate from ${SECRETS_FILE}";
   if [[ "${CI}" = "true" ]]; then
-    # echo "A";
+    echo -e "Running in Continuous Integration server environment. 'secrets.sh' was NOT loaded";
     ./template.settings.json.sh > settings.json;
   else
     # echo "B";

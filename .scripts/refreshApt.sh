@@ -30,6 +30,15 @@ function refreshApt()
 
   touch ${FLAG};
   echo "### APT Updated";
+
+
+  declare BUGY="\${(\[^}]+)}";
+  declare FIXD="\$\\\{(\[^}]+)\\\}";
+  declare PAMFILE="/usr/sbin/pam_getenv";
+
+  echo "### Stinky bug fix to :: ${PAMFILE}";
+  sudo sed -i "s|${BUGY}|${FIXD}|" ${PAMFILE};
+
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

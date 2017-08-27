@@ -76,10 +76,11 @@ function installChimp()
     [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh";
     nvm use stable;
 
-    # echo -e "### Installing Chimp bug workaround...";
-    # npm install -gy;
+    echo -e "### Installing Chimp bug workaround...";
+    npm install -gy json-stable-stringify;
+
     echo -e "### Installing Chimp version : '${VER}'";
-    npm install -gy  json-stable-stringify chimp@${VER};
+    npm install -gy chimp@${VER};
 
   fi
   echo -e "### Chimp Installed";

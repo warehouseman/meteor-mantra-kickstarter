@@ -83,11 +83,11 @@ echo -e "${MSG}";
 
 exit 0;
 
-export KEYSTORE_PWD="obscuregobbledygook";
-export HOST_SERVER_NAME="moon.planet.sun";
-export ROOT_URL="http://${ROOT_URL}:3000/";
-export YOUR_FULLNAME="You Yourself";
-export YOUR_ORGANIZATION_NAME="YourOrg";
-meteor run --mobile-server=${ROOT_URL}  --settings=settings.json;
-#
+# export KEYSTORE_PWD="obscuregobbledygook";
+# export HOST_SERVER_NAME="moon.planet.sun";
+# export ROOT_URL="http://${ROOT_URL}:3000/";
+# export YOUR_FULLNAME="You Yourself";
+# export YOUR_ORGANIZATION_NAME="YourOrg";
+# meteor run --mobile-server=${ROOT_URL}  --settings=settings.json;
+# #
 

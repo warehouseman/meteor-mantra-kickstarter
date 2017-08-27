@@ -80,9 +80,14 @@ function installNodeJs()
     && echo " - node '$( nvm version ${NODE_VERSION})' is installed" \
     || nvm install ${NODE_VERSION};
 
+  echo "### Npm and NodeJS installed ";
+  nvm use stable;
+
+  NCU_ID="npm-check-updates";
+  NCU_VER=$(npm view ${NCU_ID} version 2>/dev/null) || npm install -g npm-check-updates;
+  # echo -e "### '${NCU_ID}@$(npm view ${NCU_ID} version)' installed";
+
 }
-
-
 
 function aptNotYetInstalled() {
 

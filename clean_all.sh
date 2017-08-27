@@ -15,7 +15,7 @@ function CleanLocalNodePackages() {
         rm -fr ${item}/dist 2>/dev/null;
       fi;
     done;
-    rm -fr .pkgs/gitignored_*;
+    rm -fr gitignored_*;
   popd >/dev/null;
 
   [ -f ~/.userVars.sh ] && sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
@@ -31,6 +31,8 @@ function CleanAllInstalledPackages() {
   rm -fr npm-debug.log;
   rm -fr ${HOME}/.npm-global/lib/node_modules
   rm -fr .e2e_tests/features/5*;
+
+  .scripts/dropLocalPackages.sh;
 
   CleanLocalNodePackages ${PKGS_DIR};
   if [[ -d ../${PKGS_DIR} ]]; then

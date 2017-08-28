@@ -3,7 +3,8 @@
 
 declare PKGS_DIR=".pkgs";
 function CleanLocalNodePackages() {
-  local PKGS_DIR=$1;
+  local PKGS_DIR=${1};
+  local SHALLOW=${2};
   echo "Cleaning local node packages . . . ";
   pushd ${PKGS_DIR} >/dev/null;
     echo -e "In dir $(pwd)";
@@ -15,7 +16,7 @@ function CleanLocalNodePackages() {
         rm -fr ${item}/dist 2>/dev/null;
       fi;
     done;
-    rm -fr gitignored_*;
+    [ -z ${SHALLOW} ] && rm -fr gitignored_*;
   popd >/dev/null;
 
   [ -f ~/.userVars.sh ] && sed -i '/NON_STOP/s/.*/export NON_STOP=no;/' ~/.userVars.sh;
@@ -23,7 +24,8 @@ function CleanLocalNodePackages() {
 }
 
 function CleanAllInstalledPackages() {
-  echo "Cleaning build artifacts . . . ";
+  local SHALLOW=${1};
+  echo "Cleaning build artifacts. SHALLOW = ${SHALLOW}";
   rm -fr node_modules;
   rm -fr .meteor/local/;
   rm -fr .habitat/results;
@@ -34,9 +36,9 @@ function CleanAllInstalledPackages() {
 
   .scripts/dropLocalPackages.sh;
 
-  CleanLocalNodePackages ${PKGS_DIR};
+  CleanLocalNodePackages ${PKGS_DIR} ${1};
   if [[ -d ../${PKGS_DIR} ]]; then
-    CleanLocalNodePackages ../${PKGS_DIR};
+    CleanLocalNodePackages ../${PKGS_DIR} ${1};
   fi;
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~??????~~~>>   rm -fr ~/.meteor;
@@ -52,5 +54,6 @@ function RemoveImportedPackages() {
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  CleanAllInstalledPackages;
+  declare SHALLOW=${1};
+  CleanAllInstalledPackages ${SHALLOW};
 fi;

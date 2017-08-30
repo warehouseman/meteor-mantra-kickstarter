@@ -3,10 +3,10 @@ import { RDBMS as sequelize } from '../../api/meteorDependencies.js';
 
 const LG = console.log; // eslint-disable-line no-console,no-unused-vars
 const entity = 'DeliveryItem';
-const tblLegacy = 'tb_entregas_lines';
-const attrLegacy = 'entrega_lines_id, entrega_id, cod';
-const tblTarget = 'delivery_item';
-const attrTarget = 'item_id, fk_delivery, code';
+// const tblLegacy = 'tb_entregas_lines';
+// const attrLegacy = 'entrega_lines_id, entrega_id, cod';
+// const tblTarget = 'delivery_item';
+// const attrTarget = 'item_id, fk_delivery, code';
 module.exports = function () {
 
   return DeliveryItem.findAll({
@@ -18,10 +18,22 @@ module.exports = function () {
       LG('Migrating data into table "%s".', entity );
       return sequelize.query(
         /* eslint-disable quotes */
-        `INSERT INTO ` + tblTarget +
-         ` ( ` + attrTarget + `, createdAt, updatedAt )
-           SELECT ` + attrLegacy + `, createdAt, createdAt as updatedAt
-           FROM  ` + tblLegacy,
+        `INSERT INTO delivery_item (
+           item_id
+         , fk_delivery
+         , code
+         , createdAt
+         , updatedAt
+         , deletedAt )
+        SELECT
+           l.entrega_lines_id as item_id
+         , l.entrega_id as fk_delivery
+         , l.cod as code
+         , e.date_entrega as createdAt
+         , e.date_entrega as updatedAt
+         , null
+        FROM tb_entregas_lines l, tb_entregas e
+        WHERE l.entrega_id = e.entrega_id`,
         { type: sequelize.QueryTypes.INSERT }
         /* eslint-enable quotes  */
       ).then( rpt => {

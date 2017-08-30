@@ -6,14 +6,12 @@ const Queries = `
     #        itemId
     #        fkDelivery
     #        code
-    #        createdAt
     #      }
     #    }
     getDeliveryItem(
       itemId: Int,
       fkDelivery: Int,
       code: String,
-      createdAt: DateTime,
     ): [DeliveryItem]
 `;
 

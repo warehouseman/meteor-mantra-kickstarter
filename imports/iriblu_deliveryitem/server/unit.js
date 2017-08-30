@@ -17,7 +17,6 @@ const options = {
         itemId
         fkDelivery
         code
-        createdAt
       }
     }`
   },

@@ -14,7 +14,7 @@ const importedResolvers = imported();
 export default merge(
   bookResolvers,
   authorResolvers,
-//  partnerResolvers,
+  //  partnerResolvers,
   dateTimeResolvers,
   importedResolvers
 //  deliveryItemResolverX

@@ -3,10 +3,7 @@ import { RDBMS as sequelize } from '../../api/meteorDependencies.js';
 
 const LG = console.log; // eslint-disable-line no-console,no-unused-vars
 const entity = 'Partner';
-// const tblLegacy = 'tb_partners';
-// const attrLegacy = 'partner_id, partner_name, partner_company, partner_client, partner_supplier, partner_civil_status, partner_gender, partner_nationality, partner_legal_id, partner_group_code, partner_telf_primary, partner_telf_secundary, partner_celular_phone, partner_email, partner_webPage, partner_contact_person, partner_notes, partner_sales_person, partner_status, partner_create_by, partner_creation_date, partner_last_update, partner_country_acc, partner_state_acc, partner_city_acc, partner_canton_acc, partner_parish_acc, partner_postal_code_acc, street_acc, bulding_acc, country_res, state_res, city_res, canton_res, parish_res, postal_code_res, street_res, bulding_res';
-// const tblTarget = 'partner';
-// const attrTarget = 'partner_id, partner_name, is_corporate, is_client, is_supplier, civil_status, gender, nationality, citizen_id, group_code, phone_primary, phone_secondary, phone_mobile, email, web_site, contact_person, notes, sales_rep, status, created_by, createdAt, updatedAt, delivery_country, delivery_state, delivery_city, delivery_county, delivery_parish, delivery_postal_code, delivery_street, delivery_street_no, residence_country, residence_state, residence_city, residence_county, residence_parish, residence_postal_code, residence_street, residence_street_no';
+
 module.exports = function () {
 
   return Partner.findAll({

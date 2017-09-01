@@ -1,13 +1,10 @@
+import defs from './typeDefs';
 import tsts from './unit';
-// import defs from './typeDefs'
 
 export default {
   moduleName: 'partner',
-  schemas: function schemas() {
-    return [ 'defs' ];
-  },
+  schemas: defs,
   tests: function tests() {
     return tsts;
   },
 };
-

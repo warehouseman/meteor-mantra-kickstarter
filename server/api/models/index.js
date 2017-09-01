@@ -21,21 +21,21 @@ sanityCheck(Book, 'Book', 'title', 0);
 AuthorModel.hasMany(BookModel, { as: 'books' });
 BookModel.belongsTo(AuthorModel, { as: 'author' });
 
-let Partner = null;
+// let Partner = null;
 let Dummy = null;
 
-if ( Meteor.settings.RDBMS_DIALECT !== 'sqlite' ) {
+// if ( Meteor.settings.RDBMS_DIALECT !== 'sqlite' ) {
 
-  db.import('tbPartners', require('./tbPartners.js'));
-  Partner = db.models.tbPartners;
-  sanityCheck(Partner, 'Partner', 'partnerName', 1);
+//   db.import('tbPartners', require('./tbPartners.js'));
+//   Partner = db.models.tbPartners;
+//   sanityCheck(Partner, 'Partner', 'partnerName', 1);
 
 
-  // db.import('tbDeliveryItem', require('./tbDeliveryItem.js'));
-  // DeliveryItem = db.models.tbDeliveryItem;
-  // sanityCheck(DeliveryItem, 'Delivery item', 'cod', 0);
+//   // db.import('tbDeliveryItem', require('./tbDeliveryItem.js'));
+//   // DeliveryItem = db.models.tbDeliveryItem;
+//   // sanityCheck(DeliveryItem, 'Delivery item', 'cod', 0);
 
-}
+// }
 
 // export { Author, Book, Partner, DeliveryItem, Dummy };
-export { Author, Book, Partner, Dummy };
+export { Author, Book, Dummy };

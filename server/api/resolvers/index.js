@@ -2,7 +2,7 @@ import { merge } from 'lodash';
 
 import bookResolvers from './bookResolvers';
 import authorResolvers from './authorResolvers';
-import partnerResolvers from './partnerResolvers';
+// import partnerResolvers from './partnerResolvers';
 import dateTimeResolvers from './dateTimeResolvers';
 // imp ort deliveryItemResolvers from './deliveryItemResolvers';
 import { resolvers as imported } from '/imports';
@@ -14,7 +14,7 @@ const importedResolvers = imported();
 export default merge(
   bookResolvers,
   authorResolvers,
-  partnerResolvers,
+//  partnerResolvers,
   dateTimeResolvers,
   importedResolvers
 //  deliveryItemResolverX

@@ -7,7 +7,7 @@ exports.seed = function (knex, Promise) {
 
     //  Generated from https://www.mockaroo.com/schemas/53827
     /* eslint-disable max-len */
-    knex('book').insert({deleted: false, title: 'Marketing Manager',content: 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.',pages: 210,authorId: 5}),
+    knex('book').insert({deleted: false, title: 'Graphic Designer',content: 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.',pages: 210,authorId: 5}),
     knex('book').insert({deleted: false, title: 'Business Systems Development Analyst',content: 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.',pages: 496,authorId: 6}),
     knex('book').insert({deleted: false, title: 'Office Assistant III',content: 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',pages: 679,authorId: 1}),
     knex('book').insert({deleted: false, title: 'Staff Accountant IV',content: 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.',pages: 853,authorId: 3}),

@@ -38,10 +38,10 @@ export default {
       });
     });
 
-    // {"data":{"book":[{"_id":1,"title":"Marketing Manager"}]}}
+    // {"data":{"book":[{"_id":1,"title":"Graphic Designer"}]}}
     describe('Book server tests', function () {
       describe('book.server() graphql test', function () {
-        var expected = 'Marketing Manager';
+        var expected = 'Graphic Designer';
         it('Should return the found book', function () {
           if ( process.env.CI === 'true') {
             LG(' *** SHORT-CIRCUITED : Not Suitable For Continuous Integration Tests ***');

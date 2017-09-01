@@ -23,7 +23,7 @@ Feature: Manage books
   @watch
   Scenario: Verify field validation
     Given I have opened the books list page : "http://localhost:3000/books"
-    And I have elected to edit the "Marketing Manager" item,
+    And I have elected to edit the "Graphic Designer" item,
     When I set 'Number of Pages' to "55"
     And I submit the item,
     Then I see the number of pages validation hint "Pages count cannot be less than 60!".
@@ -31,7 +31,7 @@ Feature: Manage books
   @watch
   Scenario: Update book
     Given I have opened the books list page : "http://localhost:3000/books"
-    And I have elected to edit the "Marketing Manager" item,
+    And I have elected to edit the "Graphic Designer" item,
     When I set 'Number of Pages' to "321"
     And I submit the item with new content "SciFi is the new ---> Religion!",
     Then I see the record with the new content.
@@ -39,14 +39,14 @@ Feature: Manage books
   @watch
   Scenario: Update book
     Given I have opened the books list page : "http://localhost:3000/books"
-    And I have elected to edit the "Marketing Manager" item,
-    When I submit the item with new author "Anderson, Poul",
+    And I have elected to edit the "Graphic Designer" item,
+    When I submit the item with new author "Chapman, Eugénie",
     Then I see the record with the new content.
 
   @watch
   Scenario: Fail to update book
     Given I have opened the books list page : "http://localhost:3000/books"
-    And I have elected to edit the "Marketing Manager" item,
+    And I have elected to edit the "Graphic Designer" item,
     When I submit the item with new content "SciFi is the new ---> crap!",
     Then I see the error message, "Net-nanny says, “Don't be wude! 'Cwap' is weewee weewee cwude.”!".
 
@@ -86,7 +86,7 @@ Feature: Manage books
   @~watch
   Scenario: Create a new book
     Given I have opened the 'add books' page : "http://localhost:3000/books/add"
-    When I create a "164" page book, "Tau Zero", by "Anderson, Poul" with synopsis "Yes! WE caused the Big Bang!",
+    When I create a "164" page book, "Tau Zero", by "Chapman, Eugénie" with synopsis "Yes! WE caused the Big Bang!",
     Then I see a new record with the same title, author, number of pages and contents.
 
   @~watch

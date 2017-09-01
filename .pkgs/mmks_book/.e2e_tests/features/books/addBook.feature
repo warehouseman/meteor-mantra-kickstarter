@@ -86,7 +86,7 @@ Feature: Manage books
   @~watch
   Scenario: Create a new book
     Given I have opened the 'add books' page : "http://localhost:3000/books/add"
-    When I create a "164" page book, "Tau Zero", by "Chapman, Eugénie" with synopsis "Yes! WE caused the Big Bang!",
+    When I create a "164" page book, "Tau Zero", by "Anderson, Poul" with synopsis "Yes! WE caused the Big Bang!",
     Then I see a new record with the same title, author, number of pages and contents.
 
   @~watch

@@ -23,6 +23,11 @@ const resolvers = {
         {
           partnerName: args.partnerName,
           isCorporate: args.isCorporate,
+          isClient: args.isClient,
+          isSupplier: args.isSupplier,
+          citizenId: args.citizenId,
+          email: args.email,
+          status: args.status,
         });
 
       return aPartner.save().then(
@@ -68,6 +73,11 @@ const resolvers = {
             .update({
               partnerName: args.partnerName,
               isCorporate: args.isCorporate,
+              isClient: args.isClient,
+              isSupplier: args.isSupplier,
+              citizenId: args.citizenId,
+              email: args.email,
+              status: args.status,
             }).then(
               (sequelizeResult) => {
                 LG('**** updated ****', sequelizeResult.dataValues);

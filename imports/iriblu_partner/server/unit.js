@@ -18,6 +18,10 @@ const options = {
         partnerName
         isCorporate
         isClient
+        isSupplier
+        citizenId
+        email
+        status
       }
     }`
   },
@@ -38,7 +42,7 @@ export default {
 
     describe('Partner Tests', function () {
       describe('partner.server() graphql test', function () {
-        var expected = 'IBAA001';
+        var expected = 'Dashiel Hammet';
         it('Should return the first partner', function () {
           if ( process.env.CI === 'true') {
             LG(' *** SHORT-CIRCUITED : Not Suitable For Continuous Integration Tests ***');

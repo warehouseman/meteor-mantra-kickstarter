@@ -2,13 +2,15 @@ const Queries = `
     ###  The items of the delivery note "fkDelivery".
     ####  Query example :
     #    {
-    #      getDeliveryItem(itemId: 1) {
+    #      getDeliveryItem(itemId: 1, offset: 0, limit: 10) {
     #        itemId
     #        fkDelivery
     #        code
     #      }
     #    }
     getDeliveryItem(
+      offset: Int,
+      limit : Int,
       itemId: Int,
       fkDelivery: Int,
       code: String,

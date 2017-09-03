@@ -8,8 +8,14 @@ const resolvers = {
   Queries: {
     getPartner(_, args) {
       // LG('Partner :: ', Partner);
+      let parms = {};
+      parms.limit = args.limit;
+      delete args.limit;
+      parms.offset = args.offset;
+      delete args.offset;
+      parms.where = args;
       LG('Partner :: ', args);
-      let res = Partner.findAll({ where: args });
+      let res = Partner.findAll( parms );
       // LG('return :: ', res);
       return res;
     }

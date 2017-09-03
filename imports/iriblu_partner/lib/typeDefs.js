@@ -2,7 +2,7 @@ const Queries = `
     ###  Partner data.
     ####  Query example :
     #    {
-    #      getPartner(partnerId: 1) {
+    #      getPartner(partnerId: 1, offset: 0, limit: 10) {
     #        partnerId
     #        partnerName
     #        isCorporate
@@ -14,6 +14,8 @@ const Queries = `
     #      }
     #    }
     getPartner(
+      offset: Int,
+      limit : Int,
       partnerId: Int,
       partnerName: String,
       isCorporate: String,

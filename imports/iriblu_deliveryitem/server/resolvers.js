@@ -8,8 +8,14 @@ const resolvers = {
   Queries: {
     getDeliveryItem(_, args) {
       // LG('DeliveryItem :: ', DeliveryItem);
+      let parms = {};
+      parms.limit = args.limit;
+      delete args.limit;
+      parms.offset = args.offset;
+      delete args.offset;
+      parms.where = args;
       LG('DeliveryItem :: ', args);
-      let res = DeliveryItem.findAll({ where: args });
+      let res = DeliveryItem.findAll( parms );
       // LG('return :: ', res);
       return res;
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import t from 'tcomb-form';
 
-const enumRoles = [ 'Owner', 'Administrator', 'Staff', 'Member', 'Customer', 'Registered' ];
+const LG = console.log; // eslint-disable-line no-console
 
 export default class extends React.Component {
   constructor(props) {
@@ -13,8 +13,8 @@ export default class extends React.Component {
       event.preventDefault();
       var values = this.refs.form.getValue();
       if (values) {
-        // console.log('submitForm values', values);
-        // console.log('submitForm props._id', this.props._id);
+        // LG('submitForm values', values);
+        // LG('submitForm props._id', this.props._id);
         if (this.props._id) {
           this.props.submitAction(values, this.props._id);
         } else {
@@ -26,8 +26,9 @@ export default class extends React.Component {
 
   render() {
 
+    LG('Book model record : ', this.props );
 
-    const AllRoles = t.enums.of( enumRoles, 'Roles');
+    const AllRoles = t.enums.of( this.props.enumRoles, 'Roles');
 
     const RegisteredUser = t.struct({
       firstName: t.String,
@@ -106,7 +107,7 @@ export default class extends React.Component {
     const formTitle = _id ? 'Edit ' + email : 'Add new record';
     const buttonLabel = 'Save';
 
-    //    console.log('_users/components/users/_form.jsx --> exception :', exception);
+    //    LG('_users/components/users/_form.jsx --> exception :', exception);
 
     return (
       <div>

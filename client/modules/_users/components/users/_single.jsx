@@ -1,6 +1,7 @@
 import React from 'react';
+import AxsLevel from '/client/access_control/icon.jsx';
 
-
+// const AxsLevel = ({level}) => <span className="rotate270text">|||:::</span>;
 
 export default class extends React.Component {
   deleteRecord() {
@@ -24,13 +25,13 @@ export default class extends React.Component {
         <p><strong>First name:</strong> <x-cuke id="firstName">{firstName}</x-cuke></p>
         <p><strong>Last name:</strong> <x-cuke id="lastName">{lastName}</x-cuke> </p>
         <p><strong>EMail:</strong> <x-cuke id="email">{email}</x-cuke></p>
-        <p><strong>Role:</strong> <x-cuke id="role">{role}</x-cuke></p>
+        <p><strong>Role:</strong> <x-cuke id="role"> <AxsLevel>{role}</AxsLevel> -- {role}</x-cuke></p>
         <p>Internal key: {_id}</p>
 
-        <a href={'/users/' + _id + '/edit'}>
-          edit
-        </a> | <a href="#" onClick={this.deleteRecord.bind(this)}>
-          delete
+        <a className="fa fa-pencil" href={'/users/' + _id + '/edit'}>
+          &nbsp; edit
+        </a> | <a className="fa fa-trash-o" href="#" onClick={this.deleteRecord.bind(this)}>
+          &nbsp; delete
         </a>
       </div>
     );

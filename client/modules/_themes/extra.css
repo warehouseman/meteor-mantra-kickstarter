@@ -1,0 +1,12 @@
+.rotate270text
+{
+    display: inline-block;
+    #font-weight: bold;
+    font-size: 14px;
+    font: arial, sans-serif;
+    writing-mode: vertical-lr;
+    #writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    transform-origin: center;
+    transform: rotate(180deg);
+}

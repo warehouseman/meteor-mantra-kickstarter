@@ -1,16 +1,17 @@
-import {useDeps} from 'react-simple-di';
+import { useDeps } from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
-import {singleComposer} from './single.jsx';
+import { singleComposer } from './single.jsx';
 
-// export const editComposer = ({context, clearErrors}, onData) => {
-export const editComposer = ({context}, onData) => {
-  const {LocalState} = context();
+export const editComposer = ({ context }, onData) => {
+  const { LocalState, ACL } = context();
   const exception = LocalState.get('_users.UPDATE_ERROR');
-  onData(null, {exception});
 
-  // clearErrors when unmounting the component
-  // return clearErrors;
+  const enumRoles = ACL.AccessControl.getTrustLevels();
+  const icons = ACL.AccessControl.getIcons();
+
+  onData(null, { exception, icons, enumRoles });
+
 };
 
 export const depsMapper = (context, actions) => ({

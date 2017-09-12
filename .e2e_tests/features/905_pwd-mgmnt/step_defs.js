@@ -24,13 +24,15 @@ const cukeAcctEmail = '//x-cuke[@id="acct-email"]';
 
 const cukeBadContent = '//div[@data-cuke="bad-content"]';
 
+const LG = console.log; // eslint-disable-line no-console
+
 let reqEmail = '';
 module.exports = function () {
 
-//  Scenario: BAD password reset request
-// ------------------------------------------------------------------------
+  //  Scenario: BAD password reset request
+  // ------------------------------------------------------------------------
 
-//  I have opened the password reset page : "http://localhost:3000/password"
+  //  I have opened the password reset page : "http://localhost:3000/password"
   this.Given(/^I have opened the password reset request page : "([^"]*)"$/
     , function (_urlPasswordResetRequest) {
 
@@ -60,38 +62,38 @@ module.exports = function () {
         .toEqual(_rejectionA + reqEmail + _rejectionB);
     });
 
-// =======================================================================
+  // =======================================================================
 
 
-//  Scenario: GOOD request password reset
-// ------------------------------------------------------------------------
+  //  Scenario: GOOD request password reset
+  // ------------------------------------------------------------------------
 
   this.Then(/^I see the confirmation: "([^"]*)"\.$/,
     function (_confirmation) {
 
-      console.log(' >>> isVisible ');
+      LG(' >>> isVisible ');
       browser.waitUntil(function () {
-        console.log(' try ... ');
+        LG(' try ... ');
         return browser.isVisible(cukeAlertGood);
       }, 90000, 'done trying', 2500);
-      console.log(' isVisible >>> ');
+      LG(' isVisible >>> ');
 
       expect(browser.isVisible(cukeAlertGood) ? _confirmation : 'confirmation message')
-                                          .toBe(_confirmation);
+        .toBe(_confirmation);
     });
 
-// db.users.update( { "emails.address" : "yourself.yourorg@gmail.com" },
-//  { $addToSet: { "emails": { "address" : "m@n.o", "verifier": 777, "verified" : true } } } );
-// db.users.update( { "emails.address" : "yourself.yourorg@gmail.com" },
-//  { $set : { "emails.1.verifier": 4444  } } );
+  // db.users.update( { "emails.address" : "yourself.yourorg@gmail.com" },
+  //  { $addToSet: { "emails": { "address" : "m@n.o", "verifier": 777, "verified" : true } } } );
+  // db.users.update( { "emails.address" : "yourself.yourorg@gmail.com" },
+  //  { $set : { "emails.1.verifier": 4444  } } );
 
-// =======================================================================
+  // =======================================================================
 
 
-//  Scenarios:
-//     Process BAD password reset code
-//     Process GOOD password reset code
-// ------------------------------------------------------------------------
+  //  Scenarios:
+  //     Process BAD password reset code
+  //     Process GOOD password reset code
+  // ------------------------------------------------------------------------
 
   this.Given(/^that my email is "([^"]*)"$/, function (_email) {
     reqEmail = _email;
@@ -108,18 +110,18 @@ module.exports = function () {
         let user = server.call('_users.findByEmail', reqEmail);
         let idx = user.emails.findIndex(element => element.address === reqEmail);
         rstCode = user.emails[idx].verifier;
-        // console.log(' Found reset code : ', rstCode);
+        LG(' Found reset code : ', rstCode);
       }
 
       browser.url(_urlPasswordReset + rstCode);
 
     });
 
-// =======================================================================
+  // =======================================================================
 
 
-//  Scenario: Process GOOD password reset code
-// ------------------------------------------------------------------------
+  //  Scenario: Process GOOD password reset code
+  // ------------------------------------------------------------------------
 
   let myPwd = null;
   this.When(/^enter password "([^"]*)" twice and click 'Reset Password'$/
@@ -144,11 +146,11 @@ module.exports = function () {
     expect(idAcct).toEqual(reqEmail);
   });
 
-// =======================================================================
+  // =======================================================================
 
 
-//  Scenario: Process BAD password reset code
-// ------------------------------------------------------------------------
+  //  Scenario: Process BAD password reset code
+  // ------------------------------------------------------------------------
 
   this.Then(/^I see the invalid password reset alert, "([^"]*)"\.$/, function (rude) {
     const msg = browser.getText(cukeBadContent);

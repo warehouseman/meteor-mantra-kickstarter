@@ -103,7 +103,8 @@ export default function () {
 
         let idx = user.emails.findIndex(element => element.address === _email);
         user.emails[idx].verifier = verifier;
-        user.save();
+        // user.save();
+        Meteor.users.update(user._id, {$set: user});
 
         mailer.resetPassword(_email, user._id, verifier);
 

@@ -2,11 +2,12 @@ import {useDeps} from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
 export const composer = ({context}, onData) => {
-  const {Meteor, Collections} = context();
+  // const {Meteor, Collections} = context();
+  const { Meteor } = context();
 
   if (Meteor.subscribe('users.collection').ready()) {
-    //    const collection = Meteor.users.find().fetch();
-    const collection = Collections.Users.find();
+    const collection = Meteor.users.find().fetch();
+    // const collection = Collections.Users.find();
     onData(null, {collection});
   }
 };

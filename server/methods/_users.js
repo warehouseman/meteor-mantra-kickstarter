@@ -1,7 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
-import {User} from '/lib/user.js';
+// import {User} from '/lib/user.js';
 
 import mailer from './mail.js';
 
@@ -46,7 +46,8 @@ export default function () {
         Roles.addUsersToRoles(_idNew, AllRoles.slice( hasRole ), GROUP);
       }
 
-      Lgr.info('New user : ' + JSON.stringify(User.findOne(_idNew)) + '\n');
+      // Lgr.info('New user : ' + JSON.stringify(User.findOne(_idNew)) + '\n');
+      Lgr.info('New user : ' + JSON.stringify(Meteor.users.findOne(_idNew)) + '\n');
       return { _idNew };
 
     },
@@ -61,13 +62,15 @@ export default function () {
       check(_id, String);
 
 
-      let record = User.findOne(_id);
+      // let record = User.findOne(_id);
+      let record = Meteor.users.findOne(_id);
 
       record.profile.firstName = data.firstName;
       record.profile.lastName = data.lastName;
       record.emails[0].address = data.email;
 
-      record.save();
+      // record.save();
+      Meteor.users.update(record._id, {$set: record});
 
       Roles.setUserRoles(_id, AllRoles.slice(AllRoles.indexOf(data.role)), 'headOffice');
 
@@ -78,7 +81,8 @@ export default function () {
       check(_pwd, String);
       Lgr.a = '_users.resetPwd' + '... ';
 
-      const idUser = User.findOne( { 'emails.verifier': _code } );
+      // const idUser = User.findOne( { 'emails.verifier': _code } );
+      const idUser = Meteor.users.findOne( { 'emails.verifier': _code } );
       Lgr.info('Resetting password for, ' + idUser._id + '\n');
 
       Accounts.setPassword(idUser._id, _pwd);
@@ -89,8 +93,8 @@ export default function () {
       check(_email, String);
       Lgr.a = '_users.passwordResetRequest' + '... ';
 
-      // const user = Meteor.users.findOne({ 'emails.address': _email });
-      const user = User.findOne({ 'emails.address': _email });
+      const user = Meteor.users.findOne({ 'emails.address': _email });
+      // const user = User.findOne({ 'emails.address': _email });
       if (user) {
         let verifier = randomKey();
 
@@ -126,10 +130,12 @@ export default function () {
       check(_id, String);
       Lgr.a = '_users.hide' + ' ...';
 
-      let record = User.findOne(_id);
-      record.roles = { headOffice: [ '' ] };
-      record.save();
-      record.softRemove();
+      // let record = User.findOne(_id);
+      let record = Meteor.users.findOne(_id);
+      record.roles = { headOffice: [] };
+      Meteor.users.update(record._id, {$set: record});
+      // record.save();
+      // record.softRemove();
 
       Lgr.info('\nHidden : ' + JSON.stringify(record) + '\n');
     },

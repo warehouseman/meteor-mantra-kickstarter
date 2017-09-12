@@ -3,7 +3,8 @@ import {check} from 'meteor/check';
 
 export default function () {
   Meteor.publish('users.collection', function () {
-    const selector = {};
+    // const selector = {};
+    const selector = {'roles.headOffice.0': {$exists: true}};
     const options = {
       // fields: {_id: 1, title: 1},
       sort: {createdAt: -1},

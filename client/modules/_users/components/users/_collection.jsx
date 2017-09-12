@@ -28,33 +28,34 @@ export default class extends React.Component {
           </thead>
           <tbody>
             {this.props.collection.map(record => (
+
               <tr className="text-left" key={record._id}>
                 <td className="col-xs-4">
                   <a
                     role="button"
-                    data-cuke={'view-' + record.firstEmail()}
+                    data-cuke={'view-' + record.emails[0].address}
                     href={`/users/${record._id}`}>
                     {record.profile.lastName}, {record.profile.firstName}
                   </a>
                 </td>
                 <td className="col-xs-2"><AxsLevel>{record.roles.headOffice[0]}</AxsLevel></td>
                 <td className="col-xs-3">
-                  <x-cuke id='rowUser' key={record.firstEmail()}>
+                  <x-cuke id='rowUser' key={record.emails[0].address}>
                     <a href={`/users/${record._id}`}>
-                      {record.firstEmail()}
+                      {record.emails[0].address}
                     </a>
                   </x-cuke>
                 </td>
                 <td className="col-xs-2">
                   <a className="fa fa-pencil"
                     role="button"
-                    data-cuke={'edit-' + record.firstEmail()}
+                    data-cuke={'edit-' + record.emails[0].address}
                     href={`/users/${record._id}/edit`}>
                   </a>
                   &nbsp; &nbsp;
                   <a className="fa fa-trash-o"
                     role="button"
-                    data-cuke={'hide-' + record.firstEmail()}
+                    data-cuke={'hide-' + record.emails[0].address}
                     onClick={() => this.deleteUser(record._id)}>
                   </a>
                 </td>

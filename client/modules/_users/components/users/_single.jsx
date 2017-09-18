@@ -8,7 +8,8 @@ export default class extends React.Component {
   }
 
   render() {
-    const {_id, email, firstName, lastName, role, hideException} = this.props;
+    // const {_id, email, firstName, lastName, role, hideException} = this.props;
+    const {_id, record, hideException} = this.props;
 
     return (
       <div>
@@ -20,10 +21,11 @@ export default class extends React.Component {
           </div> : null }
         <h3> <x-cuke id="user-record">User Record</x-cuke> </h3>
 
-        <p><strong>Name:</strong> <x-cuke id="firstName">{firstName}</x-cuke></p>
-        <p><strong>Family name:</strong> <x-cuke id="lastName">{lastName}</x-cuke> </p>
-        <p><strong>EMail:</strong> <x-cuke id="email">{email}</x-cuke></p>
-        <p><strong>Privilege level:</strong> <x-cuke id="role"> <AxsLevel>{role}</AxsLevel> -- {role}</x-cuke></p>
+        <p><strong>Name:</strong> <x-cuke id="firstName">{record.firstName}</x-cuke></p>
+        <p><strong>Family name:</strong> <x-cuke id="lastName">{record.lastName}</x-cuke> </p>
+        <p><strong>EMail:</strong> <x-cuke id="email">{record.email}</x-cuke></p>
+        <p><strong>Privilege level:</strong>
+          <x-cuke id="role"> <AxsLevel>{record.role}</AxsLevel> -- {record.role}</x-cuke></p>
         <p>Internal key: {_id}</p>
 
         <a className="fa fa-pencil" href={'/users/' + _id + '/edit'}>

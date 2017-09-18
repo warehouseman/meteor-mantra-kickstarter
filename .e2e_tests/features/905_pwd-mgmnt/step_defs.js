@@ -41,7 +41,7 @@ module.exports = function () {
       browser.waitForVisible(cukeLogin);
       browser.url(_urlPasswordResetRequest);
 
-      server.call('_users.removeByEmail', 'jj@gmail.com');
+      server.call('_users.removeByEmail', 'jj@jmail.com');
       browser.waitForEnabled(cukeInpEmail);
 
     });
@@ -71,21 +71,13 @@ module.exports = function () {
   this.Then(/^I see the confirmation: "([^"]*)"\.$/,
     function (_confirmation) {
 
-      LG(' >>> isVisible ');
       browser.waitUntil(function () {
-        LG(' try ... ');
         return browser.isVisible(cukeAlertGood);
       }, 90000, 'done trying', 2500);
-      LG(' isVisible >>> ');
 
       expect(browser.isVisible(cukeAlertGood) ? _confirmation : 'confirmation message')
         .toBe(_confirmation);
     });
-
-  // db.users.update( { "emails.address" : "yourself.yourorg@gmail.com" },
-  //  { $addToSet: { "emails": { "address" : "m@n.o", "verifier": 777, "verified" : true } } } );
-  // db.users.update( { "emails.address" : "yourself.yourorg@gmail.com" },
-  //  { $set : { "emails.1.verifier": 4444  } } );
 
   // =======================================================================
 

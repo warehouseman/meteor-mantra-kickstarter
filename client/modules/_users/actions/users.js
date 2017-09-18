@@ -1,19 +1,18 @@
+import { usersAdd, usersUpdate } from '/lib/methods/_users';
+const LG = console.log; // eslint-disable-line no-console,no-unused-vars
+
 export default {
 
-  add({Meteor, LocalState, FlowRouter}, data) {
-    // console.log('actions._users.add data', data);
-    const userObject = {
-      email: data.email,
-      password: data.password1,
-      profile: {
-        firstName: data.firstName,
-        lastName: data.lastName
-      },
-      role: data.role
-    };
+  // add({Meteor, LocalState, FlowRouter}, data) {
+  add({ LocalState, FlowRouter }, data) {
 
-    Meteor.call('_users.add', userObject, (err, response) => {
-      // console.log('actions._users.add response ', response);
+    LG('actions._users.add data', data);
+
+    delete data.confirmPassword;
+    delete data.role;
+    delete data._id;
+
+    usersAdd.call( data, (err, response) => {
       if (err) {
         return LocalState.set('_users.INSERT_ERROR', err.message);
       }
@@ -21,33 +20,19 @@ export default {
         FlowRouter.go('/users/' + response._idNew);
       }
     });
-
-    /*
-    Meteor.call('_users.add', userObject, (err, response) => {
-      console.log('actions._users.add call', userObject);
-      if (err) {
-        console.log('actions._users.add INSERT_ERROR : ', err.message);
-        return LocalState.set('_users.INSERT_ERROR', err.message);
-      }
-      let id = response.user._id;
-      console.log('actions._users.add response ', id);
-      if ( id ) {
-        FlowRouter.go('/users/' + id);
-      }
-    });
-*/
   },
 
-  update({Meteor, LocalState, FlowRouter}, data, _id) {
+  update({ LocalState, FlowRouter }, data) {
 
-    LocalState.set('_users.UPDATE_ERROR', 'TESTING');
-    Meteor.call('_users.update', data, _id, (err) => {
-      // console.log('actions._users.update back from callback ');
+    LG('actions._users.update data', data);
+    delete data.confirmPassword;
+    delete data.role;
+
+    usersUpdate.call(data, (err, response) => {
+      LG('actions._users.update response ', response);
       if (err) {
-        // console.log('actions._users.update UPDATE_ERROR ', err.message);
         return LocalState.set('_users.UPDATE_ERROR', err.message);
       }
-      // console.log('actions._users.update OK ');
       FlowRouter.go('/users/');
     });
   },

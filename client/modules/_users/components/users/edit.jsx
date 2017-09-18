@@ -2,7 +2,7 @@ import React from 'react';
 import Sidebar from './_sidebar.jsx';
 
 import dataComposer from '../../composers/users/edit.jsx';
-import Component from './_form.jsx';
+import Component from './_uniform.jsx';
 const Container = dataComposer(Component);
 
 export default class extends React.Component {

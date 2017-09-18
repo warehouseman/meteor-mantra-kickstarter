@@ -1,24 +1,26 @@
 /* eslint-disable no-undef   */
 
-const cukeFrmSubmit = '//form[@data-cuke="login"]';
+// const cukeFrmSubmit = '//form[@data-cuke="login"]';
 
-const urlLogout = 'http://localhost:3000/logout';
-const cukeLogin = '//x-cuke[@id="login"]';
+// const urlLogout = 'http://localhost:3000/logout';
+// const cukeLogin = '//x-cuke[@id="login"]';
 
-const cukeHrefLogin = '//a[@data-cuke="user-control-login"]';
-const cukeInpEmail = '//input[@data-cuke="email"]';
-const cukeInpPwd = '//input[@data-cuke="password"]';
+// const cukeHrefLogin = '//a[@data-cuke="user-control-login"]';
+// const cukeInpPwd = '//input[@data-cuke="password"]';
 
-const cukeAccountPage = '//x-cuke[@id="account-page"]';
-const cukeAcctEmail = '//x-cuke[@id="acct-email"]';
+// const cukeAccountPage = '//x-cuke[@id="account-page"]';
+// const cukeAcctEmail = '//x-cuke[@id="acct-email"]';
 
-const cukeInpName = '//input[@data-cuke="firstName"]';
-const cukeInpFamilyName = '//input[@data-cuke="lastName"]';
-const cukeInpPwd1 = '//input[@data-cuke="pword1"]';
-const cukeInpPwd2 = '//input[@data-cuke="pword2"]';
+const cukeInpEmail = '//div[@data-cuke="email"]/*/input';
+const cukeInpName = '//div[@data-cuke="firstName"]/*/input';
+const cukeInpFamilyName = '//div[@data-cuke="lastName"]/*/input';
+const cukeInpPwd1 = '//div[@data-cuke="password"]/*/input';
+const cukeInpPwd2 = '//div[@data-cuke="confirmPassword"]/*/input';
+const cukeSelectRoleOpen = '//div[@data-cuke="role"]/*/div[@class="radio"]/*/input[contains(@id, "';
+const cukeSelectRoleClose = '")]';
 
 
-const cukeButtonSave = '//button[@data-cuke="user-save"]';
+const cukeButtonSave = '//div[@data-cuke="save-item"]/input';
 const cukeUserRecord = '//x-cuke[@id="user-record"]';
 
 const xCukeFirstName = '//x-cuke[@id="firstName"]';
@@ -42,7 +44,7 @@ module.exports = function () {
     browser.waitForVisible(cukeLogin);
     browser.url(urlLogin);
 
-    server.call('_users.removeByEmail', 'jj@gmail.com');
+    server.call('_users.removeByEmail', 'jj@jmail.com');
 
     browser.waitForVisible(cukeHrefLogin);
 
@@ -70,6 +72,9 @@ module.exports = function () {
 // ------------------------------------------------------------------------
 
   this.Given(/^I have opened the create user page : "([^"]*)"$/, function (urlCreateUser) {
+    browser.setViewportSize({ width: 1024, height: 480 });
+    browser.timeouts('implicit', 5000);
+    browser.timeouts('page load', 5000);
     browser.url(urlCreateUser);
   });
 
@@ -103,11 +108,15 @@ module.exports = function () {
   });
 
   let role = '';
-  this.When(/^her role "([^"]*)",$/, function (_role) {
+  let glyph = '';
+  this.When(/^her role "([^"]*)" \("([^"]*)"\),$/, function (_role, _glyph) {
     role = _role;
+    glyph = _glyph + ' -- ';
 
-    let cukeRadioRole = '//input[@data-cuke="role" and @value="' + role + '"]';
-    browser.click(cukeRadioRole);
+    let radioButt = browser.$(cukeSelectRoleOpen + role + cukeSelectRoleClose);
+    // console.log(' radioButt : ', radioButt);
+    radioButt.click();
+
   });
 
   this.When(/^I submit the create user form\.$/, function () {
@@ -122,14 +131,14 @@ module.exports = function () {
     expect(browser.element(xCukeFirstName).getText()).toEqual(firstName);
     expect(browser.element(xCukeLastName).getText()).toEqual(lastName);
     expect(browser.element(xCukeEmail).getText()).toEqual(eMail);
-    expect(browser.element(xCukeRole).getText()).toEqual(role);
+    expect(browser.element(xCukeRole).getText()).toEqual(glyph + role);
 
   });
-// =======================================================================
+  // =======================================================================
 
 
-//   Scenario: Edit an existing user
-// ------------------------------------------------------------------------
+  //   Scenario: Edit an existing user
+  // ------------------------------------------------------------------------
   this.Given(/^I have opened the list of users : "([^"]*)"$/, function (urlListUsers) {
     browser.url(urlListUsers);
     browser.waitForExist(cukeUserListPage);

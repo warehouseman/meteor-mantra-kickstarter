@@ -9,9 +9,13 @@ export const singleComposer = ({context, _id}, onData) => {
   if (Meteor.subscribe('users.single', _id).ready()) {
     const user = Collections.Users.findOne(_id);
     if ( user ) {
-      const email = user.emails[0].address;
-      const role = user.roles.headOffice[0];
-      let parms = { ...user.profile, role, user, email, hideException };
+      const record = {
+        ...user.profile,
+        user,
+        email: user.emails[0].address,
+        role: user.roles.headOffice[0]
+      };
+      let parms = { record, hideException };
       onData(null, parms);
     } else {
       onData(null, null);

@@ -1,6 +1,6 @@
 import system from './system';
 import posts from './posts';
-import _users from './_users';
+import _users from '/lib/methods/_users';
 import _colors from './_colors';
 
 import { Methods as mthdsWidget } from 'mmks_widget';

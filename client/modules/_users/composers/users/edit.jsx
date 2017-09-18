@@ -1,17 +1,18 @@
 import { useDeps } from 'react-simple-di';
 import { composeAll, composeWithTracker } from 'mantra-core';
 
+import { schemaComposer } from './schema.jsx';
 import { singleComposer } from './single.jsx';
 
-export const editComposer = ({ context }, onData) => {
-  const { LocalState, ACL } = context();
-  const exception = LocalState.get('_users.UPDATE_ERROR');
+const LG = console.log; // eslint-disable-line no-console,no-unused-vars
 
-  const enumRoles = ACL.AccessControl.getTrustLevels();
-  const icons = ACL.AccessControl.getIcons();
+export const editComposer = ({ context, clearErrors}, onData) => {
+  const { LocalState } = context();
+  const error = LocalState.get('_users.UPDATE_ERROR');
 
-  onData(null, { exception, icons, enumRoles });
+  onData(null, { error });
 
+  return clearErrors;
 };
 
 export const depsMapper = (context, actions) => ({
@@ -21,6 +22,7 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default (component) => composeAll(
+  composeWithTracker(schemaComposer),
   composeWithTracker(singleComposer),
   composeWithTracker(editComposer),
   useDeps(depsMapper)

@@ -16,7 +16,7 @@ var auth = {
 
 let mailer = nodemailer.createTransport(mg(auth));
 
-mailer.resetPassword = function resetPassword(_email, _id, _validator) {
+mailer.resetPassword = (_email, _id, _validator) => {
   Lgr.a = 'mailer.resetPassword';
 
   const cfg = Meteor.settings.public.PASSWORD_RESET;

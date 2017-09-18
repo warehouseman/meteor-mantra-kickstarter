@@ -1,3 +1,4 @@
+import { usersAdd } from '/lib/methods/_users';
 import _lgr from '/lib/logging/client/clientLogger';
 const Lgr = new _lgr(__filename, 'verbose', true);
 
@@ -68,7 +69,7 @@ export default {
     });
   },
 
-  register({Meteor, LocalState, FlowRouter}, email, password1, password2) {
+  register({ LocalState, FlowRouter }, email, password1, password2) {
     Lgr.a = 'register';
 
     if ( !email || !password1 || !password2 ) {
@@ -80,24 +81,36 @@ export default {
     }
 
     const userObject = {
-      email,
+      emails: [ { address: email } ],
       profile: {
-        firstName: '',
-        lastName: ''
+        firstName: 'unknown',
+        lastName: 'unknown'
       },
       password: password1,
-      role: 'none'
+      createdAt: new Date()
     };
+    Lgr.info('actions.account.register  ', userObject);
 
-    Meteor.call('_users.add', userObject, (err, response) => {
+    usersAdd.call( userObject, (err, response) => {
+      Lgr.info('actions.account.register response ', response);
       if (err) {
-        Lgr.info(err.message);
+        Lgr.err('actions.account.register error ', err.message);
         return LocalState.set('REGISTER_ERROR', err.message);
       }
       if (response._idNew) {
         FlowRouter.go('/users/' + response._idNew);
       }
     });
+
+    // Meteor.call('_users.add', userObject, (err, response) => {
+    //   if (err) {
+    //     Lgr.info(err.message);
+    //     return LocalState.set('REGISTER_ERROR', err.message);
+    //   }
+    //   if (response._idNew) {
+    //     FlowRouter.go('/users/' + response._idNew);
+    //   }
+    // });
   },
 
   registerErrorClear({LocalState}) {

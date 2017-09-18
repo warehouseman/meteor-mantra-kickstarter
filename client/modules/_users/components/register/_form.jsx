@@ -21,7 +21,6 @@ export default class extends React.Component {
     //    this.onChange = this.onChange.bind(this);
     this.resetForm = () => { this.refs.form.reset(); };
     this.validSubmit = (data) => {
-      // console.log('validSubmit', data);
       this.props.submitAction(data.email, data.password1, data.password2);
     };
 

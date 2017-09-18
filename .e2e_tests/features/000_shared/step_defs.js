@@ -1,5 +1,6 @@
 /* eslint-disable no-undef   */
 
+const LG = console.log; // eslint-disable-line no-console
 const cukeFrmSubmit = '//form[@data-cuke="login"]';
 
 const urlLogout = 'http://localhost:3000/logout';
@@ -65,21 +66,21 @@ module.exports = function () {
   });
 
   this.Given(/^that the kickstarter is running stand\-alone$/, function () {
-   return true;
+    return true;
   });
 
-  this.Then(/^the title in the top left is "([^"]*)" or something else$/, function (arg1) {
+  this.Then(/^the title in the top left is "([^"]*)" or something else$/, function (_brand) {
     let isSubmodule = server.call('system.isSubModule');
-    console.log('It is ' + isSubmodule + ' and we get ' + browser.getText(classBrand));
+    LG('It is ' + isSubmodule + ' and we get ' + browser.getText(classBrand));
     if ( isSubmodule === 'Stand-alone') {
-      expect(browser.getText(classBrand)).toEqual('Kickstarter');
+      expect(browser.getText(classBrand)).toEqual(_brand);
     } else {
-      expect(browser.getText(classBrand)).not.toEqual('Kickstarter');
+      expect(browser.getText(classBrand)).not.toEqual(_brand);
     }
   });
 
-//  Scenario: Log in as administrator
-// ------------------------------------------------------------------------
+  // Scenario: Log in as administrator
+  // ------------------------------------------------------------------------
 
 
   this.Then(/^I see the login menu item\.$/, function () {
@@ -97,7 +98,7 @@ module.exports = function () {
     browser.waitForExist(cukeLogin);
     browser.url(urlLogin);
 
-    server.call('_users.removeByEmail', 'jj@gmail.com');
+    server.call('_users.removeByEmail', 'jj@jmail.com');
 
     browser.waitForVisible(cukeHrefLogin);
 
@@ -192,13 +193,10 @@ module.exports = function () {
     expect(_warning).toEqual(browser.getText(cukeWarning));
   });
 
-//  let cnt = 0;
-//  let itm = '';
   this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _item) {
-//    itm = _item;
     link = '//a[@data-cuke="' + _item + '"]';
     browser.waitForEnabled( link );
-//    browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
+    // browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
     browser.click(link);
     let cukeHrefCmd = '//a[@data-cuke="' + _cmd + '-item"]';
     browser.waitForEnabled( cukeHrefCmd );
@@ -207,30 +205,28 @@ module.exports = function () {
   });
 
   this.Then(/^I no longer see that record\.$/, function () {
-// console.log("Waiting for ", cukeItemsList);
+    // console.log("Waiting for ", cukeItemsList);
     browser.waitForEnabled( cukeItemsList );
     browser.refresh();
 
-// console.log("Waiting for ", cukeItemsList);
+    // console.log("Waiting for ", cukeItemsList);
     browser.waitForEnabled( cukeItemsList );
     browser.timeouts('implicit', 1000);
-//    browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
-// console.log("Getting ", link);
+    // browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
+    // console.log("Getting ", link);
     let listItem = browser.elements(link);
     browser.waitUntil(function () {
-// console.log(link + ' still there?');
-//      browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
+    // console.log(link + ' still there?');
+      // browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
       listItem = browser.elements(link);
-// console.log("Got list item ", listItem);
-// console.log("Got list item.value ", listItem.value);
-// console.log("Got list item.value.length ", listItem.value.length);
+      // console.log("Got list item ", listItem);
+      // console.log("Got list item.value ", listItem.value);
+      // console.log("Got list item.value.length ", listItem.value.length);
       return ( listItem.value.length < 1 );
     }, 10000, ' what the?', 2000);
     expect(listItem.value.length).toEqual(0);
   });
 
 // =======================================================================
-
-
 
 };

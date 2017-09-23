@@ -22,6 +22,7 @@ echo -e "~~~~ Create ASKPASS file";
 declare INSTALLER_BUNDLE="installMariaDB";
 declare INSTALLER_BUNDLE_DIR="/dev/shm/${INSTALLER_BUNDLE}";
 mkdir -p ${INSTALLER_BUNDLE_DIR};
+rm -fr ${INSTALLER_BUNDLE_DIR}/*;
 pushd ${INSTALLER_BUNDLE_DIR} >/dev/null;
 
   cat << EOAPF > .askpass.sh
@@ -36,21 +37,28 @@ EOAPF
   cat << EOIAP > askpassInstallScript.sh
 #!/usr/bin/env bash
 #
-# echo -e "     >> Ensure ASkPASS is exported from .login";
-grep -q 'SUDO_ASKPASS' .login \
- && sed -i 's/.*SUDO_ASKPASS.*/export SUDO_ASKPASS="\${HOME}\/.askpass.sh";/' .login \
- || echo '\\nexport SUDO_ASKPASS="\${HOME}\/.askPass.sh";' >> .login;
+SCRIPT=\$(realpath \$0);
+SCRIPTPATH=\$(dirname \$SCRIPT);
 
-# echo -e "       >> Checking it...";
-# grep 'SUDO_ASKPASS' .login;
+echo -e "     >> mv \\\${SCRIPTPATH}/.askpass.sh to \\\${HOME}";
+mv \${SCRIPTPATH}/.askpass.sh .;
+
+touch .bash_login;
+grep -q 'SUDO_ASKPASS' .bash_login \
+ && sed -i 's/.*SUDO_ASKPASS.*/export SUDO_ASKPASS="\${HOME}\/.askpass.sh";/' .bash_login \
+ || echo -e '\nexport SUDO_ASKPASS="\${HOME}\/.askPass.sh";' >> .bash_login;
+
+echo -e "       >> Checking it...";
+grep 'SUDO_ASKPASS' .bash_login;
 
 EOIAP
+
   chmod 700 askpassInstallScript.sh;
 
   cat << EOIS > mariadbInstallScript.sh
 #!/usr/bin/env bash
 #
-source ~/.login;
+source ~/.bash_login;
 # echo -e "SUDO_ASKPASS = \${SUDO_ASKPASS}";
 echo -e "         >> Install MariaDB";
 sudo -A apt-get update;
@@ -87,6 +95,10 @@ echo -e "~~~~~ Copy ASKPASS file to target";
 scp -r ${INSTALLER_BUNDLE_DIR} ${SETUP_USER_UID}@${RDBMS_HST}:/home/${SETUP_USER_UID};
 
 echo -e "~~~~~~ Run AskPass installer ";
+
+echo -e ssh ${SETUP_USER_UID}@${RDBMS_HST} "${INSTALLER_BUNDLE}/askpassInstallScript.sh;";
+# echo -e "||||||||||||||||||  CURTAILED  ||||||||||||||||||||||||";
+# exit;
 ssh ${SETUP_USER_UID}@${RDBMS_HST} "${INSTALLER_BUNDLE}/askpassInstallScript.sh;";
 
 echo -e "~~~~~~~ Run MariaDB installer ";
@@ -94,13 +106,13 @@ ssh ${SETUP_USER_UID}@${RDBMS_HST} "${INSTALLER_BUNDLE}/mariadbInstallScript.sh"
 
 echo -e "~~~~~~~ Run database preparation script ";
 ssh ${SETUP_USER_UID}@${RDBMS_HST} \
-  "source .login; sudo -A mysql -u root -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${RDBMS_ADMIN_PWD}' WITH GRANT OPTION; FLUSH PRIVILEGES;\"";
+  "source .bash_login; sudo -A mysql -u root -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${RDBMS_ADMIN_PWD}' WITH GRANT OPTION; FLUSH PRIVILEGES;\"";
 
 # cat ${INSTALLER_BUNDLE_DIR}/prepareDatabase.sql;
 mysql -h ${RDBMS_HST} -u root -p${RDBMS_ADMIN_PWD} mysql < ${INSTALLER_BUNDLE_DIR}/prepareDatabase.sql;
 
 # ssh ${SETUP_USER_UID}@${RDBMS_HST} \
-#   "source .login; sudo -A mysql -u root -e \"SELECT User, Host FROM mysql.user\"";
+#   "source .bash_login; sudo -A mysql -u root -e \"SELECT User, Host FROM mysql.user\"";
 
 echo -e "~~~~ Done ~~~~";
 exit;

@@ -70,12 +70,17 @@ function installNodeJs()
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
   fi;
 
-  export NODE_VERSION=4;
-  nvm ls ${NODE_VERSION} >/dev/null \
-    && echo " - node '$( nvm version ${NODE_VERSION})' is installed" \
-    || nvm install ${NODE_VERSION};
+  # export NODE_VERSION=4;
+  # nvm ls ${NODE_VERSION} >/dev/null \
+  #   && echo " - node '$( nvm version ${NODE_VERSION})' is installed" \
+  #   || nvm install ${NODE_VERSION};
 
-  export NODE_VERSION=6;
+  # export NODE_VERSION=6;
+  # nvm ls ${NODE_VERSION} >/dev/null \
+  #   && echo " - node '$( nvm version ${NODE_VERSION})' is installed" \
+  #   || nvm install ${NODE_VERSION};
+
+  export NODE_VERSION=8;
   nvm ls ${NODE_VERSION} >/dev/null \
     && echo " - node '$( nvm version ${NODE_VERSION})' is installed" \
     || nvm install ${NODE_VERSION};

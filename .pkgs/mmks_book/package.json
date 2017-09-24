@@ -12,7 +12,7 @@
     "mocha": "--require scripts/mocha_runner src/**/__tests__/**/*.js"
   },
   "scripts": {
-    "prepublish": ". ./scripts/prepublish.sh",
+    "prepare": ". ./scripts/prepare.sh",
     "lint": "eslint . --ext .js --ext .jsx",
     "lintfix": "eslint . --ext .js --ext .jsx --fix",
     "testonly": "mocha $npm_package_options_mocha",
@@ -29,15 +29,15 @@
     "babel-preset-stage-2": "6.24.1",
     "babel-eslint": "8.0.0",
     "chai": "4.1.2",
-    "eslint": "4.7.0",
+    "eslint": "4.7.2",
     "eslint-plugin-babel": "4.1.2",
     "mocha": "3.5.3",
     "nodemon": "1.12.1"
   },
   "dependencies": {
     "babel-runtime": "6.26.0",
-    "uniforms": "^1.20.3",
-    "uniforms-bootstrap3": "^1.20.3"
+    "uniforms": "^1.20.4",
+    "uniforms-bootstrap3": "^1.20.4"
   }
 
 }

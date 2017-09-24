@@ -18,8 +18,9 @@ function linkInLocalNodePackages() {
     local MODULES=( $(cat "${LIST}") )
     for MODULE in "${MODULES[@]}"
     do
-      echo -e "~~~~~~~~~~  Linking and saving '${MODULE}'  ~~~~~~~~~~~~~~~~~~";
+      echo -e "\n~~~~~~~~~~  Linking and saving '${MODULE}'  ~~~~~~~~~~~~~~~~~~";
       # ${METEOR_CMD} npm link ${MODULE};
+      npm link ${MODULE};
       npm-link-save ${MODULE};
     done
   #   rm -f "${LIST}";

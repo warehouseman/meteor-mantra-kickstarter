@@ -29,7 +29,8 @@ fi;
 # echo -e "Packages excluded from Core    : ${CORE_EXCLUSIONS}";
 # echo -e "Packages excluded from Wrapper : ${CONTAINER_EXCLUSIONS}";
 
-declare CHIMP="${CHIMP_CMD:-${PROJECT_ROOT}/node_modules/.bin/chimp}";
+# declare CHIMP="${CHIMP_CMD:-${PROJECT_ROOT}/node_modules/.bin/chimp}";
+declare CHIMP="${CHIMP_CMD:-chimp}";
 declare LOGS_DIR="${CIRCLE_ARTIFACTS:-/var/log/meteor}";
 
 if pushd ${E2E_FEATURES} &>/dev/null; then

@@ -51,17 +51,6 @@ function installMeteorApp()
 
   addToKnexMigrationsList ${LOCAL_NODEJS_PACKAGES_LIST};
 
-  echo -e "###################################";
-  echo -e "'npm-link-save' all local packages.";
-  echo -e "###################################";
-  echo -e "Installing 'npm-link-save'.";
-  # ${METEOR_CMD} npm -y -g install npm-link-save;
-  npm -y -g install npm-link-save;
-
-  # read -n 1 -s -p "Press any key to continue";
-
-  linkInLocalNodePackages ${LOCAL_NODEJS_PACKAGES_LIST};
-
   pushd ${PROJECT_ROOT} > /dev/null;
 
 #    install_local_packages;  DEPRECATED???
@@ -72,6 +61,16 @@ function installMeteorApp()
     # yarn install;
 
   popd > /dev/null;
+
+  echo -e "###################################";
+  echo -e "'npm-link-save' all local packages.";
+  echo -e "###################################";
+  echo -e "Installing 'npm-link-save'.";
+  # ${METEOR_CMD} npm -y -g install npm-link-save;
+  npm -y -g install npm-link-save;
+
+  # read -n 1 -s -p "Press any key to continue";
+  linkInLocalNodePackages ${LOCAL_NODEJS_PACKAGES_LIST};
 
   mkdir -p /tmp/db; touch /tmp/db/mmks.sqlite;
 

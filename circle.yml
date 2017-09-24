@@ -18,12 +18,12 @@ machine:
     CHIMP_CMD: ./node_modules/.bin/chimp
 
   node:
-    version: 4.8.0
+    version: 8.5.0
 
 dependencies:
   cache_directories:
     - /home/ubuntu/.meteor # absolute only!
-    - /opt/circleci/nodejs/v4.8.0/lib/node_modules
+    - /opt/circleci/nodejs/v8.5.0/lib/node_modules
 
   pre:
     - .scripts/initialize_server.sh

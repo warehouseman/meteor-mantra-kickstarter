@@ -98,6 +98,9 @@ do
   sleep 6;
 done;
 
+echo -e "Running chimp tests now ... (cmd := '${CHIMP} ${E2E}/chimp-config.js --ddp=http://localhost:3000 --path=${E2E};')
+
+................................................................";
 ${CHIMP} ${E2E}/chimp-config.js --ddp=http://localhost:3000 --path=${E2E};
 echo -e "
 

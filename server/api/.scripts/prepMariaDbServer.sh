@@ -25,42 +25,40 @@ mkdir -p ${INSTALLER_BUNDLE_DIR};
 rm -fr ${INSTALLER_BUNDLE_DIR}/*;
 pushd ${INSTALLER_BUNDLE_DIR} >/dev/null;
 
-  cat << EOAPF > .askpass.sh
+  cat << EOAPF > .askPass.sh
 #!/usr/bin/env bash
 #
 echo -e "${SETUP_USER_PWD}";
 
 EOAPF
 
-  chmod 700 .askpass.sh;
+  chmod 700 .askPass.sh;
 
-  cat << EOIAP > askpassInstallScript.sh
+  cat << EOIAP > askPassInstallScript.sh
 #!/usr/bin/env bash
 #
 SCRIPT=\$(realpath \$0);
 SCRIPTPATH=\$(dirname \$SCRIPT);
 
-echo -e "     >> mv \\\${SCRIPTPATH}/.askpass.sh to \\\${HOME}";
-mv \${SCRIPTPATH}/.askpass.sh .;
+echo -e "     >> mv \\\${SCRIPTPATH}/.askPass.sh to \\\${HOME}";
+mv \${SCRIPTPATH}/.askPass.sh .;
 
 touch .bash_login;
 grep -q 'SUDO_ASKPASS' .bash_login \
- && sed -i 's/.*SUDO_ASKPASS.*/export SUDO_ASKPASS="\${HOME}\/.askpass.sh";/' .bash_login \
- || echo -e '\nexport SUDO_ASKPASS="\${HOME}\/.askPass.sh";' >> .bash_login;
+ && sed -i 's/.*SUDO_ASKPASS.*/export SUDO_ASKPASS="\${HOME}\/.askPass.sh";/' .bash_login \
+ || echo -e '\nexport SUDO_ASKPASS="\${HOME}/.askPass.sh";' >> .bash_login;
 
 echo -e "       >> Checking it...";
 grep 'SUDO_ASKPASS' .bash_login;
 
 EOIAP
 
-  chmod 700 askpassInstallScript.sh;
+  chmod 700 askPassInstallScript.sh;
 
   cat << EOIS > mariadbInstallScript.sh
 #!/usr/bin/env bash
 #
-source ~/.bash_login;
-# echo -e "SUDO_ASKPASS = \${SUDO_ASKPASS}";
-echo -e "         >> Install MariaDB";
+source \${HOME}/.bash_login;
 sudo -A apt-get update;
 sudo -A apt-get -y install mariadb-server;
 
@@ -96,10 +94,10 @@ scp -r ${INSTALLER_BUNDLE_DIR} ${SETUP_USER_UID}@${RDBMS_HST}:/home/${SETUP_USER
 
 echo -e "~~~~~~ Run AskPass installer ";
 
-echo -e ssh ${SETUP_USER_UID}@${RDBMS_HST} "${INSTALLER_BUNDLE}/askpassInstallScript.sh;";
+echo -e ssh ${SETUP_USER_UID}@${RDBMS_HST} "${INSTALLER_BUNDLE}/askPassInstallScript.sh;";
 # echo -e "||||||||||||||||||  CURTAILED  ||||||||||||||||||||||||";
 # exit;
-ssh ${SETUP_USER_UID}@${RDBMS_HST} "${INSTALLER_BUNDLE}/askpassInstallScript.sh;";
+ssh ${SETUP_USER_UID}@${RDBMS_HST} "${INSTALLER_BUNDLE}/askPassInstallScript.sh;";
 
 echo -e "~~~~~~~ Run MariaDB installer ";
 ssh ${SETUP_USER_UID}@${RDBMS_HST} "${INSTALLER_BUNDLE}/mariadbInstallScript.sh";

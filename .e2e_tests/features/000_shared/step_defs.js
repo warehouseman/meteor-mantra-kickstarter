@@ -62,7 +62,7 @@ module.exports = function () {
     browser.timeouts('page load', 60000);
 
     browser.url(urlMain);
-    browser.waitForVisible(classBrand);
+    browser.waitForVisible(classBrand, 30000);
   });
 
   this.Given(/^that the kickstarter is running stand\-alone$/, function () {
@@ -84,23 +84,23 @@ module.exports = function () {
 
 
   this.Then(/^I see the login menu item\.$/, function () {
-    browser.waitForVisible(cukeHrefLogin);
+    browser.waitForVisible(cukeHrefLogin, 30000);
   });
 
   this.Then(/^I see the navigation header\.$/, function () {
-    browser.waitForVisible(classBrand);
+    browser.waitForVisible(classBrand, 30000);
   });
 
   this.Given(/^I have opened the login page : "([^"]*)"$/, function (urlLogin) {
 
     browser.setViewportSize({ width: 1024, height: 480 });
     browser.url(urlLogout);
-    browser.waitForExist(cukeLogin);
+    browser.waitForExist(cukeLogin, 30000);
     browser.url(urlLogin);
 
     server.call('_users.removeByEmail', 'jj@jmail.com');
 
-    browser.waitForVisible(cukeHrefLogin);
+    browser.waitForVisible(cukeHrefLogin, 30000);
 
   });
 
@@ -112,7 +112,7 @@ module.exports = function () {
 
   this.When(/^I submit the form$/, function () {
     browser.submitForm(cukeFrmSubmit);
-    browser.waitForExist(cukeAccountPage);
+    browser.waitForExist(cukeAccountPage, 30000);
   });
 
   this.Then(/^I see my user drop\-down menu\.$/, function () {
@@ -141,14 +141,14 @@ module.exports = function () {
   });
 
   this.Then(/^I see the record with the new content\.$/, function () {
-    browser.waitForEnabled( cukeTitle );
+    browser.waitForEnabled( cukeTitle, 30000 );
     expect(browser.getText(cukeContent)).toEqual(content);
   });
 
   this.Then(/^I see the message, "([^"]*)"\.$/, function (_msg) {
     browser.waitUntil(function () {
       return browser.getText(cukeBadContent).length > 0;
-    }, 5000, 'expected text to be there after 5s');
+    }, 30000, 'expected text to be there after 5s');
 
     const msg = browser.getText(cukeBadContent);
     expect( msg ).toEqual(_msg);
@@ -157,7 +157,7 @@ module.exports = function () {
   this.Then(/^I see the error message, "([^"]*)"\.$/, function (_msg) {
     browser.waitUntil(function () {
       return browser.getText(cukeErrorMessage).length > 0;
-    }, 5000, 'expected text to be there after 5s');
+    }, 30000, 'expected text to be there after 5s');
 
     const msg = browser.getText(cukeErrorMessage);
     expect( msg ).toEqual(_msg);
@@ -166,9 +166,9 @@ module.exports = function () {
 
   this.Given(/^I have elected to edit the "([^"]*)" item,$/, function (_item) {
     link = '//a[@data-cuke="' + _item + '"]';
-    browser.waitForExist( link );
+    browser.waitForExist( link, 30000 );
     browser.click(link);
-    browser.waitForEnabled( cukeHrefEdit );
+    browser.waitForEnabled( cukeHrefEdit, 30000 );
     browser.click(cukeHrefEdit);
   });
 
@@ -176,7 +176,7 @@ module.exports = function () {
   this.When(/^I elect to delete the item,$/, function () {
     href = cukeHrefDelete;
 
-    browser.waitForExist( href );
+    browser.waitForExist( href, 30000 );
 
   });
 
@@ -186,7 +186,7 @@ module.exports = function () {
 
   this.When(/^I attempt to edit the item,$/, function () {
     href = cukeHrefEdit;
-    browser.waitForExist( href );
+    browser.waitForExist( href, 30000 );
   });
 
   this.Then(/^I see the warning "([^"]*)"$/, function (_warning) {
@@ -195,22 +195,22 @@ module.exports = function () {
 
   this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _item) {
     link = '//a[@data-cuke="' + _item + '"]';
-    browser.waitForEnabled( link );
+    browser.waitForEnabled( link, 30000 );
     // browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
     browser.click(link);
     let cukeHrefCmd = '//a[@data-cuke="' + _cmd + '-item"]';
-    browser.waitForEnabled( cukeHrefCmd );
+    browser.waitForEnabled( cukeHrefCmd, 30000 );
     browser.click( cukeHrefCmd );
 
   });
 
   this.Then(/^I no longer see that record\.$/, function () {
     // console.log("Waiting for ", cukeItemsList);
-    browser.waitForEnabled( cukeItemsList );
+    browser.waitForEnabled( cukeItemsList, 15000 );
     browser.refresh();
 
     // console.log("Waiting for ", cukeItemsList);
-    browser.waitForEnabled( cukeItemsList );
+    browser.waitForEnabled( cukeItemsList, 30000 );
     browser.timeouts('implicit', 1000);
     // browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
     // console.log("Getting ", link);
@@ -223,7 +223,7 @@ module.exports = function () {
       // console.log("Got list item.value ", listItem.value);
       // console.log("Got list item.value.length ", listItem.value.length);
       return ( listItem.value.length < 1 );
-    }, 10000, ' what the?', 2000);
+    }, 30000, ' what the?', 2000);
     expect(listItem.value.length).toEqual(0);
   });
 

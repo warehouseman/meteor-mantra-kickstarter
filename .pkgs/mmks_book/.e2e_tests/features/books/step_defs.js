@@ -41,7 +41,7 @@ module.exports = function () {
       pages = _pages;
       content = _content;
 
-      browser.waitForEnabled( cukeDivSubmit );
+      browser.waitForEnabled( cukeDivSubmit, 30000 );
       browser.setValue(cukeInpTitle, title);
 
       var selectBox = browser.$(cukeInpAuthor);
@@ -88,7 +88,7 @@ module.exports = function () {
   let link = '';
   this.Then(/^I see the book "([^"]*)"\.$/, function ( _item ) {
     link = '//a[@data-cuke="' + _item + '"]';
-    browser.waitForExist( link );
+    browser.waitForExist( link, 30000 );
     expect(browser.getText(link)).toEqual(_item);
   });
 
@@ -97,7 +97,7 @@ module.exports = function () {
     book = _book;
     const cukeHrefBook = `//a[@data-cuke="${book}"]`;
 
-    browser.waitForEnabled( cukeHrefBook );
+    browser.waitForEnabled( cukeHrefBook, 30000 );
     browser.click( cukeHrefBook );
 
   });

@@ -164,13 +164,21 @@ module.exports = function () {
 
   });
 
+  let ssDate = null;
   this.Given(/^I have elected to edit the "([^"]*)" item,$/, function (_item) {
+
+    // console.log("waiting for cukeItemsList : %s ", cukeItemsList);
+    browser.waitUntil(function () { return browser.isExisting(cukeItemsList);
+    }, 3000, ' never saw list! ', 500);
+
     link = '//a[@data-cuke="' + _item + '"]';
-    browser.waitForExist( link, 30000 );
+    // console.log("waiting for link : %s ", link);
+    browser.waitForExist( link );
     browser.click(link);
-    browser.waitForEnabled( cukeHrefEdit, 30000 );
+    browser.waitForEnabled( cukeHrefEdit );
     browser.click(cukeHrefEdit);
   });
+
 
 
   this.When(/^I elect to delete the item,$/, function () {
@@ -194,23 +202,30 @@ module.exports = function () {
   });
 
   this.Given(/^I have elected to "([^"]*)" the "([^"]*)" item\.$/, function (_cmd, _item) {
+
+    // console.log("waiting for cukeItemsList : %s ", cukeItemsList);
+    browser.waitUntil(function () { return browser.isExisting(cukeItemsList);
+    }, 3000, ' never saw list! ', 500);
+
     link = '//a[@data-cuke="' + _item + '"]';
-    browser.waitForEnabled( link, 30000 );
-    // browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
+    // console.log("waiting for link : %s ", link);
+    browser.waitForEnabled( link );
     browser.click(link);
+    // console.log("Clicked : %s ", link);
     let cukeHrefCmd = '//a[@data-cuke="' + _cmd + '-item"]';
-    browser.waitForEnabled( cukeHrefCmd, 30000 );
+    // console.log("waiting for cukeHrefCmd : %s ", cukeHrefCmd);
+    browser.refresh();
+    browser.waitForEnabled( cukeHrefCmd );
     browser.click( cukeHrefCmd );
 
   });
 
   this.Then(/^I no longer see that record\.$/, function () {
-    // console.log("Waiting for ", cukeItemsList);
-    browser.waitForEnabled( cukeItemsList, 15000 );
-    browser.refresh();
 
-    // console.log("Waiting for ", cukeItemsList);
-    browser.waitForEnabled( cukeItemsList, 30000 );
+    // console.log("waiting for cukeItemsList : %s ", cukeItemsList);
+    browser.waitUntil(function () { return browser.isExisting(cukeItemsList);
+    }, 3000, ' never saw list! ', 500);
+
     browser.timeouts('implicit', 1000);
     // browser.saveScreenshot('/tmp/logs/meteor/' + cnt++ + itm + '.png');
     // console.log("Getting ", link);

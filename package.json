@@ -58,7 +58,7 @@
     "react-addons-test-utils": "^15.6.0",
     "request": "^2.82.0",
     "sequelize-mock": "^0.9.1",
-    "sinon": "^3.3.0"
+    "sinon": "^4.0.0"
   },
   "dependencies": {
     "apollo-client": "^1.9.3",

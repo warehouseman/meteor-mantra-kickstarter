@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
-declare METEOR_NODE_VERSION=4.6.2;
+# declare METEOR_NODE_VERSION=4.6.2;
+declare METEOR_NODE_VERSION=8.5.0;
 declare APT_UPDATE=0;
 
 function installIfMissing() {

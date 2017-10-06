@@ -91,6 +91,7 @@
     "react": "^15.6.1",
     "react-apollo": "^1.4.15",
     "react-dom": "^15.6.1",
+    "react-js-pagination": "^2.2.0",
     "react-mounter": "^1.2.0",
     "react-select": "^1.0.0-rc.10",
     "react-simple-di": "^1.2.0",

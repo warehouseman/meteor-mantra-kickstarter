@@ -5,7 +5,9 @@ export const composer = ({context}, onData) => {
   // const {Meteor, Collections} = context();
   const { Meteor } = context();
 
-  if (Meteor.subscribe('users.collection').ready()) {
+  const filterSpec = { ow: 'Me' };
+
+  if (Meteor.subscribe('users.collection', filterSpec).ready()) {
     const collection = Meteor.users.find().fetch();
     // const collection = Collections.Users.find();
     onData(null, {collection});

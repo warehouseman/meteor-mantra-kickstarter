@@ -1,9 +1,11 @@
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
+const LG = console.log; // eslint-disable-line no-console,no-unused-vars
 
 export default function () {
-  Meteor.publish('users.collection', function () {
-    // const selector = {};
+  Meteor.publish('users.collection', function ( objFilter ) {
+    LG(' Yoo Hoooooooooooooooooo got objFilter ');
+    LG(objFilter);
     const selector = {'roles.headOffice.0': {$exists: true}};
     const options = {
       // fields: {_id: 1, title: 1},

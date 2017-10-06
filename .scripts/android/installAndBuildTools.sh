@@ -212,6 +212,8 @@ function installAndroid() {
     #  getPlugin "Intel x86 Atom_64 System Image, Android API 22, revision 2" ${ANDROID_HOME}/system-images/android-22/default/x86_64/system.img;
   fi;
 
+  sudo apt install -y gradle;
+
   [ -z $(grep "android" .meteor/platforms) ] && meteor add-platform android;
 
   echo "### Android SDK installed ";

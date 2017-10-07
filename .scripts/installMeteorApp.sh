@@ -23,7 +23,7 @@ function installMeteorApp()
 {
 
   if [[ "${CI:-false}" == "false" ]]; then
-    assess_memory 1.0;
+    assess_memory 0,64;
   fi;
 
   echo "" > ${LOCAL_NODEJS_PACKAGES_LIST};

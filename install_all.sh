@@ -26,15 +26,7 @@ if [[ "${CI:-false}" == "false" ]]; then
   installAndroid;
 fi;
 installChimp;
-  echo -e "${PRETTY} Ready for Meteor ' ...";
-  node --version;
-  chimp --version;
-  read -n 1 -s -p "Press any key to continue";
 installMeteorFramework;
-  echo -e "${PRETTY} Ready for Meteor app ' ...";
-  node --version;
-  chimp --version;
-  read -n 1 -s -p "Press any key to continue";
 installMeteorApp;
 
 sudo apt -y install httping;
@@ -88,11 +80,6 @@ else
 fi;
 
 echo -e "${MSG}";
-
-  echo -e "${PRETTY} Last look ' ...";
-  node --version;
-  chimp --version;
-  read -n 1 -s -p "Press any key to continue";
 
 exit 0;
 
